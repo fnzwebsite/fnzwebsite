@@ -1,4 +1,3 @@
 export default {
-    instrument: null,
-    dealing: null
+    instrument: null
 };

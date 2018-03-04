@@ -7,7 +7,7 @@ import React from 'react';
 class ListInstrument extends React.Component {
     componentWillMount() {
         // this.props.instrumentActions.getInstrument();
-        this.props.instrumentActions.getInstrumentById('IE0002639551');
+        this.props.instrumentActions.getInstrumentById('GB00BD6FFQ03');
     }
 
     renderData(item) {
