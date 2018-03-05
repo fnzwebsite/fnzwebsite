@@ -3,10 +3,11 @@ import openSocket from 'socket.io-client';
 import {usersActions} from '../actions/moneyAction';
 import {connect} from 'react-redux';
 import MoneyList from './MoneyList';
+import moment from 'moment';
 
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, ReferenceLine,
     ReferenceDot, Tooltip, CartesianGrid, Legend, Brush, ErrorBar, AreaChart, Area,
-    Label, LabelList } from 'recharts';
+    Label, LabelList ,Scatter, ScatterChart,} from 'recharts';
 
 class MyComponent extends React.Component {
     constructor(props) {
@@ -26,8 +27,9 @@ class MyComponent extends React.Component {
             if (self.money.indexOf(trade.coin) !== -1) {
                 last[trade.coin] = self.state.stocks[trade.coin];
                 stocks[trade.coin] = trade.msg.price
+                var d = new Date();
                 if(trade.coin == "BTC") {
-                    data03.push({'date': Date(), 'price': trade.msg.price})
+                    data03.push({'time':d.getTime(), 'value': trade.msg.price})
                 }
                 self.setState({
                     stocks: stocks,
@@ -43,15 +45,54 @@ class MyComponent extends React.Component {
         this.setState({count: this.state.count + result.movement});
     }
 
+    // getTicks(data) {
+    //     if (!data || !data.length ) {return [];}
+    //
+    //     const domain = [new Date(data[0].time), new Date(data[data.length - 1].time)];
+    //     const scale = d3_scale.scaleTime().domain(domain).range([0, 1]);
+    //     const ticks = scale.ticks(d3_time.timeMinute, 5);
+    //
+    //     return ticks.map(entry => +entry);
+    // }
+
+
+
     render() {
-        const data03 = [
-            { date: 'Jan 04 2016', price: 105.35 },
-            { date: 'Jan 05 2016', price: 102.71 },
-            { date: 'Jan 06 2016', price: 100.7 },
-            { date: 'Jan 07 2016', price: 96.45 },
-            { date: 'Jan 08 2016', price: 96.96 },
-            { date: 'Jan 11 2016', price: 98.53 },
-        ];
+        const dateFormat = (time) => {
+            return moment(time).format('HH:mm');
+        };
+
+        var data = null;
+        if(this.state.data03.length>0) {
+            data = <div className="line-chart-wrapper">
+                <ResponsiveContainer width = '95%' height = {500} >
+                    <ScatterChart>
+                        <XAxis
+                            dataKey = 'time'
+                            domain = {['auto', 'auto']}
+                            name = 'Time'
+                            tickFormatter = {(unixTime) => moment(unixTime).format('HH:mm Do')}
+                            type = 'number'
+                        />
+                        <YAxis dataKey = 'value' domain={['auto', 'auto']} name = 'Value' />
+
+                        <CartesianGrid />
+                        <Tooltip cursor={{strokeDasharray: '3 3'}}/>
+                        <Legend/>
+                        <Scatter  legendType="square" fill='#8884d8' shape="square"
+                            data = {this.state.data03}
+                            line = {{ stroke: '#8884d8' }}
+                            lineJointType = 'monotoneX'
+                            lineType = 'joint'
+                            name = 'Values'
+                        />
+
+                    </ScatterChart>
+                </ResponsiveContainer>
+
+            </div>
+        }
+
         return (
             <div className="row">
                 <table className="table-hover">
@@ -69,27 +110,7 @@ class MyComponent extends React.Component {
                     ))}
                     </tbody>
                 </table>
-                {this.state.data03.length > 10 &&
-                <div className="line-chart-wrapper">
-                    <LineChart
-                        width={600} height={400} data={this.state.data03}
-                        margin={{top: 40, right: 40, bottom: 20, left: 20}}
-                    >
-                        <CartesianGrid vertical={false}/>
-                        <XAxis dataKey="date" label="Date"/>
-                        <YAxis domain={['auto', 'auto']} label="Stock Price"/>
-                        <Tooltip/>
-                        <Line dataKey="price" stroke="#ff7300" dot={false}/>
-                        <Brush dataKey="date" startIndex={this.state.data03.length - 10}>
-                            <AreaChart>
-                                <CartesianGrid/>
-                                <YAxis hide domain={['auto', 'auto']}/>
-                                <Area dataKey="price" stroke="#ff7300" fill="#ff7300" dot={false}/>
-                            </AreaChart>
-                        </Brush>
-                    </LineChart>
-                </div>
-                }
+                {data}
             </div>
         );
     }
