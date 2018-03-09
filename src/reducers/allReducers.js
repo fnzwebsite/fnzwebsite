@@ -1,4 +1,4 @@
-import money from './moneyReducer';
+import dealing from './dealingReducer';
 export {
-    money
+    dealing
 };

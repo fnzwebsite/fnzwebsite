@@ -45,10 +45,33 @@ th {
     color: red;
 }
 
-.row {
-    margin: 10px 0;
+.box-height {
+    width: 250px;
+    height:500px;
+    overflow-y: auto;
+}
+.pull-left {
+    float: left;
+}
+.inner-box{
+    height:150px;
+    top:75px;
+}
+.buy {
+    background: dodgerblue;
+}
+.sell {
+    background-color: orange;
+}
+.today{
+    background: gainsboro;
+}
+.previous-day{
+    background: blanchedalmond;
+}
+.next-day{
+    background: blanchedalmond;
 }
 
-.container {
-    width: 552px;
-}
+
+

@@ -21,7 +21,7 @@ let processData = function (response, dispatch) {
 };
 
 export function receiveDealings(data) {
-    return {type: allActions.RECEIVE_INSTRUMENT, instrument: data};
+    return {type: allActions.RECEIVE_DEALING, dealing: data};
 };
 
 export function getDealings() {
