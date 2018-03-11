@@ -1,5 +1,9 @@
 table {
-    border-collapse: collapse;
+    /*border-collapse: collapse;*/
+    border-width:1px;
+    border-radius: 5px;
+    border-color:lightblue;
+
 }
 
 th:first-child {
@@ -47,8 +51,12 @@ th {
 
 .box-height {
     width: 250px;
-    height:500px;
+    height:250px;
     overflow-y: auto;
+    border-width:1px;
+    border-radius: 5px;
+    border-color:lightblue;
+
 }
 .pull-left {
     float: left;
@@ -64,14 +72,14 @@ th {
     background-color: orange;
 }
 .today{
-    background: gainsboro;
+    background: black;
+    color:white;
 }
 .previous-day{
-    background: blanchedalmond;
+    background: black;
+      color:white;
 }
 .next-day{
-    background: blanchedalmond;
+  background: black;
+    color:white;
 }
-
-
-

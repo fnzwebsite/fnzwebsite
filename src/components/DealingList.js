@@ -63,28 +63,15 @@ class DealingList extends React.Component {
             });
             chart = <div className="line-chart-wrapper">
                 <ResponsiveContainer width = '95%' height = {500} >
-                    <ScatterChart>
-                        <XAxis
-                            dataKey = 'time'
-                            domain = {['auto', 'auto']}
-                            name = 'Time'
-                            tickFormatter = {(unixTime) => moment(unixTime).format('HH:mm Do')}
-                            type = 'number'
-                        />
-                        <YAxis dataKey = 'value' domain={['auto', 'auto']} name = 'Value' />
+                <AreaChart width={400} height={400} data={ListArrayDealing} >
+          <Area type="monotone" dataKey="value" stroke="#ff7300" fill="#ff7300" className="recharts-area-curve" />
 
-                        <CartesianGrid />
-                        <Tooltip cursor={{strokeDasharray: '3 3'}}/>
-                        <Legend/>
-                        <Scatter  legendType="square" fill='#8884d8' shape="square"
-                                  data = {ListArrayDealing}
-                                  line = {{ stroke: '#8884d8' }}
-                                  lineJointType = 'monotoneX'
-                                  lineType = 'joint'
-                                  name = 'Values'
-                        />
+        <XAxis dataKey = 'time' domain = {['auto', 'auto']} name = 'Time' tickFormatter = {(unixTime) => moment(unixTime).format('HH:mm Do')}
+                           type = 'number'
+                       />
+                       <YAxis dataKey = 'value' domain={['auto', 'auto']} name = 'Value' />
 
-                    </ScatterChart>
+      </AreaChart>
                 </ResponsiveContainer>
             </div>
         }
@@ -131,7 +118,7 @@ class DealingList extends React.Component {
                             <div className="col-md-6">
                                 <h5 className="card-title">{self.props.data.dealing[keyName].account}</h5>
                                 <h6 className="card-subtitle mb-2 text-muted">{self.props.data.dealing[keyName].instrumentKey}</h6>
-                            </div>
+                                </div>
                             <div className="col-md-6">
                                 <div>{self.props.data.dealing[keyName].amount}</div>
                             </div>
@@ -162,34 +149,25 @@ class DealingList extends React.Component {
                 }
             });
             return (
-                <div className="row">
+                <div className="row" style={{backgroundColor:'Black'}}>
                     <div className="col-md-3 previous-day">
                         <div>Previous Day</div>
                         <div className="box-height">{ListPrevious}</div>
                     </div>
                     <div className="row col-md-6 today">
-                        <div className="col-md-6">
+                        <div className="col-md-6" style={{overflow:'auto'}}>
                             <div className="pull-left">Box Positions (Today)</div>
                             <br/>
                             <div className="box-height">{ListToday}</div>
-                        </div>
-                        <div className="col-md-6">
-                            <div className="row">
-                                <div className="col-md-12 inner-box">Open 45345</div>
-                            </div>
-                            <div className="row">
-                                <div className="col-md-12 inner-box">Close 5435</div>
-                            </div>
-                            <div className="row">
-                                <div className="col-md-12 inner-box">Net 4354325</div>
-                            </div>
                         </div>
                     </div>
                     <div className="col-md-3 next-day">
                         <div>Next Day</div>
                         <div className="box-height">{ListNext}</div>
                     </div>
+                    <div className="row col-md-12">
                     {chart}
+                    </div>
                 </div>
             )
         }
