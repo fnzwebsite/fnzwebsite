@@ -26,7 +26,7 @@ export function receiveDealings(data) {
 
 export function getDealings() {
     return (dispatch) => {
-        fetch('http://ec2-35-178-56-52.eu-west-2.compute.amazonaws.com:8081/api/dealing')
+        fetch('http://35.178.56.52:8081/api/v1/dealing')
             .then(response =>
                 loadData(response)
             )
