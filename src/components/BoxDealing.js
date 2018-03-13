@@ -28,7 +28,7 @@ class BoxToday extends React.Component {
 
 
     render() {
-        let dealing = this.props.data.dealing || this.state.dealing;
+        let dealing = this.state.dealing || this.props.data.dealing;
         if(dealing) {
             let self = this
             let ListToday = Object.keys(dealing).map(function (keyName, keyIndex) {
@@ -36,7 +36,7 @@ class BoxToday extends React.Component {
                     return <li className={dealing[keyName].dealType.toUpperCase() == "BUY" ? "active" : "orange"}>
                             <div className="fun">
                                 <div className="fund-name">{dealing[keyName].account}</div>
-                                <div className="fund-quan">{dealing[keyName].amount}</div>
+                                <div className="fund-quan">{dealing[keyName].units}</div>
                             </div>
                             <div className="fun">
                                 <div className="fund-isin">{dealing[keyName].instrumentKey}</div>
@@ -56,7 +56,7 @@ class BoxToday extends React.Component {
                         className={dealing[keyName].dealType.toUpperCase() == "BUY" ? "active" : "orange"}>
                         <div className="fun">
                             <div className="fund-name">{dealing[keyName].account}</div>
-                            <div className="fund-quan">{dealing[keyName].amount}</div>
+                            <div className="fund-quan">{dealing[keyName].units}</div>
                         </div>
                         <div className="fun">
                             <div className="fund-isin">{dealing[keyName].instrumentKey}</div>
@@ -75,7 +75,7 @@ class BoxToday extends React.Component {
                     return <li className={dealing[keyName].dealType.toUpperCase() == "BUY" ? "active" : "orange"}>
                         <div className="fun">
                             <div className="fund-name">{dealing[keyName].account}</div>
-                            <div className="fund-quan">{dealing[keyName].amount}</div>
+                            <div className="fund-quan">{dealing[keyName].units}</div>
                         </div>
                         <div className="fun">
                             <div className="fund-isin">{dealing[keyName].instrumentKey}</div>
