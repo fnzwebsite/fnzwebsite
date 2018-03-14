@@ -26,8 +26,12 @@ export function receiveDealings(data) {
 
 export function getDealings() {
     return (dispatch) => {
-        fetch('http://35.178.56.52:8081/api/v1/dealing')
-            .then(response =>
+        fetch('http://35.178.56.52:8081/api/v1/dealing',{
+            method: 'get',
+            headers: {
+                'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjEwMzYxMjQ2MDAsImVucm9sbG1lbnRJZCI6InRlc3RAZm56Y2hhaW4uY29tIiwiYWZmaWxpYXRpb24iOiJmbnouYWRtaW5pc3RyYXRvciIsIm9yZ2FuaXNhdGlvbiI6IkZueiIsInNjb3BlcyI6IkFETUlOIn0.vrVBH_5bg1Lkjoo1A_HAeDyJ129Anmrg-dDMccZ4RKI'
+
+            }}).then(response =>
                 loadData(response)
             )
             .then(response => {

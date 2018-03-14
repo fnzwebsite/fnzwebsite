@@ -43,14 +43,14 @@ class LoadLineChart extends React.Component {
     }
 
     getChartData(dealing) {
-        let loadAmount = Object.keys(dealing).map(function (keyName, keyIndex) {
+        let loadAmount = Object.keys(dealing).sort((a, b) => a.tradeDate - b.tradeDate).map(function (keyName, keyIndex) {
             if (moment(dealing[keyName].boxDate).isSame(moment(), 'day')) {
                 return dealing[keyName].amount;
             }
 
         });
 
-        let loadDateTime = Object.keys(dealing).map(function (keyName, keyIndex) {
+        let loadDateTime = Object.keys(dealing).sort((a, b) => a.tradeDate - b.tradeDate).map(function (keyName, keyIndex) {
             if (moment(dealing[keyName].boxDate).isSame(moment(), 'day')) {
                 return moment(dealing[keyName].tradeDate).format("hh:mm");
             }
@@ -84,15 +84,13 @@ class LoadLineChart extends React.Component {
     }
 
     componentWillMount(prevProps, prevState) {
-        this.props.dealingActions.getDealings();
+        // this.props.dealingActions.getDealings();
     }
 
     componentWillReceiveProps(prevProps){
         if(prevProps.data.dealing != this.props.data.dealing && this.props.data.dealing) {
-
                 let lineChartData = this.getChartData(this.props.data.dealing);
                 this.setState({dealing: this.props.data.dealing, data: lineChartData})
-
         }
     }
 

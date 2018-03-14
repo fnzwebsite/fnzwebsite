@@ -76,7 +76,26 @@ function getCourses(callback)
     };
 
 
-    var req = http.get("http://35.178.56.52:8081/api/v1/dealing", function(res) {
+    // var options = {
+    //     host: "http://35.178.56.52",
+    //     port: 8081,
+    //     method: "GET",
+    //     path: "/api/v1/dealing"
+    //     // Authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjEwMzk5NjkyMzUsImVucm9sbG1lbnRJZCI6InRlc3RAZm56Y2hhaW4uY29tIiwiYWZmaWxpYXRpb24iOiJmbnouYWRtaW5pc3RyYXRvciIsIm9yZ2FuaXNhdGlvbiI6IkZueiIsInNjb3BlcyI6IkFETUlOIn0.ker4SENy8uHpcpYKB__faPp89R1MlWRGviR7-OHkDd8"
+    // };
+
+    var options = {
+        method: 'GET',
+        host: '35.178.56.52',
+        port: 8081,
+        path: '/api/v1/dealing',
+        headers: {
+            Authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjEwNDQxMzU4MjAsImVucm9sbG1lbnRJZCI6InRlc3RAZm56Y2hhaW4uY29tIiwiYWZmaWxpYXRpb24iOiJmbnouYWRtaW5pc3RyYXRvciIsIm9yZ2FuaXNhdGlvbiI6IkZueiIsInNjb3BlcyI6IkFETUlOIn0.-6XigCTrmvo26FfuxLAQ2FGxHNS0ltfvraylMIwKDmU"
+        }
+    };
+
+    var req = http.request(options, function(res) {
+        console.log(JSON.stringify(res.headers));
         //console.log('-----------------------------------------');
         console.log('STATUS: ' + res.statusCode);
         console.log('STATUS: ' + res);

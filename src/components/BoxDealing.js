@@ -29,7 +29,8 @@ class BoxToday extends React.Component {
 
     render() {
         let dealing = this.state.dealing || this.props.data.dealing;
-        if(dealing) {
+        if(dealing && dealing.status != "401") {
+            // dealing = dealing.sort((a, b) => a.tradeDate - b.tradeDate);
             let self = this
             let ListToday = Object.keys(dealing).map(function (keyName, keyIndex) {
                 if(moment(dealing[keyName].boxDate).isSame(moment(), 'day')) {
