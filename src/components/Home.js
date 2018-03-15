@@ -60,7 +60,7 @@ class Home extends React.Component {
                                     </div>
                                     <div className="col-sm-12 chart-sec">
                                         <div className="row">
-                                            <h5>Trades (Today) <span>01/03/2018 &nbsp 12:00 AM</span></h5>
+                                            <h5>Trades (Today) <span>01/03/2018</span> <span>12:00 AM</span></h5>
                                             <ul className="nav nav-tabs chart-tabs">
                                                 <li className="active"><a className="active" href="#chart"><i
                                                     className="fa fa-area-chart"></i>Chart</a></li>

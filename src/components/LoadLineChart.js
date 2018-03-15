@@ -7,8 +7,10 @@ import * as dealingActions from '../actions/dealingActions';
 import {bindActionCreators} from 'redux';
 
 const options = {
+    responsive: true,
+    maintainAspectRatio: false,
     scaleShowGridLines: true,
-    scaleGridLineColor: 'rgba(0,0,0,.05)',
+    scaleGridLineColor: 'rgba(255,255,255,.05)',
     scaleGridLineWidth: 1,
     scaleShowHorizontalLines: true,
     scaleShowVerticalLines: true,
@@ -19,15 +21,16 @@ const options = {
     pointDotStrokeWidth: 1,
     pointHitDetectionRadius: 20,
     datasetStroke: true,
-    datasetStrokeWidth: 2,
+    datasetStrokeWidth: 1,
     datasetFill: true,
     legendTemplate: '<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
 }
 
 const styles = {
     graphContainer: {
-        border: '1px solid black',
+        border: '0px solid white',
         padding: '15px'
+        
     }
 }
 
@@ -45,7 +48,7 @@ class LoadLineChart extends React.Component {
     getChartData(dealing) {
         let loadAmount = Object.keys(dealing).sort((a, b) => a.tradeDate - b.tradeDate).map(function (keyName, keyIndex) {
             if (moment(dealing[keyName].boxDate).isSame(moment(), 'day')) {
-                return dealing[keyName].amount;
+                return dealing[keyName].units;
             }
 
         });
@@ -70,7 +73,7 @@ class LoadLineChart extends React.Component {
             datasets: [
                 {
                     label: 'My First dataset',
-                    fillColor: 'rgba(220,220,220,0.2)',
+                    fillColor: 'rgba(38, 148, 216, 0.5)',
                     strokeColor: 'rgba(220,220,220,1)',
                     pointColor: 'rgba(220,220,220,1)',
                     pointStrokeColor: '#fff',
@@ -113,11 +116,11 @@ class LoadLineChart extends React.Component {
                 <div style={styles.graphContainer}>
                     <LineChart data={this.state.data}
                                options={options}
-                               width="600" height="250"/>
+                               style={{background:'none',color:'#fff'}}/>
                 </div>
             )
         } else{
-            return <div>Loading ...</div>
+            return <div className="load">Loading ...</div>
         }
     }
 }

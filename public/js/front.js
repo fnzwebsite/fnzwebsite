@@ -17,6 +17,7 @@ $(document).ready(function () {
     // Card Close
     // ------------------------------------------------------ //
     $('.card-close a.remove').on('click', function (e) {
+      alert('hi this is the card...');
         e.preventDefault();
         $(this).parents('.card').fadeOut();
     });
@@ -106,8 +107,8 @@ $(document).ready(function () {
     });
 
     // ------------------------------------------------------- //
-    // Footer 
-    // ------------------------------------------------------ //   
+    // Footer
+    // ------------------------------------------------------ //
 
     var contentInner = $('.content-inner');
 

@@ -4,7 +4,7 @@ import io from "socket.io-client"
 import moment from 'moment'
 import * as dealingActions from '../actions/dealingActions';
 import {bindActionCreators} from 'redux';
-
+import $ from 'jquery';
 class BoxToday extends React.Component {
     constructor(props) {
         super(props);
@@ -21,8 +21,30 @@ class BoxToday extends React.Component {
         var self = this;
         var socket = io('http://localhost:3700');
         socket.on('dealing', function (dealing) {
-            self.setState({dealing:dealing})
+          console.log(JSON.stringify(dealing));
+            self.setState({dealing:dealing});
         })
+
+        $('.today .card').on('click',function(e) {
+          debugger;
+          alert('hi this is the card...');
+            e.preventDefault(); //prevent the link from being followed
+            $('.previous .card').removeClass('selected');
+            $('.next .card').removeClass('selected');
+            $('.today .card').addClass('selected');
+        });
+        $('.previous .card').on('click',function(e) {
+            e.preventDefault(); //prevent the link from being followed
+            $('.today .card').removeClass('selected');
+            $('.next .card').removeClass('selected');
+            $('.previous .card').addClass('selected');
+        });
+         $('.next .card').on('click',function(e) {
+            e.preventDefault(); //prevent the link from being followed
+            $('.previous .card').removeClass('selected');
+            $('.today .card').removeClass('selected');
+            $('.next .card').addClass('selected');
+        });
     }
 
 
@@ -37,12 +59,12 @@ class BoxToday extends React.Component {
                     return <li className={dealing[keyName].dealType.toUpperCase() == "BUY" ? "active" : "orange"}>
                             <div className="fun">
                                 <div className="fund-name">{dealing[keyName].account}</div>
-                                <div className="fund-quan">{dealing[keyName].units}</div>
+                                <div className="fund-quan">{(dealing[keyName].units==null ||dealing[keyName].units<=0)?0:dealing[keyName].units }</div>
                             </div>
                             <div className="fun">
                                 <div className="fund-isin">{dealing[keyName].instrumentKey}</div>
                                 <div className="fund-price"><i
-                                    className="fa fa-gbp"></i>{dealing[keyName].amount}
+                                    className="fa fa-gbp"></i>{(dealing[keyName].amount==null || dealing[keyName].amount<=0)?0:dealing[keyName].amount}
                                 </div>
                             </div>
                         </li>
@@ -57,12 +79,12 @@ class BoxToday extends React.Component {
                         className={dealing[keyName].dealType.toUpperCase() == "BUY" ? "active" : "orange"}>
                         <div className="fun">
                             <div className="fund-name">{dealing[keyName].account}</div>
-                            <div className="fund-quan">{dealing[keyName].units}</div>
+                            <div className="fund-quan">{(dealing[keyName].units==null ||dealing[keyName].units<=0)?0:dealing[keyName].units }</div>
                         </div>
                         <div className="fun">
                             <div className="fund-isin">{dealing[keyName].instrumentKey}</div>
                             <div className="fund-price"><i
-                                className="fa fa-gbp"></i>{dealing[keyName].amount}
+                                className="fa fa-gbp"></i>{(dealing[keyName].amount==null || dealing[keyName].amount<=0)?0:dealing[keyName].amount}
                             </div>
                         </div>
                     </li>
@@ -71,17 +93,17 @@ class BoxToday extends React.Component {
             });
             let ListNext = Object.keys(dealing).map(function (keyName, keyIndex) {
 
-                var date =moment(dealing[keyName].boxDate).isSameOrAfter(moment(moment.now()));
+                var date =moment(dealing[keyName].boxDate).isSameOrBefore(moment(moment.now()));
                 if(date) {
                     return <li className={dealing[keyName].dealType.toUpperCase() == "BUY" ? "active" : "orange"}>
                         <div className="fun">
                             <div className="fund-name">{dealing[keyName].account}</div>
-                            <div className="fund-quan">{dealing[keyName].units}</div>
+                            <div className="fund-quan">{(dealing[keyName].units==null ||dealing[keyName].units<=0)?0:dealing[keyName].units }</div>
                         </div>
                         <div className="fun">
                             <div className="fund-isin">{dealing[keyName].instrumentKey}</div>
                             <div className="fund-price"><i
-                                className="fa fa-gbp"></i>{dealing[keyName].amount}
+                                className="fa fa-gbp"></i>{(dealing[keyName].amount==null || dealing[keyName].amount<=0)?0:dealing[keyName].amount}
                             </div>
                         </div>
                     </li>
@@ -192,7 +214,8 @@ class BoxToday extends React.Component {
                                                <p className="blue">+11,543.114</p>
                                            </li>
                                        </ul>
-                                   </div>
+
+                                    </div>
                                </div>
                            </div>
                        </div>
@@ -202,7 +225,7 @@ class BoxToday extends React.Component {
         }
         else{
             return (
-                <div>Loading ...</div>
+                <div className="load">Loading ...</div>
             )
         }
     }
