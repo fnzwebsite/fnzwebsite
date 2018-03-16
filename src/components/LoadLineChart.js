@@ -46,16 +46,42 @@ class LoadLineChart extends React.Component {
     }
 
     getChartData(dealing) {
+        let self = this
+
         let loadAmount = Object.keys(dealing).sort((a, b) => a.tradeDate - b.tradeDate).map(function (keyName, keyIndex) {
-            if (moment(dealing[keyName].boxDate).isSame(moment(), 'day')) {
-                return dealing[keyName].units;
+            if(self.props.loadThisDay == 'today') {
+                if (moment(dealing[keyName].boxDate).isSame(moment(), 'day')) {
+                    return dealing[keyName].units;
+                }
+            }
+            if(self.props.loadThisDay == 'next') {
+                if (moment(dealing[keyName].boxDate).isSameOrBefore(moment(moment.now()))) {
+                    return dealing[keyName].units;
+                }
+            }
+            if(self.props.loadThisDay == 'previous') {
+                if (moment(dealing[keyName].boxDate).isSameOrBefore(moment(), 'day')) {
+                    return dealing[keyName].units;
+                }
             }
 
         });
 
         let loadDateTime = Object.keys(dealing).sort((a, b) => a.tradeDate - b.tradeDate).map(function (keyName, keyIndex) {
-            if (moment(dealing[keyName].boxDate).isSame(moment(), 'day')) {
-                return moment(dealing[keyName].tradeDate).format("hh:mm");
+            if(self.props.loadThisDay == 'today') {
+                if (moment(dealing[keyName].boxDate).isSame(moment(), 'day')) {
+                    return moment(dealing[keyName].tradeDate).format("hh:mm");
+                }
+            }
+            if(self.props.loadThisDay == 'next') {
+                if (moment(dealing[keyName].boxDate).isSameOrBefore(moment(moment.now()))) {
+                    return moment(dealing[keyName].tradeDate).format("hh:mm");
+                }
+            }
+            if(self.props.loadThisDay == 'previous') {
+                if (moment(dealing[keyName].boxDate).isSameOrBefore(moment(), 'day')) {
+                    return moment(dealing[keyName].tradeDate).format("hh:mm");
+                }
             }
 
         });

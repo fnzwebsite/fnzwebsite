@@ -8,6 +8,22 @@ import LoadLineChart from './LoadLineChart'
 
 
 class Home extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state ={
+            chart:'today'
+        };
+
+        this.loadChart =  this.loadChart.bind(this);
+    }
+
+    loadChart(selected){
+        if(this.state.chart != selected) {
+            this.setState({
+                chart: selected
+            })
+        }
+    }
 
     data1() {
         return {
@@ -56,7 +72,7 @@ class Home extends React.Component {
                             <div className="tab-content">
                                 <div id="home" className="tab-pane in active">
                                     <div className="col-sm-12">
-                                           <BoxToday/>
+                                           <BoxToday loadChart={this.loadChart}/>
                                     </div>
                                     <div className="col-sm-12 chart-sec">
                                         <div className="row">
@@ -72,7 +88,7 @@ class Home extends React.Component {
 
                                                         <div className="card-body">
                                                             {/*<canvas id="lineChartExample"></canvas>*/}
-                                                            <LoadLineChart/>
+                                                            <LoadLineChart loadThisDay={this.state.chart}/>
                                                         </div>
                                                     </div>
                                                 </div>

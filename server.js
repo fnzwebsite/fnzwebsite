@@ -90,7 +90,7 @@ function getCourses(callback)
         port: 8081,
         path: '/api/v1/dealing',
         headers: {
-            Authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjExMzM2MDkwODIsImVucm9sbG1lbnRJZCI6InRlc3RAZm56Y2hhaW4uY29tIiwiYWZmaWxpYXRpb24iOiJmbnouYWRtaW5pc3RyYXRvciIsIm9yZ2FuaXNhdGlvbiI6IkZueiIsInNjb3BlcyI6IkFETUlOIn0.pYULJ_PITQBPqcyQB8j6LmZMEIFfFzgWrNjzgV7SxCI"
+            Authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjEyMTM4MjI0NTEsImVucm9sbG1lbnRJZCI6InRlc3RAZm56Y2hhaW4uY29tIiwiYWZmaWxpYXRpb24iOiJmbnouYWRtaW5pc3RyYXRvciIsIm9yZ2FuaXNhdGlvbiI6IkZueiIsInNjb3BlcyI6IkFETUlOIn0.VG0lUvMD7ks3sCjBzqjaBmPtWpp0BBZ7iA9vVCoBGGg"
         }
     };
 

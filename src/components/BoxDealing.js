@@ -4,12 +4,23 @@ import io from "socket.io-client"
 import moment from 'moment'
 import * as dealingActions from '../actions/dealingActions';
 import {bindActionCreators} from 'redux';
-import $ from 'jquery';
+
 class BoxToday extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            dealing:null
+            dealing:null,
+            selected:'today'
+        }
+        this.changeView =  this.changeView.bind(this);
+    }
+
+    changeView(selected){
+        if(this.state.selected != selected){
+            this.setState({
+                selected:selected
+            });
+            this.props.loadChart(selected)
         }
     }
 
@@ -21,42 +32,24 @@ class BoxToday extends React.Component {
         var self = this;
         var socket = io('http://localhost:3700');
         socket.on('dealing', function (dealing) {
-          console.log(JSON.stringify(dealing));
-            self.setState({dealing:dealing});
+          // console.log(JSON.stringify(dealing));
+          if(self.state.dealing !== dealing) {
+              self.setState({dealing: dealing});
+          }
         })
-
-        $('.today .card').on('click',function(e) {
-          debugger;
-          alert('hi this is the card...');
-            e.preventDefault(); //prevent the link from being followed
-            $('.previous .card').removeClass('selected');
-            $('.next .card').removeClass('selected');
-            $('.today .card').addClass('selected');
-        });
-        $('.previous .card').on('click',function(e) {
-            e.preventDefault(); //prevent the link from being followed
-            $('.today .card').removeClass('selected');
-            $('.next .card').removeClass('selected');
-            $('.previous .card').addClass('selected');
-        });
-         $('.next .card').on('click',function(e) {
-            e.preventDefault(); //prevent the link from being followed
-            $('.previous .card').removeClass('selected');
-            $('.today .card').removeClass('selected');
-            $('.next .card').addClass('selected');
-        });
     }
 
 
 
     render() {
+        console.log(JSON.stringify("hi"));
         let dealing = this.state.dealing || this.props.data.dealing;
         if(dealing && dealing.status != "401") {
             // dealing = dealing.sort((a, b) => a.tradeDate - b.tradeDate);
             let self = this
             let ListToday = Object.keys(dealing).map(function (keyName, keyIndex) {
                 if(moment(dealing[keyName].boxDate).isSame(moment(), 'day')) {
-                    return <li className={dealing[keyName].dealType.toUpperCase() == "BUY" ? "active" : "orange"}>
+                    return <li keys={keyIndex} className={dealing[keyName].dealType.toUpperCase() == "BUY" ? "active" : "orange"}>
                             <div className="fun">
                                 <div className="fund-name">{dealing[keyName].account}</div>
                                 <div className="fund-quan">{(dealing[keyName].units==null ||dealing[keyName].units<=0)?0:dealing[keyName].units }</div>
@@ -75,7 +68,7 @@ class BoxToday extends React.Component {
             let ListPrevious = Object.keys(dealing).map(function (keyName, keyIndex) {
                 var date =moment(dealing[keyName].boxDate).isSameOrBefore(moment(), 'day');
                 if(date) {
-                    return <li
+                    return <li keys={keyIndex}
                         className={dealing[keyName].dealType.toUpperCase() == "BUY" ? "active" : "orange"}>
                         <div className="fun">
                             <div className="fund-name">{dealing[keyName].account}</div>
@@ -95,7 +88,7 @@ class BoxToday extends React.Component {
 
                 var date =moment(dealing[keyName].boxDate).isSameOrBefore(moment(moment.now()));
                 if(date) {
-                    return <li className={dealing[keyName].dealType.toUpperCase() == "BUY" ? "active" : "orange"}>
+                    return <li keys={keyIndex} className={dealing[keyName].dealType.toUpperCase() == "BUY" ? "active" : "orange"}>
                         <div className="fun">
                             <div className="fund-name">{dealing[keyName].account}</div>
                             <div className="fund-quan">{(dealing[keyName].units==null ||dealing[keyName].units<=0)?0:dealing[keyName].units }</div>
@@ -111,8 +104,8 @@ class BoxToday extends React.Component {
             });
             return (
                <div className="row">
-                   <div className="col-sm-4 previous">
-                       <div className="work-amount card">
+                   <div className="col-sm-4 previous" onClick={() => this.changeView('previous')}>
+                       <div className={this.state.selected == "previous" ? 'work-amount card selected':'work-amount card'}>
                            <div className="card-close">
                                Close
                            </div>
@@ -147,8 +140,8 @@ class BoxToday extends React.Component {
                            </div>
                        </div>
                    </div>
-                   <div className="col-sm-4 today">
-                       <div className="work-amount card selected">
+                   <div className="col-sm-4 today" onClick={() => this.changeView('today')}>
+                       <div className={this.state.selected == "today" ? 'work-amount card selected':'work-amount card'}>
                            <div className="card-close">
                                Open
                            </div>
@@ -183,8 +176,8 @@ class BoxToday extends React.Component {
                            </div>
                        </div>
                    </div>
-                   <div className="col-sm-4 next">
-                       <div className="work-amount card">
+                   <div className="col-sm-4 next" onClick={() => this.changeView('next')}>
+                       <div className={this.state.selected == "next" ? 'work-amount card selected':'work-amount card'}>
                            <div className="card-close">
                                Open
                            </div>
