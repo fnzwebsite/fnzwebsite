@@ -95,12 +95,12 @@ class LoadLineChart extends React.Component {
     }
 
     componentDidMount(prevProps, prevState) {
-        var self = this;
-        var socket = io('http://localhost:3700');
-        socket.on('dealing', function (dealing) {
-            let lineChartData = self.getChartData(dealing);
-            self.setState({dealing:dealing,data:lineChartData})
-        })
+        // var self = this;
+        // var socket = io('http://localhost:3700');
+        // socket.on('dealing', function (dealing) {
+        //     let lineChartData = self.getChartData(dealing);
+        //     self.setState({dealing:dealing,data:lineChartData})
+        // })
     }
 
 

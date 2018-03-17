@@ -1,4 +1,5 @@
 import * as allActions from './allActions';
+import { authHeader } from '../components/_helpers';
 
 let loadData = function (response) {
     return response.json().then(data => ({
@@ -26,12 +27,21 @@ export function receiveDealings(data) {
 
 export function getDealings() {
     return (dispatch) => {
-        fetch('http://35.178.56.52:8081/api/v1/dealing',{
-            method: 'get',
-            headers: {
-                'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjEwMzYxMjQ2MDAsImVucm9sbG1lbnRJZCI6InRlc3RAZm56Y2hhaW4uY29tIiwiYWZmaWxpYXRpb24iOiJmbnouYWRtaW5pc3RyYXRvciIsIm9yZ2FuaXNhdGlvbiI6IkZueiIsInNjb3BlcyI6IkFETUlOIn0.vrVBH_5bg1Lkjoo1A_HAeDyJ129Anmrg-dDMccZ4RKI'
+        // const requestOptions = {
+        //     headers: authHeader()
+        // };
+        var form = new FormData()
+        const requestOptions = {headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + '76886867987698'
+        },
+            mode:'cors',
+            method: 'GET',
+            host:'35.178.56.52:8081'
+        };
 
-            }}).then(response =>
+        fetch('http://35.178.56.52:8081/api/v1/dealing',requestOptions).then(response =>
                 loadData(response)
             )
             .then(response => {
@@ -42,7 +52,11 @@ export function getDealings() {
 
 export function getDealingsById(dealingId) {
     return (dispatch) => {
-        fetch('http://ec2-35-178-56-52.eu-west-2.compute.amazonaws.com:8081/api/dealing/'+dealingId)
+        const requestOptions = {
+            headers: authHeader()
+        };
+
+        fetch('http://ec2-35-178-56-52.eu-west-2.compute.amazonaws.com:8081/api/dealing/'+dealingId,requestOptions)
             .then(response =>
                 loadData(response)
             )

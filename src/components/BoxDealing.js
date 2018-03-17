@@ -18,11 +18,11 @@ class BoxToday extends React.Component {
     }
 
     componentDidMount(prevProps, prevState) {
-        var self = this;
-        var socket = io('http://localhost:3700');
-        socket.on('dealing', function (dealing) {
-            self.setState({dealing:dealing})
-        })
+        // var self = this;
+        // var socket = io('http://localhost:3700');
+        // socket.on('dealing', function (dealing) {
+        //     self.setState({dealing:dealing})
+        // })
     }
 
 

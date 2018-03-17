@@ -39,7 +39,7 @@ class Home extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="">
                 <Header/>
                 <div className="page-content d-flex align-items-stretch">
                     <SideNav/>
