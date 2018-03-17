@@ -19,10 +19,8 @@ class Header extends React.Component {
                                     <img src="img/menu-arrow.png" alt="menu-toggle" className=""/>
                                 </a>
                                 <a href="" className="navbar-brand">
-                                    <div className="brand-text brand-big"><img src="img/logo.png" alt="logo"
-                                                                               className=""/></div>
-                                    <div className="brand-text brand-small"><img src="img/logo.png" alt="logo"
-                                                                                 className=""/></div>
+                                    <div className="brand-text brand-big"><img src="img/logo.png" alt="logo" className=""/></div>
+                                    <div className="brand-text brand-small"><img src="img/logo.png" alt="logo" className=""/></div>
                                 </a>
                             </div>
                             <ul className="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">

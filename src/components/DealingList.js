@@ -22,17 +22,14 @@ class DealingList extends React.Component {
 
     componentWillMount() {
         // this.props.dealingActions.getDealings();
-        // var socket = io('http://localhost:3700');
-        this.props.dealingActions.getDealings();
     }
 
     componentDidMount(prevProps, prevState) {
-        // var self = this;
-        // var socket = io('http://localhost:3700');
-        // dispatch(this.props.dealingActions.getDealings(socket));
-        // socket.on('dealing', function (dealing) {
-        //     self.setState({dealing:dealing})
-        // })
+        var self = this;
+        var socket = io('http://localhost:3700');
+        socket.on('dealing', function (dealing) {
+            self.setState({dealing:dealing})
+        })
     }
 
     handleData(data) {

@@ -1,6 +1,7 @@
 var express = require('express'),
     debug = true,
     http = require('http'),
+    cors = require('cors'),
     _ = require('underscore'),
     server = express(),
     port = 3700,
@@ -9,17 +10,37 @@ var express = require('express'),
 
 
 io.set('log level', 1);
-
+server.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    next();
+});
 server.get('/dealing', (req, res) => {
     let auth = req.headers.authorization;
-    getCourses(function(data){
+    getCourses(function (data) {
         res.send(data);
-    },auth);
+    }, auth);
 });
 
 var clients = {};
 
-io.sockets.on('connection', function(socket){
+io.use(function (socket, next) {
+    if (socket.handshake.query.auth) {
+        setInterval(function () {
+            getCourses(function (data) {
+                console.log(socket.handshake.query.auth);
+                io.sockets.emit('dealing', data);
+            }, socket.handshake.query.auth);
+            return next();
+        }, 1000);
+    }
+    next(new Error('Authentication error'));
+});
+
+io.set('origins', '*:*');
+
+io.sockets.on('connection', function (socket) {
 
     // Add the client to the list of connected clients
     clients[socket.id] = true;
@@ -28,36 +49,38 @@ io.sockets.on('connection', function(socket){
     io.sockets.emit('connected_clients', _.size(clients));
 
     // Send the current positions to the connected client when client is ready
-    socket.on('dealing', function() {
-        getCourses(function(data){
+    socket.on('dealing', function () {
+        console.log(socket.handshake.query);
+        getCourses(function (data) {
             io.sockets.emit('dealing', data);
         });
-    });
-    socket.on('disconnect', function() {
+    }, socket.handshake.query);
+    socket.on('disconnect', function () {
         delete clients[socket.id];
         io.sockets.emit('connected_clients', _.size(clients));
     });
 });
 
-// Update locations every minutes
-setInterval(function()
-{
-    if (_.size(clients) == 0) {
-        return;
-    }
-    getCourses(function(data){
-        io.sockets.emit('dealing', data);
-    });
-}, 500);
+// // Update locations every minutes
+// setInterval(function(socket)
+// {
+//     console.log(socket.handshake.query)
+//     if (_.size(clients) == 0) {
+//         return;
+//     }
+//     getCourses(function(data){
+//         console.log(socket.handshake.query.token);
+//         io.sockets.emit('dealing', data);
+//     },socket.handshake.query);
+// }, 500);
 
 
-setInterval(function(){
-    io.sockets.emit('date', {'date': new Date()});
-}, 1000);
+// setInterval(function(){
+//     io.sockets.emit('date', {'date': new Date()});
+// }, 1000);
 
 
-function getCourses(callback,auth)
-{
+function getCourses(callback, auth) {
     var options = {
         method: 'GET',
         host: '35.178.56.52',
@@ -68,7 +91,7 @@ function getCourses(callback,auth)
         }
     };
 
-    var req = http.request(options, function(res) {
+    var req = http.request(options, function (res) {
         var output = '';
 
         res.setEncoding('utf8');
@@ -76,15 +99,15 @@ function getCourses(callback,auth)
             output += chunk;
         });
 
-        res.on('end', function() {
+        res.on('end', function () {
             var obj = JSON.parse(output);
-            if (callback != undefined){
+            if (callback != undefined) {
                 callback(obj);
             }
         });
     });
 
-    req.on('error', function(e) {
+    req.on('error', function (e) {
         console.log('problem with request: ' + e.message);
     });
 

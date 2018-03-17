@@ -9,7 +9,10 @@ let loadData = function (response) {
 };
 
 let processData = function (response, dispatch) {
-    if (response.status === 200) {
+    if (response.data && response.data.status === 400) {
+        dispatch(receiveDealings("logout"))
+    }
+    else if (response.status === 200) {
         dispatch(receiveDealings(response.data))
     } else {
         var flash = {

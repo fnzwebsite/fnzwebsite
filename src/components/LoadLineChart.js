@@ -5,10 +5,12 @@ import io from "socket.io-client"
 import moment from 'moment'
 import * as dealingActions from '../actions/dealingActions';
 import {bindActionCreators} from 'redux';
-
+import { authHeader } from '../helpers';
 const options = {
+    responsive: true,
+    maintainAspectRatio: false,
     scaleShowGridLines: true,
-    scaleGridLineColor: 'rgba(0,0,0,.05)',
+    scaleGridLineColor: 'rgba(255,255,255,.05)',
     scaleGridLineWidth: 1,
     scaleShowHorizontalLines: true,
     scaleShowVerticalLines: true,
@@ -19,15 +21,16 @@ const options = {
     pointDotStrokeWidth: 1,
     pointHitDetectionRadius: 20,
     datasetStroke: true,
-    datasetStrokeWidth: 2,
+    datasetStrokeWidth: 1,
     datasetFill: true,
     legendTemplate: '<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
 }
 
 const styles = {
     graphContainer: {
-        border: '1px solid black',
+        border: '0px solid white',
         padding: '15px'
+        
     }
 }
 
@@ -43,16 +46,42 @@ class LoadLineChart extends React.Component {
     }
 
     getChartData(dealing) {
+        let self = this
+
         let loadAmount = Object.keys(dealing).sort((a, b) => a.tradeDate - b.tradeDate).map(function (keyName, keyIndex) {
-            if (moment(dealing[keyName].boxDate).isSame(moment(), 'day')) {
-                return dealing[keyName].amount;
+            if(self.props.loadThisDay == 'today') {
+                if (moment(dealing[keyName].boxDate).isSame(moment(), 'day')) {
+                    return dealing[keyName].units;
+                }
+            }
+            if(self.props.loadThisDay == 'next') {
+                if (moment(dealing[keyName].boxDate).isSameOrBefore(moment(moment.now()))) {
+                    return dealing[keyName].units;
+                }
+            }
+            if(self.props.loadThisDay == 'previous') {
+                if (moment(dealing[keyName].boxDate).isSameOrBefore(moment(), 'day')) {
+                    return dealing[keyName].units;
+                }
             }
 
         });
 
         let loadDateTime = Object.keys(dealing).sort((a, b) => a.tradeDate - b.tradeDate).map(function (keyName, keyIndex) {
-            if (moment(dealing[keyName].boxDate).isSame(moment(), 'day')) {
-                return moment(dealing[keyName].tradeDate).format("hh:mm");
+            if(self.props.loadThisDay == 'today') {
+                if (moment(dealing[keyName].boxDate).isSame(moment(), 'day')) {
+                    return moment(dealing[keyName].tradeDate).format("hh:mm");
+                }
+            }
+            if(self.props.loadThisDay == 'next') {
+                if (moment(dealing[keyName].boxDate).isSameOrBefore(moment(moment.now()))) {
+                    return moment(dealing[keyName].tradeDate).format("hh:mm");
+                }
+            }
+            if(self.props.loadThisDay == 'previous') {
+                if (moment(dealing[keyName].boxDate).isSameOrBefore(moment(), 'day')) {
+                    return moment(dealing[keyName].tradeDate).format("hh:mm");
+                }
             }
 
         });
@@ -70,7 +99,7 @@ class LoadLineChart extends React.Component {
             datasets: [
                 {
                     label: 'My First dataset',
-                    fillColor: 'rgba(220,220,220,0.2)',
+                    fillColor: 'rgba(38, 148, 216, 0.5)',
                     strokeColor: 'rgba(220,220,220,1)',
                     pointColor: 'rgba(220,220,220,1)',
                     pointStrokeColor: '#fff',
@@ -84,7 +113,7 @@ class LoadLineChart extends React.Component {
     }
 
     componentWillMount(prevProps, prevState) {
-        // this.props.dealingActions.getDealings();
+        this.props.dealingActions.getDealings();
     }
 
     componentWillReceiveProps(prevProps){
@@ -92,15 +121,22 @@ class LoadLineChart extends React.Component {
                 let lineChartData = this.getChartData(this.props.data.dealing);
                 this.setState({dealing: this.props.data.dealing, data: lineChartData})
         }
+        if(this.props.loadThisDay != prevProps.loadThisDay){
+            let lineChartData = this.getChartData(this.props.data.dealing);
+            this.setState({dealing: this.props.data.dealing, data: lineChartData})
+
+        }
     }
 
     componentDidMount(prevProps, prevState) {
-        // var self = this;
-        // var socket = io('http://localhost:3700');
-        // socket.on('dealing', function (dealing) {
-        //     let lineChartData = self.getChartData(dealing);
-        //     self.setState({dealing:dealing,data:lineChartData})
-        // })
+        var self = this;
+        var socket = io('http://localhost:3700',{ query: "auth="+authHeader()['Authorization']});
+        socket.on('dealing', function (dealing) {
+            // console.log(JSON.stringify(dealing));
+            if(self.state.dealing !== dealing) {
+                self.setState({dealing: dealing});
+            }
+        })
     }
 
 
@@ -113,11 +149,11 @@ class LoadLineChart extends React.Component {
                 <div style={styles.graphContainer}>
                     <LineChart data={this.state.data}
                                options={options}
-                               width="600" height="250"/>
+                               style={{background:'none',color:'#fff'}}/>
                 </div>
             )
         } else{
-            return <div>Loading ...</div>
+            return <div className="load">Loading ...</div>
         }
     }
 }
