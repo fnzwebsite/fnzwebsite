@@ -4,8 +4,7 @@ export function authHeader() {
 
     if (user) {
         return {
-            'Authorization': 'Bearer '+user,
-            'Content-Type': 'application/json'
+            'Authorization': user
         };
     } else {
         return {};

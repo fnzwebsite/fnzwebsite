@@ -1,21 +1,17 @@
-import { userConstants } from '../_constants';
-import { userService } from '../_services';
+import * as allActions from './allActions';
 import alertActions  from './alert.actions';
-import { history } from '../components/_helpers';
+import { history } from '../helpers';
 
 const userActions = {
     login,
-    logout,
-    register,
-    getAll,
-    delete: _delete
+    logout
 };
 
 function login(username, password) {
     return dispatch => {
         dispatch(request({ username }));
 
-        userService.login(username, password)
+        postLogin(username, password)
             .then(
                 user => { 
                     dispatch(success(user));
@@ -28,74 +24,40 @@ function login(username, password) {
             );
     };
 
-    function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
-    function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
-    function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
+    function request(user) { return { type: allActions.LOGIN_REQUEST, user } }
+    function success(user) { return { type: allActions.LOGIN_SUCCESS, user } }
+    function failure(error) { return { type: allActions.LOGIN_FAILURE, error } }
 }
 
 function logout() {
-    userService.logout();
-    return { type: userConstants.LOGOUT };
+    localStorage.removeItem('user');
+    return { type: allActions.LOGOUT };
 }
 
-function register(user) {
-    return dispatch => {
-        dispatch(request(user));
+function postLogin(username, password) {
 
-        userService.register(user)
-            .then(
-                user => { 
-                    dispatch(success());
-                    history.push('/login');
-                    dispatch(alertActions.success('Registration successful'));
-                },
-                error => {
-                    dispatch(failure(error));
-                    dispatch(alertActions.error(error));
-                }
-            );
-    };
+    var form = new FormData()
+    form.append('enrollmentId', "test@fnzchain.com")
+    form.append('enrollmentSecret', "T3sting1")
 
-    function request(user) { return { type: userConstants.REGISTER_REQUEST, user } }
-    function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
-    function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
-}
-
-function getAll() {
-    return dispatch => {
-        dispatch(request());
-
-        userService.getAll()
-            .then(
-                users => dispatch(success(users)),
-                error => dispatch(failure(error))
-            );
-    };
-
-    function request() { return { type: userConstants.GETALL_REQUEST } }
-    function success(users) { return { type: userConstants.GETALL_SUCCESS, users } }
-    function failure(error) { return { type: userConstants.GETALL_FAILURE, error } }
-}
-
-// prefixed function name with underscore because delete is a reserved word in javascript
-function _delete(id) {
-    return dispatch => {
-        dispatch(request(id));
-
-        userService.delete(id)
-            .then(
-                user => { 
-                    dispatch(success(id));
-                },
-                error => {
-                    dispatch(failure(id, error));
-                }
-            );
-    };
-
-    function request(id) { return { type: userConstants.DELETE_REQUEST, id } }
-    function success(id) { return { type: userConstants.DELETE_SUCCESS, id } }
-    function failure(id, error) { return { type: userConstants.DELETE_FAILURE, id, error } }
+    return fetch('http://35.178.56.52:8081/login',{
+        //pass cookies, for authentication
+        method: 'post',
+        mode:'cors',
+        body: form
+    })
+        .then(response => {
+            if (!response.ok) {
+                return Promise.reject(response.statusText);
+            }
+            return response.json();
+        })
+        .then(user => {
+            if (user && user.token) {
+                localStorage.setItem('user', JSON.stringify(user.token));
+            }
+            return user;
+        });
 }
 
 export default userActions;

@@ -28,7 +28,7 @@ class BoxToday extends React.Component {
 
 
     render() {
-        let dealing = this.state.dealing || this.props.data.dealing;
+        let dealing = this.props.data.dealing;
         if(dealing && dealing.status != "401") {
             // dealing = dealing.sort((a, b) => a.tradeDate - b.tradeDate);
             let self = this

@@ -1,17 +1,20 @@
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import App from './components/App';
+import './index.css';
+import registerServiceWorker from './registerServiceWorker';
 
-import { store } from './components/_helpers';
-import App  from './App/App';
+import * as reducers from './reducers/allReducers';
+const store = createStore(combineReducers(reducers), applyMiddleware(thunk));
 
-// setup fake backend
-import { configureFakeBackend } from './components/_helpers';
-configureFakeBackend();
-
-render(
+ReactDOM.render(
     <Provider store={store}>
         <App />
     </Provider>,
     document.getElementById('root')
 );
+
+registerServiceWorker();

@@ -1,5 +1,5 @@
 import * as allActions from './allActions';
-import { authHeader } from '../components/_helpers';
+import { authHeader } from '../helpers';
 
 let loadData = function (response) {
     return response.json().then(data => ({
@@ -27,21 +27,11 @@ export function receiveDealings(data) {
 
 export function getDealings() {
     return (dispatch) => {
-        // const requestOptions = {
-        //     headers: authHeader()
-        // };
-        var form = new FormData()
-        const requestOptions = {headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + '76886867987698'
-        },
-            mode:'cors',
-            method: 'GET',
-            host:'35.178.56.52:8081'
-        };
-
-        fetch('http://35.178.56.52:8081/api/v1/dealing',requestOptions).then(response =>
+        fetch('http://localhost:3700/dealing',{
+            mode:'cros',
+            headers:authHeader()
+        })
+            .then(response =>
                 loadData(response)
             )
             .then(response => {
