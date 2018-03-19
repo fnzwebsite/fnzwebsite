@@ -29,8 +29,10 @@ io.use(function (socket, next) {
     if (socket.handshake.query.auth) {
         setInterval(function () {
             getCourses(function (data) {
-                console.log(socket.handshake.query.auth);
-                io.sockets.emit('dealing', data);
+                if(data.status != 400) {
+                    console.log("got data")
+                    io.sockets.emit('dealing', data);
+                }
             }, socket.handshake.query.auth);
             return next();
         }, 1000);
