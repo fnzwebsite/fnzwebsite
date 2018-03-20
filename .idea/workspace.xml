@@ -2,22 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0690c2d6-c039-4662-a950-a80c345b563f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/TransactionsTable.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.nvm" afterPath="$PROJECT_DIR$/.nvm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/img/logo.png" afterPath="$PROJECT_DIR$/public/img/logo.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/custom.css" afterPath="$PROJECT_DIR$/public/css/custom.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/style.default.css" afterPath="$PROJECT_DIR$/public/css/style.default.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/dashboard.html" afterPath="$PROJECT_DIR$/public/dashboard.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/charts-custom.js" afterPath="$PROJECT_DIR$/public/js/charts-custom.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/front.js" afterPath="$PROJECT_DIR$/public/js/front.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/BoxDealing.js" afterPath="$PROJECT_DIR$/src/components/BoxDealing.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Header.js" afterPath="$PROJECT_DIR$/src/components/Header.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Home.js" afterPath="$PROJECT_DIR$/src/components/Home.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/LoadLineChart.js" afterPath="$PROJECT_DIR$/src/components/LoadLineChart.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/LoginPage.js" afterPath="$PROJECT_DIR$/src/components/LoginPage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/SideNav.js" afterPath="$PROJECT_DIR$/src/components/SideNav.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -34,26 +21,27 @@
       <file leaf-file-name="LoadLineChart.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/LoadLineChart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="52" column="51" lean-forward="true" selection-start-line="52" selection-start-column="11" selection-end-line="52" selection-end-column="51" />
+            <state relative-caret-position="263">
+              <caret line="50" column="8" lean-forward="false" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="8" />
               <folding>
-                <element signature="e#2391#3154#0" expanded="false" />
-                <element signature="e#3213#3278#0" expanded="false" />
-                <element signature="e#3340#3405#0" expanded="false" />
-                <element signature="e#3436#3968#0" expanded="false" />
+                <element signature="e#1616#2362#0" expanded="false" />
+                <element signature="e#2493#3323#0" expanded="false" />
+                <element signature="e#3386#3459#0" expanded="false" />
+                <element signature="e#3525#3598#0" expanded="false" />
+                <element signature="e#3633#4221#0" expanded="false" />
                 <element signature="n#!!block;n#componentWillReceiveProps#0;n#LoadLineChart#0" expanded="false" />
                 <element signature="n#!!block;n#render#0;n#LoadLineChart#0" expanded="false" />
-                <marker date="1521557987462" expanded="true" signature="925:970" ph="..." />
+                <marker date="1521561456365" expanded="true" signature="925:970" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BoxDealing.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BoxDealing.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/BoxDealing.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="84" column="83" lean-forward="false" selection-start-line="84" selection-start-column="77" selection-end-line="84" selection-end-column="83" />
+            <state relative-caret-position="289">
+              <caret line="37" column="50" lean-forward="true" selection-start-line="37" selection-start-column="50" selection-end-line="37" selection-end-column="50" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
                 <element signature="n#!!block;n#changeView#0;n#BoxToday#0" expanded="false" />
@@ -66,11 +54,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TransactionsTable.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TransactionsTable.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/TransactionsTable.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1853">
-              <caret line="114" column="22" lean-forward="true" selection-start-line="114" selection-start-column="22" selection-end-line="114" selection-end-column="22" />
+            <state relative-caret-position="760">
+              <caret line="114" column="22" lean-forward="false" selection-start-line="114" selection-start-column="22" selection-end-line="114" selection-end-column="22" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
                 <element signature="e#1539#2250#0" expanded="false" />
@@ -82,7 +70,7 @@
       <file leaf-file-name="Home.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
+            <state relative-caret-position="2125">
               <caret line="91" column="66" lean-forward="false" selection-start-line="91" selection-start-column="66" selection-end-line="91" selection-end-column="66" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
@@ -204,9 +192,9 @@
         <option value="$PROJECT_DIR$/public/login.html" />
         <option value="$PROJECT_DIR$/src/components/LoginPage.js" />
         <option value="$PROJECT_DIR$/src/components/BoxDealing.js" />
-        <option value="$PROJECT_DIR$/src/components/LoadLineChart.js" />
         <option value="$PROJECT_DIR$/src/components/Home.js" />
         <option value="$PROJECT_DIR$/src/components/TransactionsTable.js" />
+        <option value="$PROJECT_DIR$/src/components/LoadLineChart.js" />
       </list>
     </option>
   </component>
@@ -243,6 +231,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -270,7 +259,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -341,18 +329,19 @@
       <workItem from="1521032782713" duration="20657000" />
       <workItem from="1521206374951" duration="1486000" />
       <workItem from="1521477815767" duration="878000" />
-      <workItem from="1521549064151" duration="5503000" />
+      <workItem from="1521549064151" duration="6091000" />
+      <workItem from="1521561323098" duration="159000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="165097000" />
+    <option name="totallyTimeSpent" value="165844000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22908522" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22864583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32990867" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -486,7 +475,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
           <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -613,9 +601,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
           <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -623,9 +608,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
           <caret line="12" column="41" lean-forward="false" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -633,9 +615,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
           <caret line="28" column="36" lean-forward="false" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
-          <folding>
-            <element signature="e#3066#3132#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -643,7 +622,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50">
           <caret line="3" column="5" lean-forward="false" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -651,9 +629,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
           <caret line="20" column="48" lean-forward="true" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
-          <folding>
-            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -661,7 +636,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="597">
           <caret line="35" column="27" lean-forward="false" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -689,7 +663,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="305">
           <caret line="47" column="1" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="49" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -697,37 +670,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-61">
           <caret line="514" column="12" lean-forward="false" selection-start-line="514" selection-start-column="12" selection-end-line="514" selection-end-column="12" />
-          <folding>
-            <element signature="n#nav#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#nav#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#header#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#footer#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/BoxDealing.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="84" column="83" lean-forward="false" selection-start-line="84" selection-start-column="77" selection-end-line="84" selection-end-column="83" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-            <element signature="n#!!block;n#changeView#0;n#BoxToday#0" expanded="false" />
-            <element signature="n#!!block;n#componentWillMount#0;n#BoxToday#0" expanded="false" />
-            <element signature="e#4080#4982#0" expanded="false" />
-            <element signature="e#7114#9112#0" expanded="false" />
-            <element signature="e#9132#11131#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Home.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
+        <state relative-caret-position="2125">
           <caret line="91" column="66" lean-forward="false" selection-start-line="91" selection-start-column="66" selection-end-line="91" selection-end-column="66" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
@@ -735,29 +683,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/LoadLineChart.js">
+    <entry file="file://$PROJECT_DIR$/src/components/TransactionsTable.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="52" column="51" lean-forward="true" selection-start-line="52" selection-start-column="11" selection-end-line="52" selection-end-column="51" />
+        <state relative-caret-position="760">
+          <caret line="114" column="22" lean-forward="false" selection-start-line="114" selection-start-column="22" selection-end-line="114" selection-end-column="22" />
           <folding>
-            <element signature="e#2391#3154#0" expanded="false" />
-            <element signature="e#3213#3278#0" expanded="false" />
-            <element signature="e#3340#3405#0" expanded="false" />
-            <element signature="e#3436#3968#0" expanded="false" />
-            <element signature="n#!!block;n#componentWillReceiveProps#0;n#LoadLineChart#0" expanded="false" />
-            <element signature="n#!!block;n#render#0;n#LoadLineChart#0" expanded="false" />
-            <marker date="1521557987462" expanded="true" signature="925:970" ph="..." />
+            <element signature="e#0#36#0" expanded="true" />
+            <element signature="e#1539#2250#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/TransactionsTable.js">
+    <entry file="file://$PROJECT_DIR$/src/components/LoadLineChart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1853">
-          <caret line="114" column="22" lean-forward="true" selection-start-line="114" selection-start-column="22" selection-end-line="114" selection-end-column="22" />
+        <state relative-caret-position="263">
+          <caret line="50" column="8" lean-forward="false" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="8" />
+          <folding>
+            <element signature="e#1616#2362#0" expanded="false" />
+            <element signature="e#2493#3323#0" expanded="false" />
+            <element signature="e#3386#3459#0" expanded="false" />
+            <element signature="e#3525#3598#0" expanded="false" />
+            <element signature="e#3633#4221#0" expanded="false" />
+            <element signature="n#!!block;n#componentWillReceiveProps#0;n#LoadLineChart#0" expanded="false" />
+            <element signature="n#!!block;n#render#0;n#LoadLineChart#0" expanded="false" />
+            <marker date="1521561456365" expanded="true" signature="925:970" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/BoxDealing.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="37" column="50" lean-forward="true" selection-start-line="37" selection-start-column="50" selection-end-line="37" selection-end-column="50" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
-            <element signature="e#1539#2250#0" expanded="false" />
+            <element signature="n#!!block;n#changeView#0;n#BoxToday#0" expanded="false" />
+            <element signature="n#!!block;n#componentWillMount#0;n#BoxToday#0" expanded="false" />
+            <element signature="e#4080#4982#0" expanded="false" />
+            <element signature="e#7114#9112#0" expanded="false" />
+            <element signature="e#9132#11131#0" expanded="false" />
           </folding>
         </state>
       </provider>

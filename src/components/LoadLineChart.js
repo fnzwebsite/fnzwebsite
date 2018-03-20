@@ -47,70 +47,74 @@ class LoadLineChart extends React.Component {
     }
 
     getChartData(dealing) {
-        let self = this
 
-        let loadAmount = Object.keys(dealing).sort((a, b) => a.tradeDate - b.tradeDate).map(function (keyName, keyIndex) {
-            if(self.props.loadThisDay == 'today') {
-                if (moment(dealing[keyName].boxDate).isSame(moment(), 'day')) {
-                    return dealing[keyName].units;
-                }
-            }
-            if(self.props.loadThisDay == 'next') {
-                if (moment(dealing[keyName].boxDate).isSameOrAfter(moment(moment.now()))) {
-                    return dealing[keyName].units;
-                }
-            }
-            if(self.props.loadThisDay == 'previous') {
-                if (moment(dealing[keyName].boxDate).isSameOrBefore(moment(), 'day')) {
-                    return dealing[keyName].units;
-                }
-            }
+        if(dealing) {
+            let self = this
 
-        });
-
-        let loadDateTime = Object.keys(dealing).sort((a, b) => a.tradeDate - b.tradeDate).map(function (keyName, keyIndex) {
-            if(self.props.loadThisDay == 'today') {
-                if (moment(dealing[keyName].boxDate).isSame(moment(), 'day')) {
-                    return moment(dealing[keyName].tradeDate).format("hh:mm");
+            let loadAmount = Object.keys(dealing).sort((a, b) => a.tradeDate - b.tradeDate).map(function (keyName, keyIndex) {
+                if (self.props.loadThisDay == 'today') {
+                    if (moment(dealing[keyName].boxDate).isSame(moment(), 'day')) {
+                        return dealing[keyName].units;
+                    }
                 }
-            }
-            if(self.props.loadThisDay == 'next') {
-                if (moment(dealing[keyName].boxDate).isSameOrAfter(moment(moment.now()))) {
-                    return moment(dealing[keyName].tradeDate).format("hh:mm");
+                if (self.props.loadThisDay == 'next') {
+                    if (moment(dealing[keyName].boxDate).isSameOrAfter(moment(moment.now()))) {
+                        return dealing[keyName].units;
+                    }
                 }
-            }
-            if(self.props.loadThisDay == 'previous') {
-                if (moment(dealing[keyName].boxDate).isSameOrBefore(moment(), 'day')) {
-                    return moment(dealing[keyName].tradeDate).format("hh:mm");
+                if (self.props.loadThisDay == 'previous') {
+                    if (moment(dealing[keyName].boxDate).isSameOrBefore(moment(), 'day')) {
+                        return dealing[keyName].units;
+                    }
                 }
-            }
 
-        });
+            });
 
-        loadAmount = loadAmount.filter(function (item) {
-            return item != null && item != undefined;
-        })
-
-        loadDateTime = loadDateTime.filter(function (item) {
-            return item != null && item != undefined;
-        })
-
-        let lineChartData = {
-            labels: loadDateTime,
-            datasets: [
-                {
-                    label: 'My First dataset',
-                    fillColor: 'rgba(38, 148, 216, 0.5)',
-                    strokeColor: 'rgba(220,220,220,1)',
-                    pointColor: 'rgba(220,220,220,1)',
-                    pointStrokeColor: '#fff',
-                    pointHighlightFill: '#fff',
-                    pointHighlightStroke: 'rgba(220,220,220,1)',
-                    data: loadAmount,
+            let loadDateTime = Object.keys(dealing).sort((a, b) => a.tradeDate - b.tradeDate).map(function (keyName, keyIndex) {
+                if (self.props.loadThisDay == 'today') {
+                    if (moment(dealing[keyName].boxDate).isSame(moment(), 'day')) {
+                        return moment(dealing[keyName].tradeDate).format("hh:mm");
+                    }
                 }
-            ]
-        };
-        return lineChartData;
+                if (self.props.loadThisDay == 'next') {
+                    if (moment(dealing[keyName].boxDate).isSameOrAfter(moment(moment.now()))) {
+                        return moment(dealing[keyName].tradeDate).format("hh:mm");
+                    }
+                }
+                if (self.props.loadThisDay == 'previous') {
+                    if (moment(dealing[keyName].boxDate).isSameOrBefore(moment(), 'day')) {
+                        return moment(dealing[keyName].tradeDate).format("hh:mm");
+                    }
+                }
+
+            });
+
+            loadAmount = loadAmount.filter(function (item) {
+                return item != null && item != undefined;
+            })
+
+            loadDateTime = loadDateTime.filter(function (item) {
+                return item != null && item != undefined;
+            })
+
+            let lineChartData = {
+                labels: loadDateTime,
+                datasets: [
+                    {
+                        label: 'My First dataset',
+                        fillColor: 'rgba(38, 148, 216, 0.5)',
+                        strokeColor: 'rgba(220,220,220,1)',
+                        pointColor: 'rgba(220,220,220,1)',
+                        pointStrokeColor: '#fff',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(220,220,220,1)',
+                        data: loadAmount,
+                    }
+                ]
+            };
+            return lineChartData;
+        }
+        return null;
     }
 
     componentWillMount(prevProps, prevState) {
