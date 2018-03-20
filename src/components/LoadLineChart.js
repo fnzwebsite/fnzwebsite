@@ -34,6 +34,7 @@ const styles = {
     }
 }
 
+
 class LoadLineChart extends React.Component {
 
     constructor(props) {
@@ -42,7 +43,7 @@ class LoadLineChart extends React.Component {
             data: null,
             dealing:null
         }
-        this.getChartData = this.getChartData.bind(this)
+        this.getChartData = this.getChartData.bind(this);
     }
 
     getChartData(dealing) {
@@ -55,7 +56,7 @@ class LoadLineChart extends React.Component {
                 }
             }
             if(self.props.loadThisDay == 'next') {
-                if (moment(dealing[keyName].boxDate).isSameOrBefore(moment(moment.now()))) {
+                if (moment(dealing[keyName].boxDate).isSameOrAfter(moment(moment.now()))) {
                     return dealing[keyName].units;
                 }
             }
@@ -74,7 +75,7 @@ class LoadLineChart extends React.Component {
                 }
             }
             if(self.props.loadThisDay == 'next') {
-                if (moment(dealing[keyName].boxDate).isSameOrBefore(moment(moment.now()))) {
+                if (moment(dealing[keyName].boxDate).isSameOrAfter(moment(moment.now()))) {
                     return moment(dealing[keyName].tradeDate).format("hh:mm");
                 }
             }
@@ -134,12 +135,11 @@ class LoadLineChart extends React.Component {
         socket.on('dealing', function (dealing) {
             // console.log(JSON.stringify(dealing));
             if(self.state.dealing !== dealing) {
-                self.setState({dealing: dealing});
+                    let lineChartData = self.getChartData(dealing);
+                    self.setState({dealing: dealing, data: lineChartData})
             }
         })
     }
-
-
 
     render() {
 

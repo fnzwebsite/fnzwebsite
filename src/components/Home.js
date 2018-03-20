@@ -4,6 +4,7 @@ import SideNav from './SideNav'
 import Header from './Header'
 import BoxToday from './BoxDealing'
 import LoadLineChart from './LoadLineChart'
+import TransactionsTable from './TransactionsTable'
 
 
 
@@ -11,12 +12,19 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state ={
-            chart:'today'
+            chart:'today',
+            selected:'chart'
         };
-
+        this.changeView =  this.changeView.bind(this);
         this.loadChart =  this.loadChart.bind(this);
     }
-
+    changeView(selected){
+        if(this.state.selected != selected){
+            this.setState({
+                selected:selected
+            });
+        }
+    }
     loadChart(selected){
         if(this.state.chart != selected) {
             this.setState({
@@ -55,133 +63,57 @@ class Home extends React.Component {
 
     render() {
         return (
-            <div>
-                <Header/>
+            <div className="page">
                 <div className="page-content d-flex align-items-stretch">
                     <SideNav/>
                     <div className="content-inner">
+                        <Header/>
                         <div className="container-fluid">
-                            <ul className="nav nav-tabs">
-                                <li className="active show"><a className="active" href="#home">Dealing</a></li>
-                                <li><a href="">Price</a></li>
-                                <li><a href="">Settlement</a></li>
-                                <li><a href="">Statements</a></li>
-                                <li><a href="">Commissions & Fee</a></li>
-                                <li><a href="">Corporate Actions</a></li>
-                            </ul>
+                            <div className="col-sm-12 mt-70">
+
+                                    <BoxToday loadChart={this.loadChart}/>
+
+                            </div>
                             <div className="tab-content">
                                 <div id="home" className="tab-pane in active">
-                                    <div className="col-sm-12">
-                                           <BoxToday loadChart={this.loadChart}/>
-                                    </div>
+
                                     <div className="col-sm-12 chart-sec">
                                         <div className="row">
-                                            <h5>Trades (Today) <span>01/03/2018</span> <span>12:00 AM</span></h5>
-                                            <ul className="nav nav-tabs chart-tabs">
-                                                <li className="active"><a className="active" href="#chart"><i
-                                                    className="fa fa-area-chart"></i>Chart</a></li>
-                                                <li><a href="#table"><i className="fa fa-th-list"></i>Transactions</a></li>
+                                            <h5>Trades (Today) <span>01/03/2018 &nbsp 12:00 AM</span></h5>
+
+                                            <ul className="nav nav-tabs chart-tabs has-shadow">
+                                                <li className={this.state.selected == "chart" ? 'active':''}><a className={this.state.selected == "chart" ? 'active':''} onClick={() => this.changeView('chart')} ><i className="fa fa-area-chart"></i>Chart</a></li>
+                                                <li className={this.state.selected == "table" ? 'active':''}><a className={this.state.selected == "chart" ? 'active':''} onClick={() => this.changeView('table')}><i className="fa fa-th-list"></i>Transactions</a></li>
                                             </ul>
                                             <div className="tab-content">
-                                                <div id="chart" className="tab-pane in active">
+                                                <div id="chart" className={this.state.selected == "chart" ? 'tab-pane in active':'tab-pane fade'}>
                                                     <div className="line-chart-example card">
-
                                                         <div className="card-body">
-                                                            {/*<canvas id="lineChartExample"></canvas>*/}
                                                             <LoadLineChart loadThisDay={this.state.chart}/>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div id="table" className="tab-pane fade">
+                                                <div id="table" className={this.state.selected == "table" ? 'tab-pane in active':'tab-pane fade'}>
                                                     <div className="card">
-
-                                                        <div className="card-body">
-                                                            <div className="table-responsive">
-                                                                <table className="table">
-                                                                    <thead>
-                                                                    <tr>
-                                                                        <th>Trade Date</th>
-                                                                        <th>Investment Account</th>
-                                                                        <th>ISIN</th>
-                                                                        <th>Trade Type</th>
-                                                                        <th>Units</th>
-                                                                        <th>Amount</th>
-                                                                        <th>Status</th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                    <tr>
-                                                                        <td>01/02/2018</td>
-                                                                        <td>ACC001</td>
-                                                                        <td>GBX00241</td>
-                                                                        <td>Buy</td>
-                                                                        <td>1000</td>
-                                                                        <td>-</td>
-                                                                        <td><span className="badge bg-green">Accepted</span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>01/02/2018</td>
-                                                                        <td>ACC001</td>
-                                                                        <td>GBX00241</td>
-                                                                        <td>Buy</td>
-                                                                        <td>1000</td>
-                                                                        <td>-</td>
-                                                                        <td><span className="badge bg-green">Accepted</span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>01/02/2018</td>
-                                                                        <td>ACC001</td>
-                                                                        <td>GBX00241</td>
-                                                                        <td>Buy</td>
-                                                                        <td>1000</td>
-                                                                        <td>-</td>
-                                                                        <td><span className="badge bg-green">Accepted</span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>01/02/2018</td>
-                                                                        <td>ACC001</td>
-                                                                        <td>GBX00241</td>
-                                                                        <td>Buy</td>
-                                                                        <td>1000</td>
-                                                                        <td>-</td>
-                                                                        <td><span className="badge bg-orange">On hold</span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>01/02/2018</td>
-                                                                        <td>ACC001</td>
-                                                                        <td>GBX00241</td>
-                                                                        <td>Buy</td>
-                                                                        <td>1000</td>
-                                                                        <td>-</td>
-                                                                        <td><span className="badge bg-red">Rejected</span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>01/02/2018</td>
-                                                                        <td>ACC001</td>
-                                                                        <td>GBX00241</td>
-                                                                        <td>Buy</td>
-                                                                        <td>1000</td>
-                                                                        <td>-</td>
-                                                                        <td><span className="badge bg-green">Accepted</span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
+                                                        <TransactionsTable loadThisDay={this.state.chart}/>
                                                     </div>
                                                 </div>
                                             </div>
+                                           
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <footer className="main-footer">
+                            <div className="container-fluid">
+                                <div className="row">
+                                    <div className="col-sm-12 text-center">
+                                        <p>&copy; Copyright FNZ UK Ltd 2018.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </footer>
                     </div>
                 </div>
             </div>

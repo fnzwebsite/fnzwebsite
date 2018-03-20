@@ -13,8 +13,8 @@ $(document).ready(function () {
     gradient1.addColorStop(1, 'rgba(255, 119, 119, 0.94)');
 
     var gradient2 = ctx1.createLinearGradient(146.000, 0.000, 154.000, 300.000);
-    gradient2.addColorStop(0, 'rgba(58, 94, 164, 0.8)');
-    gradient2.addColorStop(1, 'rgba(58, 94, 164, 0.8)');
+    gradient2.addColorStop(0, 'rgba(38, 148, 216, 0.8)');
+    gradient2.addColorStop(1, 'rgba(38, 148, 216, 0.8)');
 
 
     // ------------------------------------------------------- //
@@ -24,18 +24,20 @@ $(document).ready(function () {
     var lineChartExample = new Chart(LINECHARTEXMPLE, {
         type: 'line',
         options: {
-            legend: {labels:{fontColor:"#777", fontSize: 12}},
+            legend: {labels:{fontColor:"#000", fontSize: 12}},
             scales: {
                 xAxes: [{
                     display: true,
+                    labelFontColor: "red",
                     gridLines: {
-                        color: '#4c4d4d'
+                        color: '#ccc'
                     }
                 }],
                 yAxes: [{
                     display: true,
+                    labelFontColor: "red",
                     gridLines: {
-                        color: '#4c4d4d'
+                        color: '#ccc'
                     }
                 }]
             },

@@ -61,7 +61,7 @@ $(document).ready(function () {
         e.preventDefault();
         $(this).toggleClass('active');
 
-        $('.side-navbar').toggleClass('shrinked');
+        $('.side-navbar.l2').toggleClass('shrinked');
         $('.content-inner').toggleClass('active');
         $(document).trigger('sidebarChanged');
 
