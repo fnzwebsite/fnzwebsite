@@ -15,11 +15,14 @@
     <!-- Fontastic Custom icon font-->
     <link rel="stylesheet" href="css/fontastic.css">
     <!-- Google fonts - Poppins -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700"> -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
     <!-- theme stylesheet-->
     <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/amstyle.css" type="text/css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="img/favicon.ico">
     <!-- Tweaks for older IEs-->
@@ -33,18 +36,17 @@
         <!-- Main Navbar-->
         <div class="page-content d-flex align-items-stretch">
             <!-- Side Navbar level one -->
-            
             <nav class="side-navbar l1">
                 <div><a id="toggle-btn" href="#" class="menu-btn">
                            <img src="img/menu-arrow.png" alt="menu-toggle" class="">
                             </a></div>
                 <ul class="list-unstyled">
-                    <li class="active"><a href=""> <i class="fa fa-home-icon"></i>Home</a></li>
-                    <li><a href=""> <i class="fa fa-service-icon"></i>Services</a></li>
-                    <li><a href=""> <i class="fa fa-message-icon"></i>Messaging</a></li>
-                    <li><a href=""> <i class="fa fa-market-icon"></i>Market & News</a></li>
-                    <li><a href=""> <i class="fa fa-fav-icon"></i>Favourites</a></li>
-                    <li class="settings"><a href=""> <i class="fa fa-setting-icon"></i>Settings</a></li>
+                    <li class="active"><a href="javascript:void(0)" id="home-menu"> <i class="fa fa-home-icon"></i>Home</a></li>
+                    <li><a href="javascript:void(0)"> <i class="fa fa-service-icon"></i>Services</a></li>
+                    <li><a href="javascript:void(0)"> <i class="fa fa-message-icon"></i>Messaging</a></li>
+                    <li><a href="javascript:void(0)"> <i class="fa fa-market-icon"></i>Market & News</a></li>
+                    <li><a href="javascript:void(0)"> <i class="fa fa-fav-icon"></i>Favourites</a></li>
+                    <li class="settings"><a href="javascript:void(0)"> <i class="fa fa-setting-icon"></i>Settings</a></li>
                 </ul>
             </nav>
             <!-- Side Navbar -->
@@ -52,18 +54,17 @@
                 <!-- Sidebar Header-->
                 <!-- Sidebar Navidation Menus-->
                 <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
-                                    <li class="nav-item">
-                                        <div class="avatar"><img src="img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
-                                    </li>
-                                    <li class="nav-item"><a href="" class="nav-link user">John Smith</a></li>
-                                </ul>
-
+                    <li class="nav-item">
+                        <div class="avatar"><img src="img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
+                    </li>
+                    <li class="nav-item"><a href="" class="nav-link user">John Smith</a></li>
+                </ul>
                 <ul class="list-unstyled">
-                    <li class="active"><a href=""> <i class="fa fa-handshake-o"></i>Dealing</a></li>
-                    <li><a href=""> <i class="fa fa-tag"></i>Price</a></li>
-                    <li><a href=""> <i class="fa fa-settle"></i>Settlement</a></li>
-                    <li><a href=""> <i class="fa fa-cmf"></i>Commissions & Fee</a></li>
-                    <li><a href=""> <i class="fa fa-ca"></i>Corporate Actions</a></li>
+                    <li class="active"><a href="javascript:void(0)"> <i class="fa fa-handshake-o"></i>Dealing</a></li>
+                    <li><a href="javascript:void(0)"> <i class="fa fa-tag"></i>Price</a></li>
+                    <li><a href="javascript:void(0)"> <i class="fa fa-settle"></i>Settlement</a></li>
+                    <li><a href="javascript:void(0)"> <i class="fa fa-cmf"></i>Commissions & Fee</a></li>
+                    <li><a href="javascript:void(0)"> <i class="fa fa-ca"></i>Corporate Actions</a></li>
                     <!-- <li><a href=""> <i class="fa fa-power-off"></i>Logout</a></li> -->
                 </ul>
             </nav>
@@ -110,390 +111,151 @@
                     </nav>
                 </header>
                 <div class="container-fluid">
-                    <div class="col-sm-12 mt-70">
+                    <div class="mt-70">
                         <div class="row">
-                            <!-- previous -->
-                            <div class="col-sm-4 previous">
-                                <div class="work-amount card">
-                                    <div class="card-close">
-                                        Close
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="card-head">
-                                            <h3>Fund Position ( Previous day )</h3>
-                                            <small>28/02/2018  12:00 AM - 01/03/2018  12:00 PM</small>
-                                        </div>
-                                        <div class="funds-sec">
-                                            <div class="fund-list scrollbar" id="style-1">
-                                                <ul class="force-overflow">
-                                                    <li class="active">
-                                                        <div class="fun">
-                                                            <div class="fund-name">MRG Fund1</div>
-                                                            <div class="fund-quan">44,456.00</div>
-                                                        </div>
-                                                        <div class="fun">
-                                                            <div class="fund-isin">GB0000X1</div>
-                                                            <div class="fund-price"><i class="fa fa-gbp"></i>44,50.00</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="fun">
-                                                            <div class="fund-name">MRG Fund1</div>
-                                                            <div class="fund-quan">44,456.00</div>
-                                                        </div>
-                                                        <div class="fun">
-                                                            <div class="fund-isin">GB0000X1</div>
-                                                            <div class="fund-price"><i class="fa fa-gbp"></i>44,50.00</div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="orange">
-                                                        <div class="fun">
-                                                            <div class="fund-name">MRG Fund1</div>
-                                                            <div class="fund-quan">44,456.00</div>
-                                                        </div>
-                                                        <div class="fun">
-                                                            <div class="fund-isin">GB0000X1</div>
-                                                            <div class="fund-price"><i class="fa fa-gbp"></i>44,50.00</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="fun">
-                                                            <div class="fund-name">MRG Fund1</div>
-                                                            <div class="fund-quan">44,456.00</div>
-                                                        </div>
-                                                        <div class="fun">
-                                                            <div class="fund-isin">GB0000X1</div>
-                                                            <div class="fund-price"><i class="fa fa-gbp"></i>44,50.00</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="fun">
-                                                            <div class="fund-name">MRG Fund1</div>
-                                                            <div class="fund-quan">44,456.00</div>
-                                                        </div>
-                                                        <div class="fun">
-                                                            <div class="fund-isin">GB0000X1</div>
-                                                            <div class="fund-price"><i class="fa fa-gbp"></i>44,50.00</div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                            <div class="col-md-4">
+                                <div class="card funds">
+                                    <div class="card-header">
+                                        <h3>Fund Position</h3> <span class="badge bg-alice pull-right">Previous Day</span></div>
+                                    <div class="dashboard_card">
+                                        <div class="row">
+                                            <div class="col-6 open">
+                                                <h5>Open</h5>
+                                                <h2>46,321</h2>
                                             </div>
-                                            <div class="fund-status">
-                                                <ul>
-                                                    <li>
-                                                        <h4>Open</h4>
-                                                        <p>156264.567</p>
-                                                    </li>
-                                                    <li>
-                                                        <h4>CLOSE</h4>
-                                                        <p>176777.666</p>
-                                                    </li>
-                                                    <li>
-                                                        <h4>NET</h4>
-                                                        <p class="blue">+11,543.114</p>
-                                                    </li>
-                                                </ul>
+                                            <div class="col-6 closed">
+                                                <h5>Close</h5>
+                                                <h2>49,240</h2>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Today -->
-                            <div class="col-sm-4 today">
-                                <div class="work-amount card selected">
-                                    <div class="card-close">
-                                        Open
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="card-head">
-                                            <h3>Fund Position ( Today )</h3>
-                                            <small>01/03/2018  12:00 AM - 02/03/2018  12:00 PM</small>
-                                        </div>
-                                        <div class="funds-sec">
-                                            <div class="fund-list scrollbar" id="style-1">
-                                                <ul class="force-overflow">
-                                                    <li class="active">
-                                                        <div class="fun">
-                                                            <div class="fund-name">MRG Fund1</div>
-                                                            <div class="fund-quan">44,456.00</div>
-                                                        </div>
-                                                        <div class="fun">
-                                                            <div class="fund-isin">GB0000X1</div>
-                                                            <div class="fund-price"><i class="fa fa-gbp"></i>44,50.00</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="fun">
-                                                            <div class="fund-name">MRG Fund1</div>
-                                                            <div class="fund-quan">44,456.00</div>
-                                                        </div>
-                                                        <div class="fun">
-                                                            <div class="fund-isin">GB0000X1</div>
-                                                            <div class="fund-price"><i class="fa fa-gbp"></i>44,50.00</div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="orange">
-                                                        <div class="fun">
-                                                            <div class="fund-name">MRG Fund1</div>
-                                                            <div class="fund-quan">44,456.00</div>
-                                                        </div>
-                                                        <div class="fun">
-                                                            <div class="fund-isin">GB0000X1</div>
-                                                            <div class="fund-price"><i class="fa fa-gbp"></i>44,50.00</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="fun">
-                                                            <div class="fund-name">MRG Fund1</div>
-                                                            <div class="fund-quan">44,456.00</div>
-                                                        </div>
-                                                        <div class="fun">
-                                                            <div class="fund-isin">GB0000X1</div>
-                                                            <div class="fund-price"><i class="fa fa-gbp"></i>44,50.00</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="fun">
-                                                            <div class="fund-name">MRG Fund1</div>
-                                                            <div class="fund-quan">44,456.00</div>
-                                                        </div>
-                                                        <div class="fun">
-                                                            <div class="fund-isin">GB0000X1</div>
-                                                            <div class="fund-price"><i class="fa fa-gbp"></i>44,50.00</div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                            <div class="col-md-4">
+                                <div class="card funds">
+                                    <div class="card-header">
+                                        <h3>Fund Position</h3> <span class="badge bg-alice pull-right">Today</span></div>
+                                    <div class="dashboard_card">
+                                        <div class="row">
+                                            <div class="col-6 open">
+                                                <h5>Open</h5>
+                                                <h2>48,321</h2>
                                             </div>
-                                            <div class="fund-status">
-                                                <ul>
-                                                    <li>
-                                                        <h4>Open</h4>
-                                                        <p>156264.567</p>
-                                                    </li>
-                                                    <li>
-                                                        <h4>CLOSE</h4>
-                                                        <p>176777.666</p>
-                                                    </li>
-                                                    <li>
-                                                        <h4>NET</h4>
-                                                        <p class="blue">+11,543.114</p>
-                                                    </li>
-                                                </ul>
+                                            <div class="col-6 closed">
+                                                <h5>Close</h5>
+                                                <h2>50,240</h2>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- next -->
-                            <div class="col-sm-4 next">
-                                <div class="work-amount card">
-                                    <div class="card-close">
-                                        Open
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="card-head">
-                                            <h3>Fund Position ( Next day )</h3>
-                                            <small>02/03/2018  12:00 AM - 03/03/2018  12:00 PM</small>
-                                        </div>
-                                        <div class="funds-sec">
-                                            <div class="fund-list scrollbar" id="style-1">
-                                                <ul class="force-overflow">
-                                                    <li class="active">
-                                                        <div class="fun">
-                                                            <div class="fund-name">MRG Fund1</div>
-                                                            <div class="fund-quan">44,456.00</div>
-                                                        </div>
-                                                        <div class="fun">
-                                                            <div class="fund-isin">GB0000X1</div>
-                                                            <div class="fund-price"><i class="fa fa-gbp"></i>44,50.00</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="fun">
-                                                            <div class="fund-name">MRG Fund1</div>
-                                                            <div class="fund-quan">44,456.00</div>
-                                                        </div>
-                                                        <div class="fun">
-                                                            <div class="fund-isin">GB0000X1</div>
-                                                            <div class="fund-price"><i class="fa fa-gbp"></i>44,50.00</div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="orange">
-                                                        <div class="fun">
-                                                            <div class="fund-name">MRG Fund1</div>
-                                                            <div class="fund-quan">44,456.00</div>
-                                                        </div>
-                                                        <div class="fun">
-                                                            <div class="fund-isin">GB0000X1</div>
-                                                            <div class="fund-price"><i class="fa fa-gbp"></i>44,50.00</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="fun">
-                                                            <div class="fund-name">MRG Fund1</div>
-                                                            <div class="fund-quan">44,456.00</div>
-                                                        </div>
-                                                        <div class="fun">
-                                                            <div class="fund-isin">GB0000X1</div>
-                                                            <div class="fund-price"><i class="fa fa-gbp"></i>44,50.00</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="fun">
-                                                            <div class="fund-name">MRG Fund1</div>
-                                                            <div class="fund-quan">44,456.00</div>
-                                                        </div>
-                                                        <div class="fun">
-                                                            <div class="fund-isin">GB0000X1</div>
-                                                            <div class="fund-price"><i class="fa fa-gbp"></i>44,50.00</div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                            <div class="col-md-4">
+                                <div class="card funds">
+                                    <div class="card-header">
+                                        <h3>Fund Position</h3> <span class="badge bg-alice pull-right">Next Day</span></div>
+                                    <div class="dashboard_card">
+                                        <div class="row">
+                                            <div class="col-6 open">
+                                                <h5>Open</h5>
+                                                <h2>52,321</h2>
                                             </div>
-                                            <div class="fund-status">
-                                                <ul>
-                                                    <li>
-                                                        <h4>Open</h4>
-                                                        <p>156264.567</p>
-                                                    </li>
-                                                    <li>
-                                                        <h4>CLOSE</h4>
-                                                        <p>176777.666</p>
-                                                    </li>
-                                                    <li>
-                                                        <h4>NET</h4>
-                                                        <p class="blue">+11,543.114</p>
-                                                    </li>
-                                                </ul>
+                                            <div class="col-6 closed">
+                                                <h5>Close</h5>
+                                                <h2>56,240</h2>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- <ul class="nav nav-tabs">
-                        <li class="active show"><a class="active" href="#home">Dealing</a></li>
-                        <li><a href="javascript:void(0)">Price</a></li>
-                        <li><a href="javascript:void(0)">Settlement</a></li>
-                        <li><a href="javascript:void(0)">Statements</a></li>
-                        <li><a href="javascript:void(0)">Commissions & Fee</a></li>
-                        <li><a href="javascript:void(0)">Corporate Actions</a></li>
-                    </ul> -->
-                    <div class="tab-content">
-                        <div id="home" class="tab-pane in active">
-                            <!-- Work Amount  -->
-                            <div class="col-sm-12 chart-sec">
-                                <div class="row">
-                                    <h5>Trades (Today) <span>01/03/2018 &nbsp 12:00 AM</span></h5>
-                                    <!-- bottom-sec -->
-                                    <ul class="nav nav-tabs chart-tabs has-shadow">
-                                        <li class="active"><a class="active" href="#chart"><i class="fa fa-area-chart"></i>Chart</a></li>
-                                        <li><a href="#table"><i class="fa fa-th-list"></i>Transactions</a></li>
-                                    </ul>
-                                    <div class="tab-content">
-                                        <div id="chart" class="tab-pane in active">
-                                            <!-- Charts-card  -->
-                                            <div class="line-chart-example card">
-                                                <!-- <div class="card-close">
-                                                    <div class="dropdown">
-                                                        <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
-                                                        <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
-                                                    </div>
-                                                </div> -->
-                                                <!-- <div class="card-header d-flex align-items-center">
-                                                    <h3 class="h4">Line Chart Example</h3>
-                                                </div> -->
-                                                <div class="card-body">
-                                                    <canvas id="lineChartExample"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="table" class="tab-pane fade">
-                                            <div class="card">
-                                                <!-- <div class="card-header d-flex align-items-center">
-                                                    <h3 class="h4">Basic Table</h3>
-                                                </div> -->
-                                                <div class="card-body">
-                                                    <div class="table-responsive">
-                                                        <table class="table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Trade Date</th>
-                                                                    <th>Investment Account</th>
-                                                                    <th>ISIN</th>
-                                                                    <th>Trade Type</th>
-                                                                    <th>Units</th>
-                                                                    <th>Amount</th>
-                                                                    <th>Status</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>01/02/2018</td>
-                                                                    <td>ACC001</td>
-                                                                    <td>GBX00241</td>
-                                                                    <td>Buy</td>
-                                                                    <td>1000</td>
-                                                                    <td>-</td>
-                                                                    <td><span class="badge bg-green">Accepted</span></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>01/02/2018</td>
-                                                                    <td>ACC001</td>
-                                                                    <td>GBX00241</td>
-                                                                    <td>Buy</td>
-                                                                    <td>1000</td>
-                                                                    <td>-</td>
-                                                                    <td><span class="badge bg-green">Accepted</span></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>01/02/2018</td>
-                                                                    <td>ACC001</td>
-                                                                    <td>GBX00241</td>
-                                                                    <td>Buy</td>
-                                                                    <td>1000</td>
-                                                                    <td>-</td>
-                                                                    <td><span class="badge bg-green">Accepted</span></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>01/02/2018</td>
-                                                                    <td>ACC001</td>
-                                                                    <td>GBX00241</td>
-                                                                    <td>Buy</td>
-                                                                    <td>1000</td>
-                                                                    <td>-</td>
-                                                                    <td><span class="badge bg-orange">On hold</span></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>01/02/2018</td>
-                                                                    <td>ACC001</td>
-                                                                    <td>GBX00241</td>
-                                                                    <td>Buy</td>
-                                                                    <td>1000</td>
-                                                                    <td>-</td>
-                                                                    <td><span class="badge bg-red">Rejected</span></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>01/02/2018</td>
-                                                                    <td>ACC001</td>
-                                                                    <td>GBX00241</td>
-                                                                    <td>Buy</td>
-                                                                    <td>1000</td>
-                                                                    <td>-</td>
-                                                                    <td><span class="badge bg-green">Accepted</span></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
+                        <div class="row">
+                            <div class="col-md-6">
+                                 <div class="line-chart-example card">
+                                                    <div class="card-body" style={{"padding-bottom":"30px","background":"#fff"}}>
+                                                        <div id="chartdiv" style={{"width":"100%","height":"350px;"}}></div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- bottom-sec-end -->
-                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                                
+                                                    <div class="card-body" style="padding-bottom: 30px; background: #fff">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Trade Date</th>
+                                                                        <th>Investment Account</th>
+                                                                        <th>ISIN</th>
+                                                                        <th>Trade Type</th>
+                                                                        <th>Units</th>
+                                                                        <th>Amount</th>
+                                                                        <th>Status</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>01/02/2018</td>
+                                                                        <td>ACC001</td>
+                                                                        <td>GBX00241</td>
+                                                                        <td>Buy</td>
+                                                                        <td>1000</td>
+                                                                        <td>-</td>
+                                                                        <td><span class="badge bg-green">Accepted</span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>01/02/2018</td>
+                                                                        <td>ACC001</td>
+                                                                        <td>GBX00241</td>
+                                                                        <td>Buy</td>
+                                                                        <td>1000</td>
+                                                                        <td>-</td>
+                                                                        <td><span class="badge bg-green">Accepted</span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>01/02/2018</td>
+                                                                        <td>ACC001</td>
+                                                                        <td>GBX00241</td>
+                                                                        <td>Buy</td>
+                                                                        <td>1000</td>
+                                                                        <td>-</td>
+                                                                        <td><span class="badge bg-green">Accepted</span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>01/02/2018</td>
+                                                                        <td>ACC001</td>
+                                                                        <td>GBX00241</td>
+                                                                        <td>Buy</td>
+                                                                        <td>1000</td>
+                                                                        <td>-</td>
+                                                                        <td><span class="badge bg-orange">On hold</span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>01/02/2018</td>
+                                                                        <td>ACC001</td>
+                                                                        <td>GBX00241</td>
+                                                                        <td>Buy</td>
+                                                                        <td>1000</td>
+                                                                        <td>-</td>
+                                                                        <td><span class="badge bg-red">Rejected</span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>01/02/2018</td>
+                                                                        <td>ACC001</td>
+                                                                        <td>GBX00241</td>
+                                                                        <td>Buy</td>
+                                                                        <td>1000</td>
+                                                                        <td>-</td>
+                                                                        <td><span class="badge bg-green">Accepted</span></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
                             </div>
                         </div>
+                      
                     </div>
                 </div>
                 <!-- Page Footer-->
@@ -519,6 +281,10 @@
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
     <script src="js/charts-custom.js"></script>
+    <script src="js/amchart.js"></script>
+    <script src="js/amcharts.js" type="text/javascript"></script>
+    <script src="js/serial.js" type="text/javascript"></script>
+    <script src="js/amstock.js" type="text/javascript"></script>
     <!-- Main File-->
     <script src="js/front.js"></script>
     <script>

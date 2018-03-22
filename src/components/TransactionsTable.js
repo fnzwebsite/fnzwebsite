@@ -73,26 +73,22 @@ class TransactionsTable extends React.Component {
             }
         }
         return (
-            <div className="card-body">
-                <div className="table-responsive">
-                    <table className="table">
-                        <thead>
-                        <tr>
-                            <th>Trade Date</th>
-                            <th>Investment Account</th>
-                            <th>ISIN</th>
-                            <th>Trade Type</th>
-                            <th>Units</th>
-                            <th>Amount</th>
-                            <th>Status</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {LoadRows}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <table className="table table-striped">
+                <thead>
+                <tr>
+                    <th>Trade Date</th>
+                    <th>Investment Account</th>
+                    <th>ISIN</th>
+                    <th>Trade Type</th>
+                    <th>Units</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                {LoadRows}
+                </tbody>
+            </table>
         )
     }
 }

@@ -57,7 +57,7 @@ $(document).ready(function () {
     // ------------------------------------------------------- //
     // Sidebar Functionality
     // ------------------------------------------------------ //
-    $('#toggle-btn').on('click', function (e) {
+    $('#toggle-btn, #home-menu').on('click', function (e) {
         e.preventDefault();
         $(this).toggleClass('active');
 
@@ -80,7 +80,19 @@ $(document).ready(function () {
         }
     });
 
+
+
     // ------------------------------------------------------- //
+
+
+
+     $('.previous, .today, .next, .content-inner').on('click', function (e) {
+        e.preventDefault();
+
+        $('.side-navbar.l2').addClass('shrinked')
+       
+    });
+
     // Material Inputs
     // ------------------------------------------------------ //
 

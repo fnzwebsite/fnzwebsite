@@ -24,94 +24,55 @@
     <link rel="shortcut icon" href="img/favicon.ico">
     <!-- Tweaks for older IEs-->
     <!--[if lt IE 9]>
-        <script type="text/jsx" src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script type="text/jsx" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 </head>
 
 <body>
     <div class="page login-page">
         <!-- Main Navbar-->
-        <header class="header">
-            <nav class="navbar fixed-top">
-                <!-- Search Box-->
-                <div class="search-box">
-                    <button class="dismiss"><i class="icon-close"></i></button>
-                    <form id="searchForm" action="#" role="search">
-                        <input type="search" placeholder="What are you looking for..." class="form-control">
-                    </form>
-                </div>
-                <div class="container-fluid">
-                    <div class="navbar-holder d-flex align-items-center justify-content-between">
-                       
-                        <!-- Navbar Menu -->
-                        <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
-                           
-                            
-                            <li class="nav-item">
-                                <div class="avatar"><img src="img/profile-img.jpg" alt="..." class="img-fluid rounded-circle"></div>
-                            </li>
-                            <li class="nav-item"><a href="" class="nav-link">Sign In</a></li>
-                        </ul>
-                         <!-- Navbar Header-->
-                        <div class="navbar-header">
-
-                            <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
-                            <!-- Search-->
-                            <li class="nav-item d-flex align-items-center"><a id="search" href="#"><i class="icon-search"></i></a></li>
-                            <!-- Notifications-->
-                            <li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell-o"></i><span class="badge bg-yellow badge-corner">4</span></a>
-                            </li>
-                            
-                            
-                        </ul>
-
-                            <!-- Navbar Brand -->
-                           
-                            <a href="" class="navbar-brand">
-                                <div class="brand-text brand-big"><img src="img/logo.png" alt="logo" class=""></div>
-                                <div class="brand-text brand-small"><img src="img/logo.png" alt="logo" class=""></div>
-                            </a>
-                            <!-- Toggle Button-->
-                            <a href="" class="dots-nav"><img src="img/dots-nav.png" alt="..." class=""></a>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </header>
+       
         <div class="page-content d-flex align-items-stretch">
-
             <!-- Side Navbar level one -->
-
             <div class="content-inner">
                 <!-- Login -->
                 <div class="container d-flex align-items-center">
-        <div class="form-holder has-shadow col-sm-12">
-          <div class="row">
-            <!-- Form Panel    -->
-            <div class="col-sm-12 bg-white">
-              <div class="form d-flex align-items-center">
-                <div class="content">
-                  <form id="login-form" method="post">
-                    <div class="form-group">
-                      <input id="login-username" type="text" name="loginUsername" required="" class="input-material">
-                      <label for="login-username" class="label-material">User Name</label>
+                    <div class="form-holder col-sm-12">
+                        <div class="row">
+                            <!-- Form Panel    -->
+                            <div class="col-sm-12">
+                                <div class="form d-flex align-items-center">
+                                    <div class="content login_content">
+                                        <h4>Login</h4>
+                                        <form id="login-form" method="post">
+                                            <div class="form-group">
+                                                <input id="login-username" type="text" name="loginUsername" placeholder="Username" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <input id="login-password" type="password" name="loginPassword" placeholder="Password" class="form-control">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                <div class="d-flex justify-content-center">
+                                                    <a id="login" href="" class="btn">Log in</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <a href="#" class="pwd_link">Lost your password?</a>
+                                            </div>
+                                            </div>
+                                            <!-- This should be submit button but I replaced it with <a> for demo purposes-->
+                                        </form>
+                                        <div class="fnz_block">
+                                            <h3>FNZ Chain</h3>
+                                            <p>&copy; 2018 All Right reserved. Privacy and Terms</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                      <input id="login-password" type="password" name="loginPassword" required="" class="input-material">
-                      <label for="login-password" class="label-material">Password</label>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <a id="login" href="" class="btn btn-primary">Login</a>
-                    </div>
-                    
-                    <!-- This should be submit button but I replaced it with <a> for demo purposes-->
-                  </form><a href="#" class="forgot-pass">Forgot Password?</a><small>Do not have an account? </small><a href=" " class="signup">Signup</a>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
                 <!-- Page Footer-->
                 <footer class="main-footer">
                     <div class="container-fluid">
@@ -128,15 +89,53 @@
         </div>
     </div>
     <!-- JavaScript files-->
-    <script type="text/jsx" src="vendor/jquery/jquery.min.js"></script>
-    <script type="text/jsx" src="vendor/popper.js/umd/popper.min.js"></script>
-    <script type="text/jsx" src="vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/jsx" src="vendor/jquery.cookie/jquery.cookie.js"></script>
-    <script type="text/jsx" src="vendor/chart.js/Chart.min.js"></script>
-    <script type="text/jsx" src="vendor/jquery-validation/jquery.validate.min.js"></script>
-    <script type="text/jsx" src="js/charts-custom.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper.js/umd/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/jquery.cookie/jquery.cookie.js"></script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="js/charts-custom.js"></script>
     <!-- Main File-->
-    <script type="text/jsx" src="js/front.js"></script>
+    <script src="js/front.js"></script>
+    <script>
+    $(document).ready(function() {
+        $(".nav-tabs a").click(function() {
+            $(this).tab('show');
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        if (!$.browser.webkit) {
+            $('.wrapper').html('<p>Sorry! Non webkit users. :(</p>');
+        }
+
+    });
+    </script>
+    <!-- <script>
+    $(document).ready(function() {
+        $('.today .card').click(function(e) {
+            e.preventDefault(); //prevent the link from being followed
+            $('.previous .card').removeClass('selected');
+            $('.next .card').removeClass('selected');
+            $(this).addClass('selected');
+        });
+        $('.previous .card').click(function(e) {
+            e.preventDefault(); //prevent the link from being followed
+            $('.today .card').removeClass('selected');
+            $('.next .card').removeClass('selected');
+            $(this).addClass('selected');
+        });
+        $('.next .card').click(function(e) {
+            e.preventDefault(); //prevent the link from being followed
+            $('.previous .card').removeClass('selected');
+            $('.today .card').removeClass('selected');
+            $(this).addClass('selected');
+        });
+
+    });
+    </script> -->
 </body>
 
 </html>

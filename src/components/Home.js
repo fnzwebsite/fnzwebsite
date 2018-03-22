@@ -94,35 +94,24 @@ class Home extends React.Component {
                     <div className="content-inner">
                         <Header/>
                         <div className="container-fluid">
-                            <div className="col-sm-12 mt-70">
+                            <div className="mt-70">
+
                                     <BoxToday loadChart={this.loadChart} dealingData={dealing}/>
-                            </div>
-                            <div className="tab-content">
-                                <div id="home" className="tab-pane in active">
+                               
+                                <div className="row">
+                                    <div className="col-md-6">
+                                        <div className="line-chart-example card">
+                                                <LoadLineChart loadThisDay={this.state.chart} dealingData={dealing}/>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <div className="card">
 
-                                    <div className="col-sm-12 chart-sec">
-                                        <div className="row">
-                                            <h5>Trades (Today) <span>01/03/2018 &nbsp 12:00 AM</span></h5>
-
-                                            <ul className="nav nav-tabs chart-tabs has-shadow">
-                                                <li className={this.state.selected == "chart" ? 'active':''}><a className={this.state.selected == "chart" ? 'active':''} onClick={() => this.changeView('chart')} ><i className="fa fa-area-chart"></i>Chart</a></li>
-                                                <li className={this.state.selected == "table" ? 'active':''}><a className={this.state.selected == "chart" ? 'active':''} onClick={() => this.changeView('table')}><i className="fa fa-th-list"></i>Transactions</a></li>
-                                            </ul>
-                                            <div className="tab-content">
-                                                <div id="chart" className={this.state.selected == "chart" ? 'tab-pane in active':'tab-pane fade'}>
-                                                    <div className="line-chart-example card">
-                                                        <div className="card-body">
-                                                            <LoadLineChart loadThisDay={this.state.chart} dealingData={dealing}/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="table" className={this.state.selected == "table" ? 'tab-pane in active':'tab-pane fade'}>
-                                                    <div className="card">
-                                                        <TransactionsTable loadThisDay={this.state.chart} dealingData={dealing}/>
-                                                    </div>
+                                            <div className="card-body" style={{"padding-bottom":"30px","background":"#fff"}}>
+                                                <div className="table-responsive">
+                                                    <TransactionsTable loadThisDay={this.state.chart} dealingData={dealing}/>
                                                 </div>
                                             </div>
-                                           
                                         </div>
                                     </div>
                                 </div>

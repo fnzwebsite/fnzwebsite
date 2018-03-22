@@ -1,5 +1,9 @@
     /* your styles go here */
 
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+
     .navbar-header {
         display: inherit;
     }
@@ -9,28 +13,31 @@
     }
 
     nav.navbar {
-        background: #fff;
+        background: #efefef;
         color: #000;
         padding-top: 12px;
         padding-bottom: 12px;
     }
 
-    .navbar.fixed-top{
+    .navbar.fixed-top {
         position: fixed !important;
         padding-left: 80px !important;
     }
-    .mt-70{
+
+    .mt-70 {
         margin-top: 7.5rem !important;
     }
-    nav.navbar .search-box form input{
+
+    nav.navbar .search-box form input {
         padding-left: 110px;
     }
+
     nav.side-navbar {
         background: #e1e5ee;
     }
 
     .page {
-        background: #edf2f6 !important;
+        background: #efefef !important;
     }
 
     nav.side-navbar ul {
@@ -42,17 +49,20 @@
         padding: 10px 20px;
         text-decoration: none;
         font-size: 0.85rem;
+        font-weight: 500;
     }
 
     nav.side-navbar ul li a {
         border-left: 2px solid transparent;
         color: rgba(0, 0, 0, 1);
         padding: 15px;
+        font-weight: 400;
     }
 
     .nav.nav-tabs li a.active {
         border-bottom: 1px solid #fff;
-        color: rgba(0, 0, 0, 1);
+        color: #2b58c2;
+        font-weight: 500;
     }
     /*sub level*/
 
@@ -98,7 +108,7 @@
     /*footer*/
 
     .main-footer {
-        background-color: #fff !important;
+        background-color: #efefef !important;
         z-index: 100;
         box-shadow: 2px -2px 4px rgba(0, 0, 0, 0.2);
         color: rgba(0, 0, 0, 0.6) !important;
@@ -110,10 +120,10 @@
     }
 
     h5 span {
-        font-weight: 300;
+        font-weight: 500;
         font-size: 0.85rem;
         margin-left: 10px;
-        color: rgba(0, 0, 0, 0.5);
+        color: rgba(0, 0, 0, 0.6);
     }
 
     .page-content {
@@ -129,18 +139,22 @@
     nav.side-navbar.l1 {
         z-index: 9999;
     }
-    .side-navbar.l1 li a .fa{
+
+    .side-navbar.l1 li a .fa {
         opacity: 0.5;
     }
-     .side-navbar.l1 li.active a .fa{
+
+    .side-navbar.l1 li.active a .fa {
         opacity: 1;
     }
+
     nav.side-navbar.l2 {
         z-index: 9990;
         left: 80px;
         min-width: 240px;
         max-width: 240px;
         transition: all ease-in-out 0.5s;
+        background: #f3f4f5;
     }
 
     nav.side-navbar.l2.shrinked {
@@ -153,8 +167,8 @@
     nav.side-navbar.l2 .nav-menu {
         margin: 18px 0 5px 10px;
     }
-   
-    nav.side-navbar.l2 ul li a.user:hover{
+
+    nav.side-navbar.l2 ul li a.user:hover {
         background: transparent;
         border-left: 2px solid transparent;
     }
@@ -177,7 +191,7 @@
     }
 
     nav.side-navbar ul li.active>a:hover {
-        background: #e1e5ee;
+        background: #e2e7ef;
     }
 
     .shrinked nav.navbar .brand-big {
@@ -185,7 +199,7 @@
     }
 
     nav.side-navbar ul li.active>a {
-        background: #cacfd6;
+        background: #e2e7ef;
         border-left: 2px solid #d4d4d6;
     }
 
@@ -194,7 +208,7 @@
     }
 
     nav.side-navbar ul li a:hover {
-        background: #cacfd6;
+        background: #e2e7ef;
         border-left: 2px solid #d4d4d6;
         color: #000;
     }
@@ -209,9 +223,8 @@
         padding-left: 0;
         min-height: calc(100vh - 0px);
     }
-    .login-page .page-content{
-     
-    }
+
+    .login-page .page-content {}
 
     .content-inner {
         width: 100%;
@@ -277,6 +290,7 @@
     nav.navbar .nav-link {
         color: rgba(0, 0, 0, 0.8);
         font-size: 0.85rem;
+        font-weight: 500;
     }
 
     nav.side-navbar.l1 a i {
@@ -291,10 +305,9 @@
         margin: 12px 0 0 20px;
     }
 
-    .settings{
+    .settings {
         margin-top: 100px;
-        border-top: 1px solid rgba(255,255,255,0.5)
-
+        border-top: 1px solid rgba(255, 255, 255, 0.5)
     }
     /*Custom-icons*/
 
@@ -313,22 +326,28 @@
     .fa-bell-o::before {
         content: url(../img/msg.png);
     }
-      .fa-home-icon::before {
+
+    .fa-home-icon::before {
         content: url(../img/home-icon.png);
     }
-      .fa-service-icon::before {
+
+    .fa-service-icon::before {
         content: url(../img/service-icon.png);
     }
-      .fa-message-icon::before {
+
+    .fa-message-icon::before {
         content: url(../img/message-icon.png);
     }
-       .fa-fav-icon::before {
-        content: url(../img/market-icon.png);
-    }
-        .fa-market-icon::before {
+
+    .fa-fav-icon::before {
         content: url(../img/fav-icon.png);
     }
-       .fa-setting-icon::before {
+
+    .fa-market-icon::before {
+        content: url(../img/market-icon.png);
+    }
+
+    .fa-setting-icon::before {
         content: url(../img/settings-icon.png);
     }
     /*Login Page*/
@@ -347,6 +366,11 @@
         text-align: center;
     }
 
+    .login-page .form-holder {
+
+        /*border-top: 12px solid #1f96f4;*/
+    }
+
     #login.btn-primary {
         background: #1f96f4;
         border: none;
@@ -354,7 +378,16 @@
     }
 
     .page.login-page {
-        background: #edf2f6 !important;
+        background: #efefef !important;
+    }
+
+    .btn,
+    .badge {
+        box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
+    }
+
+    input.input-material {
+        border-color: #dedede;
     }
 
     input.input-material~label.active {
@@ -391,6 +424,12 @@
     .login-page .form-holder .form a.signup {
         padding: 6px;
     }
+
+
+    .login-page .form-holder .form a.forgot-pass,
+    .login-page .form-holder .form a.signup {
+        color: #1f96f4;
+    }
     /*.today{
     position: relative;
     transform: scale(1.2,1.1);
@@ -401,7 +440,7 @@
     .previous .fund-list,
     .next .fund-list {
         display: none;
-        width: auto;
+        width: 64%;
     }
 
     .card.selected .fund-list {
@@ -435,11 +474,30 @@
     }
 
     .card-header {
-        background: #000;
+        background: #e1e1e1;
+        border-radius: 8px 8px 0 0;
     }
 
+    .card-header h3{
+        color: #5d5d5d;
+        display: inline-block;
+        box-shadow: none !important;
+    }
+
+    .card.funds h5{
+        text-transform: uppercase;
+    }
+
+    .card-header .badge {
+    box-shadow: none;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+    .open {
+    border-right: 1px dotted #ccc;
+}
     .selected .card-body {
-        background: white;
+        background: #061b45;
     }
 
     .chart-sec .card-body {
@@ -447,19 +505,24 @@
     }
 
     .card-body {
-        background: #a7b9c6;
+        background: #0574e0;
         padding: 10px;
         cursor: pointer;
     }
 
+
+    .closed h2{
+        color: orange !important;
+    }
+
     .table {
-        font-weight: 300;
+        /*font-weight: 300;*/
     }
 
     .table td,
     .table th,
     .table thead th {
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1) font-weight: 500;
     }
 
     .table td,
@@ -468,8 +531,9 @@
     }
 
     .table th {
-        font-weight: 300;
-        color: rgba(0, 0, 0, 0.6);
+        font-weight: 600;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 0.85rem;
     }
 
     .table td {
@@ -480,13 +544,13 @@
         margin-top: 20px;
     }
 
-    .chart-sec .tab-content {
+    .tab-content {
         margin-top: 0px;
     }
 
     .chart-tabs {
         background: #fff;
-        border-radius: 6px 6px 0 0;
+        border-radius: 8px 8px 0 0;
     }
 
     .chart-sec .card,
@@ -504,23 +568,24 @@
     }
 
     .card-close {
-        color: #000;
+        color: #fff;
         text-transform: uppercase;
     }
 
     .card-body h3 {
-        color: black;
+        color: #fff;
         font-weight: 400;
         font-size: 1rem
     }
 
     small {
-        color: rgba(0, 0, 0, 0.5);
+        color: rgba(255, 255, 255, 0.5);
     }
 
     .card,
     .card-body {
         border-radius: 8px;
+        overflow: hidden;
     }
 
     .funds-sec {
@@ -553,7 +618,7 @@
     .fund-status ul li {
         list-style-type: none;
         padding: 20px 15px 0;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .fund-status ul li:last-child {
@@ -561,7 +626,7 @@
     }
 
     .fund-status ul li h4 {
-        color: rgba(0, 0, 0, 1);
+        color: rgba(255, 255, 255, 1);
         text-align: center;
         font-weight: 400;
         font-size: 1rem;
@@ -569,7 +634,7 @@
     }
 
     .fund-status ul li p {
-        color: rgba(0, 0, 0, 0.5);
+        color: rgba(255, 255, 255, 0.5);
         text-align: center;
         font-size: 0.9rem;
     }
@@ -580,6 +645,11 @@
 
     .orange {
         background: #f07700 !important;
+    }
+
+    .bg-alice{
+        background: #00acc1 !important;
+        color: #fff;
     }
 
     .fund-list {
@@ -717,6 +787,10 @@
         .selected .fund-status {
             width: 36%;
         }
+
+        .settings {
+            margin-top: 10px;
+        }
         /*CSS*/
     }
     /* 
@@ -807,6 +881,11 @@
 */
 
     @media (min-width: 320px) and (max-width: 480px) {
+
+
+        .dashboard_card h2{
+            font-size: 2.4rem !important;
+        }
         nav.side-navbar.shrinked {
             position: relative;
             margin-left: -90px;
@@ -827,12 +906,12 @@
             z-index: 9;
             transition: all ease-in-out 0.3s;
         }
-nav.side-navbar.l2.shrinked{
-    left: -270px;
-}
-.content-inner{
-    padding-left: 0;
-}
+        nav.side-navbar.l2.shrinked {
+            left: -270px;
+        }
+        .content-inner {
+            padding-left: 0;
+        }
         .dots-nav {
             margin-left: 120px;
         }
@@ -942,3 +1021,135 @@ nav.side-navbar.l2.shrinked{
         }
         /*CSS*/
     }
+
+
+/* Dashboard page styles */
+
+.dashboard_card{
+    text-align: center;
+    padding:17px 0;
+    box-shadow: 0 0 9px 0 #ccc;
+    -webkit-box-shadow: 0 0 9px 0 #ccc;
+    border-radius: 0 0 8px 8px;
+
+}
+.dashboard_card h5{
+    color: #818181;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+.dashboard_card h2{
+    color: #2051ba;
+    font-weight: 700;
+    font-size: 3.0rem;
+    margin-bottom:1.5rem;
+}
+.dashboard_card h2 sub{
+    font-size:0.8rem;
+}
+.dashboard_card p{
+    color: #818181;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+.dashboard_icon h2{
+    margin-bottom: 0;
+}
+.dashboard_icon i{
+    font-size: 5.25rem;
+}
+.dashboard_icon  h5{
+    margin-bottom: 0;
+}
+.fnz_list{
+    border-top: 1px solid #dadada;
+    margin:0 20px;
+} 
+.fnz_list h6{
+    color: #a4a4a4;
+    text-align: left;
+    padding-top:10px;
+}
+.fnz_list ul li{
+    padding-bottom: 10px;
+}
+.fnz_list ul li:last-child{
+    padding-bottom: 0;
+}
+.fnz_list ul li p{
+    font-size: 1rem;
+    text-align: left;
+    color: #222;
+    margin-bottom: 0;
+}
+.fnz_list ul li p span{
+    color: #6ecaff;
+}
+.card_chart{
+    padding: 15px;
+    padding-bottom: 30px;
+}
+
+/*Login page */
+
+.login_content h4{
+    color: #7c878d;
+    font-weight: 500;
+    font-size: 1.5rem;
+    position: relative;
+    margin-bottom: 2rem;
+}
+.login_content h4:before{
+    content: "";
+    position: absolute;
+    left: 0;
+    border-top: 1px solid #808080;
+    height: 1px;
+    width: calc(50% - 100px);
+    top: 12px;
+}
+.login_content h4:after{
+    content: "";
+    position: absolute;
+    right: 0;
+    border-top: 1px solid #808080;
+    height: 1px;
+    width: calc(50% - 100px);
+    top: 12px;
+}
+.login_content .form-control{
+    border-radius: 3px;
+    box-shadow: 0 0 1px 1px #ccc;
+}
+.login_content .btn{
+    background: #fff;
+    box-shadow: 0 0 1px 1px #ccc;
+    color: #666;    
+}
+.pwd_link{
+    color: #7c878d !important;
+    text-decoration: none;
+    margin-top: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+}
+.fnz_block{
+    border-top: 2px solid #ddd;
+    padding-top: 30px;
+}
+.fnz_block h3{
+   color: #7c878d;
+    font-weight: 500;
+  
+}
+.fnz_block p{
+    color: #7c878d;
+    font-size:0.9rem;
+}
+.form-control:focus{
+        border-color: #888;
+}
+.amChartsPeriodSelector div:last-child{
+    display: none !important;
+}

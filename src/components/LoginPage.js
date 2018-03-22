@@ -43,99 +43,49 @@ class LoginPage extends React.Component {
         return (
 
             <div className="page login-page">
-               
-                <header className="header">
-                    <nav className="navbar fixed-top">
-                        
-                        <div className="search-box">
-                            <button className="dismiss"><i className="icon-close"></i></button>
-                            <form id="searchForm" action="#" role="search">
-                                <input type="search" placeholder="What are you looking for..." className="form-control"/>
-                            </form>
-                        </div>
-                        <div className="container-fluid">
-                            <div className="navbar-holder d-flex align-items-center justify-content-between">
-
-                                
-                                <ul className="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
-
-
-                                    <li className="nav-item">
-                                        <div className="avatar"><img src="img/profile-img.jpg" alt="..." className="img-fluid rounded-circle"/></div>
-                                    </li>
-                                    <li className="nav-item"><a href="" className="nav-link">Sign In</a></li>
-                                </ul>
-                           
-                                <div className="navbar-header">
-
-                                    <ul className="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
-                                    
-                                        <li className="nav-item d-flex align-items-center"><a id="search" href="#"><i className="icon-search"></i></a></li>
-                                       
-                                        <li className="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" className="nav-link"><i className="fa fa-bell-o"></i><span className="badge bg-yellow badge-corner">4</span></a>
-                                        </li>
-
-
-                                    </ul>
-
-                                   
-
-                                    <a href="" className="navbar-brand">
-                                        <div className="brand-text brand-big"><img src="img/logo.png" alt="logo" className=""/></div>
-                                        <div className="brand-text brand-small"><img src="img/logo.png" alt="logo" className=""/></div>
-                                    </a>
-                                   
-                                    <a href="" className="dots-nav"><img src="img/dots-nav.png" alt="..." className=""/></a>
-                                </div>
-                            </div>
-                        </div>
-                    </nav>
-                </header>
                 <div className="page-content d-flex align-items-stretch">
-
-            
-
                     <div className="content-inner">
-                        
                         <div className="container d-flex align-items-center">
-                            <div className="form-holder has-shadow col-sm-12">
+                            <div className="form-holder col-sm-12">
                                 <div className="row">
-                                 
-                                    <div className="col-sm-12 bg-white">
+                                    <div className="col-sm-12">
                                         <div className="form d-flex align-items-center">
-                                            <div className="content">
+                                            <div className="content login_content">
+                                                <h4>Login</h4>
                                                 <form id="login-form" method="post" name="form" onSubmit={this.handleSubmit}>
-                                                    <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
-
-                                                        <input type="text" className="input-material" name="username" value={username} onChange={this.handleChange} />
-                                                        <label className="label-material" htmlFor="username">User name</label>
+                                                    <div className="form-group">
+                                                        <input id="login-username" type="text" name="username" value={username} onChange={this.handleChange}  placeholder="Username" className="form-control"/>
                                                         {submitted && !username &&
                                                         <div className="help-block">Username is required</div>
                                                         }
                                                     </div>
                                                     <div className="form-group">
-                                                        <input id="login-password" type="password" className="input-material" name="password" value={password} onChange={this.handleChange} />
-                                                        <label className="input-material" htmlFor="password">Password</label>
+                                                        <input id="login-password" type="password" value={password} onChange={this.handleChange} name="password" placeholder="Password" className="form-control"/>
                                                         {submitted && !password &&
                                                         <div className="help-block">Password is required</div>
                                                         }
                                                     </div>
-                                                    <div className="d-flex justify-content-center">
-                                                        <button id="login" href="" className="btn btn-primary">Login</button>
+                                                    <div className="row">
+                                                        <div className="col-md-6">
+                                                            <div className="d-flex justify-content-center">
+                                                                <button id="login" href="" className="btn">Log in</button>
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-6">
+                                                            <a href="#" className="pwd_link">Lost your password?</a>
+                                                        </div>
                                                     </div>
                                                 </form>
-
-
-
-
-                                                <a href="#" className="forgot-pass">Forgot Password?</a><small>Do not have an account? </small><a href=" " className="signup">Signup</a>
+                                                <div className="fnz_block">
+                                                    <h3>FNZ Chain</h3>
+                                                    <p>&copy; 2018 All Right reserved. Privacy and Terms</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
                         <footer className="main-footer">
                             <div className="container-fluid">
                                 <div className="row">
@@ -146,11 +96,8 @@ class LoginPage extends React.Component {
                             </div>
                         </footer>
                     </div>
-                    
                 </div>
             </div>
-            
-           
         );
     }
 }
