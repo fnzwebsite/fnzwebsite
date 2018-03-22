@@ -13,80 +13,59 @@ class TransactionsTable extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state={
-            dealing:null
-        };
-    }
-
-    componentWillMount(prevProps, prevState) {
-        this.props.dealingActions.getDealings();
-    }
-
-    componentDidMount(prevProps, prevState) {
-        var self = this;
-        var socket = io('http://localhost:3700',{ query: "auth="+authHeader()['Authorization']});
-        socket.on('dealing', function (dealing) {
-            // console.log(JSON.stringify(dealing));
-            if(self.state.dealing !== dealing) {
-                self.setState({dealing: dealing});
-            }
-        })
     }
 
     render() {
-        let LoadRows = null
-        if(this.props.data.dealing == "logout"){
-            this.props.userActions.logout();
-        }
-        let dealing = this.state.dealing || this.props.data.dealing;
-        if(dealing && dealing.status != "401") {
+        let LoadRows = null;
+        let self = this;
+        if(self.props.dealingData && self.props.dealingData.status != "401") {
             let self = this;
             if(self.props.loadThisDay == 'today') {
-                LoadRows = Object.keys(dealing).map(function (keyName, keyIndex) {
-                    if (moment(dealing[keyName].boxDate).isSame(moment(), 'day')) {
+                LoadRows = Object.keys(self.props.dealingData).map(function (keyName, keyIndex) {
+                    if (moment(self.props.dealingData[keyName].boxDate).isSame(moment(), 'day')) {
                         return <tr>
-                            <td>{dealing[keyName].boxDate}</td>
-                            <td>{dealing[keyName].account}</td>
-                            <td>{dealing[keyName].instrumentKey}</td>
-                            <td>{dealing[keyName].dealType.toUpperCase()}</td>
-                            <td>{dealing[keyName].units}</td>
-                            <td>{dealing[keyName].amount}</td>
+                            <td>{self.props.dealingData[keyName].boxDate}</td>
+                            <td>{self.props.dealingData[keyName].account}</td>
+                            <td>{self.props.dealingData[keyName].instrumentKey}</td>
+                            <td>{self.props.dealingData[keyName].dealType.toUpperCase()}</td>
+                            <td>{self.props.dealingData[keyName].units}</td>
+                            <td>{self.props.dealingData[keyName].amount}</td>
                             <td><span
-                                className={dealing[keyName].dealType.toUpperCase() == "BUY" ? "badge bg-green" : "badge bg-orange"}>Accepted</span>
+                                className={self.props.dealingData[keyName].dealType.toUpperCase() == "BUY" ? "badge bg-green" : "badge bg-orange"}>Accepted</span>
                             </td>
                         </tr>
                     }
                 });
             }
             if(self.props.loadThisDay == 'next') {
-                LoadRows = Object.keys(dealing).map(function (keyName, keyIndex) {
-                    if (moment(dealing[keyName].boxDate).isSameOrAfter(moment(), 'day')) {
+                LoadRows = Object.keys(self.props.dealingData).map(function (keyName, keyIndex) {
+                    if (moment(self.props.dealingData[keyName].boxDate).isSameOrAfter(moment(), 'day')) {
                         return <tr>
-                            <td>{dealing[keyName].boxDate}</td>
-                            <td>{dealing[keyName].account}</td>
-                            <td>{dealing[keyName].instrumentKey}</td>
-                            <td>{dealing[keyName].dealType.toUpperCase()}</td>
-                            <td>{dealing[keyName].units}</td>
-                            <td>{dealing[keyName].amount}</td>
+                            <td>{self.props.dealingData[keyName].boxDate}</td>
+                            <td>{self.props.dealingData[keyName].account}</td>
+                            <td>{self.props.dealingData[keyName].instrumentKey}</td>
+                            <td>{self.props.dealingData[keyName].dealType.toUpperCase()}</td>
+                            <td>{self.props.dealingData[keyName].units}</td>
+                            <td>{self.props.dealingData[keyName].amount}</td>
                             <td><span
-                                className={dealing[keyName].dealType.toUpperCase() == "BUY" ? "badge bg-green" : "badge bg-orange"}>Accepted</span>
+                                className={self.props.dealingData[keyName].dealType.toUpperCase() == "BUY" ? "badge bg-green" : "badge bg-orange"}>Accepted</span>
                             </td>
                         </tr>
                     }
                 });
             }
             if(self.props.loadThisDay == 'previous') {
-                LoadRows = Object.keys(dealing).map(function (keyName, keyIndex) {
-                    if (moment(dealing[keyName].boxDate).isSameOrBefore(moment(), 'day')) {
+                LoadRows = Object.keys(self.props.dealingData).map(function (keyName, keyIndex) {
+                    if (moment(self.props.dealingData[keyName].boxDate).isSameOrBefore(moment(), 'day')) {
                         return <tr>
-                            <td>{dealing[keyName].boxDate}</td>
-                            <td>{dealing[keyName].account}</td>
-                            <td>{dealing[keyName].instrumentKey}</td>
-                            <td>{dealing[keyName].dealType.toUpperCase()}</td>
-                            <td>{dealing[keyName].units}</td>
-                            <td>{dealing[keyName].amount}</td>
+                            <td>{self.props.dealingData[keyName].boxDate}</td>
+                            <td>{self.props.dealingData[keyName].account}</td>
+                            <td>{self.props.dealingData[keyName].instrumentKey}</td>
+                            <td>{self.props.dealingData[keyName].dealType.toUpperCase()}</td>
+                            <td>{self.props.dealingData[keyName].units}</td>
+                            <td>{self.props.dealingData[keyName].amount}</td>
                             <td><span
-                                className={dealing[keyName].dealType.toUpperCase() == "BUY" ? "badge bg-green" : "badge bg-orange"}>Accepted</span>
+                                className={self.props.dealingData[keyName].dealType.toUpperCase() == "BUY" ? "badge bg-green" : "badge bg-orange"}>Accepted</span>
                             </td>
                         </tr>
                     }
@@ -118,30 +97,4 @@ class TransactionsTable extends React.Component {
     }
 }
 
-const
-    mapStateToProps = (state, props) => {
-        return {
-            data: state,
-            user: state.user
-        }
-    };
-
-TransactionsTable.propTypes = {
-    userActions: PropTypes.object,
-    user: PropTypes.array
-};
-
-const
-    mapDispatchToProps = (dispatch) => ({
-        dealingActions: bindActionCreators(dealingActions, dispatch),
-        userActions:bindActionCreators(userActions, dispatch)
-    });
-
-
-export default connect(mapStateToProps,
-    mapDispatchToProps)
-
-(
-    TransactionsTable
-)
-;
+export default TransactionsTable;

@@ -31,11 +31,12 @@ io.use(function (socket, next) {
             getCourses(function (data) {
                 if(data.status != 400) {
                     console.log("got data")
+                    console.log(data)
                     io.sockets.emit('dealing', data);
                 }
             }, socket.handshake.query.auth);
             return next();
-        }, 1000);
+        }, 2000);
     }
     next(new Error('Authentication error'));
 });

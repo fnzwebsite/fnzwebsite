@@ -40,8 +40,7 @@ class LoadLineChart extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            data: null,
-            dealing:null
+            data: null
         }
         this.getChartData = this.getChartData.bind(this);
     }
@@ -117,39 +116,21 @@ class LoadLineChart extends React.Component {
         return null;
     }
 
-    componentWillMount(prevProps, prevState) {
-        this.props.dealingActions.getDealings();
-    }
-
     componentWillReceiveProps(prevProps){
-        if(prevProps.data.dealing != this.props.data.dealing && this.props.data.dealing) {
-                let lineChartData = this.getChartData(this.props.data.dealing);
-                this.setState({dealing: this.props.data.dealing, data: lineChartData})
+        if(prevProps.dealingData != this.props.dealingData && this.props.dealingData) {
+                let lineChartData = this.getChartData(this.props.dealingData);
+                this.setState({data: lineChartData})
         }
         if(this.props.loadThisDay != prevProps.loadThisDay){
-            let lineChartData = this.getChartData(this.props.data.dealing);
-            this.setState({dealing: this.props.data.dealing, data: lineChartData})
+            let lineChartData = this.getChartData(this.props.dealingData);
+            this.setState({data: lineChartData})
 
         }
-    }
-
-    componentDidMount(prevProps, prevState) {
-        var self = this;
-        var socket = io('http://localhost:3700',{ query: "auth="+authHeader()['Authorization']});
-        socket.on('dealing', function (dealing) {
-            // console.log(JSON.stringify(dealing));
-            if(self.state.dealing !== dealing) {
-                    let lineChartData = self.getChartData(dealing);
-                    self.setState({dealing: dealing, data: lineChartData})
-            }
-        })
     }
 
     render() {
-
         if(this.state.data) {
             return (
-
                 <div style={styles.graphContainer}>
                     <LineChart data={this.state.data}
                                options={options}
@@ -162,23 +143,4 @@ class LoadLineChart extends React.Component {
     }
 }
 
-const
-    mapStateToProps = (state, props) => {
-        return {
-            data: state
-        }
-    };
-
-const
-    mapDispatchToProps = (dispatch) => ({
-        dealingActions: bindActionCreators(dealingActions, dispatch)
-    });
-
-
-export default connect(mapStateToProps,
-    mapDispatchToProps)
-
-(
-    LoadLineChart
-)
-;
+export default LoadLineChart;

@@ -5,13 +5,19 @@ import Header from './Header'
 import BoxToday from './BoxDealing'
 import LoadLineChart from './LoadLineChart'
 import TransactionsTable from './TransactionsTable'
-
+import io from "socket.io-client"
+import * as dealingActions from '../actions/dealingActions';
+import userActions from '../actions/user.actions';
+import { authHeader } from '../helpers';
+import {bindActionCreators} from 'redux';
+import PropTypes from 'prop-types';
 
 
 class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state ={
+            dealing:null,
             chart:'today',
             selected:'chart'
         };
@@ -32,6 +38,21 @@ class Home extends React.Component {
             })
         }
     }
+
+    componentWillMount(prevProps, prevState) {
+        this.props.dealingActions.getDealings();
+    }
+
+    componentDidMount(prevProps, prevState) {
+        var self = this;
+        var socket = io('http://localhost:3700',{ query: "auth="+authHeader()['Authorization']});
+        socket.on('dealing', function (dealing) {
+            if(self.state.dealing !== dealing) {
+                self.setState({dealing: dealing});
+            }
+        })
+    }
+
 
     data1() {
         return {
@@ -62,6 +83,10 @@ class Home extends React.Component {
     }
 
     render() {
+        if(this.props.data.dealing == "logout" || this.state.dealing == "logout"){
+            this.props.userActions.logout();
+        }
+        var dealing = this.state.dealing || this.props.data.dealing;
         return (
             <div className="page">
                 <div className="page-content d-flex align-items-stretch">
@@ -70,9 +95,7 @@ class Home extends React.Component {
                         <Header/>
                         <div className="container-fluid">
                             <div className="col-sm-12 mt-70">
-
-                                    <BoxToday loadChart={this.loadChart}/>
-
+                                    <BoxToday loadChart={this.loadChart} dealingData={dealing}/>
                             </div>
                             <div className="tab-content">
                                 <div id="home" className="tab-pane in active">
@@ -89,13 +112,13 @@ class Home extends React.Component {
                                                 <div id="chart" className={this.state.selected == "chart" ? 'tab-pane in active':'tab-pane fade'}>
                                                     <div className="line-chart-example card">
                                                         <div className="card-body">
-                                                            <LoadLineChart loadThisDay={this.state.chart}/>
+                                                            <LoadLineChart loadThisDay={this.state.chart} dealingData={dealing}/>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div id="table" className={this.state.selected == "table" ? 'tab-pane in active':'tab-pane fade'}>
                                                     <div className="card">
-                                                        <TransactionsTable loadThisDay={this.state.chart}/>
+                                                        <TransactionsTable loadThisDay={this.state.chart} dealingData={dealing}/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -121,4 +144,25 @@ class Home extends React.Component {
     }
 }
 
-export default Home;
+const
+    mapStateToProps = (state, props) => {
+        return {
+            data: state,
+            user: state.user
+        }
+    };
+
+Home.propTypes = {
+    userActions: PropTypes.object,
+    user: PropTypes.array
+};
+
+const
+    mapDispatchToProps = (dispatch) => ({
+        dealingActions: bindActionCreators(dealingActions, dispatch),
+        userActions:bindActionCreators(userActions, dispatch)
+    });
+
+
+export default connect(mapStateToProps,
+    mapDispatchToProps)(Home);
