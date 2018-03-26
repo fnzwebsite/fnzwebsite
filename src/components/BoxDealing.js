@@ -83,6 +83,44 @@ class BoxToday extends React.Component {
                     </li>
                 }
             });
+            var subscriptionsNext = 0;
+            var redemptionsNext = 0;
+            if(this.props.price.priceNext && this.props.price.priceNext.length){
+               this.props.price.priceNext.map(function(item, index){
+                  if(item.units > 0 && item.dealType == "BUY" && item.price){
+                      subscriptionsNext += item.units * item.price;
+                  }
+                   if(item.units > 0 && item.dealType == "SELL" && item.price){
+                       redemptionsNext += item.units * item.price;
+                   }
+               })
+            }
+
+            var subscriptionsPrevious = 0;
+            var redemptionsPrevious = 0;
+            if(this.props.price.pricePrevious && this.props.price.pricePrevious.length){
+                this.props.price.pricePrevious.map(function(item, index){
+                    if(item.units > 0 && item.dealType == "BUY" && item.price){
+                        subscriptionsPrevious += item.units * item.price;
+                    }
+                    if(item.units > 0 && item.dealType == "SELL" && item.price){
+                        redemptionsPrevious += item.units * item.price;
+                    }
+                })
+            }
+
+            var subscriptionsToday = 0;
+            var redemptionsToday = 0;
+            if(this.props.price.priceToday && this.props.price.priceToday.length){
+                this.props.price.priceToday.map(function(item, index){
+                    if(item.units > 0 && item.dealType == "BUY" && item.price){
+                        subscriptionsToday += item.units * item.price;
+                    }
+                    if(item.units > 0 && item.dealType == "SELL" && item.price){
+                        redemptionsToday += item.units * item.price;
+                    }
+                })
+            }
 
             return (
                <div className="row">
@@ -96,7 +134,7 @@ class BoxToday extends React.Component {
                                        <div className="row align-items-center justify-content-center h-100">
 
                                            <h5>Net Inflows/Outflows</h5>
-                                           <h2><span>&#163;</span>23.46<span className="sub-text">mn</span></h2>
+                                           <h2><span>&#163;</span>{subscriptionsPrevious + redemptionsPrevious}<span className="sub-text">mn</span></h2>
                                        </div>
 
                                    </div>
@@ -104,14 +142,14 @@ class BoxToday extends React.Component {
                                        <div className="row">
                                            <div className="col-sm-12 sub-sec">
                                                <h5>Subscriptions</h5>
-                                               <h2><span>&#163;</span>149,240</h2>
+                                               <h2><span>&#163;</span>{subscriptionsPrevious}</h2>
                                            </div>
                                        </div>
                                        <hr/>
                                            <div className="row">
                                                <div className="col-sm-12">
                                                    <h5>Redemptions</h5>
-                                                   <h2><span>&#163;</span>200,146</h2>
+                                                   <h2><span>&#163;</span>{redemptionsPrevious}</h2>
                                                </div>
                                            </div>
                                    </div>
@@ -129,7 +167,7 @@ class BoxToday extends React.Component {
                                        <div className="row align-items-center justify-content-center h-100">
 
                                            <h5>Net Inflows/Outflows</h5>
-                                           <h2><span>&#163;</span>23.46<span className="sub-text">mn</span></h2>
+                                           <h2><span>&#163;</span>{subscriptionsToday+subscriptionsPrevious}<span className="sub-text">mn</span></h2>
                                        </div>
 
                                    </div>
@@ -137,14 +175,14 @@ class BoxToday extends React.Component {
                                        <div className="row">
                                            <div className="col-sm-12 sub-sec">
                                                <h5>Subscriptions</h5>
-                                               <h2><span>&#163;</span>149,240</h2>
+                                               <h2><span>&#163;</span>{subscriptionsToday}</h2>
                                            </div>
                                        </div>
                                        <hr/>
                                            <div className="row">
                                                <div className="col-sm-12">
                                                    <h5>Redemptions</h5>
-                                                   <h2><span>&#163;</span>200,146</h2>
+                                                   <h2><span>&#163;</span>{redemptionsToday}</h2>
                                                </div>
                                            </div>
                                    </div>
@@ -162,7 +200,7 @@ class BoxToday extends React.Component {
                                        <div className="row align-items-center justify-content-center h-100">
 
                                            <h5>Net Inflows/Outflows</h5>
-                                           <h2><span>&#163;</span>23.46<span className="sub-text">mn</span></h2>
+                                           <h2><span>&#163;</span>{subscriptionsNext+redemptionsNext}<span className="sub-text">mn</span></h2>
                                        </div>
 
                                    </div>
@@ -170,14 +208,14 @@ class BoxToday extends React.Component {
                                        <div className="row">
                                            <div className="col-sm-12 sub-sec">
                                                <h5>Subscriptions</h5>
-                                               <h2><span>&#163;</span>149,240</h2>
+                                               <h2><span>&#163;</span>{subscriptionsNext}</h2>
                                            </div>
                                        </div>
                                        <hr/>
                                            <div className="row">
                                                <div className="col-sm-12">
                                                    <h5>Redemptions</h5>
-                                                   <h2><span>&#163;</span>200,146</h2>
+                                                   <h2><span>&#163;</span>{redemptionsNext}</h2>
                                                </div>
                                            </div>
                                    </div>

@@ -8,6 +8,7 @@ import TransactionsTable from './TransactionsTable'
 import io from "socket.io-client"
 import * as dealingActions from '../actions/dealingActions';
 import userActions from '../actions/user.actions';
+import * as priceActions from '../actions/priceActions';
 import { authHeader } from '../helpers';
 import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
@@ -41,6 +42,9 @@ class Home extends React.Component {
 
     componentWillMount(prevProps, prevState) {
         this.props.dealingActions.getDealings();
+        this.props.priceActions.getPriceKeyDate('2018-03-25','today');
+        this.props.priceActions.getPriceKeyDate('2018-03-26','next');
+        this.props.priceActions.getPriceKeyDate('2018-03-24','previous');
     }
 
     componentDidMount(prevProps, prevState) {
@@ -96,7 +100,7 @@ class Home extends React.Component {
                         <div className="container-fluid">
                             <div className="mt-70">
 
-                                    <BoxToday loadChart={this.loadChart} dealingData={dealing}/>
+                                    <BoxToday loadChart={this.loadChart} dealingData={dealing} price={this.props.data}/>
 
                                 <div className="row">
                                     <div className="col-md-6">
@@ -137,19 +141,26 @@ const
     mapStateToProps = (state, props) => {
         return {
             data: state,
-            user: state.user
+            user: state.user,
+            price:state.priceToday,
+            price:state.priceNext,
+            price:state.pricePrevious
         }
     };
 
 Home.propTypes = {
     userActions: PropTypes.object,
-    user: PropTypes.array
+    user: PropTypes.array,
+    priceToday: PropTypes.array,
+    priceNext: PropTypes.array,
+    pricePrevious: PropTypes.array
 };
 
 const
     mapDispatchToProps = (dispatch) => ({
         dealingActions: bindActionCreators(dealingActions, dispatch),
-        userActions:bindActionCreators(userActions, dispatch)
+        userActions:bindActionCreators(userActions, dispatch),
+        priceActions:bindActionCreators(priceActions, dispatch)
     });
 
 

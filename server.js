@@ -18,15 +18,32 @@ server.use(function(req, res, next) {
 });
 server.get('/dealing', (req, res) => {
     let auth = req.headers.authorization;
-    getCourses(function (data) {
+    getDealing(function (data) {
         res.send(data);
     }, auth);
 });
 
-server.get('/price', (req, res) => {
+server.get('/price/:date/:day', (req, res) => {
+    var priceData = [];
     let auth = req.headers.authorization;
-    getCourses(function (data) {
-        res.send(data);
+    getDealing(function (data) {
+        Object.keys(data).map(function (keyName, keyIndex) {
+            if(data[keyName].units>0 || Object.keys(data).length-1 == keyIndex){
+                getPriceByKeyDate(function (priceDataRes) {
+                    priceData.push({
+                        'price':priceDataRes.price,
+                        'units':data[keyName].units,
+                        'dealType':data[keyName].dealType,
+                        'day':req.params.day
+
+                    })
+                    if(Object.keys(data).length-1 == keyIndex){
+                        console.log(priceData);
+                        res.send(priceData);
+                    }
+                }, data[keyName].instrumentKey, req.params.date, auth);
+            }
+        })
     }, auth);
 });
 
@@ -35,10 +52,10 @@ var clients = {};
 io.use(function (socket, next) {
     if (socket.handshake.query.auth) {
         setInterval(function () {
-            getCourses(function (data) {
+            getDealing(function (data) {
                 if(data.status != 400) {
-                    console.log("got data")
-                    console.log(data)
+                    //console.log("got data")
+                    //console.log(data)
                     io.sockets.emit('dealing', data);
                 }
             }, socket.handshake.query.auth);
@@ -61,7 +78,7 @@ io.sockets.on('connection', function (socket) {
     // Send the current positions to the connected client when client is ready
     socket.on('dealing', function () {
         console.log(socket.handshake.query);
-        getCourses(function (data) {
+        getDealing(function (data) {
             io.sockets.emit('dealing', data);
         });
     }, socket.handshake.query);
@@ -90,7 +107,7 @@ io.sockets.on('connection', function (socket) {
 // }, 1000);
 
 
-function getCourses(callback, auth) {
+function getDealing(callback, auth) {
     var options = {
         method: 'GET',
         host: '35.178.56.52',
@@ -122,4 +139,40 @@ function getCourses(callback, auth) {
     });
 
     req.end();
+}
+
+
+function getPriceByKeyDate(callback, instrumentKey, date, auth) {
+    var options = {
+        method: 'GET',
+        host: '35.178.56.52',
+        port: 8081,
+        path: '/api/v1/price/'+instrumentKey+'/'+date,
+        headers: {
+            Authorization: auth
+        }
+    };
+
+    var req1 = http.request(options, function (res) {
+        //console.log(res)
+        var output = '';
+
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            output += chunk;
+        });
+
+        res.on('end', function () {
+            var obj = JSON.parse(output);
+            if (callback != undefined) {
+                callback(obj);
+            }
+        });
+    });
+
+    req1.on('error', function (e) {
+        console.log('problem with request: ' + e.message);
+    });
+
+    req1.end();
 }

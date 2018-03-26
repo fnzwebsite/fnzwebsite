@@ -1,3 +1,6 @@
 export default {
-    dealing: null
+    dealing: null,
+    priceToday:null,
+    pricePrevious:null,
+    priceNext:null
 };
