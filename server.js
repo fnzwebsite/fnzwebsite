@@ -60,7 +60,7 @@ io.use(function (socket, next) {
                 }
             }, socket.handshake.query.auth);
             return next();
-        }, 2000);
+        }, 30000);
     }
     next(new Error('Authentication error'));
 });
