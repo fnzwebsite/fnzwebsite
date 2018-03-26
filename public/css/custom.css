@@ -2,6 +2,7 @@
 
     body {
         font-family: 'Roboto', sans-serif;
+        background-color: #efefef;
     }
 
     .navbar-header {
@@ -451,7 +452,7 @@
     .previous .card.selected,
     .next .card.selected {
         position: relative;
-        transform: scale(1.2, 1.1);
+        transform: scale(1.05, 1.05);
         z-index: 5;
         box-shadow: 0px 5px 12px #adadad;
         opacity: 1;
@@ -459,17 +460,19 @@
     }
 
     .previous .card.selected {
-        left: 40px;
+        left: 10px;
+        transition: all ease-in 0.3s;
     }
 
     .next .card.selected {
-        right: 40px;
+        right: 10px;
+        transition: all ease-in 0.3s;
     }
 
     .previous .card,
     .next .card,
     .today .card {
-        opacity: 0.3;
+        
         transition: all ease-in 0.3s;
     }
 
@@ -483,9 +486,20 @@
         display: inline-block;
         box-shadow: none !important;
     }
+    .selected .card-header{
+        background: #061b45;
+        transition: all ease-in 0.3s;
+    }
+    .selected .card-header h3{
+        color: #FFF;
+        transition: all ease-in 0.3s;
+    }
+    .net{
+        display: flex;
+    }
 
     .card.funds h5{
-        text-transform: uppercase;
+        /*text-transform: uppercase;*/
     }
 
     .card-header .badge {
@@ -493,7 +507,7 @@
     text-transform: uppercase;
     font-weight: 600;
 }
-    .open {
+    .open, .net {
     border-right: 1px dotted #ccc;
 }
     .selected .card-body {
@@ -513,6 +527,16 @@
 
     .closed h2{
         color: orange !important;
+    }
+    .sub-sec h5{
+        padding-bottom: 10px;
+    }
+
+    .sub-text{
+        font-size: 1.2rem;
+    }
+    .closed hr{
+        margin: 20px; 
     }
 
     .table {
@@ -884,7 +908,14 @@
 
 
         .dashboard_card h2{
-            font-size: 2.4rem !important;
+            font-size: 2.0rem !important;
+        }
+
+         .dashboard_card h5{
+            margin-left: 10px;
+        }
+        .mt-70{
+            margin-top: 2.5rem !important;
         }
         nav.side-navbar.shrinked {
             position: relative;
@@ -1019,6 +1050,11 @@
         .chart-sec .nav {
             display: flex;
         }
+
+
+        .line-chart-example.card canvas{
+            height: 350px !important;
+        }
         /*CSS*/
     }
 
@@ -1036,13 +1072,14 @@
 .dashboard_card h5{
     color: #818181;
     font-weight: 500;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
+    width: 100%;
 }
 .dashboard_card h2{
     color: #2051ba;
     font-weight: 700;
-    font-size: 3.0rem;
-    margin-bottom:1.5rem;
+    font-size: 1.8rem;
+    margin-bottom:0.8rem;
 }
 .dashboard_card h2 sub{
     font-size:0.8rem;

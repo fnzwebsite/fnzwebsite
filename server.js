@@ -23,6 +23,13 @@ server.get('/dealing', (req, res) => {
     }, auth);
 });
 
+server.get('/price', (req, res) => {
+    let auth = req.headers.authorization;
+    getCourses(function (data) {
+        res.send(data);
+    }, auth);
+});
+
 var clients = {};
 
 io.use(function (socket, next) {

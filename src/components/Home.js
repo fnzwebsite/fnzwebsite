@@ -97,7 +97,7 @@ class Home extends React.Component {
                             <div className="mt-70">
 
                                     <BoxToday loadChart={this.loadChart} dealingData={dealing}/>
-                               
+
                                 <div className="row">
                                     <div className="col-md-6">
                                         <div className="line-chart-example card">

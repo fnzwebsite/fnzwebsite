@@ -86,56 +86,100 @@ class BoxToday extends React.Component {
 
             return (
                <div className="row">
+                   <div className="col-md-4 previous" onClick={() => this.changeView('previous')}>
+                       <div className="card funds">
+                           <div className="card-header">
+                               <h3>Fund Position</h3> <span className="badge bg-alice pull-right">Previous Day</span></div>
+                           <div className="dashboard_card">
+                               <div className="row">
+                                   <div className="col-6 open">
+                                       <div className="row align-items-center justify-content-center h-100">
 
-                   <div class="col-md-4" onClick={() => this.changeView('previous')}>
-                       <div class="card funds">
-                           <div class="card-header">
-                               <h3>Fund Position</h3> <span class="badge bg-alice pull-right">Previous Day</span></div>
-                           <div class="dashboard_card">
-                               <div class="row">
-                                   <div class="col-6 open">
-                                       <h5>Open</h5>
-                                       <h2>46,321</h2>
+                                           <h5>Net Inflows/Outflows</h5>
+                                           <h2><span>&#163;</span>23.46<span className="sub-text">mn</span></h2>
+                                       </div>
+
                                    </div>
-                                   <div class="col-6 closed">
-                                       <h5>Close</h5>
-                                       <h2>49,240</h2>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-                   <div class="col-md-4" onClick={() => this.changeView('today')}>
-                       <div class="card funds">
-                           <div class="card-header">
-                               <h3>Fund Position</h3> <span class="badge bg-alice pull-right">Today</span></div>
-                           <div class="dashboard_card">
-                               <div class="row">
-                                   <div class="col-6 open">
-                                       <h5>Open</h5>
-                                       <h2>48,321</h2>
-                                   </div>
-                                   <div class="col-6 closed">
-                                       <h5>Close</h5>
-                                       <h2>50,240</h2>
+                                   <div className="col-6 closed">
+                                       <div className="row">
+                                           <div className="col-sm-12 sub-sec">
+                                               <h5>Subscriptions</h5>
+                                               <h2><span>&#163;</span>149,240</h2>
+                                           </div>
+                                       </div>
+                                       <hr/>
+                                           <div className="row">
+                                               <div className="col-sm-12">
+                                                   <h5>Redemptions</h5>
+                                                   <h2><span>&#163;</span>200,146</h2>
+                                               </div>
+                                           </div>
                                    </div>
                                </div>
                            </div>
                        </div>
                    </div>
-                   <div class="col-md-4" onClick={() => this.changeView('next')}>
-                       <div class="card funds">
-                           <div class="card-header">
-                               <h3>Fund Position</h3> <span class="badge bg-alice pull-right">Next Day</span></div>
-                           <div class="dashboard_card">
-                               <div class="row">
-                                   <div class="col-6 open">
-                                       <h5>Open</h5>
-                                       <h2>52,321</h2>
+                   <div className="col-md-4 today" onClick={() => this.changeView('today')}>
+                       <div className="card funds">
+                           <div className="card-header">
+                               <h3>Fund Position</h3> <span className="badge bg-alice pull-right">Today</span></div>
+                           <div className="dashboard_card">
+                               <div className="row">
+                                   <div className="col-6 open">
+                                       <div className="row align-items-center justify-content-center h-100">
+
+                                           <h5>Net Inflows/Outflows</h5>
+                                           <h2><span>&#163;</span>23.46<span className="sub-text">mn</span></h2>
+                                       </div>
+
                                    </div>
-                                   <div class="col-6 closed">
-                                       <h5>Close</h5>
-                                       <h2>56,240</h2>
+                                   <div className="col-6 closed">
+                                       <div className="row">
+                                           <div className="col-sm-12 sub-sec">
+                                               <h5>Subscriptions</h5>
+                                               <h2><span>&#163;</span>149,240</h2>
+                                           </div>
+                                       </div>
+                                       <hr/>
+                                           <div className="row">
+                                               <div className="col-sm-12">
+                                                   <h5>Redemptions</h5>
+                                                   <h2><span>&#163;</span>200,146</h2>
+                                               </div>
+                                           </div>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                   <div className="col-md-4 next" onClick={() => this.changeView('next')}>
+                       <div className="card funds">
+                           <div className="card-header">
+                               <h3>Fund Position</h3> <span className="badge bg-alice pull-right">Next Day</span></div>
+                           <div className="dashboard_card">
+                               <div className="row">
+                                   <div className="col-6 open">
+                                       <div className="row align-items-center justify-content-center h-100">
+
+                                           <h5>Net Inflows/Outflows</h5>
+                                           <h2><span>&#163;</span>23.46<span className="sub-text">mn</span></h2>
+                                       </div>
+
+                                   </div>
+                                   <div className="col-6 closed">
+                                       <div className="row">
+                                           <div className="col-sm-12 sub-sec">
+                                               <h5>Subscriptions</h5>
+                                               <h2><span>&#163;</span>149,240</h2>
+                                           </div>
+                                       </div>
+                                       <hr/>
+                                           <div className="row">
+                                               <div className="col-sm-12">
+                                                   <h5>Redemptions</h5>
+                                                   <h2><span>&#163;</span>200,146</h2>
+                                               </div>
+                                           </div>
                                    </div>
                                </div>
                            </div>
