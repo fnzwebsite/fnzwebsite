@@ -161,13 +161,11 @@ class BoxToday extends React.Component {
                             <div className="dashboard_card">
                                 <div className="row">
                                     <div className="col-6 open">
-                                        <div className="row align-items-center justify-content-center h-100">
-
+                                        <div className="row align-items-center justify-content-center h-50">
                                             <h5>Net Inflows/Outflows</h5>
                                             <h2><span>&#163;</span>{parseInt(subscriptionsPrevious) + parseInt(redemptionsPrevious)}<span
-                                                className="sub-text">mn</span></h2>
+                                                className="sub-text"></span></h2>
                                         </div>
-
                                     </div>
                                     <div className="col-6 closed">
                                         <div className="row">
@@ -176,7 +174,7 @@ class BoxToday extends React.Component {
                                                 <h2><span>&#163;</span>{subscriptionsPrevious}</h2>
                                             </div>
                                         </div>
-                                        <hr/>
+                                        <hr style={{marginTop:'-10px'}}/>
                                         <div className="row">
                                             <div className="col-sm-12">
                                                 <h5>Redemptions</h5>
@@ -195,11 +193,11 @@ class BoxToday extends React.Component {
                             <div className="dashboard_card">
                                 <div className="row">
                                     <div className="col-6 open">
-                                        <div className="row align-items-center justify-content-center h-100">
+                                        <div className="row align-items-center justify-content-center h-50">
 
                                             <h5>Net Inflows/Outflows</h5>
                                             <h2><span>&#163;</span>{parseInt(subscriptionsToday) + parseInt(redemptionsToday)}<span
-                                                className="sub-text">mn</span></h2>
+                                                className="sub-text"></span></h2>
                                         </div>
 
                                     </div>
@@ -210,7 +208,7 @@ class BoxToday extends React.Component {
                                                 <h2><span>&#163;</span>{subscriptionsToday}</h2>
                                             </div>
                                         </div>
-                                        <hr/>
+                                        <hr style={{marginTop:'-10px'}}/>
                                         <div className="row">
                                             <div className="col-sm-12">
                                                 <h5>Redemptions</h5>
@@ -229,11 +227,10 @@ class BoxToday extends React.Component {
                             <div className="dashboard_card">
                                 <div className="row">
                                     <div className="col-6 open">
-                                        <div className="row align-items-center justify-content-center h-100">
-
+                                        <div className="row align-items-center justify-content-center h-50">
                                             <h5>Net Inflows/Outflows</h5>
                                             <h2><span>&#163;</span>{parseInt(subscriptionsNext) + parseInt(redemptionsNext)}<span
-                                                className="sub-text">mn</span></h2>
+                                                className="sub-text"></span></h2>
                                         </div>
 
                                     </div>
@@ -244,7 +241,7 @@ class BoxToday extends React.Component {
                                                 <h2><span>&#163;</span>{subscriptionsNext}</h2>
                                             </div>
                                         </div>
-                                        <hr/>
+                                        <hr style={{marginTop:'-10px'}}/>
                                         <div className="row">
                                             <div className="col-sm-12">
                                                 <h5>Redemptions</h5>
@@ -257,116 +254,7 @@ class BoxToday extends React.Component {
                         </div>
                     </div>
 
-                    {/*<div className="col-sm-4 previous" onClick={() => this.changeView('previous')}>*/}
-                    {/*<div className={this.state.selected == "previous" ? 'work-amount card selected':'work-amount card'}>*/}
-                    {/*<div className="card-close">*/}
-                    {/*Close*/}
-                    {/*</div>*/}
-                    {/*<div className="card-body">*/}
-                    {/*<div className="card-head">*/}
-                    {/*<h3>Box Positions(Previous day)</h3>*/}
-                    {/*<small>28/02/2018 12:00 AM -  12:00 PM</small>*/}
-                    {/*/!*{moment.now().formate("MM/DD/YYYY")}*!/*/}
-                    {/*</div>*/}
-                    {/*<div className="funds-sec">*/}
-                    {/*<div className="fund-list scrollbar" id="style-1">*/}
-                    {/*<ul className="force-overflow">*/}
-                    {/*{ListPrevious}*/}
-                    {/*</ul>*/}
-                    {/*</div>*/}
-                    {/*<div className="fund-status">*/}
-                    {/*<ul>*/}
-                    {/*<li>*/}
-                    {/*<h4>Open</h4>*/}
-                    {/*<p>156264.567</p>*/}
-                    {/*</li>*/}
-                    {/*<li>*/}
-                    {/*<h4>CLOSE</h4>*/}
-                    {/*<p>176777.666</p>*/}
-                    {/*</li>*/}
-                    {/*<li>*/}
-                    {/*<h4>NET</h4>*/}
-                    {/*<p className="blue">+11,543.114</p>*/}
-                    {/*</li>*/}
-                    {/*</ul>*/}
-                    {/*</div>*/}
-                    {/*</div>*/}
-                    {/*</div>*/}
-                    {/*</div>*/}
-                    {/*</div>*/}
-                    {/*<div className="col-sm-4 today" onClick={() => this.changeView('today')}>*/}
-                    {/*<div className={this.state.selected == "today" ? 'work-amount card selected':'work-amount card'}>*/}
-                    {/*<div className="card-close">*/}
-                    {/*Open*/}
-                    {/*</div>*/}
-                    {/*<div className="card-body">*/}
-                    {/*<div className="card-head">*/}
-                    {/*<h3>Box Positions(Today)</h3>*/}
-                    {/*<small>01/03/2018 12:00 AM - 02/03/2018 12:00 PM</small>*/}
-                    {/*</div>*/}
-                    {/*<div className="funds-sec">*/}
-                    {/*<div className="fund-list scrollbar" id="style-1">*/}
-                    {/*<ul className="force-overflow">*/}
-                    {/*{ListToday}*/}
-                    {/*</ul>*/}
-                    {/*</div>*/}
-                    {/*<div className="fund-status">*/}
-                    {/*<ul>*/}
-                    {/*<li>*/}
-                    {/*<h4>Open</h4>*/}
-                    {/*<p>156264.567</p>*/}
-                    {/*</li>*/}
-                    {/*<li>*/}
-                    {/*<h4>CLOSE</h4>*/}
-                    {/*<p>176777.666</p>*/}
-                    {/*</li>*/}
-                    {/*<li>*/}
-                    {/*<h4>NET</h4>*/}
-                    {/*<p className="blue">+11,543.114</p>*/}
-                    {/*</li>*/}
-                    {/*</ul>*/}
-                    {/*</div>*/}
-                    {/*</div>*/}
-                    {/*</div>*/}
-                    {/*</div>*/}
-                    {/*</div>*/}
-                    {/*<div className="col-sm-4 next" onClick={() => this.changeView('next')}>*/}
-                    {/*<div className={this.state.selected == "next" ? 'work-amount card selected':'work-amount card'}>*/}
-                    {/*<div className="card-close">*/}
-                    {/*Open*/}
-                    {/*</div>*/}
-                    {/*<div className="card-body">*/}
-                    {/*<div className="card-head">*/}
-                    {/*<h3>Box Positions(Next day)</h3>*/}
-                    {/*<small>02/03/2018 12:00 AM - 03/03/2018 12:00 PM</small>*/}
-                    {/*</div>*/}
-                    {/*<div className="funds-sec">*/}
-                    {/*<div className="fund-list scrollbar" id="style-1">*/}
-                    {/*<ul className="force-overflow">*/}
-                    {/*{ListNext}*/}
-                    {/*</ul>*/}
-                    {/*</div>*/}
-                    {/*<div className="fund-status">*/}
-                    {/*<ul>*/}
-                    {/*<li>*/}
-                    {/*<h4>Open</h4>*/}
-                    {/*<p>156264.567</p>*/}
-                    {/*</li>*/}
-                    {/*<li>*/}
-                    {/*<h4>CLOSE</h4>*/}
-                    {/*<p>176777.666</p>*/}
-                    {/*</li>*/}
-                    {/*<li>*/}
-                    {/*<h4>NET</h4>*/}
-                    {/*<p className="blue">+11,543.114</p>*/}
-                    {/*</li>*/}
-                    {/*</ul>*/}
 
-                    {/*</div>*/}
-                    {/*</div>*/}
-                    {/*</div>*/}
-                    {/*</div>*/}
-                    {/*</div>*/}
                 </div>
             )
         }

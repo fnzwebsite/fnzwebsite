@@ -13,7 +13,7 @@ function login(username, password) {
 
         postLogin(username, password)
             .then(
-                user => { 
+                user => {
                     dispatch(success(user));
                     history.push('/');
                 },
@@ -37,8 +37,8 @@ function logout() {
 function postLogin(username, password) {
 
     var form = new FormData()
-    form.append('enrollmentId', "test2@fnzchain.com")
-    form.append('enrollmentSecret', "T3sting1")
+    form.append('enrollmentId',username)
+    form.append('enrollmentSecret', password)
 
     return fetch('http://35.178.56.52:8081/login',{
         //pass cookies, for authentication
@@ -55,6 +55,7 @@ function postLogin(username, password) {
         .then(user => {
             if (user && user.token) {
                 localStorage.setItem('user', JSON.stringify(user.token));
+                localStorage.setItem('displayName', user.enrollmentId);
             }
             return user;
         });

@@ -109,7 +109,7 @@ class Home extends React.Component {
 
                                     <div className="row">
                                         <div className="col-md-6">
-                                            <div className="line-chart-example card">
+                                            <div className="line-chart-example card" style={{minHeight:'300px'}}>
                                                 <LoadLineChart loadThisDay={this.state.chart} dealingData={dealing}/>
                                             </div>
                                         </div>

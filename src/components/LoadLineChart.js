@@ -8,7 +8,7 @@ import {bindActionCreators} from 'redux';
 import { authHeader } from '../helpers';
 const options = {
     responsive: true,
-    maintainAspectRatio: false,
+    maintainAspectRatio: true,
     scaleShowGridLines: true,
     scaleGridLineColor: 'rgba(255,255,255,.05)',
     scaleGridLineWidth: 1,
@@ -29,8 +29,10 @@ const options = {
 const styles = {
     graphContainer: {
         border: '0px solid white',
-        padding: '15px'
-        
+        padding: '15px',
+        width:'100%',
+        height:'100%'
+
     }
 }
 
@@ -138,7 +140,7 @@ class LoadLineChart extends React.Component {
                 <div style={styles.graphContainer}>
                     <LineChart data={this.state.data}
                                options={options}
-                               style={{background:'none',color:'#fff'}}/>
+                               style={{background:'none',color:'#fff',padding:'10px'}}/>
                 </div>
             )
         } else{
