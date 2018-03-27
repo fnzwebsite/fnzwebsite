@@ -12,7 +12,7 @@ import * as priceActions from '../actions/priceActions';
 import { authHeader } from '../helpers';
 import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
-
+import moment from 'moment'
 
 class Home extends React.Component {
     constructor(props) {
@@ -42,9 +42,13 @@ class Home extends React.Component {
 
     componentWillMount(prevProps, prevState) {
         this.props.dealingActions.getDealings();
-        this.props.priceActions.getPriceKeyDate('2018-03-25','today');
-        this.props.priceActions.getPriceKeyDate('2018-03-26','next');
-        this.props.priceActions.getPriceKeyDate('2018-03-24','previous');
+        var today = moment().format("YYYY-MM-DD");
+        var tomorrow = moment().add('days', 1).format("YYYY-MM-DD");
+        var yesterday = moment().add('days', -1).format("YYYY-MM-DD");
+
+        this.props.priceActions.getPriceKeyDate(today,'today');
+        this.props.priceActions.getPriceKeyDate(tomorrow,'next');
+        this.props.priceActions.getPriceKeyDate(yesterday ,'previous');
     }
 
     componentDidMount(prevProps, prevState) {

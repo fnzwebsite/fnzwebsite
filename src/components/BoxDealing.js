@@ -8,39 +8,45 @@ import PropTypes from 'prop-types';
 class BoxToday extends React.Component {
     constructor(props) {
         super(props);
-        this.state={
-            selected:'today'
+        this.state = {
+            selected: 'today'
         }
-        this.changeView =  this.changeView.bind(this);
+        this.changeView = this.changeView.bind(this);
     }
 
-    changeView(selected){
-        if(this.state.selected != selected){
+    changeView(selected) {
+        if (this.state.selected != selected) {
             this.setState({
-                selected:selected
+                selected: selected
             });
             this.props.loadChart(selected)
         }
     }
 
     render() {
-        if(this.props.dealingData == "logout"){
+        var today = moment().format("YYYY-MM-DD");
+        var tomorrow = moment().add('days', 1).format("YYYY-MM-DD");
+        var yesterday = moment().add('days', -1).format("YYYY-MM-DD");
+
+        if (this.props.dealingData == "logout") {
             this.props.userActions.logout();
         }
 
-        if(this.props.dealingData && this.props.dealingData.status != "401") {
+        if (this.props.dealingData && this.props.dealingData.status != "401") {
             let self = this
             let ListToday = Object.keys(self.props.dealingData).map(function (keyName, keyIndex) {
-                if(moment(self.props.dealingData[keyName].boxDate).isSame(moment(), 'day')) {
-                    return <li keys={keyIndex} className={self.props.dealingData[keyName].dealType.toUpperCase() == "BUY" ? "active" : "orange"}>
+                if (moment(self.props.dealingData[keyName].boxDate).isSame(today, 'day')) {
+                    return <li keys={keyIndex}
+                               className={self.props.dealingData[keyName].dealType.toUpperCase() == "BUY" ? "active" : "orange"}>
                         <div className="fun">
                             <div className="fund-name">{self.props.dealingData[keyName].account}</div>
-                            <div className="fund-quan">{(self.props.dealingData[keyName].units==null ||self.props.dealingData[keyName].units<=0)?0:self.props.dealingData[keyName].units }</div>
+                            <div
+                                className="fund-quan">{(self.props.dealingData[keyName].units == null || self.props.dealingData[keyName].units <= 0) ? 0 : self.props.dealingData[keyName].units}</div>
                         </div>
                         <div className="fun">
                             <div className="fund-isin">{self.props.dealingData[keyName].instrumentKey}</div>
                             <div className="fund-price"><i
-                                className="fa fa-gbp"></i>{(self.props.dealingData[keyName].amount==null || self.props.dealingData[keyName].amount<=0)?0:self.props.dealingData[keyName].amount}
+                                className="fa fa-gbp"></i>{(self.props.dealingData[keyName].amount == null || self.props.dealingData[keyName].amount <= 0) ? 0 : self.props.dealingData[keyName].amount}
                             </div>
                         </div>
                     </li>
@@ -48,18 +54,19 @@ class BoxToday extends React.Component {
             });
 
             let ListPrevious = Object.keys(self.props.dealingData).map(function (keyName, keyIndex) {
-                var date =moment(self.props.dealingData[keyName].boxDate).isSameOrBefore(moment(), 'day');
-                if(date) {
+                var date = moment(self.props.dealingData[keyName].boxDate).isSame(yesterday, 'day');
+                if (date) {
                     return <li keys={keyIndex}
-                        className={self.props.dealingData[keyName].dealType.toUpperCase() == "BUY" ? "active" : "orange"}>
+                               className={self.props.dealingData[keyName].dealType.toUpperCase() == "BUY" ? "active" : "orange"}>
                         <div className="fun">
                             <div className="fund-name">{self.props.dealingData[keyName].account}</div>
-                            <div className="fund-quan">{(self.props.dealingData[keyName].units==null ||self.props.dealingData[keyName].units<=0)?0:self.props.dealingData[keyName].units }</div>
+                            <div
+                                className="fund-quan">{(self.props.dealingData[keyName].units == null || self.props.dealingData[keyName].units <= 0) ? 0 : self.props.dealingData[keyName].units}</div>
                         </div>
                         <div className="fun">
                             <div className="fund-isin">{self.props.dealingData[keyName].instrumentKey}</div>
                             <div className="fund-price"><i
-                                className="fa fa-gbp"></i>{(self.props.dealingData[keyName].amount==null || self.props.dealingData[keyName].amount<=0)?0:self.props.dealingData[keyName].amount}
+                                className="fa fa-gbp"></i>{(self.props.dealingData[keyName].amount == null || self.props.dealingData[keyName].amount <= 0) ? 0 : self.props.dealingData[keyName].amount}
                             </div>
                         </div>
                     </li>
@@ -67,17 +74,19 @@ class BoxToday extends React.Component {
             });
 
             let ListNext = Object.keys(self.props.dealingData).map(function (keyName, keyIndex) {
-                var date =moment(self.props.dealingData[keyName].boxDate).isSameOrAfter(moment(moment.now()));
-                if(date) {
-                    return <li keys={keyIndex} className={self.props.dealingData[keyName].dealType.toUpperCase() == "BUY" ? "active" : "orange"}>
+                var date = moment(self.props.dealingData[keyName].boxDate).isSame(tomorrow, 'day');
+                if (date) {
+                    return <li keys={keyIndex}
+                               className={self.props.dealingData[keyName].dealType.toUpperCase() == "BUY" ? "active" : "orange"}>
                         <div className="fun">
                             <div className="fund-name">{self.props.dealingData[keyName].account}</div>
-                            <div className="fund-quan">{(self.props.dealingData[keyName].units==null ||self.props.dealingData[keyName].units<=0)?0:self.props.dealingData[keyName].units }</div>
+                            <div
+                                className="fund-quan">{(self.props.dealingData[keyName].units == null || self.props.dealingData[keyName].units <= 0) ? 0 : self.props.dealingData[keyName].units}</div>
                         </div>
                         <div className="fun">
                             <div className="fund-isin">{self.props.dealingData[keyName].instrumentKey}</div>
                             <div className="fund-price"><i
-                                className="fa fa-gbp"></i>{(self.props.dealingData[keyName].amount==null || self.props.dealingData[keyName].amount<=0)?0:self.props.dealingData[keyName].amount}
+                                className="fa fa-gbp"></i>{(self.props.dealingData[keyName].amount == null || self.props.dealingData[keyName].amount <= 0) ? 0 : self.props.dealingData[keyName].amount}
                             </div>
                         </div>
                     </li>
@@ -85,25 +94,39 @@ class BoxToday extends React.Component {
             });
             var subscriptionsNext = 0;
             var redemptionsNext = 0;
-            if(this.props.price.priceNext && this.props.price.priceNext.length){
-               this.props.price.priceNext.map(function(item, index){
-                  if(item.units > 0 && item.dealType == "BUY" && item.price){
-                      subscriptionsNext += item.units * item.price;
-                  }
-                   if(item.units > 0 && item.dealType == "SELL" && item.price){
-                       redemptionsNext += item.units * item.price;
-                   }
-               })
+            if (this.props.price.priceNext && this.props.price.priceNext.length) {
+                this.props.price.priceNext.map(function (item, index) {
+                    if (item.amount > 0 && item.dealType == "BUY") {
+                        subscriptionsNext += item.amount;
+                    }
+                    else if (item.units > 0 && item.dealType == "BUY" && item.price) {
+                        subscriptionsNext += item.units * item.price;
+                    }
+
+                    if (item.amount > 0 && item.dealType == "SELL") {
+                        redemptionsNext += item.amount;
+                    }
+
+                    else if (item.units > 0 && item.dealType == "SELL" && item.price) {
+                        redemptionsNext += item.units * item.price;
+                    }
+                })
             }
 
             var subscriptionsPrevious = 0;
             var redemptionsPrevious = 0;
-            if(this.props.price.pricePrevious && this.props.price.pricePrevious.length){
-                this.props.price.pricePrevious.map(function(item, index){
-                    if(item.units > 0 && item.dealType == "BUY" && item.price){
+            if (this.props.price.pricePrevious && this.props.price.pricePrevious.length) {
+                this.props.price.pricePrevious.map(function (item, index) {
+                    if (item.amount > 0 && item.dealType == "BUY") {
+                        subscriptionsPrevious += item.amount;
+                    }
+                    else if (item.units > 0 && item.dealType == "BUY" && item.price) {
                         subscriptionsPrevious += item.units * item.price;
                     }
-                    if(item.units > 0 && item.dealType == "SELL" && item.price){
+                    if (item.amount > 0 && item.dealType == "SELL") {
+                        redemptionsPrevious += item.amount;
+                    }
+                    else if (item.units > 0 && item.dealType == "SELL" && item.price) {
                         redemptionsPrevious += item.units * item.price;
                     }
                 })
@@ -111,233 +134,243 @@ class BoxToday extends React.Component {
 
             var subscriptionsToday = 0;
             var redemptionsToday = 0;
-            if(this.props.price.priceToday && this.props.price.priceToday.length){
-                this.props.price.priceToday.map(function(item, index){
-                    if(item.units > 0 && item.dealType == "BUY" && item.price){
+            if (this.props.price.priceToday && this.props.price.priceToday.length) {
+                this.props.price.priceToday.map(function (item, index) {
+                    if (item.amount > 0 && item.dealType == "BUY") {
+                        subscriptionsToday += item.amount;
+                    }
+                    else if (item.units > 0 && item.dealType == "BUY" && item.price) {
                         subscriptionsToday += item.units * item.price;
                     }
-                    if(item.units > 0 && item.dealType == "SELL" && item.price){
+                    if (item.amount > 0 && item.dealType == "SELL") {
+                        redemptionsToday += item.amount;
+                    }
+                    else if (item.units > 0 && item.dealType == "SELL" && item.price) {
                         redemptionsToday += item.units * item.price;
                     }
                 })
             }
 
             return (
-               <div className="row">
-                   <div className="col-md-4 previous" onClick={() => this.changeView('previous')}>
-                       <div className="card funds">
-                           <div className="card-header">
-                               <h3>Fund Position</h3> <span className="badge bg-alice pull-right">Previous Day</span></div>
-                           <div className="dashboard_card">
-                               <div className="row">
-                                   <div className="col-6 open">
-                                       <div className="row align-items-center justify-content-center h-100">
+                <div className="row">
+                    <div className="col-md-4 previous" onClick={() => this.changeView('previous')}>
+                        <div className={this.state.selected == "previous" ? 'card funds selected':'card funds'}>
+                            <div className="card-header">
+                                <h3>Fund Position</h3> <span className="badge bg-alice pull-right">Previous Day</span>
+                            </div>
+                            <div className="dashboard_card">
+                                <div className="row">
+                                    <div className="col-6 open">
+                                        <div className="row align-items-center justify-content-center h-100">
 
-                                           <h5>Net Inflows/Outflows</h5>
-                                           <h2><span>&#163;</span>{subscriptionsPrevious + redemptionsPrevious}<span className="sub-text">mn</span></h2>
-                                       </div>
+                                            <h5>Net Inflows/Outflows</h5>
+                                            <h2><span>&#163;</span>{parseInt(subscriptionsPrevious) + parseInt(redemptionsPrevious)}<span
+                                                className="sub-text">mn</span></h2>
+                                        </div>
 
-                                   </div>
-                                   <div className="col-6 closed">
-                                       <div className="row">
-                                           <div className="col-sm-12 sub-sec">
-                                               <h5>Subscriptions</h5>
-                                               <h2><span>&#163;</span>{subscriptionsPrevious}</h2>
-                                           </div>
-                                       </div>
-                                       <hr/>
-                                           <div className="row">
-                                               <div className="col-sm-12">
-                                                   <h5>Redemptions</h5>
-                                                   <h2><span>&#163;</span>{redemptionsPrevious}</h2>
-                                               </div>
-                                           </div>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-                   <div className="col-md-4 today" onClick={() => this.changeView('today')}>
-                       <div className="card funds">
-                           <div className="card-header">
-                               <h3>Fund Position</h3> <span className="badge bg-alice pull-right">Today</span></div>
-                           <div className="dashboard_card">
-                               <div className="row">
-                                   <div className="col-6 open">
-                                       <div className="row align-items-center justify-content-center h-100">
+                                    </div>
+                                    <div className="col-6 closed">
+                                        <div className="row">
+                                            <div className="col-sm-12 sub-sec">
+                                                <h5>Subscriptions</h5>
+                                                <h2><span>&#163;</span>{subscriptionsPrevious}</h2>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div className="row">
+                                            <div className="col-sm-12">
+                                                <h5>Redemptions</h5>
+                                                <h2><span>&#163;</span>{redemptionsPrevious}</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-4 today" onClick={() => this.changeView('today')}>
+                        <div className={this.state.selected == "today" ? 'card funds selected':'card funds'}>
+                            <div className="card-header">
+                                <h3>Fund Position</h3> <span className="badge bg-alice pull-right">Today</span></div>
+                            <div className="dashboard_card">
+                                <div className="row">
+                                    <div className="col-6 open">
+                                        <div className="row align-items-center justify-content-center h-100">
 
-                                           <h5>Net Inflows/Outflows</h5>
-                                           <h2><span>&#163;</span>{subscriptionsToday+subscriptionsPrevious}<span className="sub-text">mn</span></h2>
-                                       </div>
+                                            <h5>Net Inflows/Outflows</h5>
+                                            <h2><span>&#163;</span>{parseInt(subscriptionsToday) + parseInt(redemptionsToday)}<span
+                                                className="sub-text">mn</span></h2>
+                                        </div>
 
-                                   </div>
-                                   <div className="col-6 closed">
-                                       <div className="row">
-                                           <div className="col-sm-12 sub-sec">
-                                               <h5>Subscriptions</h5>
-                                               <h2><span>&#163;</span>{subscriptionsToday}</h2>
-                                           </div>
-                                       </div>
-                                       <hr/>
-                                           <div className="row">
-                                               <div className="col-sm-12">
-                                                   <h5>Redemptions</h5>
-                                                   <h2><span>&#163;</span>{redemptionsToday}</h2>
-                                               </div>
-                                           </div>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-                   <div className="col-md-4 next" onClick={() => this.changeView('next')}>
-                       <div className="card funds">
-                           <div className="card-header">
-                               <h3>Fund Position</h3> <span className="badge bg-alice pull-right">Next Day</span></div>
-                           <div className="dashboard_card">
-                               <div className="row">
-                                   <div className="col-6 open">
-                                       <div className="row align-items-center justify-content-center h-100">
+                                    </div>
+                                    <div className="col-6 closed">
+                                        <div className="row">
+                                            <div className="col-sm-12 sub-sec">
+                                                <h5>Subscriptions</h5>
+                                                <h2><span>&#163;</span>{subscriptionsToday}</h2>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div className="row">
+                                            <div className="col-sm-12">
+                                                <h5>Redemptions</h5>
+                                                <h2><span>&#163;</span>{redemptionsToday}</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-4 next" onClick={() => this.changeView('next')}>
+                        <div className={this.state.selected == "next" ? 'card funds selected':'card funds'}>
+                            <div className="card-header">
+                                <h3>Fund Position</h3> <span className="badge bg-alice pull-right">Next Day</span></div>
+                            <div className="dashboard_card">
+                                <div className="row">
+                                    <div className="col-6 open">
+                                        <div className="row align-items-center justify-content-center h-100">
 
-                                           <h5>Net Inflows/Outflows</h5>
-                                           <h2><span>&#163;</span>{subscriptionsNext+redemptionsNext}<span className="sub-text">mn</span></h2>
-                                       </div>
+                                            <h5>Net Inflows/Outflows</h5>
+                                            <h2><span>&#163;</span>{parseInt(subscriptionsNext) + parseInt(redemptionsNext)}<span
+                                                className="sub-text">mn</span></h2>
+                                        </div>
 
-                                   </div>
-                                   <div className="col-6 closed">
-                                       <div className="row">
-                                           <div className="col-sm-12 sub-sec">
-                                               <h5>Subscriptions</h5>
-                                               <h2><span>&#163;</span>{subscriptionsNext}</h2>
-                                           </div>
-                                       </div>
-                                       <hr/>
-                                           <div className="row">
-                                               <div className="col-sm-12">
-                                                   <h5>Redemptions</h5>
-                                                   <h2><span>&#163;</span>{redemptionsNext}</h2>
-                                               </div>
-                                           </div>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
+                                    </div>
+                                    <div className="col-6 closed">
+                                        <div className="row">
+                                            <div className="col-sm-12 sub-sec">
+                                                <h5>Subscriptions</h5>
+                                                <h2><span>&#163;</span>{subscriptionsNext}</h2>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div className="row">
+                                            <div className="col-sm-12">
+                                                <h5>Redemptions</h5>
+                                                <h2><span>&#163;</span>{redemptionsNext}</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                   {/*<div className="col-sm-4 previous" onClick={() => this.changeView('previous')}>*/}
-                       {/*<div className={this.state.selected == "previous" ? 'work-amount card selected':'work-amount card'}>*/}
-                           {/*<div className="card-close">*/}
-                               {/*Close*/}
-                           {/*</div>*/}
-                           {/*<div className="card-body">*/}
-                               {/*<div className="card-head">*/}
-                                   {/*<h3>Box Positions(Previous day)</h3>*/}
-                                   {/*<small>28/02/2018 12:00 AM -  12:00 PM</small>*/}
-                                   {/*/!*{moment.now().formate("MM/DD/YYYY")}*!/*/}
-                               {/*</div>*/}
-                               {/*<div className="funds-sec">*/}
-                                   {/*<div className="fund-list scrollbar" id="style-1">*/}
-                                       {/*<ul className="force-overflow">*/}
-                                           {/*{ListPrevious}*/}
-                                       {/*</ul>*/}
-                                   {/*</div>*/}
-                                   {/*<div className="fund-status">*/}
-                                       {/*<ul>*/}
-                                           {/*<li>*/}
-                                               {/*<h4>Open</h4>*/}
-                                               {/*<p>156264.567</p>*/}
-                                           {/*</li>*/}
-                                           {/*<li>*/}
-                                               {/*<h4>CLOSE</h4>*/}
-                                               {/*<p>176777.666</p>*/}
-                                           {/*</li>*/}
-                                           {/*<li>*/}
-                                               {/*<h4>NET</h4>*/}
-                                               {/*<p className="blue">+11,543.114</p>*/}
-                                           {/*</li>*/}
-                                       {/*</ul>*/}
-                                   {/*</div>*/}
-                               {/*</div>*/}
-                           {/*</div>*/}
-                       {/*</div>*/}
-                   {/*</div>*/}
-                   {/*<div className="col-sm-4 today" onClick={() => this.changeView('today')}>*/}
-                       {/*<div className={this.state.selected == "today" ? 'work-amount card selected':'work-amount card'}>*/}
-                           {/*<div className="card-close">*/}
-                               {/*Open*/}
-                           {/*</div>*/}
-                           {/*<div className="card-body">*/}
-                               {/*<div className="card-head">*/}
-                                   {/*<h3>Box Positions(Today)</h3>*/}
-                                   {/*<small>01/03/2018 12:00 AM - 02/03/2018 12:00 PM</small>*/}
-                               {/*</div>*/}
-                               {/*<div className="funds-sec">*/}
-                                   {/*<div className="fund-list scrollbar" id="style-1">*/}
-                                       {/*<ul className="force-overflow">*/}
-                                           {/*{ListToday}*/}
-                                       {/*</ul>*/}
-                                   {/*</div>*/}
-                                   {/*<div className="fund-status">*/}
-                                       {/*<ul>*/}
-                                           {/*<li>*/}
-                                               {/*<h4>Open</h4>*/}
-                                               {/*<p>156264.567</p>*/}
-                                           {/*</li>*/}
-                                           {/*<li>*/}
-                                               {/*<h4>CLOSE</h4>*/}
-                                               {/*<p>176777.666</p>*/}
-                                           {/*</li>*/}
-                                           {/*<li>*/}
-                                               {/*<h4>NET</h4>*/}
-                                               {/*<p className="blue">+11,543.114</p>*/}
-                                           {/*</li>*/}
-                                       {/*</ul>*/}
-                                   {/*</div>*/}
-                               {/*</div>*/}
-                           {/*</div>*/}
-                       {/*</div>*/}
-                   {/*</div>*/}
-                   {/*<div className="col-sm-4 next" onClick={() => this.changeView('next')}>*/}
-                       {/*<div className={this.state.selected == "next" ? 'work-amount card selected':'work-amount card'}>*/}
-                           {/*<div className="card-close">*/}
-                               {/*Open*/}
-                           {/*</div>*/}
-                           {/*<div className="card-body">*/}
-                               {/*<div className="card-head">*/}
-                                   {/*<h3>Box Positions(Next day)</h3>*/}
-                                   {/*<small>02/03/2018 12:00 AM - 03/03/2018 12:00 PM</small>*/}
-                               {/*</div>*/}
-                               {/*<div className="funds-sec">*/}
-                                   {/*<div className="fund-list scrollbar" id="style-1">*/}
-                                       {/*<ul className="force-overflow">*/}
-                                           {/*{ListNext}*/}
-                                       {/*</ul>*/}
-                                   {/*</div>*/}
-                                   {/*<div className="fund-status">*/}
-                                       {/*<ul>*/}
-                                           {/*<li>*/}
-                                               {/*<h4>Open</h4>*/}
-                                               {/*<p>156264.567</p>*/}
-                                           {/*</li>*/}
-                                           {/*<li>*/}
-                                               {/*<h4>CLOSE</h4>*/}
-                                               {/*<p>176777.666</p>*/}
-                                           {/*</li>*/}
-                                           {/*<li>*/}
-                                               {/*<h4>NET</h4>*/}
-                                               {/*<p className="blue">+11,543.114</p>*/}
-                                           {/*</li>*/}
-                                       {/*</ul>*/}
+                    {/*<div className="col-sm-4 previous" onClick={() => this.changeView('previous')}>*/}
+                    {/*<div className={this.state.selected == "previous" ? 'work-amount card selected':'work-amount card'}>*/}
+                    {/*<div className="card-close">*/}
+                    {/*Close*/}
+                    {/*</div>*/}
+                    {/*<div className="card-body">*/}
+                    {/*<div className="card-head">*/}
+                    {/*<h3>Box Positions(Previous day)</h3>*/}
+                    {/*<small>28/02/2018 12:00 AM -  12:00 PM</small>*/}
+                    {/*/!*{moment.now().formate("MM/DD/YYYY")}*!/*/}
+                    {/*</div>*/}
+                    {/*<div className="funds-sec">*/}
+                    {/*<div className="fund-list scrollbar" id="style-1">*/}
+                    {/*<ul className="force-overflow">*/}
+                    {/*{ListPrevious}*/}
+                    {/*</ul>*/}
+                    {/*</div>*/}
+                    {/*<div className="fund-status">*/}
+                    {/*<ul>*/}
+                    {/*<li>*/}
+                    {/*<h4>Open</h4>*/}
+                    {/*<p>156264.567</p>*/}
+                    {/*</li>*/}
+                    {/*<li>*/}
+                    {/*<h4>CLOSE</h4>*/}
+                    {/*<p>176777.666</p>*/}
+                    {/*</li>*/}
+                    {/*<li>*/}
+                    {/*<h4>NET</h4>*/}
+                    {/*<p className="blue">+11,543.114</p>*/}
+                    {/*</li>*/}
+                    {/*</ul>*/}
+                    {/*</div>*/}
+                    {/*</div>*/}
+                    {/*</div>*/}
+                    {/*</div>*/}
+                    {/*</div>*/}
+                    {/*<div className="col-sm-4 today" onClick={() => this.changeView('today')}>*/}
+                    {/*<div className={this.state.selected == "today" ? 'work-amount card selected':'work-amount card'}>*/}
+                    {/*<div className="card-close">*/}
+                    {/*Open*/}
+                    {/*</div>*/}
+                    {/*<div className="card-body">*/}
+                    {/*<div className="card-head">*/}
+                    {/*<h3>Box Positions(Today)</h3>*/}
+                    {/*<small>01/03/2018 12:00 AM - 02/03/2018 12:00 PM</small>*/}
+                    {/*</div>*/}
+                    {/*<div className="funds-sec">*/}
+                    {/*<div className="fund-list scrollbar" id="style-1">*/}
+                    {/*<ul className="force-overflow">*/}
+                    {/*{ListToday}*/}
+                    {/*</ul>*/}
+                    {/*</div>*/}
+                    {/*<div className="fund-status">*/}
+                    {/*<ul>*/}
+                    {/*<li>*/}
+                    {/*<h4>Open</h4>*/}
+                    {/*<p>156264.567</p>*/}
+                    {/*</li>*/}
+                    {/*<li>*/}
+                    {/*<h4>CLOSE</h4>*/}
+                    {/*<p>176777.666</p>*/}
+                    {/*</li>*/}
+                    {/*<li>*/}
+                    {/*<h4>NET</h4>*/}
+                    {/*<p className="blue">+11,543.114</p>*/}
+                    {/*</li>*/}
+                    {/*</ul>*/}
+                    {/*</div>*/}
+                    {/*</div>*/}
+                    {/*</div>*/}
+                    {/*</div>*/}
+                    {/*</div>*/}
+                    {/*<div className="col-sm-4 next" onClick={() => this.changeView('next')}>*/}
+                    {/*<div className={this.state.selected == "next" ? 'work-amount card selected':'work-amount card'}>*/}
+                    {/*<div className="card-close">*/}
+                    {/*Open*/}
+                    {/*</div>*/}
+                    {/*<div className="card-body">*/}
+                    {/*<div className="card-head">*/}
+                    {/*<h3>Box Positions(Next day)</h3>*/}
+                    {/*<small>02/03/2018 12:00 AM - 03/03/2018 12:00 PM</small>*/}
+                    {/*</div>*/}
+                    {/*<div className="funds-sec">*/}
+                    {/*<div className="fund-list scrollbar" id="style-1">*/}
+                    {/*<ul className="force-overflow">*/}
+                    {/*{ListNext}*/}
+                    {/*</ul>*/}
+                    {/*</div>*/}
+                    {/*<div className="fund-status">*/}
+                    {/*<ul>*/}
+                    {/*<li>*/}
+                    {/*<h4>Open</h4>*/}
+                    {/*<p>156264.567</p>*/}
+                    {/*</li>*/}
+                    {/*<li>*/}
+                    {/*<h4>CLOSE</h4>*/}
+                    {/*<p>176777.666</p>*/}
+                    {/*</li>*/}
+                    {/*<li>*/}
+                    {/*<h4>NET</h4>*/}
+                    {/*<p className="blue">+11,543.114</p>*/}
+                    {/*</li>*/}
+                    {/*</ul>*/}
 
-                                    {/*</div>*/}
-                               {/*</div>*/}
-                           {/*</div>*/}
-                       {/*</div>*/}
-                   {/*</div>*/}
-               </div>
+                    {/*</div>*/}
+                    {/*</div>*/}
+                    {/*</div>*/}
+                    {/*</div>*/}
+                    {/*</div>*/}
+                </div>
             )
         }
-        else{
+        else {
             return (
                 <div className="load">Loading ...</div>
             )
@@ -359,7 +392,7 @@ BoxToday.propTypes = {
 
 const
     mapDispatchToProps = (dispatch) => ({
-        userActions:bindActionCreators(userActions, dispatch)
+        userActions: bindActionCreators(userActions, dispatch)
     });
 
 

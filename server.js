@@ -28,13 +28,14 @@ server.get('/price/:date/:day', (req, res) => {
     let auth = req.headers.authorization;
     getDealing(function (data) {
         Object.keys(data).map(function (keyName, keyIndex) {
-            if(data[keyName].units>0 || Object.keys(data).length-1 == keyIndex){
+
                 getPriceByKeyDate(function (priceDataRes) {
                     priceData.push({
                         'price':priceDataRes.price,
                         'units':data[keyName].units,
                         'dealType':data[keyName].dealType,
-                        'day':req.params.day
+                        'day':req.params.day,
+                        'amount':data[keyName].amount
 
                     })
                     if(Object.keys(data).length-1 == keyIndex){
@@ -42,7 +43,7 @@ server.get('/price/:date/:day', (req, res) => {
                         res.send(priceData);
                     }
                 }, data[keyName].instrumentKey, req.params.date, auth);
-            }
+
         })
     }, auth);
 });
@@ -60,7 +61,7 @@ io.use(function (socket, next) {
                 }
             }, socket.handshake.query.auth);
             return next();
-        }, 30000);
+        }, 3000);
     }
     next(new Error('Authentication error'));
 });

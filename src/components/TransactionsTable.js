@@ -16,13 +16,17 @@ class TransactionsTable extends React.Component {
     }
 
     render() {
+        var today = moment().format("YYYY-MM-DD");
+        var tomorrow = moment().add('days', 1).format("YYYY-MM-DD");
+        var yesterday = moment().add('days', -1).format("YYYY-MM-DD");
+
         let LoadRows = null;
         let self = this;
         if(self.props.dealingData && self.props.dealingData.status != "401") {
             let self = this;
             if(self.props.loadThisDay == 'today') {
                 LoadRows = Object.keys(self.props.dealingData).map(function (keyName, keyIndex) {
-                    if (moment(self.props.dealingData[keyName].boxDate).isSame(moment(), 'day')) {
+                    if (moment(self.props.dealingData[keyName].boxDate).isSame(today, 'd')) {
                         return <tr>
                             <td>{self.props.dealingData[keyName].boxDate}</td>
                             <td>{self.props.dealingData[keyName].account}</td>
@@ -39,7 +43,7 @@ class TransactionsTable extends React.Component {
             }
             if(self.props.loadThisDay == 'next') {
                 LoadRows = Object.keys(self.props.dealingData).map(function (keyName, keyIndex) {
-                    if (moment(self.props.dealingData[keyName].boxDate).isSameOrAfter(moment(), 'day')) {
+                    if (moment(self.props.dealingData[keyName].boxDate).isSame(tomorrow, 'd')) {
                         return <tr>
                             <td>{self.props.dealingData[keyName].boxDate}</td>
                             <td>{self.props.dealingData[keyName].account}</td>
@@ -56,7 +60,7 @@ class TransactionsTable extends React.Component {
             }
             if(self.props.loadThisDay == 'previous') {
                 LoadRows = Object.keys(self.props.dealingData).map(function (keyName, keyIndex) {
-                    if (moment(self.props.dealingData[keyName].boxDate).isSameOrBefore(moment(), 'day')) {
+                    if (moment(self.props.dealingData[keyName].boxDate).isSame(yesterday, 'd')) {
                         return <tr>
                             <td>{self.props.dealingData[keyName].boxDate}</td>
                             <td>{self.props.dealingData[keyName].account}</td>

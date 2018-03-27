@@ -46,23 +46,27 @@ class LoadLineChart extends React.Component {
     }
 
     getChartData(dealing) {
+        var today = moment().format("YYYY-MM-DD");
+        var tomorrow = moment().add('days', 1).format("YYYY-MM-DD");
+        var yesterday = moment().add('days', -1).format("YYYY-MM-DD");
+
 
         if(dealing) {
             let self = this
 
             let loadAmount = Object.keys(dealing).sort((a, b) => a.tradeDate - b.tradeDate).map(function (keyName, keyIndex) {
                 if (self.props.loadThisDay == 'today') {
-                    if (moment(dealing[keyName].boxDate).isSame(moment(), 'day')) {
+                    if (moment(dealing[keyName].boxDate).isSame(today, 'day')) {
                         return dealing[keyName].units;
                     }
                 }
                 if (self.props.loadThisDay == 'next') {
-                    if (moment(dealing[keyName].boxDate).isSameOrAfter(moment(moment.now()))) {
+                    if (moment(dealing[keyName].boxDate).isSame(tomorrow, 'day')) {
                         return dealing[keyName].units;
                     }
                 }
                 if (self.props.loadThisDay == 'previous') {
-                    if (moment(dealing[keyName].boxDate).isSameOrBefore(moment(), 'day')) {
+                    if (moment(dealing[keyName].boxDate).isSame(yesterday, 'day')) {
                         return dealing[keyName].units;
                     }
                 }
@@ -71,17 +75,17 @@ class LoadLineChart extends React.Component {
 
             let loadDateTime = Object.keys(dealing).sort((a, b) => a.tradeDate - b.tradeDate).map(function (keyName, keyIndex) {
                 if (self.props.loadThisDay == 'today') {
-                    if (moment(dealing[keyName].boxDate).isSame(moment(), 'day')) {
+                    if (moment(dealing[keyName].boxDate).isSame(today, 'day')) {
                         return moment(dealing[keyName].tradeDate).format("hh:mm");
                     }
                 }
                 if (self.props.loadThisDay == 'next') {
-                    if (moment(dealing[keyName].boxDate).isSameOrAfter(moment(moment.now()))) {
+                    if (moment(dealing[keyName].boxDate).isSame(tomorrow,'day')) {
                         return moment(dealing[keyName].tradeDate).format("hh:mm");
                     }
                 }
                 if (self.props.loadThisDay == 'previous') {
-                    if (moment(dealing[keyName].boxDate).isSameOrBefore(moment(), 'day')) {
+                    if (moment(dealing[keyName].boxDate).isSame(yesterday, 'day')) {
                         return moment(dealing[keyName].tradeDate).format("hh:mm");
                     }
                 }
