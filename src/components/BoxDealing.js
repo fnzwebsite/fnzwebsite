@@ -97,18 +97,18 @@ class BoxToday extends React.Component {
             if (this.props.price.priceNext && this.props.price.priceNext.length) {
                 this.props.price.priceNext.map(function (item, index) {
                     if (item.amount > 0 && item.dealType == "BUY") {
-                        subscriptionsNext += item.amount;
+                        subscriptionsNext =parseInt(subscriptionsNext)+parseInt(item.amount);
                     }
                     else if (item.units > 0 && item.dealType == "BUY" && item.price) {
-                        subscriptionsNext += item.units * item.price;
+                        subscriptionsNext =parseInt(subscriptionsNext)+ parseInt(item.units) * parseInt(item.price);
                     }
 
                     if (item.amount > 0 && item.dealType == "SELL") {
-                        redemptionsNext += item.amount;
+                        redemptionsNext =parseInt(redemptionsNext) + parseInt(item.amount);
                     }
 
                     else if (item.units > 0 && item.dealType == "SELL" && item.price) {
-                        redemptionsNext += item.units * item.price;
+                        redemptionsNext =parseInt(redemptionsNext)+parseInt( item.units) * parseInt(item.price);
                     }
                 })
             }
@@ -118,16 +118,16 @@ class BoxToday extends React.Component {
             if (this.props.price.pricePrevious && this.props.price.pricePrevious.length) {
                 this.props.price.pricePrevious.map(function (item, index) {
                     if (item.amount > 0 && item.dealType == "BUY") {
-                        subscriptionsPrevious += item.amount;
+                        subscriptionsPrevious =parseInt(subscriptionsPrevious)+parseInt(item.amount);
                     }
                     else if (item.units > 0 && item.dealType == "BUY" && item.price) {
-                        subscriptionsPrevious += item.units * item.price;
+                        subscriptionsPrevious +=parseInt(subscriptionsPrevious)+ parseInt(item.units) * parseInt(item.price);
                     }
                     if (item.amount > 0 && item.dealType == "SELL") {
-                        redemptionsPrevious += item.amount;
+                        redemptionsPrevious =parseInt(redemptionsPrevious)+ parseInt(redemptionsPrevious)+parseInt(item.amount);
                     }
                     else if (item.units > 0 && item.dealType == "SELL" && item.price) {
-                        redemptionsPrevious += item.units * item.price;
+                        redemptionsPrevious =parseInt(redemptionsPrevious)+ parseInt(item.units) * parseInt(item.price);
                     }
                 })
             }
@@ -137,16 +137,16 @@ class BoxToday extends React.Component {
             if (this.props.price.priceToday && this.props.price.priceToday.length) {
                 this.props.price.priceToday.map(function (item, index) {
                     if (item.amount > 0 && item.dealType == "BUY") {
-                        subscriptionsToday += item.amount;
+                        subscriptionsToday = parseInt(subscriptionsToday) + parseInt(item.amount);
                     }
                     else if (item.units > 0 && item.dealType == "BUY" && item.price) {
-                        subscriptionsToday += item.units * item.price;
+                        subscriptionsToday = parseInt(subscriptionsToday)+ parseInt(item.units) * parseInt(item.price);
                     }
                     if (item.amount > 0 && item.dealType == "SELL") {
-                        redemptionsToday += item.amount;
+                        redemptionsToday = parseInt(redemptionsToday)+parseInt(item.amount);
                     }
                     else if (item.units > 0 && item.dealType == "SELL" && item.price) {
-                        redemptionsToday += item.units * item.price;
+                        redemptionsToday =parseInt(redemptionsToday)+ parseInt(item.units) * parseInt(item.price);
                     }
                 })
             }

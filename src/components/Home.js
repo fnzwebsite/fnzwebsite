@@ -91,53 +91,57 @@ class Home extends React.Component {
     }
 
     render() {
-        if(this.props.data.dealing == "logout" || this.state.dealing == "logout"){
+         if(this.props.data.dealing == "logout" || this.state.dealing == "logout"){
             this.props.userActions.logout();
         }
-        var dealing = this.state.dealing || this.props.data.dealing;
-        return (
-            <div className="page">
-                <div className="page-content d-flex align-items-stretch">
-                    <SideNav/>
-                    <div className="content-inner">
-                        <Header/>
-                        <div className="container-fluid">
-                            <div className="mt-70">
+        else {
+            var dealing = this.state.dealing || this.props.data.dealing;
+            return (
+                <div className="page">
+                    <div className="page-content d-flex align-items-stretch">
+                        <SideNav/>
+                        <div className="content-inner">
+                            <Header/>
+                            <div className="container-fluid">
+                                <div className="mt-70">
 
                                     <BoxToday loadChart={this.loadChart} dealingData={dealing} price={this.props.data}/>
 
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <div className="line-chart-example card">
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <div className="line-chart-example card">
                                                 <LoadLineChart loadThisDay={this.state.chart} dealingData={dealing}/>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <div className="card">
+                                        <div className="col-md-6">
+                                            <div className="card">
 
-                                            <div className="card-body" style={{"padding-bottom":"30px","background":"#fff"}}>
-                                                <div className="table-responsive">
-                                                    <TransactionsTable loadThisDay={this.state.chart} dealingData={dealing}/>
+                                                <div className="card-body"
+                                                     style={{"padding-bottom": "30px", "background": "#fff"}}>
+                                                    <div className="table-responsive">
+                                                        <TransactionsTable loadThisDay={this.state.chart}
+                                                                           dealingData={dealing}/>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <footer className="main-footer">
-                            <div className="container-fluid">
-                                <div className="row">
-                                    <div className="col-sm-12 text-center">
-                                        <p>&copy; Copyright FNZ UK Ltd 2018.</p>
+                            <footer className="main-footer">
+                                <div className="container-fluid">
+                                    <div className="row">
+                                        <div className="col-sm-12 text-center">
+                                            <p>&copy; Copyright FNZ UK Ltd 2018.</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </footer>
+                            </footer>
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        }
     }
 }
 

@@ -38,13 +38,10 @@ server.get('/price/:date/:day', (req, res) => {
     var priceData = [];
     let auth = req.headers.authorization;
     getDealing(function (data) {
-        console.log(checkDate)
-
+        console.log(Object.keys(data).length)
         Object.keys(data).map(function (keyName, keyIndex) {
-            if(moment(data[keyName].boxDate).isSame(checkDate, 'day') || Object.keys(data).length - 1 == keyIndex) {
-                console.log(data[keyName])
+                // console.log(data[keyName])
                 getPriceByKeyDate(function (priceDataRes) {
-
                     if(moment(data[keyName].boxDate).isSame(checkDate,'day')) {
                         priceData.push({
                             'price': priceDataRes.price,
@@ -56,13 +53,15 @@ server.get('/price/:date/:day', (req, res) => {
                             'boxDate': data[keyName].boxDate
 
                         });
+                        console.log(priceData)
                     }
                     if(Object.keys(data).length - 1 == keyIndex){
-                        console.log(priceData)
-                        res.send(priceData);
+                        setTimeout(function(){
+                            res.send(priceData);
+                        }, 500);
+
                     }
                 }, data[keyName].instrumentKey, req.params.date, auth);
-            }
 
         })
     }, auth);
@@ -75,8 +74,6 @@ io.use(function (socket, next) {
         setInterval(function () {
             getDealing(function (data) {
                 if(data.status != 400) {
-                    //console.log("got data")
-                    //console.log(data)
                     io.sockets.emit('dealing', data);
                 }
             }, socket.handshake.query.auth);
