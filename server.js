@@ -7,6 +7,7 @@ var express = require('express'),
     port = 3700,
     api_host = 'localhost',
     io = require('socket.io').listen(server.listen(port), {log: debug});
+moment = require('moment')
 
 
 io.set('log level', 1);
@@ -24,25 +25,44 @@ server.get('/dealing', (req, res) => {
 });
 
 server.get('/price/:date/:day', (req, res) => {
+
+    var checkDate;
+    if(req.params.day == 'today'){
+        checkDate = moment().format("YYYY-MM-DD");
+    }else if(req.params.day == 'next'){
+        checkDate = moment().add('days', 1).format("YYYY-MM-DD");
+    }else if(req.params.day == 'previous'){
+        checkDate = moment().add('days', -1).format("YYYY-MM-DD");
+    }
+
     var priceData = [];
     let auth = req.headers.authorization;
     getDealing(function (data) {
+        console.log(checkDate)
+
         Object.keys(data).map(function (keyName, keyIndex) {
-
+            if(moment(data[keyName].boxDate).isSame(checkDate, 'day') || Object.keys(data).length - 1 == keyIndex) {
+                console.log(data[keyName])
                 getPriceByKeyDate(function (priceDataRes) {
-                    priceData.push({
-                        'price':priceDataRes.price,
-                        'units':data[keyName].units,
-                        'dealType':data[keyName].dealType,
-                        'day':req.params.day,
-                        'amount':data[keyName].amount
 
-                    })
-                    if(Object.keys(data).length-1 == keyIndex){
-                        console.log(priceData);
+                    if(moment(data[keyName].boxDate).isSame(checkDate,'day')) {
+                        priceData.push({
+                            'price': priceDataRes.price,
+                            'units': data[keyName].units,
+                            'dealType': data[keyName].dealType,
+                            'day': req.params.day,
+                            'amount': data[keyName].amount,
+                            'instrumentKey': data[keyName].instrumentKey,
+                            'boxDate': data[keyName].boxDate
+
+                        });
+                    }
+                    if(Object.keys(data).length - 1 == keyIndex){
+                        console.log(priceData)
                         res.send(priceData);
                     }
                 }, data[keyName].instrumentKey, req.params.date, auth);
+            }
 
         })
     }, auth);
@@ -155,7 +175,6 @@ function getPriceByKeyDate(callback, instrumentKey, date, auth) {
     };
 
     var req1 = http.request(options, function (res) {
-        //console.log(res)
         var output = '';
 
         res.setEncoding('utf8');
