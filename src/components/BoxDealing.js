@@ -32,7 +32,7 @@ class BoxToday extends React.Component {
             this.props.userActions.logout();
         }
 
-        if (this.props.dealingData && this.props.dealingData.status != "401") {
+        if (this.props.dealingData && this.props.dealingData.status != "400") {
             let self = this
             let ListToday = Object.keys(self.props.dealingData).map(function (keyName, keyIndex) {
                 if (moment(self.props.dealingData[keyName].boxDate).isSame(today, 'day')) {

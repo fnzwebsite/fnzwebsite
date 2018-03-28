@@ -10,12 +10,12 @@ const options = {
     responsive: true,
     maintainAspectRatio: true,
     scaleShowGridLines: true,
-    scaleGridLineColor: 'rgba(255,255,255,.05)',
+    scaleGridLineColor: 'rgba(255,255,255,.5)',
     scaleGridLineWidth: 1,
     scaleShowHorizontalLines: true,
     scaleShowVerticalLines: true,
     bezierCurve: true,
-    bezierCurveTension: 0.4,
+    bezierCurveTension: 0.8,
     pointDot: true,
     pointDotRadius: 4,
     pointDotStrokeWidth: 1,
@@ -28,7 +28,7 @@ const options = {
 
 const styles = {
     graphContainer: {
-        border: '0px solid white',
+        border: '0px solid black',
         padding: '15px',
         width:'100%',
         height:'100%'
@@ -106,8 +106,8 @@ class LoadLineChart extends React.Component {
                 labels: loadDateTime,
                 datasets: [
                     {
-                        label: 'My First dataset',
-                        fillColor: 'rgba(38, 148, 216, 0.5)',
+                        label: 'Trade Chart',
+                        fillColor: 'rgba(36, 148, 230, 0.5)',
                         strokeColor: 'rgba(220,220,220,1)',
                         pointColor: 'rgba(220,220,220,1)',
                         pointStrokeColor: '#fff',
