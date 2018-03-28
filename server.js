@@ -7,11 +7,12 @@ var express = require('express'),
     port = 3700,
     api_host = 'localhost',
     io = require('socket.io').listen(server.listen(port), {log: debug});
-moment = require('moment')
+moment = require('moment');
+var async = require('async');
 
 
 io.set('log level', 1);
-server.use(function(req, res, next) {
+server.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
@@ -27,43 +28,39 @@ server.get('/dealing', (req, res) => {
 server.get('/price/:date/:day', (req, res) => {
 
     var checkDate;
-    if(req.params.day == 'today'){
+    if (req.params.day == 'today') {
         checkDate = moment().format("YYYY-MM-DD");
-    }else if(req.params.day == 'next'){
+    } else if (req.params.day == 'next') {
         checkDate = moment().add('days', 1).format("YYYY-MM-DD");
-    }else if(req.params.day == 'previous'){
+    } else if (req.params.day == 'previous') {
         checkDate = moment().add('days', -1).format("YYYY-MM-DD");
     }
 
     var priceData = [];
     let auth = req.headers.authorization;
     getDealing(function (data) {
-        console.log(Object.keys(data).length)
-        Object.keys(data).map(function (keyName, keyIndex) {
-                // console.log(data[keyName])
+        async.forEachOf(data, function (elem, key, callback) {
                 getPriceByKeyDate(function (priceDataRes) {
-                    if(moment(data[keyName].boxDate).isSame(checkDate,'day')) {
+                    if (moment(elem.boxDate).isSame(checkDate, 'day')) {
                         priceData.push({
                             'price': priceDataRes.price,
-                            'units': data[keyName].units,
-                            'dealType': data[keyName].dealType,
+                            'units': elem.units,
+                            'dealType': elem.dealType,
                             'day': req.params.day,
-                            'amount': data[keyName].amount,
-                            'instrumentKey': data[keyName].instrumentKey,
-                            'boxDate': data[keyName].boxDate
+                            'amount': elem.amount,
+                            'instrumentKey': elem.instrumentKey,
+                            'boxDate': elem.boxDate
 
                         });
-                        console.log(priceData)
-                    }
-                    if(Object.keys(data).length - 1 == keyIndex){
-                        setTimeout(function(){
-                            res.send(priceData);
-                        }, 500);
 
                     }
-                }, data[keyName].instrumentKey, req.params.date, auth);
-
-        })
+                    callback()
+                }, elem.instrumentKey, req.params.date, auth);
+            },
+            function (err) {
+                res.send(priceData);
+            }
+        )
     }, auth);
 });
 
@@ -73,7 +70,7 @@ io.use(function (socket, next) {
     if (socket.handshake.query.auth) {
         setInterval(function () {
             getDealing(function (data) {
-                if(data.status != 400) {
+                if (data.status != 400) {
                     io.sockets.emit('dealing', data);
                 }
             }, socket.handshake.query.auth);
@@ -165,7 +162,7 @@ function getPriceByKeyDate(callback, instrumentKey, date, auth) {
         method: 'GET',
         host: '35.178.56.52',
         port: 8081,
-        path: '/api/v1/price/'+instrumentKey+'/'+date,
+        path: '/api/v1/price/' + instrumentKey + '/' + date,
         headers: {
             Authorization: auth
         }
