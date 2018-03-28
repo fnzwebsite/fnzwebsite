@@ -19,7 +19,7 @@ class Header extends React.Component {
                                     <div className="avatar"><img src="img/avatar-1.jpg" alt="..."
                                                              className="img-fluid rounded-circle"/></div>
                                 </li>
-                                <li className="nav-item"><a href="" className="nav-link">Welcome! John Smith</a></li>
+                                <li className="nav-item"><a href="" className="nav-link">Welcome! {localStorage.getItem('displayName')}</a></li>
                             </ul>
                             <div className="navbar-header">
                                 <ul className="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
