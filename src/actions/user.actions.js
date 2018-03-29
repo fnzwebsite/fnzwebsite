@@ -37,8 +37,8 @@ function logout() {
 function postLogin(username, password) {
 
     var form = new FormData()
-    form.append('enrollmentId',username)
-    form.append('enrollmentSecret', password)
+    form.append('enrollmentId','test2@fnzchain.com')
+    form.append('enrollmentSecret', 'T3sting1')
 
     return fetch('http://35.178.56.52:8081/login',{
         //pass cookies, for authentication

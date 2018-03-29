@@ -24,6 +24,7 @@ class Home extends React.Component {
         };
         this.changeView =  this.changeView.bind(this);
         this.loadChart =  this.loadChart.bind(this);
+        this.getPrice = this.getPrice.bind(this);
     }
     changeView(selected){
         if(this.state.selected != selected){
@@ -42,23 +43,30 @@ class Home extends React.Component {
 
     componentWillMount(prevProps, prevState) {
         this.props.dealingActions.getDealings();
-        var today = moment().format("YYYY-MM-DD");
-        var tomorrow = moment().add('days', 1).format("YYYY-MM-DD");
-        var yesterday = moment().add('days', -1).format("YYYY-MM-DD");
-
-        this.props.priceActions.getPriceKeyDate(today,'today');
-        this.props.priceActions.getPriceKeyDate(tomorrow,'next');
-        this.props.priceActions.getPriceKeyDate(yesterday ,'previous');
+        this.getPrice();
     }
+
+
 
     componentDidMount(prevProps, prevState) {
         var self = this;
         var socket = io('http://localhost:3700',{ query: "auth="+authHeader()['Authorization']});
         socket.on('dealing', function (dealing) {
             if(self.state.dealing !== dealing) {
+                self.getPrice();
                 self.setState({dealing: dealing});
             }
         })
+    }
+
+    getPrice() {
+        var today = moment().format("YYYY-MM-DD");
+        var tomorrow = moment().add('days', 1).format("YYYY-MM-DD");
+        var yesterday = moment().add('days', -1).format("YYYY-MM-DD");
+
+        this.props.priceActions.getPriceKeyDate(today, 'today');
+        this.props.priceActions.getPriceKeyDate(tomorrow, 'next');
+        this.props.priceActions.getPriceKeyDate(yesterday, 'previous');
     }
 
 
