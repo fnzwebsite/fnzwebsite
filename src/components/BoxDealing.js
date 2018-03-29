@@ -97,18 +97,18 @@ class BoxToday extends React.Component {
             if (this.props.price.priceNext && this.props.price.priceNext.length) {
                 this.props.price.priceNext.map(function (item, index) {
                     if (item.amount > 0 && item.dealType == "BUY") {
-                        subscriptionsNext =parseInt(subscriptionsNext)+parseInt(item.amount);
+                        subscriptionsNext =parseFloat(subscriptionsNext)+parseFloat(item.amount);
                     }
                     else if (item.units > 0 && item.dealType == "BUY" && item.price) {
-                        subscriptionsNext =parseInt(subscriptionsNext)+ parseInt(item.units) * parseInt(item.price);
+                        subscriptionsNext =parseFloat(subscriptionsNext)+ parseFloat(item.units) * parseFloat(item.price);
                     }
 
                     if (item.amount > 0 && item.dealType == "SELL") {
-                        redemptionsNext =parseInt(redemptionsNext) + parseInt(item.amount);
+                        redemptionsNext =parseFloat(redemptionsNext) + parseFloat(item.amount);
                     }
 
                     else if (item.units > 0 && item.dealType == "SELL" && item.price) {
-                        redemptionsNext =parseInt(redemptionsNext)+parseInt( item.units) * parseInt(item.price);
+                        redemptionsNext =parseFloat(redemptionsNext)+parseFloat( item.units) * parseFloat(item.price);
                     }
                 })
             }
@@ -118,16 +118,16 @@ class BoxToday extends React.Component {
             if (this.props.price.pricePrevious && this.props.price.pricePrevious.length) {
                 this.props.price.pricePrevious.map(function (item, index) {
                     if (item.amount > 0 && item.dealType == "BUY") {
-                        subscriptionsPrevious =parseInt(subscriptionsPrevious)+parseInt(item.amount);
+                        subscriptionsPrevious =parseFloat(subscriptionsPrevious)+parseFloat(item.amount);
                     }
                     else if (item.units > 0 && item.dealType == "BUY" && item.price) {
-                        subscriptionsPrevious +=parseInt(subscriptionsPrevious)+ parseInt(item.units) * parseInt(item.price);
+                        subscriptionsPrevious +=parseFloat(subscriptionsPrevious)+ parseFloat(item.units) * parseFloat(item.price);
                     }
                     if (item.amount > 0 && item.dealType == "SELL") {
-                        redemptionsPrevious =parseInt(redemptionsPrevious)+ parseInt(redemptionsPrevious)+parseInt(item.amount);
+                        redemptionsPrevious =parseFloat(redemptionsPrevious)+ parseFloat(redemptionsPrevious)+parseFloat(item.amount);
                     }
                     else if (item.units > 0 && item.dealType == "SELL" && item.price) {
-                        redemptionsPrevious =parseInt(redemptionsPrevious)+ parseInt(item.units) * parseInt(item.price);
+                        redemptionsPrevious =parseFloat(redemptionsPrevious)+ parseFloat(item.units) * parseFloat(item.price);
                     }
                 })
             }
@@ -137,16 +137,16 @@ class BoxToday extends React.Component {
             if (this.props.price.priceToday && this.props.price.priceToday.length) {
                 this.props.price.priceToday.map(function (item, index) {
                     if (item.amount > 0 && item.dealType == "BUY") {
-                        subscriptionsToday = parseInt(subscriptionsToday) + parseInt(item.amount);
+                        subscriptionsToday = parseFloat(subscriptionsToday) + parseFloat(item.amount);
                     }
                     else if (item.units > 0 && item.dealType == "BUY" && item.price) {
-                        subscriptionsToday = parseInt(subscriptionsToday)+ parseInt(item.units) * parseInt(item.price);
+                        subscriptionsToday = parseFloat(subscriptionsToday)+ parseFloat(item.units) * parseFloat(item.price);
                     }
                     if (item.amount > 0 && item.dealType == "SELL") {
-                        redemptionsToday = parseInt(redemptionsToday)+parseInt(item.amount);
+                        redemptionsToday = parseFloat(redemptionsToday)+parseFloat(item.amount);
                     }
                     else if (item.units > 0 && item.dealType == "SELL" && item.price) {
-                        redemptionsToday =parseInt(redemptionsToday)+ parseInt(item.units) * parseInt(item.price);
+                        redemptionsToday =parseFloat(redemptionsToday)+ parseFloat(item.units) * parseFloat(item.price);
                     }
                 })
             }
@@ -163,7 +163,7 @@ class BoxToday extends React.Component {
                                     <div className="col-6 open">
                                         <div className="row align-items-center justify-content-center h-50">
                                             <h5>Net Inflows/Outflows</h5>
-                                            <h2><span>&#163;</span>{parseInt(subscriptionsPrevious) + parseInt(redemptionsPrevious)}<span
+                                            <h2><span>&#163;</span>{parseFloat(subscriptionsPrevious) + parseFloat(redemptionsPrevious)}<span
                                                 className="sub-text"></span></h2>
                                         </div>
                                     </div>
@@ -196,7 +196,7 @@ class BoxToday extends React.Component {
                                         <div className="row align-items-center justify-content-center h-50">
 
                                             <h5>Net Inflows/Outflows</h5>
-                                            <h2><span>&#163;</span>{parseInt(subscriptionsToday) + parseInt(redemptionsToday)}<span
+                                            <h2><span>&#163;</span>{parseFloat(subscriptionsToday) + parseFloat(redemptionsToday)}<span
                                                 className="sub-text"></span></h2>
                                         </div>
 
@@ -229,7 +229,7 @@ class BoxToday extends React.Component {
                                     <div className="col-6 open">
                                         <div className="row align-items-center justify-content-center h-50">
                                             <h5>Net Inflows/Outflows</h5>
-                                            <h2><span>&#163;</span>{parseInt(subscriptionsNext) + parseInt(redemptionsNext)}<span
+                                            <h2><span>&#163;</span>{parseFloat(subscriptionsNext) + parseFloat(redemptionsNext)}<span
                                                 className="sub-text"></span></h2>
                                         </div>
 

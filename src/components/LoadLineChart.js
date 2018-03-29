@@ -128,7 +128,7 @@ class LoadLineChart extends React.Component {
             loadDateTime = loadDateTime.filter(function (item) {
                 return item != null && item != undefined;
             })
-
+loadDateTime=["12:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00"];
             let lineChartData = {
                 labels: loadDateTime,
                 datasets: [
@@ -164,16 +164,61 @@ class LoadLineChart extends React.Component {
     render() {
 
         if(this.state.data) {
+          console.log(JSON.stringify(this.state.data));
             var data = this.state.data.sort(function (left, right) {
                 return moment.utc(left.date).diff(moment.utc(right.date))
             });
-            console.log(this.state.data)
+            var x = 5; //minutes interval
+var times = []; // time array
+var tt = 0; // start time
+var ap = ['AM', 'PM']; // AM-PM
+
+//loop to increment the time and push results in array
+// for (var i=0;tt<24*60; i++) {
+//   var hh = Math.floor(tt/60); // getting hours of day in 0-24 format
+//   var mm = (tt); // getting minutes of the hour in 0-55 format
+//   times[i] = ("0" + (hh % 12)).slice(-2) + ':' + ("0" + mm).slice(-2) + ap[Math.floor(hh/12)]; // pushing data in array in [00:00 - 12:00 AM/PM format]
+//   tt = tt + x;
+// }
+for(var i=0;i<24;i++)
+{
+  for(var j=0;j<60;j++)
+  {
+    times.push(("0"+i).slice(-2)+":"+("0"+j).slice(-2));
+  }
+}
+//console.log(times[0].substring(3,5));
+            var xaxistime=[12,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
+            var i=0;
+            var newData=[];
+             //console.log(parseInt(moment(data[0].date).format("hh")));
+             times.map(function(item,index)
+             {
+               i++;
+               var val=null;
+               var hour=parseInt(item.substring(0,2));
+               var ampm=item.substring(5,7);
+               var min=item.substring(3,5);
+               //var nextmin=times[i].substring(3,5);
+            //   console.log(index);
+               data.map(function (item1, index1) {
+                 //console.log(hour+";;;;"+min);
+                 if(parseInt(moment(item1.date).format("hh"))===hour &&  (parseInt(moment(item1.date).format("mm"))==min))
+                 {
+                   //console.log(item1.date);
+                   val=item1.value;
+                 }
+               })
+ newData.push({"value":val,"date":item})
+             });
+
+//console.log(JSON.stringify(newData));
         const config = {
             "type": "serial",
             "theme": "light",
             "marginTop":0,
             "marginRight": 80,
-            "dataProvider":data,
+            "dataProvider":newData,
             "valueAxes": [{
                 "axisAlpha": 0,
                 "position": "left"
@@ -198,13 +243,13 @@ class LoadLineChart extends React.Component {
                 "selectedBackgroundAlpha":0.1,
                 "selectedBackgroundColor":"#888888",
                 "graphFillAlpha":0,
-                "autoGridCount":true,
+                "autoGridCount":false,
                 "selectedGraphFillAlpha":0,
-                "graphLineAlpha":0.2,
+                "graphLineAlpha":0.5,
                 "graphLineColor":"#c2c2c2",
                 "selectedGraphLineColor":"#888888",
-                "selectedGraphLineAlpha":1
-
+                "selectedGraphLineAlpha":1,
+                "gridCount":200
             },
             "chartCursor": {
                 "categoryBalloonDateFormat": "JJ:NN, DD MMMM",
@@ -217,17 +262,24 @@ class LoadLineChart extends React.Component {
 
             "categoryField": "date",
             "categoryAxis": {
-                "minPeriod": "mm",
-                "parseDates": true,
-                "minorGridAlpha": 0.1,
-                "minorGridEnabled": true
+              "categoryAxis.dashLength":100,
+     "categoryAxis.gridPosition": "start",
+     "gridPosition": "start",
+     "autoGridCount": "true",
+     "gridPosition": "start",
+     "autoGridCount": "false",
+     "labelRotation": 0,
+                "minHorizontalGap": 40
             },
             "export": {
                 "enabled": true,
                 "dateFormat": "YYYY-MM-DD HH:NN:SS"
             }
         };
-
+        var valueAxis = new AmCharts.CategoryAxis();
+        valueAxis.minimum = 10.5;
+        valueAxis.maximum = 11.90;
+        valueAxis.strictMinMax = true;
             return (
                 <AmCharts.React style={{ width: "100%", height: "500px" }} options={config} />
             )
