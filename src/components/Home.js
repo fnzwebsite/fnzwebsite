@@ -109,7 +109,7 @@ class Home extends React.Component {
                                                         <div id="chart"
                                                              className={this.state.selected == "chart" ? 'tab-pane in active' : 'tab-pane fade'}>
                                                             <div className="line-chart-example card">
-                                                                <div className="card-body">
+                                                                <div className="line-chart-example card">
                                                                     <LoadLineChart loadThisDay={this.state.chart}
                                                                                    dealingData={dealing}/>
                                                                 </div>
@@ -117,7 +117,7 @@ class Home extends React.Component {
                                                         </div>
                                                         <div id="table"
                                                              className={this.state.selected == "table" ? 'tab-pane in active' : 'tab-pane fade'}>
-                                                            <div className="card">
+                                                            <div className="table-responsive">
                                                                 <TransactionsTable loadThisDay={this.state.chart}
                                                                                    dealingData={dealing}/>
                                                             </div>

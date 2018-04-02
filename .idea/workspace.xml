@@ -6,14 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0690c2d6-c039-4662-a950-a80c345b563f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.nvm" afterPath="$PROJECT_DIR$/.nvm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/BoxDealing.js" afterPath="$PROJECT_DIR$/src/components/BoxDealing.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Home.js" afterPath="$PROJECT_DIR$/src/components/Home.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/LoadLineChart.js" afterPath="$PROJECT_DIR$/src/components/LoadLineChart.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/TransactionsTable.js" afterPath="$PROJECT_DIR$/src/components/TransactionsTable.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -30,8 +24,8 @@
       <file leaf-file-name="LoadLineChart.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/LoadLineChart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="45" column="42" lean-forward="false" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
+            <state relative-caret-position="183">
+              <caret line="111" column="28" lean-forward="false" selection-start-line="111" selection-start-column="28" selection-end-line="111" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -40,8 +34,8 @@
       <file leaf-file-name="BoxDealing.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/BoxDealing.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="97">
-              <caret line="26" column="43" lean-forward="false" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
+            <state relative-caret-position="147">
+              <caret line="28" column="51" lean-forward="true" selection-start-line="28" selection-start-column="51" selection-end-line="28" selection-end-column="51" />
               <folding>
                 <element signature="n#!!block;n#constructor#0;n#BoxToday#0" expanded="false" />
                 <element signature="n#!!block;n#changeView#0;n#BoxToday#0" expanded="false" />
@@ -68,8 +62,8 @@
       <file leaf-file-name="Home.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="122">
-              <caret line="63" column="64" lean-forward="true" selection-start-line="63" selection-start-column="44" selection-end-line="63" selection-end-column="64" />
+            <state relative-caret-position="308">
+              <caret line="119" column="92" lean-forward="false" selection-start-line="119" selection-start-column="92" selection-end-line="119" selection-end-column="92" />
               <folding>
                 <element signature="n#!!block;n#loadChart#0;n#Home#0" expanded="false" />
               </folding>
@@ -130,10 +124,10 @@
       <find>Date</find>
       <find>parse</find>
       <find>data1</find>
-      <find>alert</find>
-      <find>issame</find>
       <find>format(&quot;YYYY-MM-DD&quot;)</find>
       <find>.format(&quot;</find>
+      <find>alert</find>
+      <find>issame</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -213,10 +207,10 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/actions/user.actions.js" />
         <option value="$PROJECT_DIR$/public/index.html" />
-        <option value="$PROJECT_DIR$/src/components/Home.js" />
         <option value="$PROJECT_DIR$/src/components/BoxDealing.js" />
         <option value="$PROJECT_DIR$/src/components/TransactionsTable.js" />
         <option value="$PROJECT_DIR$/server.js" />
+        <option value="$PROJECT_DIR$/src/components/Home.js" />
         <option value="$PROJECT_DIR$/src/components/LoadLineChart.js" />
       </list>
     </option>
@@ -358,12 +352,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="255785000" />
+    <option name="totallyTimeSpent" value="258591000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28225175" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28225175" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32906765" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6727605" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -763,18 +758,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/BoxDealing.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="26" column="43" lean-forward="false" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
-          <folding>
-            <element signature="n#!!block;n#constructor#0;n#BoxToday#0" expanded="false" />
-            <element signature="n#!!block;n#changeView#0;n#BoxToday#0" expanded="false" />
-            <element signature="e#1272#2388#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/TransactionsTable.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
@@ -783,16 +766,6 @@
             <element signature="e#1090#1906#0" expanded="false" />
             <element signature="e#2088#3019#0" expanded="false" />
             <element signature="e#2185#3001#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Home.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="63" column="64" lean-forward="true" selection-start-line="63" selection-start-column="44" selection-end-line="63" selection-end-column="64" />
-          <folding>
-            <element signature="n#!!block;n#loadChart#0;n#Home#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -811,10 +784,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/BoxDealing.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="28" column="51" lean-forward="true" selection-start-line="28" selection-start-column="51" selection-end-line="28" selection-end-column="51" />
+          <folding>
+            <element signature="n#!!block;n#constructor#0;n#BoxToday#0" expanded="false" />
+            <element signature="n#!!block;n#changeView#0;n#BoxToday#0" expanded="false" />
+            <element signature="e#1272#2388#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Home.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="119" column="92" lean-forward="false" selection-start-line="119" selection-start-column="92" selection-end-line="119" selection-end-column="92" />
+          <folding>
+            <element signature="n#!!block;n#loadChart#0;n#Home#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/LoadLineChart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="45" column="42" lean-forward="false" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
+        <state relative-caret-position="183">
+          <caret line="111" column="28" lean-forward="false" selection-start-line="111" selection-start-column="28" selection-end-line="111" selection-end-column="28" />
           <folding />
         </state>
       </provider>
