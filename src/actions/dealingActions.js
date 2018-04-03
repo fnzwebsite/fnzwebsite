@@ -10,6 +10,7 @@ let loadData = function (response) {
 
 let processData = function (response, dispatch) {
     if (response.data && response.data.status === 400) {
+      console.log('logout.......');
         dispatch(receiveDealings("logout"))
     }
     else if (response.status === 200) {
@@ -31,7 +32,7 @@ export function receiveDealings(data) {
 export function getDealings() {
     return (dispatch) => {
         fetch('http://localhost:3700/dealing',{
-            mode:'cros',
+            mode:'cors',
             headers:authHeader()
         })
             .then(response =>

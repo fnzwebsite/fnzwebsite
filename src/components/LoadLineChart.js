@@ -107,7 +107,6 @@ class LoadLineChart extends React.Component {
     render() {
         if (this.state.data && this.state.data.length) {
             var options = {
-
                 legend: {position: 'none'},
                 pointSize: 2,
                 series: {
@@ -115,7 +114,7 @@ class LoadLineChart extends React.Component {
                 },
                 enableInteractivity: false,
                 chartArea: {
-                    width: '85%'
+                    width: '90%'
                 },
                 hAxis: {
                     ticks: [[0, 0, 0], [1, 0, 0], [2, 0, 0],[3, 0, 0],[4, 0, 0], [5, 0, 0],[6, 0, 0], [7, 0, 0],[8, 0, 0], [9, 0, 0],[10, 0, 0], [11, 0, 0], [12, 0, 0], [13, 0, 0],
@@ -138,11 +137,20 @@ class LoadLineChart extends React.Component {
             // ]
 
 
-            // alert(JSON.stringify(data))
+          //   alert(JSON.stringify(this.state.data))
+          //var chartData=;
+          var data = [
+
+                [[[0,0,0],0][1, 0, 0], 10],
+                [[2, 51, 50], 40.4],
+                [[3, 0, 50], 21.2],
+                [[3, 55, 58], 21.4],
+                [[4, 52, 31], 188.4]
+            ];
             return (
                 <Chart
                     chartType="LineChart"
-                    rows={this.state.data}
+                    rows={data}
                     columns={[
                         {
                             type: 'timeofday',
