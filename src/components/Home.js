@@ -117,7 +117,7 @@ return (
                         </div>
                     </div>
                     <div id="table"
-                         className={this.state.selected == "table" ? 'tab-pane in active' : 'tab-pane in fade'}>
+                         className={this.state.selected == "table" ? 'tab-pane in active' : 'tab-pane in  fade'}>
                         <div className="card table-responsive">
                         <div className="card-body">
                             <TransactionsTable loadThisDay={this.state.chart}
