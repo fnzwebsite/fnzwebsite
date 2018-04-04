@@ -25,7 +25,7 @@ class BoxToday extends React.Component {
     }
 
     render() {
-        var today = moment().add('days', 2).format("YYYY-MM-DD");
+        var today = moment().add('days', 0).format("YYYY-MM-DD");
         var tomorrow = moment().add('days', 1).format("YYYY-MM-DD");
         var yesterday = moment().add('days', -1).format("YYYY-MM-DD");
 

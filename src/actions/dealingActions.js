@@ -1,5 +1,6 @@
 import * as allActions from './allActions';
-import { authHeader } from '../helpers';
+//import { authHeader } from '../helpers';
+import { authHeader,getConfig } from '../helpers';
 
 let loadData = function (response) {
     return response.json().then(data => ({
@@ -10,6 +11,7 @@ let loadData = function (response) {
 
 let processData = function (response, dispatch) {
     if (response.data && response.data.status === 400) {
+      console.log('logout.......');
         dispatch(receiveDealings("logout"))
     }
     else if (response.status === 200) {
@@ -30,7 +32,7 @@ export function receiveDealings(data) {
 
 export function getDealings() {
     return (dispatch) => {
-        fetch('http://localhost:3700/dealing',{
+        fetch(getConfig('socketurl')+'dealing',{
             mode:'cros',
             headers:authHeader()
         })
@@ -49,7 +51,7 @@ export function getDealingsById(dealingId) {
             headers: authHeader()
         };
 
-        fetch('http://ec2-35-178-56-52.eu-west-2.compute.amazonaws.com:8081/api/dealing/'+dealingId,requestOptions)
+        fetch(getConfig('socketurl')+'api/dealing/'+dealingId,requestOptions)
             .then(response =>
                 loadData(response)
             )
