@@ -6,6 +6,7 @@ var express = require('express'),
     server = express(),
     port = 3700,
     api_host = 'localhost',
+    //api_host='ec2-35-178-56-52.eu-west-2.compute.amazonaws.com'
     io = require('socket.io').listen(server.listen(port), {log: debug});
 moment = require('moment');
 var async = require('async');

@@ -1,5 +1,6 @@
 import * as allActions from './allActions';
-import { authHeader } from '../helpers';
+//import { authHeader } from '../helpers';
+import { authHeader,getConfig } from '../helpers';
 
 let loadData = function (response,day) {
     return response.json().then(data => ({
@@ -41,7 +42,7 @@ export function getPriceKeyDate(date, day) {
         const requestOptions = {
             headers: authHeader()
         };
-        fetch('http://localhost:3700/price/'+date+'/'+day,requestOptions)
+        fetch(getConfig('socketurl')+'price/'+date+'/'+day,requestOptions)
             .then(response =>
                 loadData(response,day)
             )

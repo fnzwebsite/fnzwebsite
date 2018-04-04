@@ -139,18 +139,18 @@ class LoadLineChart extends React.Component {
 
           //   alert(JSON.stringify(this.state.data))
           //var chartData=;
-          var data = [
-
-                [[[0,0,0],0][1, 0, 0], 10],
-                [[2, 51, 50], 40.4],
-                [[3, 0, 50], 21.2],
-                [[3, 55, 58], 21.4],
-                [[4, 52, 31], 188.4]
-            ];
+          // var data = [
+          //
+          //       [[[0,0,0],0][1, 0, 0], 10],
+          //       [[2, 51, 50], 40.4],
+          //       [[3, 0, 50], 21.2],
+          //       [[3, 55, 58], 21.4],
+          //       [[4, 52, 31], 188.4]
+          //   ];
             return (
                 <Chart
                     chartType="LineChart"
-                    rows={data}
+                    rows={this.state.data}
                     columns={[
                         {
                             type: 'timeofday',

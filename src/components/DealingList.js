@@ -26,7 +26,8 @@ class DealingList extends React.Component {
 
     componentDidMount(prevProps, prevState) {
         var self = this;
-        var socket = io('http://localhost:3700');
+        //var socket = io('http://localhost:3700');
+        var socket = io(getConfig('socketurl'));
         socket.on('dealing', function (dealing) {
             self.setState({dealing:dealing})
         })

@@ -9,7 +9,8 @@ import io from "socket.io-client"
 import * as dealingActions from '../actions/dealingActions';
 import userActions from '../actions/user.actions';
 import * as priceActions from '../actions/priceActions';
-import {authHeader} from '../helpers';
+//import {authHeader} from '../helpers';
+import { authHeader,getConfig } from '../helpers';
 import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
 import moment from 'moment'
@@ -51,7 +52,8 @@ this.getPrice();
 
 componentDidMount(prevProps, prevState) {
 var self = this;
-var socket = io('http://localhost:3700', {query: "auth=" + authHeader()['Authorization']});
+//var socket = io('http://localhost:3700', {query: "auth=" + authHeader()['Authorization']});
+        var socket = io(getConfig('socketurl'),{ query: "auth="+authHeader()['Authorization']});
 socket.on('dealing', function (dealing) {
 
 if (self.state.dealing !== dealing) {
