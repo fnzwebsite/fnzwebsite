@@ -13,6 +13,7 @@ import {authHeader} from '../helpers';
 import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
 import moment from 'moment'
+import { Redirect} from 'react-router-dom';
 
 class Home extends React.Component {
     constructor(props) {
@@ -72,8 +73,7 @@ class Home extends React.Component {
 
     render() {
         if (this.props.data.dealing == "logout" || this.state.dealing == "logout") {
-            this.props.userActions.logout();
-            this.history.pushState(null, 'login');
+            return  <Redirect to={{ pathname: '/login', state: { from: this.props.location } }} />
         }
         else {
             var dealing = this.state.dealing || this.props.data.dealing;

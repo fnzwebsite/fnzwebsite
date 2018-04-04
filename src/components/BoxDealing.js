@@ -4,6 +4,7 @@ import moment from 'moment'
 import userActions from '../actions/user.actions';
 import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
+import { Redirect} from 'react-router-dom';
 
 class BoxToday extends React.Component {
     constructor(props) {
@@ -29,7 +30,7 @@ class BoxToday extends React.Component {
         var yesterday = moment().add('days', -1).format("YYYY-MM-DD");
 
         if (this.props.dealingData == "logout") {
-            this.props.userActions.logout();
+            return <Redirect to={{ pathname: '/login', state: { from: this.props.location } }} />
         }
 
         if (this.props.dealingData && this.props.dealingData.status != "400") {
