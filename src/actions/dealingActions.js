@@ -33,7 +33,7 @@ export function receiveDealings(data) {
 export function getDealings() {
     return (dispatch) => {
         fetch(getConfig('socketurl')+'dealing',{
-            mode:'cros',
+            mode:'cors',
             headers:authHeader()
         })
             .then(response =>

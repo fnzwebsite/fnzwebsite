@@ -8,6 +8,7 @@ const userActions = {
 };
 
 function login(username, password) {
+  //alert('hi login....');
     return dispatch => {
         dispatch(request({ username }));
 
@@ -37,8 +38,8 @@ function logout() {
 function postLogin(username, password) {
 
     var form = new FormData()
-    form.append('enrollmentId','test2@fnzchain.com')
-    form.append('enrollmentSecret', 'T3sting1')
+    form.append('enrollmentId',username)
+    form.append('enrollmentSecret', password)
 
     return fetch('http://35.178.56.52:8081/login',{
         //pass cookies, for authentication
@@ -47,6 +48,8 @@ function postLogin(username, password) {
         body: form
     })
         .then(response => {
+      //    alert(response.statusText);
+
             if (!response.ok) {
                 return Promise.reject(response.statusText);
             }

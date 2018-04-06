@@ -30,7 +30,7 @@ server.get('/price/:date/:day', (req, res) => {
 
     var checkDate;
     if (req.params.day == 'today') {
-        checkDate = moment().add('days', 2).format("YYYY-MM-DD");
+        checkDate = moment().format("YYYY-MM-DD");
     } else if (req.params.day == 'next') {
         checkDate = moment().add('days', 1).format("YYYY-MM-DD");
     } else if (req.params.day == 'previous') {

@@ -485,6 +485,7 @@
         color: #5d5d5d;
         display: inline-block;
         box-shadow: none !important;
+        font-size: 1.0rem;
     }
     .selected .card-header{
         background: #061b45;
@@ -506,10 +507,14 @@
     box-shadow: none;
     text-transform: uppercase;
     font-weight: 600;
+        }
+.funds .card-header{
+  padding: 0.6rem 1.25rem;  
 }
+
     .open, .net {
     border-right: 1px dotted #ccc;
-}
+        }
     .selected .card-body {
         background: #061b45;
     }
@@ -528,15 +533,15 @@
     .closed h2{
         color: orange !important;
     }
-    .sub-sec h5{
+   /* .sub-sec h5{
         padding-bottom: 10px;
-    }
+    }*/
 
     .sub-text{
         font-size: 1.2rem;
     }
     .closed hr{
-        margin: 20px; 
+        margin: 0 20px 10px;
     }
 
     .table {
@@ -1072,14 +1077,20 @@
 .dashboard_card h5{
     color: #818181;
     font-weight: 500;
-    margin-bottom: 0;
+    margin-bottom: 5px;
     width: 100%;
+    font-size: 0.8rem;
 }
 .dashboard_card h2{
     color: #2051ba;
     font-weight: 700;
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     margin-bottom:0.8rem;
+}
+
+.dashboard_card .h-100{
+    height: 50% !important;
+    margin-top: 30px;
 }
 .dashboard_card h2 sub{
     font-size:0.8rem;

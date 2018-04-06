@@ -29,7 +29,7 @@ class LoginPage extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-
+//alert('hi....')
         this.setState({ submitted: true });
         const { username, password } = this.state;
         if (username && password) {

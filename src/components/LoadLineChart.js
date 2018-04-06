@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Line as LineChart} from 'react-chartjs';
 import io from "socket.io-client"
-import moment from 'moment'
+import moment from 'moment';
+import 'moment-timezone';
 import * as dealingActions from '../actions/dealingActions';
 import {bindActionCreators} from 'redux';
 import {authHeader} from '../helpers';
@@ -43,41 +44,45 @@ class LoadLineChart extends React.Component {
     }
 
     getChartData(dealing) {
-        var today = moment().add('days', 2).format("YYYY-MM-DD");
+        var today = moment().format("YYYY-MM-DD");
         var tomorrow = moment().add('days', 1).format("YYYY-MM-DD");
         var yesterday = moment().add('days', -1).format("YYYY-MM-DD");
         if (dealing) {
+          console.log(JSON.stringify(dealing));
             let self = this
             let loadAmount = Object.keys(dealing).sort((a, b) => a.tradeDate - b.tradeDate).map(function (keyName, keyIndex) {
                 if (self.props.loadThisDay == 'today') {
                     if (moment(dealing[keyName].boxDate).isSame(today, 'day')) {
+                      let tdate=moment(dealing[keyName].tradeDate);//.tz('Europe/London');
+                      console.log(parseInt(tdate.format('hh')));
                         return [
-
-                            [parseInt(moment(dealing[keyName].tradeDate).format('HH')),
-                                parseInt(moment(dealing[keyName].tradeDate).format('mm')),
-                                parseInt(moment(dealing[keyName].tradeDate).format('ss'))],
+                            [parseInt(tdate.format('HH')),
+                                parseInt(tdate.format('mm')),
+                                parseInt(tdate.format('ss'))],
                             parseFloat(dealing[keyName].units).toFixed(2) / 1
                         ]
                     }
                 }
                 if (self.props.loadThisDay == 'next') {
                     if (moment(dealing[keyName].boxDate).isSame(tomorrow, 'day')) {
+                        let tdate=moment(dealing[keyName].tradeDate).tz('Europe/London');
                         return [
 
-                            [parseInt(moment(dealing[keyName].tradeDate).format('HH')),
-                                parseInt(moment(dealing[keyName].tradeDate).format('mm')),
-                                parseInt(moment(dealing[keyName].tradeDate).format('ss'))],
+                            [parseInt(tdate.format('HH')),
+                                parseInt(tdate.format('mm')),
+                                parseInt(tdate.format('ss'))],
                             parseFloat(dealing[keyName].units).toFixed(2) / 1
                         ]
                     }
                 }
                 if (self.props.loadThisDay == 'previous') {
                     if (moment(dealing[keyName].boxDate).isSame(yesterday, 'day')) {
+                          let tdate=moment(dealing[keyName].tradeDate).tz('Europe/London');
                         return [
 
-                            [parseInt(moment(dealing[keyName].tradeDate).format('HH')),
-                                parseInt(moment(dealing[keyName].tradeDate).format('mm')),
-                                parseInt(moment(dealing[keyName].tradeDate).format('ss'))],
+                            [parseInt(tdate.format('HH')),
+                                parseInt(tdate.format('mm')),
+                                parseInt(tdate.format('ss'))],
                             parseFloat(dealing[keyName].units).toFixed(2) / 1
                         ]
                     }
@@ -105,17 +110,21 @@ class LoadLineChart extends React.Component {
     }
 
     render() {
+      //  console.log(JSON.stringify(this.state.data))
         if (this.state.data && this.state.data.length) {
             var options = {
                 legend: {position: 'none'},
-                pointSize: 2,
+                pointSize: 10,
                 series: {
-                    0: { color: '#e7711b',lineWidth: 1,pointShape: 'circle'},
+                    0: { color: '#2051ba',lineWidth: 1,pointShape: 'circle'},
                 },
                 enableInteractivity: false,
                 chartArea: {
                     width: '90%'
                 },
+                bar: {
+    groupWidth: '100%'
+},
                 hAxis: {
                     ticks: [[0, 0, 0], [1, 0, 0], [2, 0, 0],[3, 0, 0],[4, 0, 0], [5, 0, 0],[6, 0, 0], [7, 0, 0],[8, 0, 0], [9, 0, 0],[10, 0, 0], [11, 0, 0], [12, 0, 0], [13, 0, 0],
                         [14, 0, 0], [15, 0, 0], [16, 0, 0], [17, 0, 0], [18, 0, 0],[19, 0, 0],[20, 0, 0],[21, 0, 0],[22, 0, 0],[23, 0, 0],[24, 0, 0]]

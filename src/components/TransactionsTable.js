@@ -16,7 +16,7 @@ class TransactionsTable extends React.Component {
     }
 
     render() {
-        var today = moment().add('days', 2).format("YYYY-MM-DD");
+        var today = moment().format("YYYY-MM-DD");
         var tomorrow = moment().add('days', 1).format("YYYY-MM-DD");
         var yesterday = moment().add('days', -1).format("YYYY-MM-DD");
 
@@ -28,7 +28,7 @@ class TransactionsTable extends React.Component {
                 LoadRows = Object.keys(self.props.dealingData).map(function (keyName, keyIndex) {
                     if (moment(self.props.dealingData[keyName].boxDate).isSame(today, 'd')) {
                         return <tr>
-                            <td>{self.props.dealingData[keyName].boxDate}</td>
+                            <td>{self.props.dealingData[keyName].tradeDate}</td>
                             <td>{self.props.dealingData[keyName].account}</td>
                             <td>{self.props.dealingData[keyName].instrumentKey}</td>
                             <td>{self.props.dealingData[keyName].dealType.toUpperCase()}</td>
