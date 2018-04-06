@@ -37,7 +37,6 @@ class LoadLineChart extends React.Component {
         super(props)
         this.state = {
             data: null,
-            dataProvider: generateData(),
             timer: null
         }
         this.getChartData = this.getChartData.bind(this);
@@ -100,8 +99,9 @@ class LoadLineChart extends React.Component {
     }
 
     componentWillReceiveProps(prevProps) {
-        if (prevProps.dealingData != this.props.dealingData && this.props.dealingData) {
-            let lineChartData = this.getChartData(this.props.dealingData);
+        if (prevProps.dealingData != this.props.dealingData) {
+            let data = prevProps.dealingData || this.props.dealingData
+            let lineChartData = this.getChartData(data);
             this.setState({data: lineChartData})
         }
         if (this.props.loadThisDay != prevProps.loadThisDay) {

@@ -1,10 +1,6 @@
 import dealing from './dealingReducer';
-import priceNext from './priceNextReducer';
-import priceToday from './priceTodayReducer';
-import pricePrevious from './pricePreviousReducer';
+import price from './priceTodayReducer';
 export {
     dealing,
-    priceToday,
-    pricePrevious,
-    priceNext
+    price
 };

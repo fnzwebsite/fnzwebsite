@@ -37,117 +37,108 @@ class BoxToday extends React.Component {
             let self = this
             let ListToday = Object.keys(self.props.dealingData).map(function (keyName, keyIndex) {
                 if (moment(self.props.dealingData[keyName].boxDate).isSame(today, 'day')) {
-                    return <li keys={keyIndex}
-                               className={self.props.dealingData[keyName].dealType.toUpperCase() == "BUY" ? "active" : "orange"}>
-                        <div className="fun">
-                            <div className="fund-name">{self.props.dealingData[keyName].account}</div>
-                            <div
-                                className="fund-quan">{(self.props.dealingData[keyName].units == null || self.props.dealingData[keyName].units <= 0) ? 0 : self.props.dealingData[keyName].units}</div>
-                        </div>
-                        <div className="fun">
-                            <div className="fund-isin">{self.props.dealingData[keyName].instrumentKey}</div>
-                            <div className="fund-price"><i
-                                className="fa fa-gbp"></i>{(self.props.dealingData[keyName].amount == null || self.props.dealingData[keyName].amount <= 0) ? 0 : self.props.dealingData[keyName].amount}
-                            </div>
-                        </div>
-                    </li>
+                    return self.props.dealingData[keyName];
                 }
             });
 
             let ListPrevious = Object.keys(self.props.dealingData).map(function (keyName, keyIndex) {
                 var date = moment(self.props.dealingData[keyName].boxDate).isSame(yesterday, 'day');
                 if (date) {
-                    return <li keys={keyIndex}
-                               className={self.props.dealingData[keyName].dealType.toUpperCase() == "BUY" ? "active" : "orange"}>
-                        <div className="fun">
-                            <div className="fund-name">{self.props.dealingData[keyName].account}</div>
-                            <div
-                                className="fund-quan">{(self.props.dealingData[keyName].units == null || self.props.dealingData[keyName].units <= 0) ? 0 : self.props.dealingData[keyName].units}</div>
-                        </div>
-                        <div className="fun">
-                            <div className="fund-isin">{self.props.dealingData[keyName].instrumentKey}</div>
-                            <div className="fund-price"><i
-                                className="fa fa-gbp"></i>{(self.props.dealingData[keyName].amount == null || self.props.dealingData[keyName].amount <= 0) ? 0 : self.props.dealingData[keyName].amount}
-                            </div>
-                        </div>
-                    </li>
+                    return self.props.dealingData[keyName];
                 }
             });
 
             let ListNext = Object.keys(self.props.dealingData).map(function (keyName, keyIndex) {
                 var date = moment(self.props.dealingData[keyName].boxDate).isSame(tomorrow, 'day');
                 if (date) {
-                    return <li keys={keyIndex}
-                               className={self.props.dealingData[keyName].dealType.toUpperCase() == "BUY" ? "active" : "orange"}>
-                        <div className="fun">
-                            <div className="fund-name">{self.props.dealingData[keyName].account}</div>
-                            <div
-                                className="fund-quan">{(self.props.dealingData[keyName].units == null || self.props.dealingData[keyName].units <= 0) ? 0 : self.props.dealingData[keyName].units}</div>
-                        </div>
-                        <div className="fun">
-                            <div className="fund-isin">{self.props.dealingData[keyName].instrumentKey}</div>
-                            <div className="fund-price"><i
-                                className="fa fa-gbp"></i>{(self.props.dealingData[keyName].amount == null || self.props.dealingData[keyName].amount <= 0) ? 0 : self.props.dealingData[keyName].amount}
-                            </div>
-                        </div>
-                    </li>
+                    return self.props.dealingData[keyName];
                 }
             });
+
             var subscriptionsNext = 0;
             var redemptionsNext = 0;
-            if (this.props.price.priceNext && this.props.price.priceNext.length) {
-                this.props.price.priceNext.map(function (item, index) {
-                    if (item.amount > 0 && item.dealType == "BUY") {
-                        subscriptionsNext =(parseFloat(subscriptionsNext)+parseFloat(item.amount)).toFixed(4);
-                    }
-                    else if (item.units > 0 && item.dealType == "BUY" && item.price) {
-                        subscriptionsNext =(parseFloat(subscriptionsNext)+ parseFloat(item.units) * parseFloat(item.price)).toFixed(4);
-                    }
+            if (ListNext && ListNext.length && self.props.price.price) {
+                ListNext.map(function (item, index) {
+                    if(item) {
+                        let data = Object.keys(self.props.price.price).filter(function (priceItem) {
+                            return self.props.price.price[priceItem].instrumentKey == item.instrumentKey;
+                        })
+                        if (data && data.length) {
+                            data = self.props.price.price[data];
 
-                    if (item.amount > 0 && item.dealType == "SELL") {
-                        redemptionsNext =(parseFloat(redemptionsNext) + parseFloat(item.amount)).toFixed(4);
-                    }
+                            if (item.amount > 0 && item.dealType == "BUY") {
+                                subscriptionsNext = (parseFloat(subscriptionsNext) + parseFloat(item.amount)).toFixed(4);
+                            }
+                            else if (item.units > 0 && item.dealType == "BUY" && data.price) {
+                                subscriptionsNext = (parseFloat(subscriptionsNext) + parseFloat(item.units) * parseFloat(data.price)).toFixed(4);
+                            }
 
-                    else if (item.units > 0 && item.dealType == "SELL" && item.price) {
-                        redemptionsNext =(parseFloat(redemptionsNext)+parseFloat( item.units) * parseFloat(item.price)).toFixed(4);
+                            if (item.amount > 0 && item.dealType == "SELL") {
+                                redemptionsNext = (parseFloat(redemptionsNext) + parseFloat(item.amount)).toFixed(4);
+                            }
+
+                            else if (item.units > 0 && item.dealType == "SELL" && data.price) {
+                                redemptionsNext = (parseFloat(redemptionsNext) + parseFloat(item.units) * parseFloat(data.price)).toFixed(4);
+                            }
+                        }
                     }
                 })
             }
-
             var subscriptionsPrevious = 0;
             var redemptionsPrevious = 0;
-            if (this.props.price.pricePrevious && this.props.price.pricePrevious.length) {
-                this.props.price.pricePrevious.map(function (item, index) {
-                    if (item.amount > 0 && item.dealType == "BUY") {
-                        subscriptionsPrevious =(parseFloat(subscriptionsPrevious)+parseFloat(item.amount)).toFixed(4);
-                    }
-                    else if (item.units > 0 && item.dealType == "BUY" && item.price) {
-                        subscriptionsPrevious =(parseFloat(subscriptionsPrevious)+ parseFloat(item.units) * parseFloat(item.price)).toFixed(4);
-                    }
-                    if (item.amount > 0 && item.dealType == "SELL") {
-                        redemptionsPrevious =(parseFloat(redemptionsPrevious)+ parseFloat(redemptionsPrevious)+parseFloat(item.amount)).toFixed(4);
-                    }
-                    else if (item.units > 0 && item.dealType == "SELL" && item.price) {
-                        redemptionsPrevious =(parseFloat(redemptionsPrevious)+ parseFloat(item.units) * parseFloat(item.price)).toFixed(4);
+            if (ListPrevious && ListPrevious.length && self.props.price.price) {
+                ListPrevious.map(function (item, index) {
+                    if(item) {
+                        let data = Object.keys(self.props.price.price).filter(function (priceItem) {
+                            return self.props.price.price[priceItem].instrumentKey == item.instrumentKey;
+                        })
+                        if (data && data.length) {
+                            data = self.props.price.price[data];
+
+                            if (item.amount > 0 && item.dealType == "BUY") {
+                                subscriptionsPrevious = (parseFloat(subscriptionsPrevious) + parseFloat(item.amount)).toFixed(4);
+                            }
+                            else if (item.units > 0 && item.dealType == "BUY" && data.price) {
+                                subscriptionsPrevious = (parseFloat(subscriptionsPrevious) + parseFloat(item.units) * parseFloat(data.price)).toFixed(4);
+                            }
+
+                            if (item.amount > 0 && item.dealType == "SELL") {
+                                redemptionsPrevious = (parseFloat(redemptionsPrevious) + parseFloat(item.amount)).toFixed(4);
+                            }
+
+                            else if (item.units > 0 && item.dealType == "SELL" && data.price) {
+                                redemptionsPrevious = (parseFloat(redemptionsPrevious) + parseFloat(item.units) * parseFloat(data.price)).toFixed(4);
+                            }
+                        }
                     }
                 })
             }
-
             var subscriptionsToday = 0;
             var redemptionsToday = 0;
-            if (this.props.price.priceToday && this.props.price.priceToday.length) {
-                this.props.price.priceToday.map(function (item, index) {
-                    if (item.amount > 0 && item.dealType == "BUY") {
-                        subscriptionsToday = (parseFloat(subscriptionsToday) + parseFloat(item.amount)).toFixed(4);
-                    }
-                    else if (item.units > 0 && item.dealType == "BUY" && item.price) {
-                        subscriptionsToday = (parseFloat(subscriptionsToday)+ parseFloat(item.units) * parseFloat(item.price)).toFixed(4);
-                    }
-                    if (item.amount > 0 && item.dealType == "SELL") {
-                        redemptionsToday = (parseFloat(redemptionsToday)+parseFloat(item.amount)).toFixed(4);
-                    }
-                    else if (item.units > 0 && item.dealType == "SELL" && item.price) {
-                        redemptionsToday = (parseFloat(redemptionsToday)+ parseFloat(item.units) * parseFloat(item.price)).toFixed(4);
+            if (ListToday && ListToday.length && self.props.price.price) {
+                ListToday.map(function (item, index) {
+                    if(item) {
+                        let data = Object.keys(self.props.price.price).filter(function (priceItem) {
+                            return self.props.price.price[priceItem].instrumentKey == item.instrumentKey;
+                        })
+                        if (data && data.length) {
+                            data = self.props.price.price[data];
+
+                            if (item.amount > 0 && item.dealType == "BUY") {
+                                subscriptionsToday = (parseFloat(subscriptionsToday) + parseFloat(item.amount)).toFixed(4);
+                            }
+                            else if (item.units > 0 && item.dealType == "BUY" && data.price) {
+                                subscriptionsToday = (parseFloat(subscriptionsToday) + parseFloat(item.units) * parseFloat(data.price)).toFixed(4);
+                            }
+
+                            if (item.amount > 0 && item.dealType == "SELL") {
+                                redemptionsToday = (parseFloat(redemptionsToday) + parseFloat(item.amount)).toFixed(4);
+                            }
+
+                            else if (item.units > 0 && item.dealType == "SELL" && data.price) {
+                                redemptionsToday = (parseFloat(redemptionsToday) + parseFloat(item.units) * parseFloat(data.price)).toFixed(4);
+                            }
+                        }
                     }
                 })
             }

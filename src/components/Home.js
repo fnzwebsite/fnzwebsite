@@ -65,13 +65,7 @@ class Home extends React.Component {
     }
 
     getPrice() {
-        var today = moment().format("YYYY-MM-DD");
-        var tomorrow = moment().add('days', 1).format("YYYY-MM-DD");
-        var yesterday = moment().add('days', -1).format("YYYY-MM-DD");
-
-        this.props.priceActions.getPriceKeyDate(today, 'today');
-        this.props.priceActions.getPriceKeyDate(tomorrow, 'next');
-        this.props.priceActions.getPriceKeyDate(yesterday, 'previous');
+        this.props.priceActions.getPriceKeyDate();
     }
 
     render() {
@@ -158,18 +152,14 @@ const
         return {
             data: state,
             user: state.user,
-            price: state.priceToday,
-            price: state.priceNext,
-            price: state.pricePrevious
+            price: state.price,
         }
     };
 
 Home.propTypes = {
     userActions: PropTypes.object,
     user: PropTypes.array,
-    priceToday: PropTypes.array,
-    priceNext: PropTypes.array,
-    pricePrevious: PropTypes.array
+    price: PropTypes.array,
 };
 
 const

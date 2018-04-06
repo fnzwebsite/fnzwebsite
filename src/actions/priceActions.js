@@ -9,12 +9,12 @@ let loadData = function (response,day) {
     }));
 };
 
-let processData = function (response, dispatch, day) {
+let processData = function (response, dispatch) {
     if (response.data && response.data.status === 400) {
         dispatch(receivePrice("logout"))
     }
     else if (response.status === 200) {
-        dispatch(receivePrice(response.data,day))
+        dispatch(receivePrice(response.data))
     } else {
         var flash = {
             type: 'error',
@@ -25,29 +25,23 @@ let processData = function (response, dispatch, day) {
     }
 };
 
-export function receivePrice(data,day) {
-    if(day == 'today') {
-        return {type: allActions.RECEIVE_PRICE_TODAY, priceToday: data};
-    }
-    if(day == 'next') {
-        return {type: allActions.RECEIVE_PRICE_NEXT, priceNext: data};
-    }
-    if(day == 'previous') {
-        return {type: allActions.RECEIVE_PRICE_PREVIOUS, pricePrevious: data};
-    }
+export function receivePrice(data) {
+
+        return {type: allActions.RECEIVE_PRICE_TODAY, price: data};
+
 };
 
-export function getPriceKeyDate(date, day) {
+export function getPriceKeyDate() {
     return (dispatch) => {
         const requestOptions = {
             headers: authHeader()
         };
-        fetch(getConfig('socketurl')+'price/'+date+'/'+day,requestOptions)
+        fetch(getConfig('socketurl')+'price',requestOptions)
             .then(response =>
-                loadData(response,day)
+                loadData(response)
             )
             .then(response => {
-                processData(response, dispatch,day);
+                processData(response, dispatch);
             });
     };
 }

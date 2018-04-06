@@ -26,42 +26,11 @@ server.get('/dealing', (req, res) => {
     }, auth);
 });
 
-server.get('/price/:date/:day', (req, res) => {
-
-    var checkDate;
-    if (req.params.day == 'today') {
-        checkDate = moment().format("YYYY-MM-DD");
-    } else if (req.params.day == 'next') {
-        checkDate = moment().add('days', 1).format("YYYY-MM-DD");
-    } else if (req.params.day == 'previous') {
-        checkDate = moment().add('days', -1).format("YYYY-MM-DD");
-    }
-
+server.get('/price', (req, res) => {
     var priceData = [];
     let auth = req.headers.authorization;
-    getDealing(function (data) {
-        async.forEachOf(data, function (elem, key, callback) {
-                getPriceByKeyDate(function (priceDataRes) {
-                    if (moment(elem.boxDate).isSame(checkDate, 'day')) {
-                        priceData.push({
-                            'price': priceDataRes.price,
-                            'units': elem.units,
-                            'dealType': elem.dealType,
-                            'day': req.params.day,
-                            'amount': elem.amount,
-                            'instrumentKey': elem.instrumentKey,
-                            'boxDate': elem.boxDate
-
-                        });
-
-                    }
-                    callback()
-                }, elem.instrumentKey, req.params.date, auth);
-            },
-            function (err) {
-                res.send(priceData);
-            }
-        )
+    getPriceByKeyDate(function (priceDataRes) {
+        res.send(priceDataRes);
     }, auth);
 });
 
@@ -158,12 +127,12 @@ function getDealing(callback, auth) {
 }
 
 
-function getPriceByKeyDate(callback, instrumentKey, date, auth) {
+function getPriceByKeyDate(callback,auth) {
     var options = {
         method: 'GET',
         host: '35.178.56.52',
         port: 8081,
-        path: '/api/v1/price/' + instrumentKey + '/' + date,
+        path: '/api/v1/price',
         headers: {
             Authorization: auth
         }
