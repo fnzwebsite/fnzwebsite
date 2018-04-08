@@ -72,28 +72,32 @@ class LoadLineChart extends React.Component {
                 }
                 if (self.props.loadThisDay == 'next') {
                     if (moment(dealing[keyName].boxDate).isSame(tomorrow, 'day')) {
-                        let tdate = moment(dealing[keyName].tradeDate).tz('Europe/London');
-                        return [
-
-                            [parseInt(tdate._a[3]),
-                                parseInt(tdate._a[4]),
-                                parseInt(tdate._a[5])],
-                            parseFloat(dealing[keyName].units).toFixed(2) / 1
-
-                        ]
+                        let tdate = moment(dealing[keyName].tradeDate);//.tz('Europe/London');
+                        console.log(parseInt(tdate.format('hh')));
+                        datetime.push(tdate._a[3] + ':' + tdate._a[4] + ':' + tdate._a[5])
+                        if (dealing[keyName].dealType.toUpperCase() == "BUY") {
+                            buy.push(dealing[keyName].units)
+                            sell.push(0)
+                        } else {
+                            buy.push(0)
+                            sell.push(dealing[keyName].units)
+                        }
+                        return null
                     }
                 }
                 if (self.props.loadThisDay == 'previous') {
                     if (moment(dealing[keyName].boxDate).isSame(yesterday, 'day')) {
-                        let tdate = moment(dealing[keyName].tradeDate).tz('Europe/London');
-                        return [
-
-                            [parseInt(tdate._a[3]),
-                                parseInt(tdate._a[4]),
-                                parseInt(tdate._a[5])],
-                            parseFloat(dealing[keyName].units).toFixed(2) / 1
-
-                        ]
+                        let tdate = moment(dealing[keyName].tradeDate);//.tz('Europe/London');
+                        console.log(parseInt(tdate.format('hh')));
+                        datetime.push(tdate._a[3] + ':' + tdate._a[4] + ':' + tdate._a[5])
+                        if (dealing[keyName].dealType.toUpperCase() == "BUY") {
+                            buy.push(dealing[keyName].units)
+                            sell.push(0)
+                        } else {
+                            buy.push(0)
+                            sell.push(dealing[keyName].units)
+                        }
+                        return null
                     }
                 }
             });
@@ -233,6 +237,7 @@ class LoadLineChart extends React.Component {
                     bar={bar}
                     axis={axis}
                     grid={grid}
+                    unloadBeforeLoad={true}
 
                 />
             )
