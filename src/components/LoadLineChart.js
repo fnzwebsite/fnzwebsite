@@ -183,7 +183,7 @@ class LoadLineChart extends React.Component {
                 x: 'x',
                 xFormat: '%H:%M:%S',
                 columns: this.state.data,
-                type: 'bar'
+                type: 'line'
             };
             const bar = {
                 width: {
