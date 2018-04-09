@@ -53,14 +53,25 @@ class Home extends React.Component {
 
     componentDidMount(prevProps, prevState) {
         var self = this;
-//var socket = io('http://localhost:3700', {query: "auth=" + authHeader()['Authorization']});
+        //var socket = io('http://localhost:3700', {query: "auth=" + authHeader()['Authorization']});
         var socket = io(getConfig('socketurl'), {query: "auth=" + authHeader()['Authorization']});
-        socket.on('dealing', function (dealing) {
-
-            if (self.state.dealing !== dealing) {
-                self.getPrice();
-                self.setState({dealing: dealing});
-            }
+        socket.on('dealingbydate', function (dealingbydate) {
+           if(Object.keys(dealingbydate).length > 0){
+               var data = self.state.dealing;
+               if(self.state.dealing &&  Object.keys(self.state.dealing).length > 0){
+                   Object.keys(self.props.data.dealing).forEach((itm, i) => {
+                       data[itm] = self.props.data.dealing[itm];
+                   });
+               }else {
+                   data = {};
+               }
+               Object.keys(dealingbydate).forEach((itm, i) => {
+                   data[itm] = dealingbydate[itm];
+               });
+               self.setState({
+                   dealing:data
+               })
+           }
         })
     }
 

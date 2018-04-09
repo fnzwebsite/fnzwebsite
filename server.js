@@ -10,8 +10,8 @@ var express = require('express'),
     io = require('socket.io').listen(server.listen(port), {log: debug});
 moment = require('moment');
 var async = require('async');
-
-
+var querystring = require('querystring');
+momenttz = require('moment-timezone');
 io.set('log level', 1);
 server.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -39,9 +39,9 @@ var clients = {};
 io.use(function (socket, next) {
     if (socket.handshake.query.auth) {
         setInterval(function () {
-            getDealing(function (data) {
+            getDealingByDate(function (data) {
                 if (data.status != 400) {
-                    io.sockets.emit('dealing', data);
+                    io.sockets.emit('dealingbydate', data);
                 }
             }, socket.handshake.query.auth);
             return next();
@@ -61,36 +61,56 @@ io.sockets.on('connection', function (socket) {
     io.sockets.emit('connected_clients', _.size(clients));
 
     // Send the current positions to the connected client when client is ready
-    socket.on('dealing', function () {
+    socket.on('dealingbydate', function () {
         console.log(socket.handshake.query);
-        getDealing(function (data) {
-            io.sockets.emit('dealing', data);
+        getDealingByDate(function (data) {
+            console.log(data)
+            io.sockets.emit('dealingbydate', data);
         });
     }, socket.handshake.query);
+
     socket.on('disconnect', function () {
         delete clients[socket.id];
         io.sockets.emit('connected_clients', _.size(clients));
     });
 });
 
-// // Update locations every minutes
-// setInterval(function(socket)
-// {
-//     console.log(socket.handshake.query)
-//     if (_.size(clients) == 0) {
-//         return;
-//     }
-//     getCourses(function(data){
-//         console.log(socket.handshake.query.token);
-//         io.sockets.emit('dealing', data);
-//     },socket.handshake.query);
-// }, 500);
+function getDealingByDate(callback, auth) {
+
+    var post_data = '{"selector": {"tradeDate": {"$gt": "'+momenttz.tz(momenttz.now(), "Europe/London").format()+'"}}}';
+    var options = {
+        method: 'POST',
+        host: '35.178.56.52',
+        port: 8081,
+        path: '/api/v1/dealquery',
+        headers: {
+            Authorization: auth,
+            'Content-Type': 'application/json'
+        }
+    };
+    console.log(post_data)
+    var req = http.request(options, function (res) {
+        var output = '';
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            output += chunk;
+        });
+        res.on('end', function () {
+            console.log(output);
+            var obj = JSON.parse(output);
+            if (callback != undefined) {
+                callback(obj);
+            }
+        });
+    });
 
 
-// setInterval(function(){
-//     io.sockets.emit('date', {'date': new Date()});
-// }, 1000);
-
+    req.on('error', function (e) {
+        console.log('problem with request: ' + e.message);
+    });
+    req.write(post_data);
+    req.end();
+}
 
 function getDealing(callback, auth) {
     var options = {
@@ -125,7 +145,6 @@ function getDealing(callback, auth) {
 
     req.end();
 }
-
 
 function getPriceByKeyDate(callback,auth) {
     var options = {
