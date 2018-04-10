@@ -1,17 +1,14 @@
 var express = require('express'),
     debug = true,
     http = require('http'),
-    cors = require('cors'),
     _ = require('underscore'),
     server = express(),
     port = 3700,
-    api_host = 'localhost',
-    //api_host='ec2-35-178-56-52.eu-west-2.compute.amazonaws.com'
-    io = require('socket.io').listen(server.listen(port), {log: debug});
-moment = require('moment');
-var async = require('async');
-var querystring = require('querystring');
-momenttz = require('moment-timezone');
+    io = require('socket.io').listen(server.listen(port), {log: debug}),
+    momenttz = require('moment-timezone');
+
+var setDate = momenttz.tz(momenttz.now(), "Europe/London").format();
+
 io.set('log level', 1);
 server.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -43,7 +40,8 @@ io.use(function (socket, next) {
                 if (data.status != 400) {
                     io.sockets.emit('dealingbydate', data);
                 }
-            }, socket.handshake.query.auth);
+            }, socket.handshake.query.auth,setDate);
+            setDate = momenttz.tz(momenttz.now(), "Europe/London").format();
             return next();
         }, 10000);
     }
@@ -61,13 +59,12 @@ io.sockets.on('connection', function (socket) {
     io.sockets.emit('connected_clients', _.size(clients));
 
     // Send the current positions to the connected client when client is ready
-    socket.on('dealingbydate', function () {
-        console.log(socket.handshake.query);
-        getDealingByDate(function (data) {
-            console.log(data)
+    socket.on('dealingbydate', function (msg) {
+        getDealingByDate(function () {
             io.sockets.emit('dealingbydate', data);
-        });
-    }, socket.handshake.query);
+        }, msg['query'], setDate);
+        setDate = momenttz.tz(momenttz.now(), "Europe/London").format();
+    });
 
     socket.on('disconnect', function () {
         delete clients[socket.id];
@@ -75,9 +72,9 @@ io.sockets.on('connection', function (socket) {
     });
 });
 
-function getDealingByDate(callback, auth) {
+function getDealingByDate(callback, auth, setDate) {
 
-    var post_data = '{"selector": {"tradeDate": {"$gt": "'+momenttz.tz(momenttz.now(), "Europe/London").format()+'"}}}';
+    var post_data = '{"selector": {"tradeDate": {"$gt": "'+setDate+'"}}}';
     var options = {
         method: 'POST',
         host: '35.178.56.52',

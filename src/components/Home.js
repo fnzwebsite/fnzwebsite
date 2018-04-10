@@ -14,7 +14,7 @@ import {authHeader, getConfig} from '../helpers';
 import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
 import moment from 'moment'
-import { Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 class Home extends React.Component {
     constructor(props) {
@@ -39,6 +39,7 @@ class Home extends React.Component {
 
     loadChart(selected) {
         if (this.state.chart != selected) {
+            this.props.dealingActions.getDealings();
             this.setState({
                 chart: selected
             })
