@@ -1,13 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {Line as LineChart} from 'react-chartjs';
-import io from "socket.io-client"
 import moment from 'moment';
 import 'moment-timezone';
-import * as dealingActions from '../actions/dealingActions';
-import {bindActionCreators} from 'redux';
-import {authHeader} from '../helpers';
-// import {Chart} from 'react-google-charts';
 import RTChart from 'react-c3js';
 
 // Generate random data
@@ -31,6 +24,18 @@ function generateData() {
 }
 
 
+const LineChart = ({ size,padding,tooltip,data,bar,axis,grid }) =>
+    <RTChart
+        size={size}
+        padding={padding}
+        tooltip={tooltip}
+        data={data}
+        bar={bar}
+        axis={axis}
+        grid={grid}
+    />
+
+
 class LoadLineChart extends React.Component {
 
     constructor(props) {
@@ -42,7 +47,7 @@ class LoadLineChart extends React.Component {
         this.getChartData = this.getChartData.bind(this);
     }
 
-    getChartData(dealing) {
+    getChartData(dealing,loadThisDay) {
         var today = moment().format("YYYY-MM-DD");
         var tomorrow = moment().add('days', 1).format("YYYY-MM-DD");
         var yesterday = moment().add('days', -1).format("YYYY-MM-DD");
@@ -55,10 +60,9 @@ class LoadLineChart extends React.Component {
             sell.push('SELL');
             let self = this;
             let loadAmount = Object.keys(dealing).sort((a, b) => a.tradeDate - b.tradeDate).map(function (keyName, keyIndex) {
-                if (self.props.loadThisDay == 'today') {
+                if (loadThisDay == 'today') {
                     if (moment(dealing[keyName].boxDate).isSame(today, 'day')) {
                         let tdate = moment(dealing[keyName].tradeDate);//.tz('Europe/London');
-                        console.log(parseInt(tdate.format('hh')));
                         datetime.push(tdate._a[3] + ':' + tdate._a[4] + ':' + tdate._a[5])
                         if (dealing[keyName].dealType.toUpperCase() == "BUY") {
                             buy.push(dealing[keyName].units)
@@ -70,10 +74,9 @@ class LoadLineChart extends React.Component {
                         return null
                     }
                 }
-                if (self.props.loadThisDay == 'next') {
+                if (loadThisDay == 'next') {
                     if (moment(dealing[keyName].boxDate).isSame(tomorrow, 'day')) {
                         let tdate = moment(dealing[keyName].tradeDate);//.tz('Europe/London');
-                        console.log(parseInt(tdate.format('hh')));
                         datetime.push(tdate._a[3] + ':' + tdate._a[4] + ':' + tdate._a[5])
                         if (dealing[keyName].dealType.toUpperCase() == "BUY") {
                             buy.push(dealing[keyName].units)
@@ -85,7 +88,7 @@ class LoadLineChart extends React.Component {
                         return null
                     }
                 }
-                if (self.props.loadThisDay == 'previous') {
+                if (loadThisDay == 'previous') {
                     if (moment(dealing[keyName].boxDate).isSame(yesterday, 'day')) {
                         let tdate = moment(dealing[keyName].tradeDate);//.tz('Europe/London');
                         console.log(parseInt(tdate.format('hh')));
@@ -112,17 +115,20 @@ class LoadLineChart extends React.Component {
         return null;
     }
 
-    componentWillReceiveProps(prevProps) {
-        if (prevProps.dealingData != this.props.dealingData) {
-            let data = prevProps.dealingData || this.props.dealingData
-            let lineChartData = this.getChartData(data);
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.dealingData) {
+            let data = nextProps.dealingData;
+            let loadThisDay = nextProps.loadThisDay;
+            let lineChartData = this.getChartData(data,loadThisDay);
             this.setState({data: lineChartData})
         }
-        if (this.props.loadThisDay != prevProps.loadThisDay) {
-            let lineChartData = this.getChartData(this.props.dealingData);
-            this.setState({data: lineChartData})
-
-        }
+        // if (this.props.loadThisDay != nextProps.loadThisDay) {
+        //     let data = nextProps.dealingData || this.props.dealingData;
+        //     let loadThisDay = nextProps.loadThisDay || this.props.loadThisDay;
+        //     let lineChartData = this.getChartData(data,loadThisDay);
+        //     this.setState({data: lineChartData})
+        //
+        // }
     }
 
     render() {
@@ -183,7 +189,7 @@ class LoadLineChart extends React.Component {
                 x: 'x',
                 xFormat: '%H:%M:%S',
                 columns: this.state.data,
-                type: 'line'
+                type: 'bar'
             };
             const bar = {
                 width: {
@@ -229,17 +235,14 @@ class LoadLineChart extends React.Component {
             const size = {};
 
             return (
-                <RTChart
-                    size={size}
-                    padding={padding}
-                    tooltip={tooltip}
-                    data={data}
-                    bar={bar}
-                    axis={axis}
-                    grid={grid}
-                    unloadBeforeLoad={true}
-
-                />
+                <LineChart size={size}
+                           padding={padding}
+                           tooltip={tooltip}
+                           data={data}
+                           bar={bar}
+                           axis={axis}
+                           grid={grid}
+                           />
             )
         }
         else {

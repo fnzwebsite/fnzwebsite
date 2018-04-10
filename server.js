@@ -7,7 +7,7 @@ var express = require('express'),
     io = require('socket.io').listen(server.listen(port), {log: debug}),
     momenttz = require('moment-timezone');
 
-var setDate = momenttz.tz(momenttz.now(), "Europe/London").format();
+var setDate = momenttz.tz(momenttz.now(), "Europe/London").subtract(2,'hour').format();
 
 io.set('log level', 1);
 server.use(function (req, res, next) {
@@ -41,7 +41,7 @@ io.use(function (socket, next) {
                     io.sockets.emit('dealingbydate', data);
                 }
             }, socket.handshake.query.auth,setDate);
-            setDate = momenttz.tz(momenttz.now(), "Europe/London").format();
+            setDate = momenttz.tz(momenttz.now(), "Europe/London").subtract(2,'hour').format();
             return next();
         }, 10000);
     }

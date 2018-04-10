@@ -59,12 +59,11 @@ class Home extends React.Component {
         socket.on('dealingbydate', function (dealingbydate) {
            if(Object.keys(dealingbydate).length > 0){
                var data = self.state.dealing;
-               if(self.state.dealing &&  Object.keys(self.state.dealing).length > 0){
+               if(!self.state.dealing){
+                   data = {};
                    Object.keys(self.props.data.dealing).forEach((itm, i) => {
                        data[itm] = self.props.data.dealing[itm];
                    });
-               }else {
-                   data = {};
                }
                Object.keys(dealingbydate).forEach((itm, i) => {
                    data[itm] = dealingbydate[itm];
