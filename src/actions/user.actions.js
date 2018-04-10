@@ -57,8 +57,11 @@ function postLogin(username, password) {
         })
         .then(user => {
             if (user && user.token) {
-                localStorage.setItem('user', JSON.stringify(user.token));
-                localStorage.setItem('displayName', user.enrollmentId);
+                setTimeout(function () {
+                    localStorage.setItem('user', JSON.stringify(user.token));
+                    localStorage.setItem('displayName', user.enrollmentId);
+                    history.push('/');
+                },10)
             }
             return user;
         });

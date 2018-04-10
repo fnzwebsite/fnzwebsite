@@ -26,6 +26,9 @@ class LoginPage extends React.Component {
         const { name, value } = e.target;
         this.setState({ [name]: value });
     }
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps.user)
+    }
 
     handleSubmit(e) {
         e.preventDefault();

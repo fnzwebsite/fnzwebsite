@@ -201,8 +201,8 @@ class LoadLineChart extends React.Component {
 
             const axis = {
                 x: {
-                    min: '2:00:00',
-                    max: '21:00:00',
+                    min: '00:30:00',
+                    max: '23:00:00',
                     type: 'timeseries',
                     tick: {
                         format: '%H:%M:%S',

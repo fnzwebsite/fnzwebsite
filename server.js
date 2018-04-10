@@ -63,7 +63,7 @@ io.sockets.on('connection', function (socket) {
         getDealingByDate(function () {
             io.sockets.emit('dealingbydate', data);
         }, msg['query'], setDate);
-        setDate = momenttz.tz(momenttz.now(), "Europe/London").format();
+        setDate = momenttz.tz(momenttz.now(), "Europe/London").subtract(2,'hour').format();
     });
 
     socket.on('disconnect', function () {
@@ -85,7 +85,6 @@ function getDealingByDate(callback, auth, setDate) {
             'Content-Type': 'application/json'
         }
     };
-    console.log(post_data)
     var req = http.request(options, function (res) {
         var output = '';
         res.setEncoding('utf8');
@@ -93,7 +92,6 @@ function getDealingByDate(callback, auth, setDate) {
             output += chunk;
         });
         res.on('end', function () {
-            console.log(output);
             var obj = JSON.parse(output);
             if (callback != undefined) {
                 callback(obj);

@@ -8,8 +8,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.nvm" afterPath="$PROJECT_DIR$/.nvm" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Home.js" afterPath="$PROJECT_DIR$/src/components/Home.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/user.actions.js" afterPath="$PROJECT_DIR$/src/actions/user.actions.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/LoadLineChart.js" afterPath="$PROJECT_DIR$/src/components/LoadLineChart.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/LoginPage.js" afterPath="$PROJECT_DIR$/src/components/LoginPage.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,26 +24,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="server.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="43" column="77" lean-forward="false" selection-start-line="43" selection-start-column="77" selection-end-line="43" selection-end-column="77" />
+            <state relative-caret-position="237">
+              <caret line="161" column="0" lean-forward="true" selection-start-line="161" selection-start-column="0" selection-end-line="161" selection-end-column="0" />
               <folding>
                 <element signature="e#724#840#0" expanded="false" />
                 <element signature="e#879#1042#0" expanded="false" />
                 <element signature="n#!!block;n#getDealing#0" expanded="false" />
-                <element signature="n#!!block;n#getPriceByKeyDate#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoadLineChart.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LoadLineChart.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/LoadLineChart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="121" column="12" lean-forward="true" selection-start-line="121" selection-start-column="12" selection-end-line="121" selection-end-column="12" />
+            <state relative-caret-position="171">
+              <caret line="203" column="30" lean-forward="false" selection-start-line="203" selection-start-column="30" selection-end-line="203" selection-end-column="30" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -53,8 +53,8 @@
       <file leaf-file-name="Home.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="61" column="18" lean-forward="true" selection-start-line="61" selection-start-column="18" selection-end-line="61" selection-end-column="18" />
+            <state relative-caret-position="2100">
+              <caret line="84" column="9" lean-forward="true" selection-start-line="84" selection-start-column="9" selection-end-line="84" selection-end-column="9" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
                 <element signature="e#502#551#0" expanded="true" />
@@ -79,8 +79,18 @@
       <file leaf-file-name="user.actions.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/actions/user.actions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="19" column="18" lean-forward="true" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+            <state relative-caret-position="561">
+              <caret line="62" column="38" lean-forward="false" selection-start-line="62" selection-start-column="38" selection-end-line="62" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoginPage.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/LoginPage.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="37">
+              <caret line="29" column="8" lean-forward="false" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -98,7 +108,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Field</find>
       <find>units</find>
       <find>value</find>
       <find>Date</find>
@@ -126,6 +135,7 @@
       <find>loadThisDay</find>
       <find>LineChart</find>
       <find>&lt;LineChart</find>
+      <find>console</find>
       <find>self.props.loadThisDay</find>
       <find>loadChart</find>
     </findStrings>
@@ -190,7 +200,6 @@
         <option value="$PROJECT_DIR$/src/components/App.js" />
         <option value="$PROJECT_DIR$/src/actions/dealingActions.js" />
         <option value="$PROJECT_DIR$/public/login.html" />
-        <option value="$PROJECT_DIR$/src/components/LoginPage.js" />
         <option value="$PROJECT_DIR$/src/components/SideNav.js" />
         <option value="$PROJECT_DIR$/src/components/Header.js" />
         <option value="$PROJECT_DIR$/public/dashboard.html" />
@@ -201,7 +210,6 @@
         <option value="$PROJECT_DIR$/src/reducers/priceNextReducer.js" />
         <option value="$PROJECT_DIR$/src/reducers/pricePreviousReducer.js" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/src/actions/user.actions.js" />
         <option value="$PROJECT_DIR$/src/components/TransactionsTable.js" />
         <option value="$PROJECT_DIR$/src/reducers/priceTodayReducer.js" />
         <option value="$PROJECT_DIR$/src/reducers/initialState.js" />
@@ -210,9 +218,11 @@
         <option value="$PROJECT_DIR$/src/components/BoxDealing.js" />
         <option value="$PROJECT_DIR$/public/css/chart.css" />
         <option value="$PROJECT_DIR$/public/index.html" />
-        <option value="$PROJECT_DIR$/src/components/LoadLineChart.js" />
-        <option value="$PROJECT_DIR$/src/components/Home.js" />
         <option value="$PROJECT_DIR$/server.js" />
+        <option value="$PROJECT_DIR$/src/components/Home.js" />
+        <option value="$PROJECT_DIR$/src/components/LoginPage.js" />
+        <option value="$PROJECT_DIR$/src/actions/user.actions.js" />
+        <option value="$PROJECT_DIR$/src/components/LoadLineChart.js" />
       </list>
     </option>
   </component>
@@ -369,12 +379,12 @@
       <workItem from="1523276033624" duration="12000" />
       <workItem from="1523286495674" duration="10716000" />
       <workItem from="1523346829030" duration="3625000" />
-      <workItem from="1523373267588" duration="6197000" />
+      <workItem from="1523373267588" duration="7684000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="304417000" />
+    <option name="totallyTimeSpent" value="305904000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
@@ -489,13 +499,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/LoginPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="661">
-          <caret line="102" column="1" lean-forward="true" selection-start-line="102" selection-start-column="1" selection-end-line="102" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -763,11 +766,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/user.actions.js">
+    <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="19" column="18" lean-forward="true" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
-          <folding />
+        <state relative-caret-position="237">
+          <caret line="161" column="0" lean-forward="true" selection-start-line="161" selection-start-column="0" selection-end-line="161" selection-end-column="0" />
+          <folding>
+            <element signature="e#724#840#0" expanded="false" />
+            <element signature="e#879#1042#0" expanded="false" />
+            <element signature="n#!!block;n#getDealing#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -782,20 +789,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/LoadLineChart.js">
+    <entry file="file://$PROJECT_DIR$/src/actions/user.actions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="121" column="12" lean-forward="true" selection-start-line="121" selection-start-column="12" selection-end-line="121" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="561">
+          <caret line="62" column="38" lean-forward="false" selection-start-line="62" selection-start-column="38" selection-end-line="62" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/LoginPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="37">
+          <caret line="29" column="8" lean-forward="false" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Home.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="61" column="18" lean-forward="true" selection-start-line="61" selection-start-column="18" selection-end-line="61" selection-end-column="18" />
+        <state relative-caret-position="2100">
+          <caret line="84" column="9" lean-forward="true" selection-start-line="84" selection-start-column="9" selection-end-line="84" selection-end-column="9" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
             <element signature="e#502#551#0" expanded="true" />
@@ -803,15 +816,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
+    <entry file="file://$PROJECT_DIR$/src/components/LoadLineChart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="43" column="77" lean-forward="false" selection-start-line="43" selection-start-column="77" selection-end-line="43" selection-end-column="77" />
+        <state relative-caret-position="171">
+          <caret line="203" column="30" lean-forward="false" selection-start-line="203" selection-start-column="30" selection-end-line="203" selection-end-column="30" />
           <folding>
-            <element signature="e#724#840#0" expanded="false" />
-            <element signature="e#879#1042#0" expanded="false" />
-            <element signature="n#!!block;n#getDealing#0" expanded="false" />
-            <element signature="n#!!block;n#getPriceByKeyDate#0" expanded="false" />
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
