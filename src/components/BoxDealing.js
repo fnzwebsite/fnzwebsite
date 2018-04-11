@@ -29,6 +29,12 @@ class BoxToday extends React.Component {
         this.props.acdActions.getAcd('previous','1cb01fd9-a3be-42aa-9bae-93d8f05f6c67')
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.props.acdActions.getAcd('today','1cb01fd9-a3be-42aa-9bae-93d8f05f6c67')
+        this.props.acdActions.getAcd('next','1cb01fd9-a3be-42aa-9bae-93d8f05f6c67')
+        this.props.acdActions.getAcd('previous','1cb01fd9-a3be-42aa-9bae-93d8f05f6c67')
+    }
+
     render() {
         var today = moment().format("YYYY-MM-DD");
         var tomorrow = moment().add('days', 1).format("YYYY-MM-DD");

@@ -54,7 +54,7 @@ class LoadLineChart extends React.Component {
         if (dealing) {
             let datetime = [];
             datetime.push('x');
-            datetime.push('00:00')
+            datetime.push('00:00:00')
             let buy = [];
             buy.push('BUY');
             buy.push(0);
