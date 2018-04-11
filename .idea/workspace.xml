@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0690c2d6-c039-4662-a950-a80c345b563f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.nvm" afterPath="$PROJECT_DIR$/.nvm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/LoadLineChart.js" afterPath="$PROJECT_DIR$/src/components/LoadLineChart.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/BoxDealing.js" afterPath="$PROJECT_DIR$/src/components/BoxDealing.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -32,11 +32,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoadLineChart.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LoadLineChart.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/LoadLineChart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="73">
-              <caret line="56" column="32" lean-forward="false" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="32" />
+            <state relative-caret-position="70">
+              <caret line="103" column="56" lean-forward="true" selection-start-line="103" selection-start-column="56" selection-end-line="103" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -75,11 +75,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BoxDealing.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BoxDealing.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/BoxDealing.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="170" column="31" lean-forward="false" selection-start-line="170" selection-start-column="31" selection-end-line="170" selection-end-column="31" />
+            <state relative-caret-position="82">
+              <caret line="57" column="72" lean-forward="true" selection-start-line="57" selection-start-column="72" selection-end-line="57" selection-end-column="72" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
                 <element signature="n#!!block;n#constructor#0;n#BoxToday#0" expanded="false" />
@@ -262,8 +262,8 @@
         <option value="$PROJECT_DIR$/src/actions/priceActions.js" />
         <option value="$PROJECT_DIR$/src/components/Home.js" />
         <option value="$PROJECT_DIR$/src/actions/acdActions.js" />
-        <option value="$PROJECT_DIR$/src/components/BoxDealing.js" />
         <option value="$PROJECT_DIR$/src/components/LoadLineChart.js" />
+        <option value="$PROJECT_DIR$/src/components/BoxDealing.js" />
       </list>
     </option>
   </component>
@@ -432,12 +432,12 @@
       <workItem from="1523276033624" duration="12000" />
       <workItem from="1523286495674" duration="10716000" />
       <workItem from="1523346829030" duration="3625000" />
-      <workItem from="1523373267588" duration="16605000" />
+      <workItem from="1523373267588" duration="16851000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="314825000" />
+    <option name="totallyTimeSpent" value="315071000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -895,23 +895,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/LoadLineChart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="103" column="56" lean-forward="true" selection-start-line="103" selection-start-column="56" selection-end-line="103" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/BoxDealing.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="170" column="31" lean-forward="false" selection-start-line="170" selection-start-column="31" selection-end-line="170" selection-end-column="31" />
+        <state relative-caret-position="82">
+          <caret line="57" column="72" lean-forward="true" selection-start-line="57" selection-start-column="72" selection-end-line="57" selection-end-column="72" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
             <element signature="n#!!block;n#constructor#0;n#BoxToday#0" expanded="false" />
             <element signature="e#1237#1346#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/LoadLineChart.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
-          <caret line="56" column="32" lean-forward="false" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>

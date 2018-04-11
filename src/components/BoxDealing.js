@@ -55,7 +55,7 @@ class BoxToday extends React.Component {
             if(this.props.price.acdToday && this.props.price.acdToday.length) {
                 subscriptionsToday = parseFloat(subscriptionsToday) + parseFloat(this.props.price.acdToday[0].unitsPurchased) * parseFloat(this.props.price.acdToday[0].roundedPrice);
                 redemptionsToday = parseFloat(redemptionsToday) + parseFloat(this.props.price.acdToday[0].unitsSold) * parseFloat(this.props.price.acdToday[0].roundedPrice);
-                netInflowOutflowToday = parseFloat(subscriptionsToday) - parseFloat(redemptionsToday);
+                netInflowOutflowToday = parseFloat(subscriptionsToday) + parseFloat(redemptionsToday);
                 subscriptionsToday = parseFloat(subscriptionsToday).toFixed(4);
                 redemptionsToday = parseFloat(redemptionsToday).toFixed(4);
                 netInflowOutflowToday = parseFloat(netInflowOutflowToday).toFixed(4);
@@ -63,7 +63,7 @@ class BoxToday extends React.Component {
             if(this.props.price.acdPrevious && this.props.price.acdPrevious.length) {
                 subscriptionsPrevious = parseFloat(subscriptionsPrevious) + parseFloat(this.props.price.acdPrevious[0].unitsPurchased) * parseFloat(this.props.price.acdPrevious[0].roundedPrice);
                 redemptionsPrevious = parseFloat(redemptionsPrevious) + parseFloat(this.props.price.acdPrevious[0].unitsSold) * parseFloat(this.props.price.acdPrevious[0].roundedPrice);
-                netInflowOutflowPrevious = parseFloat(subscriptionsPrevious) - parseFloat(redemptionsPrevious);
+                netInflowOutflowPrevious = parseFloat(subscriptionsPrevious) + parseFloat(redemptionsPrevious);
                 subscriptionsPrevious = parseFloat(subscriptionsPrevious).toFixed(4);
                 redemptionsPrevious = parseFloat(redemptionsPrevious).toFixed(4);
                 netInflowOutflowPrevious = parseFloat(netInflowOutflowPrevious).toFixed(4);
@@ -73,7 +73,7 @@ class BoxToday extends React.Component {
             if(this.props.price.acdNext && this.props.price.acdNext.length) {
                 subscriptionsNext = parseFloat(subscriptionsNext) + parseFloat(this.props.price.acdNext[0].unitsPurchased) * parseFloat(this.props.price.acdNext[0].roundedPrice);
                 redemptionsNext = parseFloat(redemptionsNext) + parseFloat(this.props.price.acdNext[0].unitsSold) * parseFloat(this.props.price.acdNext[0].roundedPrice);
-                netInflowOutflowNext = parseFloat(subscriptionsNext) - parseFloat(redemptionsNext);
+                netInflowOutflowNext = parseFloat(subscriptionsNext) + parseFloat(redemptionsNext);
                 subscriptionsNext = parseFloat(subscriptionsNext).toFixed(4);
                 redemptionsNext = parseFloat(redemptionsNext).toFixed(4);
                 netInflowOutflowNext = parseFloat(netInflowOutflowNext).toFixed(4);
