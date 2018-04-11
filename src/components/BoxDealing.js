@@ -96,9 +96,9 @@ class BoxToday extends React.Component {
                             <div className="dashboard_card">
                                 <div className="row">
                                     <div className="col-6 open">
-                                        <div className="row align-items-center justify-content-center h-50">
+                                        <div className="row align-items-center justify-content-center h-100" style={{marginTop:'20px'}}>
                                             <h5>Net Inflows/Outflows</h5>
-                                            <h2><span>&#163;</span>{netInflowOutflowPrevious}<span
+                                            <h2 className={netInflowOutflowPrevious < 0 ? 'closed':'open'}><span>&#163;</span>{netInflowOutflowPrevious}<span
                                                 className="sub-text"></span></h2>
                                         </div>
                                     </div>
@@ -128,10 +128,10 @@ class BoxToday extends React.Component {
                             <div className="dashboard_card">
                                 <div className="row">
                                     <div className="col-6 open">
-                                        <div className="row align-items-center justify-content-center h-50">
+                                        <div className="row align-items-center justify-content-center h-100" style={{marginTop:'20px'}}>
 
                                             <h5>Net Inflows/Outflows</h5>
-                                            <h2><span>&#163;</span>{netInflowOutflowToday}<span
+                                            <h2 className={netInflowOutflowToday < 0 ? 'fund-orange':'fund-blue'}><span>&#163;</span>{netInflowOutflowToday}<span
                                                 className="sub-text"></span></h2>
                                         </div>
 
@@ -162,9 +162,9 @@ class BoxToday extends React.Component {
                             <div className="dashboard_card">
                                 <div className="row">
                                     <div className="col-6 open">
-                                        <div className="row align-items-center justify-content-center h-50">
+                                        <div className="row align-items-center justify-content-center h-100" style={{marginTop:'20px'}}>
                                             <h5>Net Inflows/Outflows</h5>
-                                            <h2><span>&#163;</span>{netInflowOutflowNext}<span
+                                            <h2 className={netInflowOutflowNext < 0 ? 'fund-orange':'fund-blue'}><span>&#163;</span>{netInflowOutflowNext}<span
                                                 className="sub-text"></span></h2>
                                         </div>
 
