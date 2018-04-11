@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import React from 'react';
 import moment from 'moment'
-import userActions from '../actions/user.actions';
+import * as acdActions from '../actions/acdActions';
 import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
 import { Redirect} from 'react-router-dom';
@@ -23,6 +23,11 @@ class BoxToday extends React.Component {
             this.props.loadChart(selected)
         }
     }
+    componentWillMount(){
+        this.props.acdActions.getAcd('today','1cb01fd9-a3be-42aa-9bae-93d8f05f6c67')
+        this.props.acdActions.getAcd('next','1cb01fd9-a3be-42aa-9bae-93d8f05f6c67')
+        this.props.acdActions.getAcd('previous','1cb01fd9-a3be-42aa-9bae-93d8f05f6c67')
+    }
 
     render() {
         var today = moment().format("YYYY-MM-DD");
@@ -33,114 +38,46 @@ class BoxToday extends React.Component {
             return <Redirect to={{ pathname: '/login', state: { from: this.props.location } }} />
         }
 
-        if (this.props.dealingData && this.props.dealingData.status != "400") {
-            let self = this
-            let ListToday = Object.keys(self.props.dealingData).map(function (keyName, keyIndex) {
-                if (moment(self.props.dealingData[keyName].boxDate).isSame(today, 'day')) {
-                    return self.props.dealingData[keyName];
-                }
-            });
+        if (this.props.price.acdToday && this.props.price.acdToday.length) {
+            console.log("hi")
+            let subscriptionsPrevious = 0;
+            let redemptionsPrevious = 0;
+            let netInflowOutflowPrevious = 0;
 
-            let ListPrevious = Object.keys(self.props.dealingData).map(function (keyName, keyIndex) {
-                var date = moment(self.props.dealingData[keyName].boxDate).isSame(yesterday, 'day');
-                if (date) {
-                    return self.props.dealingData[keyName];
-                }
-            });
+            let subscriptionsNext = 0;
+            let redemptionsNext = 0;
+            let netInflowOutflowNext = 0;
 
-            let ListNext = Object.keys(self.props.dealingData).map(function (keyName, keyIndex) {
-                var date = moment(self.props.dealingData[keyName].boxDate).isSame(tomorrow, 'day');
-                if (date) {
-                    return self.props.dealingData[keyName];
-                }
-            });
+            let subscriptionsToday = 0;
+            let redemptionsToday = 0;
+            let netInflowOutflowToday = 0;
 
-            var subscriptionsNext = 0;
-            var redemptionsNext = 0;
-            if (ListNext && ListNext.length && self.props.price.price) {
-                ListNext.map(function (item, index) {
-                    if(item) {
-                        let data = Object.keys(self.props.price.price).filter(function (priceItem) {
-                            return self.props.price.price[priceItem].instrumentKey == item.instrumentKey;
-                        })
-                        if (data && data.length) {
-                            data = self.props.price.price[data];
-
-                            if (item.amount > 0 && item.dealType == "BUY") {
-                                subscriptionsNext = (parseFloat(subscriptionsNext) + parseFloat(item.amount)).toFixed(4);
-                            }
-                            else if (item.units > 0 && item.dealType == "BUY" && data.price) {
-                                subscriptionsNext = (parseFloat(subscriptionsNext) + parseFloat(item.units) * parseFloat(data.price)).toFixed(4);
-                            }
-
-                            if (item.amount > 0 && item.dealType == "SELL") {
-                                redemptionsNext = (parseFloat(redemptionsNext) + parseFloat(item.amount)).toFixed(4);
-                            }
-
-                            else if (item.units > 0 && item.dealType == "SELL" && data.price) {
-                                redemptionsNext = (parseFloat(redemptionsNext) + parseFloat(item.units) * parseFloat(data.price)).toFixed(4);
-                            }
-                        }
-                    }
-                })
+            if(this.props.price.acdToday && this.props.price.acdToday.length) {
+                subscriptionsToday = parseFloat(subscriptionsToday) + parseFloat(this.props.price.acdToday[0].unitsPurchased) * parseFloat(this.props.price.acdToday[0].roundedPrice);
+                redemptionsToday = parseFloat(redemptionsToday) + parseFloat(this.props.price.acdToday[0].unitsSold) * parseFloat(this.props.price.acdToday[0].roundedPrice);
+                netInflowOutflowToday = parseFloat(subscriptionsToday) - parseFloat(redemptionsToday);
+                subscriptionsToday = parseFloat(subscriptionsToday).toFixed(4);
+                redemptionsToday = parseFloat(redemptionsToday).toFixed(4);
+                netInflowOutflowToday = parseFloat(netInflowOutflowToday).toFixed(4);
             }
-            var subscriptionsPrevious = 0;
-            var redemptionsPrevious = 0;
-            if (ListPrevious && ListPrevious.length && self.props.price.price) {
-                ListPrevious.map(function (item, index) {
-                    if(item) {
-                        let data = Object.keys(self.props.price.price).filter(function (priceItem) {
-                            return self.props.price.price[priceItem].instrumentKey == item.instrumentKey;
-                        })
-                        if (data && data.length) {
-                            data = self.props.price.price[data];
+            if(this.props.price.acdPrevious && this.props.price.acdPrevious.length) {
+                subscriptionsPrevious = parseFloat(subscriptionsPrevious) + parseFloat(this.props.price.acdPrevious[0].unitsPurchased) * parseFloat(this.props.price.acdPrevious[0].roundedPrice);
+                redemptionsPrevious = parseFloat(redemptionsPrevious) + parseFloat(this.props.price.acdPrevious[0].unitsSold) * parseFloat(this.props.price.acdPrevious[0].roundedPrice);
+                netInflowOutflowPrevious = parseFloat(subscriptionsPrevious) - parseFloat(redemptionsPrevious);
+                subscriptionsPrevious = parseFloat(subscriptionsPrevious).toFixed(4);
+                redemptionsPrevious = parseFloat(redemptionsPrevious).toFixed(4);
+                netInflowOutflowPrevious = parseFloat(netInflowOutflowPrevious).toFixed(4);
 
-                            if (item.amount > 0 && item.dealType == "BUY") {
-                                subscriptionsPrevious = (parseFloat(subscriptionsPrevious) + parseFloat(item.amount)).toFixed(4);
-                            }
-                            else if (item.units > 0 && item.dealType == "BUY" && data.price) {
-                                subscriptionsPrevious = (parseFloat(subscriptionsPrevious) + parseFloat(item.units) * parseFloat(data.price)).toFixed(4);
-                            }
-
-                            if (item.amount > 0 && item.dealType == "SELL") {
-                                redemptionsPrevious = (parseFloat(redemptionsPrevious) + parseFloat(item.amount)).toFixed(4);
-                            }
-
-                            else if (item.units > 0 && item.dealType == "SELL" && data.price) {
-                                redemptionsPrevious = (parseFloat(redemptionsPrevious) + parseFloat(item.units) * parseFloat(data.price)).toFixed(4);
-                            }
-                        }
-                    }
-                })
             }
-            var subscriptionsToday = 0;
-            var redemptionsToday = 0;
-            if (ListToday && ListToday.length && self.props.price.price) {
-                ListToday.map(function (item, index) {
-                    if(item) {
-                        let data = Object.keys(self.props.price.price).filter(function (priceItem) {
-                            return self.props.price.price[priceItem].instrumentKey == item.instrumentKey;
-                        })
-                        if (data && data.length) {
-                            data = self.props.price.price[data];
 
-                            if (item.amount > 0 && item.dealType == "BUY") {
-                                subscriptionsToday = (parseFloat(subscriptionsToday) + parseFloat(item.amount)).toFixed(4);
-                            }
-                            else if (item.units > 0 && item.dealType == "BUY" && data.price) {
-                                subscriptionsToday = (parseFloat(subscriptionsToday) + parseFloat(item.units) * parseFloat(data.price)).toFixed(4);
-                            }
+            if(this.props.price.acdNext && this.props.price.acdNext.length) {
+                subscriptionsNext = parseFloat(subscriptionsNext) + parseFloat(this.props.price.acdNext[0].unitsPurchased) * parseFloat(this.props.price.acdNext[0].roundedPrice);
+                redemptionsNext = parseFloat(redemptionsNext) + parseFloat(this.props.price.acdNext[0].unitsSold) * parseFloat(this.props.price.acdNext[0].roundedPrice);
+                netInflowOutflowNext = parseFloat(subscriptionsNext) - parseFloat(redemptionsNext);
+                subscriptionsNext = parseFloat(subscriptionsNext).toFixed(4);
+                redemptionsNext = parseFloat(redemptionsNext).toFixed(4);
+                netInflowOutflowNext = parseFloat(netInflowOutflowNext).toFixed(4);
 
-                            if (item.amount > 0 && item.dealType == "SELL") {
-                                redemptionsToday = (parseFloat(redemptionsToday) + parseFloat(item.amount)).toFixed(4);
-                            }
-
-                            else if (item.units > 0 && item.dealType == "SELL" && data.price) {
-                                redemptionsToday = (parseFloat(redemptionsToday) + parseFloat(item.units) * parseFloat(data.price)).toFixed(4);
-                            }
-                        }
-                    }
-                })
             }
 
             return (
@@ -155,7 +92,7 @@ class BoxToday extends React.Component {
                                     <div className="col-6 open">
                                         <div className="row align-items-center justify-content-center h-50">
                                             <h5>Net Inflows/Outflows</h5>
-                                            <h2><span>&#163;</span>{(parseFloat(subscriptionsPrevious) + parseFloat(redemptionsPrevious)).toFixed(4)}<span
+                                            <h2><span>&#163;</span>{netInflowOutflowPrevious}<span
                                                 className="sub-text"></span></h2>
                                         </div>
                                     </div>
@@ -188,7 +125,7 @@ class BoxToday extends React.Component {
                                         <div className="row align-items-center justify-content-center h-50">
 
                                             <h5>Net Inflows/Outflows</h5>
-                                            <h2><span>&#163;</span>{(parseFloat(subscriptionsToday) + parseFloat(redemptionsToday)).toFixed(4)}<span
+                                            <h2><span>&#163;</span>{netInflowOutflowToday}<span
                                                 className="sub-text"></span></h2>
                                         </div>
 
@@ -221,7 +158,7 @@ class BoxToday extends React.Component {
                                     <div className="col-6 open">
                                         <div className="row align-items-center justify-content-center h-50">
                                             <h5>Net Inflows/Outflows</h5>
-                                            <h2><span>&#163;</span>{(parseFloat(subscriptionsNext) + parseFloat(redemptionsNext)).toFixed(4)}<span
+                                            <h2><span>&#163;</span>{netInflowOutflowNext}<span
                                                 className="sub-text"></span></h2>
                                         </div>
 
@@ -266,13 +203,15 @@ const
     };
 
 BoxToday.propTypes = {
-    userActions: PropTypes.object,
-    user: PropTypes.array
+    acdActions: PropTypes.object,
+    acdToday: PropTypes.array,
+    acdNext: PropTypes.array,
+    acdPrevious: PropTypes.array,
 };
 
 const
     mapDispatchToProps = (dispatch) => ({
-        userActions: bindActionCreators(userActions, dispatch)
+        acdActions: bindActionCreators(acdActions, dispatch)
     });
 
 

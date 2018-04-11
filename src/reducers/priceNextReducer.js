@@ -1,15 +1,15 @@
 import initialState from './initialState';
 import {
-    FETCH_PRICE_NEXT, RECEIVE_PRICE_NEXT
+    FETCH_ACD_NEXT, RECEIVE_ACD_NEXT
 } from '../actions/allActions';
 
-export default function priceNext(state = initialState.priceNext, action) {
+export default function acdNext(state = initialState.acdNext, action) {
     let newState;
     switch (action.type) {
-        case FETCH_PRICE_NEXT:
+        case FETCH_ACD_NEXT:
             return action;
-        case RECEIVE_PRICE_NEXT:
-            newState = action.priceNext;
+        case RECEIVE_ACD_NEXT:
+            newState = action.acdNext;
             return newState;
         default:
             return state;

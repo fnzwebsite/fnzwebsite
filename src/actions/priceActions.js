@@ -27,7 +27,7 @@ let processData = function (response, dispatch) {
 
 export function receivePrice(data) {
 
-        return {type: allActions.RECEIVE_PRICE_TODAY, price: data};
+        return {type: allActions.RECEIVE_ACD_TODAY, price: data};
 
 };
 

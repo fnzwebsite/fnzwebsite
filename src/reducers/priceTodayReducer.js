@@ -1,15 +1,15 @@
 import initialState from './initialState';
 import {
-  FETCH_PRICE_TODAY, RECEIVE_PRICE_TODAY
+    FETCH_ACD_TODAY, RECEIVE_ACD_TODAY
 } from '../actions/allActions';
 
-export default function priceToday(state = initialState.price, action) {
+export default function acdToday(state = initialState.acdToday, action) {
     let newState;
     switch (action.type) {
-        case FETCH_PRICE_TODAY:
+        case FETCH_ACD_TODAY:
             return action;
-        case RECEIVE_PRICE_TODAY:
-            newState = action.price;
+        case RECEIVE_ACD_TODAY:
+            newState = action.acdToday;
             return newState;
         default:
             return state;

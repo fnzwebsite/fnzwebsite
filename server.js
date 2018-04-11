@@ -5,7 +5,8 @@ var express = require('express'),
     server = express(),
     port = 3700,
     io = require('socket.io').listen(server.listen(port), {log: debug}),
-    momenttz = require('moment-timezone');
+    momenttz = require('moment-timezone'),
+    moment = require('moment');
 
 var setDate = momenttz.tz(momenttz.now(), "Europe/London").subtract(2,'hour').format();
 
@@ -29,6 +30,25 @@ server.get('/price', (req, res) => {
     getPriceByKeyDate(function (priceDataRes) {
         res.send(priceDataRes);
     }, auth);
+});
+
+
+server.get('/box/:day/acd/:acdId', (req, res) => {
+    console.log("hi")
+    var checkDate;
+    if (req.params.day == 'today') {
+        checkDate = moment().format("YYYY-MM-DD");
+    } else if (req.params.day == 'next') {
+        checkDate = moment().add('days', 1).format("YYYY-MM-DD");
+    } else if (req.params.day == 'previous') {
+        checkDate = moment().add('days', -1).format("YYYY-MM-DD");
+    }
+    console.log(checkDate);
+    var priceData = [];
+    let auth = req.headers.authorization;
+    getAcd(function (data) {
+        res.send(data);
+    }, auth, checkDate, req.params.acdId);
 });
 
 var clients = {};
@@ -173,4 +193,39 @@ function getPriceByKeyDate(callback,auth) {
     });
 
     req1.end();
+}
+
+function getAcd(callback, auth, dateValue,acdId) {
+    console.log('/api/v1/box/'+dateValue+'/acd/'+acdId)
+    var options = {
+        method: 'GET',
+        host: '35.178.56.52',
+        port: 8081,
+        path: '/api/v1/box/'+dateValue+'/acd/'+acdId,
+        headers: {
+            Authorization: auth
+        }
+    };
+
+    var req = http.request(options, function (res) {
+        var output = '';
+
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            output += chunk;
+        });
+
+        res.on('end', function () {
+            var obj = JSON.parse(output);
+            if (callback != undefined) {
+                callback(obj);
+            }
+        });
+    });
+
+    req.on('error', function (e) {
+        console.log('problem with request: ' + e.message);
+    });
+
+    req.end();
 }

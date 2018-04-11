@@ -76,7 +76,7 @@ class Home extends React.Component {
     }
 
     getPrice() {
-        this.props.priceActions.getPriceKeyDate();
+        // this.props.priceActions.getPriceKeyDate();
     }
 
     render() {
