@@ -54,10 +54,13 @@ class LoadLineChart extends React.Component {
         if (dealing) {
             let datetime = [];
             datetime.push('x');
+            datetime.push('00:00')
             let buy = [];
             buy.push('BUY');
+            buy.push(0);
             let sell = [];
             sell.push('SELL');
+            sell.push(0);
             let self = this;
             let loadAmount = Object.keys(dealing).sort((a, b) => a.tradeDate - b.tradeDate).map(function (keyName, keyIndex) {
                 if (loadThisDay == 'today') {
