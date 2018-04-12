@@ -49,40 +49,61 @@ class BoxToday extends React.Component {
             let subscriptionsPrevious = 0;
             let redemptionsPrevious = 0;
             let netInflowOutflowPrevious = 0;
+            let broughtForwardPrevious = 0;
+            let carryForwardPrevious = 0;
 
             let subscriptionsNext = 0;
             let redemptionsNext = 0;
             let netInflowOutflowNext = 0;
+            let broughtForwardNext = 0;
+            let carryForwardNext = 0;
 
             let subscriptionsToday = 0;
             let redemptionsToday = 0;
             let netInflowOutflowToday = 0;
+            let broughtForwardToday = 0;
+            let carryForwardToday = 0;
 
             if(this.props.price.acdToday && this.props.price.acdToday.length) {
+                console.log(JSON.stringify(this.props.price.acdToday));
                 subscriptionsToday = parseFloat(subscriptionsToday) + parseFloat(this.props.price.acdToday[0].unitsPurchased) * parseFloat(this.props.price.acdToday[0].roundedPrice);
                 redemptionsToday = parseFloat(redemptionsToday) + parseFloat(this.props.price.acdToday[0].unitsSold) * parseFloat(this.props.price.acdToday[0].roundedPrice);
+                broughtForwardToday = parseFloat(broughtForwardToday) + parseFloat(this.props.price.acdToday[0].totalUnitsBroughtForwardBalance);
+                carryForwardToday = parseFloat(carryForwardToday) + parseFloat(this.props.price.acdToday[0].totalUnitsCarriedForward);
                 netInflowOutflowToday = parseFloat(subscriptionsToday) + parseFloat(redemptionsToday);
                 subscriptionsToday = parseFloat(subscriptionsToday).toFixed(4);
                 redemptionsToday = parseFloat(redemptionsToday).toFixed(4);
                 netInflowOutflowToday = parseFloat(netInflowOutflowToday).toFixed(4);
+                broughtForwardToday = parseFloat(broughtForwardToday).toFixed(4);
+                carryForwardToday = parseFloat(carryForwardToday).toFixed(4);
+                console.log(broughtForwardToday);
+                console.log(carryForwardToday);
             }
             if(this.props.price.acdPrevious && this.props.price.acdPrevious.length) {
                 subscriptionsPrevious = parseFloat(subscriptionsPrevious) + parseFloat(this.props.price.acdPrevious[0].unitsPurchased) * parseFloat(this.props.price.acdPrevious[0].roundedPrice);
                 redemptionsPrevious = parseFloat(redemptionsPrevious) + parseFloat(this.props.price.acdPrevious[0].unitsSold) * parseFloat(this.props.price.acdPrevious[0].roundedPrice);
+                broughtForwardPrevious = parseFloat(broughtForwardPrevious) + parseFloat(this.props.price.acdPrevious[0].totalUnitsBroughtForwardBalance);
+                carryForwardPrevious = parseFloat(carryForwardPrevious) + parseFloat(this.props.price.acdPrevious[0].totalUnitsCarriedForward);
                 netInflowOutflowPrevious = parseFloat(subscriptionsPrevious) + parseFloat(redemptionsPrevious);
                 subscriptionsPrevious = parseFloat(subscriptionsPrevious).toFixed(4);
                 redemptionsPrevious = parseFloat(redemptionsPrevious).toFixed(4);
                 netInflowOutflowPrevious = parseFloat(netInflowOutflowPrevious).toFixed(4);
+                broughtForwardPrevious = parseFloat(broughtForwardPrevious).toFixed(4);
+                carryForwardPrevious = parseFloat(carryForwardPrevious).toFixed(4);
 
             }
 
             if(this.props.price.acdNext && this.props.price.acdNext.length) {
                 subscriptionsNext = parseFloat(subscriptionsNext) + parseFloat(this.props.price.acdNext[0].unitsPurchased) * parseFloat(this.props.price.acdNext[0].roundedPrice);
                 redemptionsNext = parseFloat(redemptionsNext) + parseFloat(this.props.price.acdNext[0].unitsSold) * parseFloat(this.props.price.acdNext[0].roundedPrice);
+                broughtForwardNext = parseFloat(broughtForwardNext) + parseFloat(this.props.price.acdNext[0].totalUnitsBroughtForwardBalance);
+                carryForwardNext = parseFloat(carryForwardNext) + parseFloat(this.props.price.acdNext[0].totalUnitsCarriedForward);
                 netInflowOutflowNext = parseFloat(subscriptionsNext) + parseFloat(redemptionsNext);
                 subscriptionsNext = parseFloat(subscriptionsNext).toFixed(4);
                 redemptionsNext = parseFloat(redemptionsNext).toFixed(4);
                 netInflowOutflowNext = parseFloat(netInflowOutflowNext).toFixed(4);
+                broughtForwardNext = parseFloat(broughtForwardNext).toFixed(4);
+                carryForwardNext = parseFloat(carryForwardNext).toFixed(4);
 
             }
 
@@ -97,35 +118,35 @@ class BoxToday extends React.Component {
                                     <div className="col-6 open">
                                         <div className="row align-items-center justify-content-center h-100">
                                             <h5>Net In/Out Flow</h5>
-                                            <h2><span>&#163;</span>23.46<span className="sub-text">mn</span></h2>
+                                            <h2><span>&#163;</span>{netInflowOutflowPrevious}<span className="sub-text">mn</span></h2>
                                         </div>
                                     </div>
                                     <div className="col-6 closed">
                                         <div className="row">
                                             <div className="col-sm-12 sub-sec">
                                                 <h5>Subscriptions</h5>
-                                                <h2><span>&#163;</span>149,240</h2>
+                                                <h2><span>&#163;</span>{subscriptionsPrevious}</h2>
                                             </div>
                                         </div>
                                         <hr/>
                                             <div className="row">
                                                 <div className="col-sm-12">
                                                     <h5>Redemptions</h5>
-                                                    <h2><span>&#163;</span>200,146</h2>
+                                                    <h2><span>&#163;</span>{redemptionsPrevious}</h2>
                                                 </div>
                                             </div>
                                             <hr/>
                                                 <div className="row">
                                                     <div className="col-sm-12">
                                                         <h5>Brought Forward</h5>
-                                                        <h2>1000 Units</h2>
+                                                        <h2>{broughtForwardPrevious} Units</h2>
                                                     </div>
                                                 </div>
                                                 <hr/>
                                                     <div className="row">
                                                         <div className="col-sm-12">
                                                             <h5>Carry Forward</h5>
-                                                            <h2>200 Units</h2>
+                                                            <h2>{carryForwardPrevious} Units</h2>
                                                         </div>
                                                     </div>
                                     </div>
@@ -142,35 +163,35 @@ class BoxToday extends React.Component {
                                     <div className="col-6 open">
                                         <div className="row align-items-center justify-content-center h-100">
                                             <h5>Net In/Out Flow</h5>
-                                            <h2><span>&#163;</span>23.46<span className="sub-text">mn</span></h2>
+                                            <h2><span>&#163;</span>{netInflowOutflowToday}<span className="sub-text">mn</span></h2>
                                         </div>
                                     </div>
                                     <div className="col-6 closed">
                                         <div className="row">
                                             <div className="col-sm-12 sub-sec">
                                                 <h5>Subscriptions</h5>
-                                                <h2><span>&#163;</span>149,240</h2>
+                                                <h2><span>&#163;</span>{subscriptionsToday}</h2>
                                             </div>
                                         </div>
                                         <hr/>
                                             <div className="row">
                                                 <div className="col-sm-12">
                                                     <h5>Redemptions</h5>
-                                                    <h2><span>&#163;</span>200,146</h2>
+                                                    <h2><span>&#163;</span>{redemptionsToday}</h2>
                                                 </div>
                                             </div>
                                             <hr/>
                                                 <div className="row">
                                                     <div className="col-sm-12">
                                                         <h5>Brought Forward</h5>
-                                                        <h2>1000 Units</h2>
+                                                        <h2>{broughtForwardToday} Units</h2>
                                                     </div>
                                                 </div>
                                                 <hr/>
                                                     <div className="row">
                                                         <div className="col-sm-12">
                                                             <h5>Carry Forward</h5>
-                                                            <h2>200 Units</h2>
+                                                            <h2>{carryForwardToday} Units</h2>
                                                         </div>
                                                     </div>
                                     </div>
@@ -187,35 +208,35 @@ class BoxToday extends React.Component {
                                     <div className="col-6 open">
                                         <div className="row align-items-center justify-content-center h-100">
                                             <h5>Net In/Out Flow</h5>
-                                            <h2><span>&#163;</span>23.46<span className="sub-text">mn</span></h2>
+                                            <h2><span>&#163;</span>{netInflowOutflowNext}<span className="sub-text">mn</span></h2>
                                         </div>
                                     </div>
                                     <div className="col-6 closed">
                                         <div className="row">
                                             <div className="col-sm-12 sub-sec">
                                                 <h5>Subscriptions</h5>
-                                                <h2><span>&#163;</span>149,240</h2>
+                                                <h2><span>&#163;</span>{subscriptionsNext}</h2>
                                             </div>
                                         </div>
                                         <hr/>
                                             <div className="row">
                                                 <div className="col-sm-12">
                                                     <h5>Redemptions</h5>
-                                                    <h2><span>&#163;</span>200,146</h2>
+                                                    <h2><span>&#163;</span>{redemptionsNext}</h2>
                                                 </div>
                                             </div>
                                             <hr/>
                                                 <div className="row">
                                                     <div className="col-sm-12">
                                                         <h5>Brought Forward</h5>
-                                                        <h2>1000 Units</h2>
+                                                        <h2>{broughtForwardNext} Units</h2>
                                                     </div>
                                                 </div>
                                                 <hr/>
                                                     <div className="row">
                                                         <div className="col-sm-12">
                                                             <h5>Carry Forward</h5>
-                                                            <h2>200 Units</h2>
+                                                            <h2>{carryForwardNext} Units</h2>
                                                         </div>
                                                     </div>
                                     </div>
