@@ -151,7 +151,7 @@ class Home extends React.Component {
                                                             <ul id="tabs_1" className="uk-switcher uk-margin">
                                                                 <li>
                                                                     <div className="line-chart-example card">
-                                                                        <div className="card-body" style={{"paddingBottom": "30px"}}>
+                                                                        <div className="card-body">
                                                                             <LoadLineChart loadThisDay={this.state.chart}
                                                                                            dealingData={dealing}/>
                                                                         </div>

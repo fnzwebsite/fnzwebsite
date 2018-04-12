@@ -109,8 +109,8 @@ class BoxToday extends React.Component {
 
             return (
                 <div className="row">
-                    <div className="col-md-4 previous">
-                        <div className="card funds">
+                    <div className="col-md-4 previous" onClick={() => this.changeView('previous')}>
+                        <div className={this.state.selected == "previous" ? 'card funds selected':'card funds'}>
                             <div className="card-header">
                                 <h3>Fund Position</h3> <span className="badge bg-alice pull-right">Previous Day</span></div>
                             <div className="dashboard_card">
@@ -154,8 +154,8 @@ class BoxToday extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4 today">
-                        <div className="card funds">
+                    <div className="col-md-4 today" onClick={() => this.changeView('today')}>
+                        <div className={this.state.selected == "today" ? 'card funds selected':'card funds'}>
                             <div className="card-header">
                                 <h3>Fund Position</h3> <span className="badge bg-alice pull-right">Today</span></div>
                             <div className="dashboard_card">
@@ -199,8 +199,8 @@ class BoxToday extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4 next">
-                        <div className="card funds">
+                    <div className="col-md-4 next" onClick={() => this.changeView('next')}>
+                        <div className={this.state.selected == "next" ? 'card funds selected':'card funds'}>
                             <div className="card-header">
                                 <h3>Fund Position</h3> <span className="badge bg-alice pull-right">Next Day</span></div>
                             <div className="dashboard_card">
