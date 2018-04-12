@@ -5,108 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0690c2d6-c039-4662-a950-a80c345b563f" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/amstyle.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/chart.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/custom.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/fontastic.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/style.blue.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/style.default.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/style.green.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/style.pink.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/style.red.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/style.sea.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/style.violet.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/styles.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/data/addresses.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/data/countries.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/fonts/dashboard.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/fonts/dashboard.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/fonts/dashboard.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/fonts/dashboard.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/icons-reference/fonts/dashboard.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/icons-reference/fonts/dashboard.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/icons-reference/fonts/dashboard.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/icons-reference/fonts/dashboard.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/icons-reference/icons-reference.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/icons-reference/styles.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/amchart.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/amcharts.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/amstock.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/charts-custom.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/charts-home.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/front.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIcon.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconBlack.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconH.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconHBlack.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRectBig.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRectBig.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRectBigBlack.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRectBigBlack.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRectBigBlackH.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRectBigBlackH.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRectBigH.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRectBigH.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRectSmall.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRectSmall.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRectSmallBlack.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRectSmallBlack.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRectSmallBlackH.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRectSmallBlackH.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRectSmallH.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRectSmallH.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRoundBig.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRoundBig.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRoundBigBlack.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRoundBigBlack.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRoundBigBlackH.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRoundBigBlackH.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRoundBigH.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRoundBigH.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRoundSmall.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRoundSmall.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRoundSmallBlack.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRoundSmallBlack.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRoundSmallBlackH.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRoundSmallBlackH.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRoundSmallH.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/dragIconRoundSmallH.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/eraserIcon.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/eraserIcon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/eraserIcon.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/eraserIconH.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/eraserIconH.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/eraserIconH.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/export.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/exportWhite.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/lens.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/lens.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/lensWhite.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/lensWhite.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/lensWhite_old.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/lens_old.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/pencilIcon.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/pencilIcon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/pencilIcon.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/pencilIconH.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/pencilIconH.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/pencilIconH.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/xIcon.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/xIcon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/xIcon.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/xIconH.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/xIconH.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/images/xIconH.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/serial.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.nvm" afterPath="$PROJECT_DIR$/.nvm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/dashboard.html" afterPath="$PROJECT_DIR$/public/dashboard.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/BoxDealing.js" afterPath="$PROJECT_DIR$/src/components/BoxDealing.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Header.js" afterPath="$PROJECT_DIR$/src/components/Header.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Home.js" afterPath="$PROJECT_DIR$/src/components/Home.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/SideNav.js" afterPath="$PROJECT_DIR$/src/components/SideNav.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/TransactionsTable.js" afterPath="$PROJECT_DIR$/src/components/TransactionsTable.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -558,12 +457,12 @@
       <workItem from="1523276033624" duration="12000" />
       <workItem from="1523286495674" duration="10716000" />
       <workItem from="1523346829030" duration="3625000" />
-      <workItem from="1523373267588" duration="26798000" />
+      <workItem from="1523373267588" duration="27390000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="325018000" />
+    <option name="totallyTimeSpent" value="325610000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
