@@ -2,143 +2,131 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>FNZ-Dashboard</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="robots" content="all,follow">
+    <!-- Remove Tap Highlight on Windows Phone IE -->
+    <meta name="msapplication-tap-highlight" content="no" />
+    <link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
+    <title>Dashboard</title>
+    <!-- additional styles for plugins -->
+    <!-- weather icons -->
+    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bower_components/weather-icons/css/weather-icons.min.css" media="all">
+    <!-- metrics graphics (charts) -->
+    <link rel="stylesheet" href="bower_components/metrics-graphics/dist/metricsgraphics.css">
+    <!-- chartist -->
+    <link rel="stylesheet" href="bower_components/chartist/dist/chartist.min.css">
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome CSS-->
-    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
-    <!-- Fontastic Custom icon font-->
-    <link rel="stylesheet" href="css/fontastic.css">
-    <!-- Google fonts - Poppins -->
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700"> -->
-    <!-- <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet"> -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
-    <!-- theme stylesheet-->
-    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
-    <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="css/custom.css">
-    <link rel="stylesheet" href="css/amstyle.css" type="text/css">
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="img/favicon.ico">
-    <!-- Tweaks for older IEs-->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- uikit -->
+    <link rel="stylesheet" href="bower_components/uikit/css/uikit.almost-flat.min.css" media="all">
+    <!-- flag icons -->
+    <link rel="stylesheet" href="assets/icons/flags/flags.min.css" media="all">
+    <!-- altair admin -->
+    <link rel="stylesheet" href="assets/css/main.min.css" media="all">
+    <link rel="stylesheet" href="assets/css/style.default.css" media="all">
+    <link rel="stylesheet" href="assets/css/custom.css" media="all">
+    <link rel="stylesheet" href="assets/css/amstyle.css" media="all">
+    <!-- matchMedia polyfill for testing media queries in JS -->
+    <!--[if lte IE 9]>
+        <script type="text/javascript" src="bower_components/matchMedia/matchMedia.js"></script>
+        <script type="text/javascript" src="bower_components/matchMedia/matchMedia.addListener.js"></script>
+    <![endif]-->
 </head>
 
 <body>
-    <div class="page">
-        <!-- Main Navbar-->
-        <div class="page-content d-flex align-items-stretch">
-            <!-- Side Navbar level one -->
-            <nav class="side-navbar l1">
-                <div><a id="toggle-btn" href="#" class="menu-btn">
-                           <img src="img/menu-arrow.png" alt="menu-toggle" class="">
+    <div className="page">
+        <div className="page-content d-flex align-items-stretch">
+            <nav className="side-navbar l1">
+                <div><a id="toggle-btn" href="#" className="menu-btn">
+                           <img src="img/menu-arrow.png" alt="menu-toggle" className="">
                             </a></div>
-                <ul class="list-unstyled">
-                    <li class="active"><a href="javascript:void(0)" id="home-menu"> <i class="fa fa-home-icon"></i>Home</a></li>
-                    <li><a href="javascript:void(0)"> <i class="fa fa-service-icon"></i>Services</a></li>
-                    <li><a href="javascript:void(0)"> <i class="fa fa-message-icon"></i>Messaging</a></li>
-                    <li><a href="javascript:void(0)"> <i class="fa fa-market-icon"></i>Market & News</a></li>
-                    <li><a href="javascript:void(0)"> <i class="fa fa-fav-icon"></i>Favourites</a></li>
-                    <li class="settings"><a href="javascript:void(0)"> <i class="fa fa-setting-icon"></i>Settings</a></li>
+                <ul className="list-unstyled">
+                    <li className="active"><a href="dashboard.html" id="home-menu"> <i className="fa fa-home-icon"></i>Home</a></li>
+                    <li><a href="acd.html"> <i className="fa fa-admin"></i>Admin</a></li>
                 </ul>
             </nav>
-            <!-- Side Navbar -->
-            <nav class="side-navbar l2 shrinked">
-                <!-- Sidebar Header-->
-                <!-- Sidebar Navidation Menus-->
-                <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
-                    <li class="nav-item">
-                        <div class="avatar"><img src="img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
-                    </li>
-                    <li class="nav-item"><a href="" class="nav-link user">John Smith</a></li>
-                </ul>
-                <ul class="list-unstyled">
-                    <li class="active"><a href="javascript:void(0)"> <i class="fa fa-handshake-o"></i>Dealing</a></li>
-                    <li><a href="javascript:void(0)"> <i class="fa fa-tag"></i>Price</a></li>
-                    <li><a href="javascript:void(0)"> <i class="fa fa-settle"></i>Settlement</a></li>
-                    <li><a href="javascript:void(0)"> <i class="fa fa-cmf"></i>Commissions & Fee</a></li>
-                    <li><a href="javascript:void(0)"> <i class="fa fa-ca"></i>Corporate Actions</a></li>
-                    <!-- <li><a href=""> <i class="fa fa-power-off"></i>Logout</a></li> -->
+            <nav className="side-navbar l2 shrinked">
+                <ul className="list-unstyled">
+                    <li className="active"><a href="acd.html"> <i className="fa fa-tachometer"></i>Dashboard</a></li>
                 </ul>
             </nav>
-            <div class="content-inner">
-                <!-- menu -->
-                <!-- header -->
-                <header class="header">
-                    <nav class="navbar fixed-top">
-                        <!-- Search Box-->
-                        <div class="search-box">
-                            <button class="dismiss"><i class="icon-close"></i></button>
+            <div className="content-inner">
+                <header className="header">
+                    <nav className="navbar fixed-top">
+                        <div className="search-box">
+                            <button className="dismiss"><i className="icon-close"></i></button>
                             <form id="searchForm" action="#" role="search">
-                                <input type="search" placeholder="What are you looking for..." class="form-control">
+                                <input type="search" placeholder="What are you looking for..." className="form-control">
                             </form>
                         </div>
-                        <div class="container-fluid">
-                            <div class="navbar-holder d-flex align-items-center justify-content-between">
-                                <!-- Navbar Menu -->
-                                <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
-                                    <li class="nav-item">
-                                        <div class="avatar"><img src="img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
+                        <div className="container-fluid">
+                            <div className="navbar-holder d-flex align-items-center justify-content-between">
+                                <ul className="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                                    <li className="nav-item">
+                                        <div className="avatar"><img src="img/avatar-1.jpg" alt="..." className="img-fluid rounded-circle"></div>
                                     </li>
-                                    <li class="nav-item"><a href="" class="nav-link">Welcome! John Smith</a></li>
+                                    <li className="nav-item"><a href="" className="nav-link">Welcome! John Smith</a></li>
                                 </ul>
-                                <!-- Navbar Header-->
-                                <div class="navbar-header">
-                                    <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
-                                        <!-- Search-->
-                                        <li class="nav-item d-flex align-items-center"><a id="search" href="#"><i class="icon-search"></i></a></li>
-                                        <!-- Notifications-->
-                                        <li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell-o"></i><span class="badge bg-yellow badge-corner">4</span></a>
+                                <div className="navbar-header">
+                                    <ul className="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                                        <li className="nav-item d-flex align-items-center"><a id="search" href="#"><i className="icon-search"></i></a></li>
+                                        <li className="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" className="nav-link"><i className="fa fa-bell-o"></i><span className="badge bg-yellow badge-corner">4</span></a>
                                         </li>
                                     </ul>
-                                    <!-- Navbar Brand -->
-                                    <a href="" class="navbar-brand">
-                                        <div class="brand-text brand-big"><img src="img/logo.png" alt="logo" class=""></div>
-                                        <div class="brand-text brand-small"><img src="img/logo.png" alt="logo" class=""></div>
+                                    <a href="" className="navbar-brand">
+                                        <div className="brand-text brand-big"><img src="img/logo.png" alt="logo" className=""></div>
+                                        <div className="brand-text brand-small"><img src="img/logo.png" alt="logo" className=""></div>
                                     </a>
-                                    <!-- Toggle Button-->
-                                    <a href="" class="dots-nav"><img src="img/dots-nav.png" alt="..." class=""></a>
+                                    <a href="" className="dots-nav"><img src="img/dots-nav.png" alt="..." className=""></a>
                                 </div>
                             </div>
                         </div>
                     </nav>
                 </header>
-                <div class="container-fluid">
-                    <div class="mt-70">
-                        <div class="row">
-                            <div class="col-md-4 previous">
-                                <div class="card funds">
-                                    <div class="card-header">
-                                        <h3>Fund Position</h3> <span class="badge bg-alice pull-right">Previous Day</span></div>
-                                    <div class="dashboard_card">
-                                        <div class="row">
-                                            <div class="col-6 open">
-                                                <div class="row align-items-center justify-content-center h-100">
-                                                    
-                                                    <h5>Net Inflows/Outflows</h5>
-                                                <h2><span>&#163;</span>23.46<span class="sub-text">mn</span></h2>
+                <div className="container-fluid">
+                    <div className="mt-6">
+                        <div className="row">
+                            <div className="col-md-4 previous">
+                                <div className="card funds">
+                                    <div className="card-header">
+                                        <h3>Fund Position</h3> <span className="badge bg-alice pull-right">Previous Day</span></div>
+                                    <div className="dashboard_card">
+                                        <div className="row">
+                                            <div className="col-6 open">
+                                                <div className="row align-items-center justify-content-center h-100">
+                                                    <h5>Net In/Out Flow</h5>
+                                                    <h2><span>&#163;</span>23.46<span className="sub-text">mn</span></h2>
                                                 </div>
-                                                
                                             </div>
-                                            <div class="col-6 closed">
-                                                <div class="row">
-                                                    <div class="col-sm-12 sub-sec">
+                                            <div className="col-6 closed">
+                                                <div className="row">
+                                                    <div className="col-sm-12 sub-sec">
                                                         <h5>Subscriptions</h5>
                                                         <h2><span>&#163;</span>149,240</h2>
                                                     </div>
                                                 </div>
                                                 <hr>
-                                                <div class="row">
-                                                    <div class="col-sm-12">
+                                                <div className="row">
+                                                    <div className="col-sm-12">
                                                         <h5>Redemptions</h5>
                                                         <h2><span>&#163;</span>200,146</h2>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div className="row">
+                                                    <div className="col-sm-12">
+                                                        <h5>Brought Forward</h5>
+                                                        <h2>1000 Units</h2>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div className="row">
+                                                    <div className="col-sm-12">
+                                                        <h5>Carry Forward</h5>
+                                                        <h2>200 Units</h2>
                                                     </div>
                                                 </div>
                                             </div>
@@ -146,32 +134,44 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 today">
-                                <div class="card funds">
-                                    <div class="card-header">
-                                        <h3>Fund Position</h3> <span class="badge bg-alice pull-right">Today</span></div>
-                                   <div class="dashboard_card">
-                                        <div class="row">
-                                            <div class="col-6 open">
-                                                <div class="row align-items-center justify-content-center h-100">
-                                                    
-                                                    <h5>Net Inflows/Outflows</h5>
-                                                <h2><span>&#163;</span>23.46<span class="sub-text">mn</span></h2>
+                            <div className="col-md-4 today">
+                                <div className="card funds">
+                                    <div className="card-header">
+                                        <h3>Fund Position</h3> <span className="badge bg-alice pull-right">Today</span></div>
+                                    <div className="dashboard_card">
+                                        <div className="row">
+                                            <div className="col-6 open">
+                                                <div className="row align-items-center justify-content-center h-100">
+                                                    <h5>Net In/Out Flow</h5>
+                                                    <h2><span>&#163;</span>23.46<span className="sub-text">mn</span></h2>
                                                 </div>
-                                                
                                             </div>
-                                            <div class="col-6 closed">
-                                                <div class="row">
-                                                    <div class="col-sm-12 sub-sec">
+                                            <div className="col-6 closed">
+                                                <div className="row">
+                                                    <div className="col-sm-12 sub-sec">
                                                         <h5>Subscriptions</h5>
                                                         <h2><span>&#163;</span>149,240</h2>
                                                     </div>
                                                 </div>
                                                 <hr>
-                                                <div class="row">
-                                                    <div class="col-sm-12">
+                                                <div className="row">
+                                                    <div className="col-sm-12">
                                                         <h5>Redemptions</h5>
                                                         <h2><span>&#163;</span>200,146</h2>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div className="row">
+                                                    <div className="col-sm-12">
+                                                        <h5>Brought Forward</h5>
+                                                        <h2>1000 Units</h2>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div className="row">
+                                                    <div className="col-sm-12">
+                                                        <h5>Carry Forward</h5>
+                                                        <h2>200 Units</h2>
                                                     </div>
                                                 </div>
                                             </div>
@@ -179,32 +179,44 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 next">
-                                <div class="card funds">
-                                    <div class="card-header">
-                                        <h3>Fund Position</h3> <span class="badge bg-alice pull-right">Next Day</span></div>
-                                     <div class="dashboard_card">
-                                        <div class="row">
-                                            <div class="col-6 open">
-                                                <div class="row align-items-center justify-content-center h-100">
-                                                    
-                                                    <h5>Net Inflows/Outflows</h5>
-                                                <h2><span>&#163;</span>23.46<span class="sub-text">mn</span></h2>
+                            <div className="col-md-4 next">
+                                <div className="card funds">
+                                    <div className="card-header">
+                                        <h3>Fund Position</h3> <span className="badge bg-alice pull-right">Next Day</span></div>
+                                    <div className="dashboard_card">
+                                        <div className="row">
+                                            <div className="col-6 open">
+                                                <div className="row align-items-center justify-content-center h-100">
+                                                    <h5>Net In/Out Flow</h5>
+                                                    <h2><span>&#163;</span>23.46<span className="sub-text">mn</span></h2>
                                                 </div>
-                                                
                                             </div>
-                                            <div class="col-6 closed">
-                                                <div class="row">
-                                                    <div class="col-sm-12 sub-sec">
+                                            <div className="col-6 closed">
+                                                <div className="row">
+                                                    <div className="col-sm-12 sub-sec">
                                                         <h5>Subscriptions</h5>
                                                         <h2><span>&#163;</span>149,240</h2>
                                                     </div>
                                                 </div>
                                                 <hr>
-                                                <div class="row">
-                                                    <div class="col-sm-12">
+                                                <div className="row">
+                                                    <div className="col-sm-12">
                                                         <h5>Redemptions</h5>
                                                         <h2><span>&#163;</span>200,146</h2>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div className="row">
+                                                    <div className="col-sm-12">
+                                                        <h5>Brought Forward</h5>
+                                                        <h2>1000 Units</h2>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div className="row">
+                                                    <div className="col-sm-12">
+                                                        <h5>Carry Forward</h5>
+                                                        <h2>200 Units</h2>
                                                     </div>
                                                 </div>
                                             </div>
@@ -213,87 +225,98 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="line-chart-example card">
-                                    <div class="card-body" style="padding-bottom: 30px; background: #fff">
-                                        <div id="chartdiv" style="width:100%; height:350px;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card">
-                                    <div class="card-body" style="padding-bottom: 30px; background: #fff">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Trade Date</th>
-                                                        <th>Investment Account</th>
-                                                        <th>ISIN</th>
-                                                        <th>Trade Type</th>
-                                                        <th>Units</th>
-                                                        <th>Amount</th>
-                                                        <th>Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>01/02/2018</td>
-                                                        <td>ACC001</td>
-                                                        <td>GBX00241</td>
-                                                        <td>Buy</td>
-                                                        <td>1000</td>
-                                                        <td>-</td>
-                                                        <td><span class="badge bg-green">Accepted</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>01/02/2018</td>
-                                                        <td>ACC001</td>
-                                                        <td>GBX00241</td>
-                                                        <td>Buy</td>
-                                                        <td>1000</td>
-                                                        <td>-</td>
-                                                        <td><span class="badge bg-green">Accepted</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>01/02/2018</td>
-                                                        <td>ACC001</td>
-                                                        <td>GBX00241</td>
-                                                        <td>Buy</td>
-                                                        <td>1000</td>
-                                                        <td>-</td>
-                                                        <td><span class="badge bg-green">Accepted</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>01/02/2018</td>
-                                                        <td>ACC001</td>
-                                                        <td>GBX00241</td>
-                                                        <td>Buy</td>
-                                                        <td>1000</td>
-                                                        <td>-</td>
-                                                        <td><span class="badge bg-orange">On hold</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>01/02/2018</td>
-                                                        <td>ACC001</td>
-                                                        <td>GBX00241</td>
-                                                        <td>Buy</td>
-                                                        <td>1000</td>
-                                                        <td>-</td>
-                                                        <td><span class="badge bg-red">Rejected</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>01/02/2018</td>
-                                                        <td>ACC001</td>
-                                                        <td>GBX00241</td>
-                                                        <td>Buy</td>
-                                                        <td>1000</td>
-                                                        <td>-</td>
-                                                        <td><span class="badge bg-green">Accepted</span></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                        <div className="row">
+                            <div className="col-sm-12">
+                                <div className="md-card uk-margin-medium-bottom">
+                                    <div className="md-card-content">
+                                        <div className="uk-grid" data-uk-grid-margin>
+                                            <div className="uk-width-1-1">
+                                                <ul className="uk-tab chart-tabs" data-uk-tab="{connect:'#tabs_1'}">
+                                                    <li><a className="" href="#chart"><i className="fa fa-area-chart"></i>Chart</a></li>
+                                                    <li className="uk-active"><a href="#table" className="active"><i className="fa fa-th-list"></i>Transactions</a></li>
+                                                </ul>
+                                                <ul id="tabs_1" className="uk-switcher uk-margin">
+                                                    <li>
+                                                        <div className="line-chart-example card">
+                                                            <div className="card-body" style="padding-bottom: 30px;">
+                                                                <div id="chartdiv" style="width:100%; height:350px;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <!-- table-content -->
+                                                        <table id="dt_default" className="uk-table" cellspacing="0" width="100%">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Trade Date</th>
+                                                                    <th>Investment Account</th>
+                                                                    <th>ISIN</th>
+                                                                    <th>Trade Type</th>
+                                                                    <th>Units</th>
+                                                                    <th>Amount</th>
+                                                                    <th>Status</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>01/02/2018</td>
+                                                                    <td>ACC001</td>
+                                                                    <td>GBX00241</td>
+                                                                    <td>Buy</td>
+                                                                    <td>1000</td>
+                                                                    <td>-</td>
+                                                                    <td><span className="badge bg-green">Accepted</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>01/02/2018</td>
+                                                                    <td>ACC001</td>
+                                                                    <td>GBX00241</td>
+                                                                    <td>Buy</td>
+                                                                    <td>1000</td>
+                                                                    <td>-</td>
+                                                                    <td><span className="badge bg-green">Accepted</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>01/02/2018</td>
+                                                                    <td>ACC001</td>
+                                                                    <td>GBX00241</td>
+                                                                    <td>Buy</td>
+                                                                    <td>1000</td>
+                                                                    <td>-</td>
+                                                                    <td><span className="badge bg-green">Accepted</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>01/02/2018</td>
+                                                                    <td>ACC001</td>
+                                                                    <td>GBX00241</td>
+                                                                    <td>Buy</td>
+                                                                    <td>1000</td>
+                                                                    <td>-</td>
+                                                                    <td><span className="badge bg-orange">On hold</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>01/02/2018</td>
+                                                                    <td>ACC001</td>
+                                                                    <td>GBX00241</td>
+                                                                    <td>Buy</td>
+                                                                    <td>1000</td>
+                                                                    <td>-</td>
+                                                                    <td><span className="badge bg-red">Rejected</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>01/02/2018</td>
+                                                                    <td>ACC001</td>
+                                                                    <td>GBX00241</td>
+                                                                    <td>Buy</td>
+                                                                    <td>1000</td>
+                                                                    <td>-</td>
+                                                                    <td><span className="badge bg-green">Accepted</span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -301,11 +324,10 @@
                         </div>
                     </div>
                 </div>
-                <!-- Page Footer-->
-                <footer class="main-footer">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-sm-12 text-center">
+                <footer className="main-footer">
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-sm-12 text-center">
                                 <p>&copy; Copyright FNZ UK Ltd 2018.</p>
                             </div>
                         </div>
@@ -317,33 +339,214 @@
         </div>
     </div>
     <!-- JavaScript files-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/popper.js/umd/popper.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendor/jquery.cookie/jquery.cookie.js"></script>
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
-    <script src="js/charts-custom.js"></script>
-    <script src="js/amchart.js"></script>
-    <script src="js/amcharts.js" type="text/javascript"></script>
-    <script src="js/serial.js" type="text/javascript"></script>
-    <script src="js/amstock.js" type="text/javascript"></script>
-    <!-- Main File-->
-    <script src="js/front.js"></script>
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <!-- common functions -->
+    <script src="assets/js/common.min.js"></script>
+    <!-- uikit functions -->
+    <script src="assets/js/uikit_custom.min.js"></script>
+    <!-- altair common functions/helpers -->
+    <script src="assets/js/altair_admin_common.min.js"></script>
+    <!-- page specific plugins -->
+    <!-- datatables -->
+    <script src="bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <!-- datatables colVis-->
+    <script src="bower_components/datatables-colvis/js/dataTables.colVis.js"></script>
+    <!-- datatables tableTools-->
+    <script src="bower_components/datatables-tabletools/js/dataTables.tableTools.js"></script>
+    <!-- datatables custom integration -->
+    <script src="assets/js/custom/datatables_uikit.min.js"></script>
+    <!--  datatables functions -->
+    <script src="assets/js/pages/plugins_datatables.min.js"></script>
+    <!-- <script src="assets/js/front.js"></script> -->
+    <!-- amcharts -->
+    <script src="assets/js/custom/amchart.js"></script>
+    <script src="assets/js/custom/amcharts.js" type="text/javascript"></script>
+    <script src="assets/js/custom/serial.js" type="text/javascript"></script>
+    <script src="assets/js/custom/amstock.js" type="text/javascript"></script>
+    <!-- amcharts end-->
     <script>
     $(document).ready(function() {
-        $(".nav-tabs a").click(function() {
-            $(this).tab('show');
+
+        // ------------------------------------------------------- //
+        // Sidebar Functionality
+        // ------------------------------------------------------ //
+        $('#toggle-btn, #home-menu').on('click', function(e) {
+            e.preventDefault();
+            $(this).toggleClass('active');
+
+            $('.side-navbar.l2').toggleClass('shrinked');
+            $('.content-inner').toggleClass('active');
+            $(document).trigger('sidebarChanged');
+
+            if ($(window).outerWidth() > 1183) {
+                if ($('#toggle-btn').hasClass('active')) {
+                    $('.navbar-header .brand-small').hide();
+                    $('.navbar-header .brand-big').show();
+                } else {
+                    $('.navbar-header .brand-small').show();
+                    $('.navbar-header .brand-big').hide();
+                }
+            }
+
+            if ($(window).outerWidth() < 1183) {
+                $('.navbar-header .brand-small').show();
+            }
+        });
+
+        $('.content-inner').on('click', function(e) {
+            e.preventDefault();
+
+            $('.side-navbar.l2').addClass('shrinked')
+
         });
     });
     </script>
     <script>
-    $(document).ready(function() {
-        if (!$.browser.webkit) {
-            $('.wrapper').html('<p>Sorry! Non webkit users. :(</p>');
+    $(function() {
+        var $switcher = $('#style_switcher'),
+            $switcher_toggle = $('#style_switcher_toggle'),
+            $theme_switcher = $('#theme_switcher'),
+            $mini_sidebar_toggle = $('#style_sidebar_mini'),
+            $boxed_layout_toggle = $('#style_layout_boxed'),
+            $accordion_mode_toggle = $('#accordion_mode_main_menu'),
+            $body = $('body');
+
+
+        $switcher_toggle.click(function(e) {
+            e.preventDefault();
+            $switcher.toggleClass('switcher_active');
+        });
+
+        $theme_switcher.children('li').click(function(e) {
+            e.preventDefault();
+            var $this = $(this),
+                this_theme = $this.attr('data-app-theme');
+
+            $theme_switcher.children('li').removeClass('active_theme');
+            $(this).addClass('active_theme');
+            $body
+                .removeClass('app_theme_a app_theme_b app_theme_c app_theme_d app_theme_e app_theme_f app_theme_g app_theme_h app_theme_i')
+                .addClass(this_theme);
+
+            if (this_theme == '') {
+                localStorage.removeItem('altair_theme');
+            } else {
+                localStorage.setItem("altair_theme", this_theme);
+            }
+
+        });
+
+
+
+
+        $('body').on('click', '#fooBtnGroup .btn', function(event) {
+            event.stopPropagation(); // prevent default bootstrap behavior
+            if ($(this).attr('data-toggle') != 'button') { // don't toggle if data-toggle="button"
+                <!-- $(this).toggleClass('active'); -->
+
+                var idval = $(this).attr('id');
+
+                if ($(this).attr('id') == 'savings') {
+                    $('#current').removeAttr('data-toggle');
+                    $(this).addClass('btn btn-success');
+                    $('#current').removeClass('btn-success');
+                    <!-- $(this).toggleClass('active'); -->
+                    $(this).attr('data-toggle', 'button');
+                };
+
+                if ($(this).attr('id') == 'current') {
+                    $('#savings').removeAttr('data-toggle');
+                    $('#savings').removeClass('btn-success');
+                    $(this).addClass('btn btn-success');
+                    <!-- $(this).toggleClass('active'); -->
+                    $(this).attr('data-toggle', 'button');
+                };
+
+            }
+        });
+
+
+
+
+
+
+
+
+        // hide style switcher
+        $document.on('click keyup', function(e) {
+            if ($switcher.hasClass('switcher_active')) {
+                if (
+                    (!$(e.target).closest($switcher).length) ||
+                    (e.keyCode == 27)
+                ) {
+                    $switcher.removeClass('switcher_active');
+                }
+            }
+        });
+
+        // get theme from local storage
+        if (localStorage.getItem("altair_theme") !== null) {
+            $theme_switcher.children('li[data-app-theme=' + localStorage.getItem("altair_theme") + ']').click();
         }
 
+
+        // toggle mini sidebar
+
+        // change input's state to checked if mini sidebar is active
+        if ((localStorage.getItem("altair_sidebar_mini") !== null && localStorage.getItem("altair_sidebar_mini") == '1') || $body.hasClass('sidebar_mini')) {
+            $mini_sidebar_toggle.iCheck('check');
+        }
+
+        $mini_sidebar_toggle
+            .on('ifChecked', function(event) {
+                $switcher.removeClass('switcher_active');
+                localStorage.setItem("altair_sidebar_mini", '1');
+                location.reload(true);
+            })
+            .on('ifUnchecked', function(event) {
+                $switcher.removeClass('switcher_active');
+                localStorage.removeItem('altair_sidebar_mini');
+                location.reload(true);
+            });
+
+
+        // toggle boxed layout
+
+        if ((localStorage.getItem("altair_layout") !== null && localStorage.getItem("altair_layout") == 'boxed') || $body.hasClass('boxed_layout')) {
+            $boxed_layout_toggle.iCheck('check');
+            $body.addClass('boxed_layout');
+            $(window).resize();
+        }
+
+        $boxed_layout_toggle
+            .on('ifChecked', function(event) {
+                $switcher.removeClass('switcher_active');
+                localStorage.setItem("altair_layout", 'boxed');
+                location.reload(true);
+            })
+            .on('ifUnchecked', function(event) {
+                $switcher.removeClass('switcher_active');
+                localStorage.removeItem('altair_layout');
+                location.reload(true);
+            });
+
+        // main menu accordion mode
+        if ($sidebar_main.hasClass('accordion_mode')) {
+            $accordion_mode_toggle.iCheck('check');
+        }
+
+        $accordion_mode_toggle
+            .on('ifChecked', function() {
+                $sidebar_main.addClass('accordion_mode');
+            })
+            .on('ifUnchecked', function() {
+                $sidebar_main.removeClass('accordion_mode');
+            });
+
+
     });
+
     </script>
     <script>
     $(document).ready(function() {

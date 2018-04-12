@@ -88,108 +88,141 @@ class BoxToday extends React.Component {
 
             return (
                 <div className="row">
-                    <div className="col-md-4 previous" onClick={() => this.changeView('previous')}>
-                        <div className={this.state.selected == "previous" ? 'card funds selected':'card funds'}>
+                    <div className="col-md-4 previous">
+                        <div className="card funds">
                             <div className="card-header">
-                                <h3>Fund Position</h3> <span className="badge bg-alice pull-right">Previous Day</span>
-                            </div>
+                                <h3>Fund Position</h3> <span className="badge bg-alice pull-right">Previous Day</span></div>
                             <div className="dashboard_card">
                                 <div className="row">
                                     <div className="col-6 open">
-                                        <div className="row align-items-center justify-content-center h-100" style={{marginTop:'20px'}}>
-                                            <h5>Net Inflows/Outflows</h5>
-                                            <h2 className={netInflowOutflowPrevious < 0 ? 'closed':'open'}><span>&#163;</span>{netInflowOutflowPrevious}<span
-                                                className="sub-text"></span></h2>
+                                        <div className="row align-items-center justify-content-center h-100">
+                                            <h5>Net In/Out Flow</h5>
+                                            <h2><span>&#163;</span>23.46<span className="sub-text">mn</span></h2>
                                         </div>
                                     </div>
                                     <div className="col-6 closed">
                                         <div className="row">
                                             <div className="col-sm-12 sub-sec">
                                                 <h5>Subscriptions</h5>
-                                                <h2><span>&#163;</span>{subscriptionsPrevious}</h2>
+                                                <h2><span>&#163;</span>149,240</h2>
                                             </div>
                                         </div>
-                                        <hr style={{marginTop:'-10px'}}/>
-                                        <div className="row">
-                                            <div className="col-sm-12">
-                                                <h5>Redemptions</h5>
-                                                <h2><span>&#163;</span>{redemptionsPrevious}</h2>
+                                        <hr/>
+                                            <div className="row">
+                                                <div className="col-sm-12">
+                                                    <h5>Redemptions</h5>
+                                                    <h2><span>&#163;</span>200,146</h2>
+                                                </div>
                                             </div>
-                                        </div>
+                                            <hr/>
+                                                <div className="row">
+                                                    <div className="col-sm-12">
+                                                        <h5>Brought Forward</h5>
+                                                        <h2>1000 Units</h2>
+                                                    </div>
+                                                </div>
+                                                <hr/>
+                                                    <div className="row">
+                                                        <div className="col-sm-12">
+                                                            <h5>Carry Forward</h5>
+                                                            <h2>200 Units</h2>
+                                                        </div>
+                                                    </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4 today" onClick={() => this.changeView('today')}>
-                        <div className={this.state.selected == "today" ? 'card funds selected':'card funds'}>
+                    <div className="col-md-4 today">
+                        <div className="card funds">
                             <div className="card-header">
                                 <h3>Fund Position</h3> <span className="badge bg-alice pull-right">Today</span></div>
                             <div className="dashboard_card">
                                 <div className="row">
                                     <div className="col-6 open">
-                                        <div className="row align-items-center justify-content-center h-100" style={{marginTop:'20px'}}>
-
-                                            <h5>Net Inflows/Outflows</h5>
-                                            <h2 className={netInflowOutflowToday < 0 ? 'fund-orange':'fund-blue'}><span>&#163;</span>{netInflowOutflowToday}<span
-                                                className="sub-text"></span></h2>
+                                        <div className="row align-items-center justify-content-center h-100">
+                                            <h5>Net In/Out Flow</h5>
+                                            <h2><span>&#163;</span>23.46<span className="sub-text">mn</span></h2>
                                         </div>
-
                                     </div>
                                     <div className="col-6 closed">
                                         <div className="row">
                                             <div className="col-sm-12 sub-sec">
                                                 <h5>Subscriptions</h5>
-                                                <h2><span>&#163;</span>{subscriptionsToday}</h2>
+                                                <h2><span>&#163;</span>149,240</h2>
                                             </div>
                                         </div>
-                                        <hr style={{marginTop:'-10px'}}/>
-                                        <div className="row">
-                                            <div className="col-sm-12">
-                                                <h5>Redemptions</h5>
-                                                <h2><span>&#163;</span>{redemptionsToday}</h2>
+                                        <hr/>
+                                            <div className="row">
+                                                <div className="col-sm-12">
+                                                    <h5>Redemptions</h5>
+                                                    <h2><span>&#163;</span>200,146</h2>
+                                                </div>
                                             </div>
-                                        </div>
+                                            <hr/>
+                                                <div className="row">
+                                                    <div className="col-sm-12">
+                                                        <h5>Brought Forward</h5>
+                                                        <h2>1000 Units</h2>
+                                                    </div>
+                                                </div>
+                                                <hr/>
+                                                    <div className="row">
+                                                        <div className="col-sm-12">
+                                                            <h5>Carry Forward</h5>
+                                                            <h2>200 Units</h2>
+                                                        </div>
+                                                    </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4 next" onClick={() => this.changeView('next')}>
-                        <div className={this.state.selected == "next" ? 'card funds selected':'card funds'}>
+                    <div className="col-md-4 next">
+                        <div className="card funds">
                             <div className="card-header">
                                 <h3>Fund Position</h3> <span className="badge bg-alice pull-right">Next Day</span></div>
                             <div className="dashboard_card">
                                 <div className="row">
                                     <div className="col-6 open">
-                                        <div className="row align-items-center justify-content-center h-100" style={{marginTop:'20px'}}>
-                                            <h5>Net Inflows/Outflows</h5>
-                                            <h2 className={netInflowOutflowNext < 0 ? 'fund-orange':'fund-blue'}><span>&#163;</span>{netInflowOutflowNext}<span
-                                                className="sub-text"></span></h2>
+                                        <div className="row align-items-center justify-content-center h-100">
+                                            <h5>Net In/Out Flow</h5>
+                                            <h2><span>&#163;</span>23.46<span className="sub-text">mn</span></h2>
                                         </div>
-
                                     </div>
                                     <div className="col-6 closed">
                                         <div className="row">
                                             <div className="col-sm-12 sub-sec">
                                                 <h5>Subscriptions</h5>
-                                                <h2><span>&#163;</span>{subscriptionsNext}</h2>
+                                                <h2><span>&#163;</span>149,240</h2>
                                             </div>
                                         </div>
-                                        <hr style={{marginTop:'-10px'}}/>
-                                        <div className="row">
-                                            <div className="col-sm-12">
-                                                <h5>Redemptions</h5>
-                                                <h2><span>&#163;</span>{redemptionsNext}</h2>
+                                        <hr/>
+                                            <div className="row">
+                                                <div className="col-sm-12">
+                                                    <h5>Redemptions</h5>
+                                                    <h2><span>&#163;</span>200,146</h2>
+                                                </div>
                                             </div>
-                                        </div>
+                                            <hr/>
+                                                <div className="row">
+                                                    <div className="col-sm-12">
+                                                        <h5>Brought Forward</h5>
+                                                        <h2>1000 Units</h2>
+                                                    </div>
+                                                </div>
+                                                <hr/>
+                                                    <div className="row">
+                                                        <div className="col-sm-12">
+                                                            <h5>Carry Forward</h5>
+                                                            <h2>200 Units</h2>
+                                                        </div>
+                                                    </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             )
         }

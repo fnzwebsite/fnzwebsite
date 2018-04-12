@@ -77,7 +77,7 @@ class TransactionsTable extends React.Component {
             }
         }
         return (
-            <table className="table table-striped">
+            <table id="dt_default" className="uk-table" cellSpacing={0} style={{'width':"100%"}} >
                 <thead>
                 <tr>
                     <th>Trade Date</th>
