@@ -10,8 +10,7 @@ const userActions = {
 function login(username, password) {
   //alert('hi login....');
     return dispatch => {
-        dispatch(request({ username }));
-
+        //dispatch(request({ username }));
         postLogin(username, password)
             .then(
                 user => {
