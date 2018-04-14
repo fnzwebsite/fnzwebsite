@@ -2,10 +2,10 @@ import {connect} from 'react-redux';
 import React from 'react';
 import io from "socket.io-client"
 import moment from 'moment'
-import * as dealingActions from '../actions/dealingActions';
-import userActions from '../actions/user.actions';
+import * as dealingActions from '../../actions/dealingActions';
+import userActions from '../../actions/user.actions';
 import {bindActionCreators} from 'redux';
-import { authHeader } from '../helpers';
+import { authHeader } from '../../helpers/index';
 import PropTypes from 'prop-types';
 
 

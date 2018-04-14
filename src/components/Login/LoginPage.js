@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as instrumentActions from '../actions/instrumentActions';
-import userActions  from '../actions/user.actions';
+import * as instrumentActions from '../../actions/instrumentActions';
+import userActions  from '../../actions/user.actions';
 import PropTypes from 'prop-types';
 import React from 'react';
 
