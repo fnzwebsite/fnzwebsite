@@ -45,7 +45,7 @@ class BoxToday extends React.Component {
         }
 
         if (this.props.price.acdToday && this.props.price.acdToday.length) {
-            console.log("hi")
+            //console.log("hi")
             let subscriptionsPrevious = 0;
             let redemptionsPrevious = 0;
             let netInflowOutflowPrevious = 0;
@@ -65,7 +65,7 @@ class BoxToday extends React.Component {
             let carryForwardToday = 0;
 
             if(this.props.price.acdToday && this.props.price.acdToday.length) {
-                console.log(JSON.stringify(this.props.price.acdToday));
+              //  console.log(JSON.stringify(this.props.price.acdToday));
                 subscriptionsToday = parseFloat(subscriptionsToday) + parseFloat(this.props.price.acdToday[0].unitsPurchased) * parseFloat(this.props.price.acdToday[0].roundedPrice);
                 redemptionsToday = parseFloat(redemptionsToday) + parseFloat(this.props.price.acdToday[0].unitsSold) * parseFloat(this.props.price.acdToday[0].roundedPrice);
                 broughtForwardToday = parseFloat(broughtForwardToday) + parseFloat(this.props.price.acdToday[0].totalUnitsBroughtForwardBalance);
@@ -76,8 +76,8 @@ class BoxToday extends React.Component {
                 netInflowOutflowToday = parseFloat(netInflowOutflowToday).toFixed(4);
                 broughtForwardToday = parseFloat(broughtForwardToday).toFixed(4);
                 carryForwardToday = parseFloat(carryForwardToday).toFixed(4);
-                console.log(broughtForwardToday);
-                console.log(carryForwardToday);
+                //console.log(broughtForwardToday);
+                //console.log(carryForwardToday);
             }
             if(this.props.price.acdPrevious && this.props.price.acdPrevious.length) {
                 subscriptionsPrevious = parseFloat(subscriptionsPrevious) + parseFloat(this.props.price.acdPrevious[0].unitsPurchased) * parseFloat(this.props.price.acdPrevious[0].roundedPrice);
@@ -104,7 +104,6 @@ class BoxToday extends React.Component {
                 netInflowOutflowNext = parseFloat(netInflowOutflowNext).toFixed(4);
                 broughtForwardNext = parseFloat(broughtForwardNext).toFixed(4);
                 carryForwardNext = parseFloat(carryForwardNext).toFixed(4);
-
             }
 
             return (
@@ -118,14 +117,14 @@ class BoxToday extends React.Component {
                                     <div className="col-6 open">
                                         <div className="row align-items-center justify-content-center h-100">
                                             <h5>Net In/Out Flow</h5>
-                                            <h2><span>&#163;</span>{netInflowOutflowPrevious}<span className="sub-text">mn</span></h2>
+                          <h2 className={netInflowOutflowPrevious < 0 ? 'fund-orange':'fund-blue'}><span>&#163;</span>{netInflowOutflowPrevious}<span className="sub-text">mn</span></h2>
                                         </div>
                                     </div>
                                     <div className="col-6 closed">
                                         <div className="row">
                                             <div className="col-sm-12 sub-sec">
                                                 <h5>Subscriptions</h5>
-                                                <h2><span>&#163;</span>{subscriptionsPrevious}</h2>
+                                                <h2 className='fund-blue'><span>&#163;</span>{subscriptionsPrevious}</h2>
                                             </div>
                                         </div>
                                         <hr/>
@@ -163,14 +162,14 @@ class BoxToday extends React.Component {
                                     <div className="col-6 open">
                                         <div className="row align-items-center justify-content-center h-100">
                                             <h5>Net In/Out Flow</h5>
-                                            <h2><span>&#163;</span>{netInflowOutflowToday}<span className="sub-text">mn</span></h2>
+                                            <h2 className={netInflowOutflowToday < 0 ? 'fund-orange':'fund-blue'}><span>&#163;</span>{netInflowOutflowToday}<span className="sub-text">mn</span></h2>
                                         </div>
                                     </div>
                                     <div className="col-6 closed">
                                         <div className="row">
                                             <div className="col-sm-12 sub-sec">
                                                 <h5>Subscriptions</h5>
-                                                <h2><span>&#163;</span>{subscriptionsToday}</h2>
+                                                <h2 className='fund-blue'><span>&#163;</span>{subscriptionsToday}</h2>
                                             </div>
                                         </div>
                                         <hr/>
@@ -208,14 +207,14 @@ class BoxToday extends React.Component {
                                     <div className="col-6 open">
                                         <div className="row align-items-center justify-content-center h-100">
                                             <h5>Net In/Out Flow</h5>
-                                            <h2><span>&#163;</span>{netInflowOutflowNext}<span className="sub-text">mn</span></h2>
+                                            <h2 className={netInflowOutflowNext < 0 ? 'fund-orange':'fund-blue'}><span>&#163;</span>{netInflowOutflowNext}<span className="sub-text">mn</span></h2>
                                         </div>
                                     </div>
                                     <div className="col-6 closed">
                                         <div className="row">
                                             <div className="col-sm-12 sub-sec">
                                                 <h5>Subscriptions</h5>
-                                                <h2><span>&#163;</span>{subscriptionsNext}</h2>
+                                                <h2 className='fund-blue'><span>&#163;</span>{subscriptionsNext}</h2>
                                             </div>
                                         </div>
                                         <hr/>

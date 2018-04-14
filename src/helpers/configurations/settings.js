@@ -5,7 +5,7 @@ var config = {
  },
  'default1': {
    url: 'http://ec2-35-178-56-52.eu-west-2.compute.amazonaws.com:3000/',
-   socketurl: 'http://ec2-35-178-56-52.eu-west-2.compute.amazonaws.com:3000/'
+   socketurl: 'http://ec2-35-178-56-52.eu-west-2.compute.amazonaws.com:3700/'
  }
 }
 
