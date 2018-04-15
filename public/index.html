@@ -31,11 +31,11 @@
     <script src="assets/js/common.min.js"></script>
     <script src="assets/js/uikit_custom.min.js"></script>
     <script src="assets/js/altair_admin_common.min.js"></script>
-    <script src="bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-    <script src="bower_components/datatables-colvis/js/dataTables.colVis.js"></script>
-    <script src="bower_components/datatables-tabletools/js/dataTables.tableTools.js"></script>
-    <script src="assets/js/custom/datatables_uikit.min.js"></script>
-    <script src="assets/js/pages/plugins_datatables.min.js"></script>
+    <!--<script src="bower_components/datatables/media/js/jquery.dataTables.min.js"></script>-->
+    <!--<script src="bower_components/datatables-colvis/js/dataTables.colVis.js"></script>-->
+    <!--<script src="bower_components/datatables-tabletools/js/dataTables.tableTools.js"></script>-->
+    <!--<script src="assets/js/custom/datatables_uikit.min.js"></script>-->
+    <!--<script src="assets/js/pages/plugins_datatables.min.js"></script>-->
 
     <script>
         $(document).ready(function() {
@@ -215,28 +215,6 @@
         });
 
     </script>
-    <script>
-        $(document).ready(function() {
-            $('.today .card').click(function(e) {
-                e.preventDefault(); //prevent the link from being followed
-                $('.previous .card').removeClass('selected');
-                $('.next .card').removeClass('selected');
-                $(this).addClass('selected');
-            });
-            $('.previous .card').click(function(e) {
-                e.preventDefault(); //prevent the link from being followed
-                $('.today .card').removeClass('selected');
-                $('.next .card').removeClass('selected');
-                $(this).addClass('selected');
-            });
-            $('.next .card').click(function(e) {
-                e.preventDefault(); //prevent the link from being followed
-                $('.previous .card').removeClass('selected');
-                $('.today .card').removeClass('selected');
-                $(this).addClass('selected');
-            });
 
-        });
-    </script>
   </body>
 </html>

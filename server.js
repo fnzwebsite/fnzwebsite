@@ -63,7 +63,7 @@ io.use(function (socket, next) {
             }, socket.handshake.query.auth,setDate);
             setDate = momenttz.tz(momenttz.now(), "Europe/London").subtract(2,'hour').format();
             return next();
-        }, 10000);
+        }, 30000);
     }
     next(new Error('Authentication error'));
 });
