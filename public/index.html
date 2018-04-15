@@ -18,24 +18,32 @@
     <link rel="stylesheet" href="assets/css/main.min.css" media="all">
     <link rel="stylesheet" href="assets/css/style.default.css" media="all">
     <link rel="stylesheet" href="assets/css/custom.css" media="all">
-    <link rel="stylesheet" href="assets/css/amstyle.css" media="all">
-    <link rel="stylesheet" href="assets/css/chart.css"  media="all"/>
+    <!-- <link rel="stylesheet" href="assets/css/amstyle.css" media="all">
+    <link rel="stylesheet" href="assets/css/chart.css"  media="all"/> -->
     <!--[if lte IE 9]>
     <script type="text/javascript" src="bower_components/matchMedia/matchMedia.js"></script>
     <script type="text/javascript" src="bower_components/matchMedia/matchMedia.addListener.js"></script>
     <![endif]-->
+
 </head>
   <body>
     <div id="root">
     </div>
     <script src="assets/js/common.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/uikit_custom.min.js"></script>
     <script src="assets/js/altair_admin_common.min.js"></script>
+    <script src="bower_components/parsleyjs/dist/parsley.min.js"></script>
     <script src="bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="bower_components/datatables-colvis/js/dataTables.colVis.js"></script>
     <script src="bower_components/datatables-tabletools/js/dataTables.tableTools.js"></script>
     <script src="assets/js/custom/datatables_uikit.min.js"></script>
     <script src="assets/js/pages/plugins_datatables.min.js"></script>
+        <script src="assets/js/pages/components_notifications.min.js"></script>
+<script src="assets/js/custom/wizard_steps.min.js"></script>
+<script src="assets/js/pages/forms_wizard.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment-with-locales.min.js"></script>
+    <script src="https://tempusdominus.github.io/bootstrap-4/theme/js/tempusdominus-bootstrap-4.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -244,6 +252,28 @@
                 //           $('.side-navbar.l2').addClass('shrinked')
                 //
                 //         });
+
+
+                $(function() {
+   altair_wizard.advanced_wizard(),
+   altair_wizard.vertical_wizard() }),
+   altair_wizard = { content_height: function(t, i) { var e = $(t).find(".step-" + i).actual("outerHeight");
+        $(t).children(".content").animate({ height: e }, 280, bez_easing_swiftOut) },
+
+
+        advanced_wizard: function() { var t = $("#wizard_advanced"),
+            i = $("#wizard_advanced_form");
+        t.length && (t.steps({ headerTag: "h3", bodyTag: "section", transitionEffect: "slideLeft", trigger: "change", onInit: function(i, e) { altair_wizard.content_height(t, e), altair_md.checkbox_radio($(".wizard-icheck")), altair_uikit.reinitialize_grid_margin(), altair_forms.select_elements(t), t.find("span.switchery").remove(), altair_forms.switches(), $(".uk-accordion").on("toggle.uk.accordion", function() { $window.resize() }), setTimeout(function() { $window.resize() }, 100) }, onStepChanged: function(i, e) { altair_wizard.content_height(t, e), setTimeout(function() { $window.resize() }, 100) }, onStepChanging: function(i, e, n) { var a = t.find(".body.current").attr("data-step"),
+                    r = $('.body[data-step="' + a + '"]'); return r.find("[data-parsley-id]").each(function() { $(this).parsley().validate() }), $window.resize(), r.find(".md-input-danger").length ? !1 : !0 }, onFinished: function() { var t = JSON.stringify(i.serializeObject(), null, 2);
+                UIkit.alert("<p>Wizard data:</p><pre>" + t + "</pre>") } }), $window.on("debouncedresize", function() { var i = t.find(".body.current").attr("data-step");
+            altair_wizard.content_height(t, i) }), i.parsley().on("form:validated", function() { setTimeout(function() { altair_md.update_input(i.find(".md-input")), $window.resize() }, 100) }).on("field:validated", function(i) { var e = $(i.$element);
+            setTimeout(function() { altair_md.update_input(e); var i = t.find(".body.current").attr("data-step");
+                altair_wizard.content_height(t, i) }, 100) })) },
+
+
+        vertical_wizard: function() { var t = $("#wizard_vertical");
+        t.length && t.steps({ headerTag: "h3", bodyTag: "section", enableAllSteps: !0, enableFinishButton: !1, transitionEffect: "slideLeft", stepsOrientation: "vertical", onInit: function(i, e) { altair_wizard.content_height(t, e) }, onStepChanged: function(i, e) { altair_wizard.content_height(t, e) } }) }
+      };
 
 
         });

@@ -727,7 +727,7 @@
         font-size: 1.2rem;
         text-align: center;
 
-       
+
     }
     .dataTables_wrapper .uk-table .action .sorting::after {
         content: none !important;
@@ -1163,7 +1163,7 @@
         background-color: #555;
     }
     /*firefox*/
-    /* 
+    /*
   ##Device = Desktops
   ##Screen = 1281px to higher resolution desktops
 */
@@ -1172,7 +1172,7 @@
 
         /*CSS*/
     }
-    /* 
+    /*
   ##Device = Laptops, Desktops
   ##Screen = B/w 1025px to 1280px
 */
@@ -1191,7 +1191,7 @@
         }
         /*CSS*/
     }
-    /* 
+    /*
   ##Device = Tablets, Ipads (portrait)
   ##Screen = B/w 768px to 1024px
 */
@@ -1255,7 +1255,7 @@
 
         /*CSS*/
     }
-    /* 
+    /*
   ##Device = Tablets, Ipads (landscape)
   ##Screen = B/w 768px to 1024px
 */
@@ -1264,7 +1264,7 @@
 
         /*CSS*/
     }
-    /* 
+    /*
   ##Device = Low Resolution Tablets, Mobiles (Landscape)
   ##Screen = B/w 481px to 767px
 */
@@ -1273,7 +1273,7 @@
 
         /*CSS*/
     }
-    /* 
+    /*
   ##Device = Most of the Smartphones Mobiles (Portrait)
   ##Screen = B/w 320px to 479px
 */
