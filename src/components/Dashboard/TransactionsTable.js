@@ -6,11 +6,9 @@ import 'datatables.net-responsive/js/dataTables.responsive';
 import 'datatables.net-responsive-dt/css/responsive.dataTables.css';
 import Settings from '../Common/Settings';
 import moment from 'moment';
-
 var createReactClass = require('create-react-class');
-
-
 var tableAsJqeryElement = null;
+
 var Table = createReactClass({
     componentDidMount: function () {
         this.loadDataTable();
@@ -99,19 +97,6 @@ var Table = createReactClass({
             LoadRows = LoadRows.filter(function (item) {
                 return item != undefined
             })
-
-            // if (LoadRows.length == 0) {
-            //     LoadRows = <tr class="odd">
-            //         <td valign="top" colspan="7" class="dataTables_empty">No data available in table</td>
-            //         <td></td>
-            //         <td></td>
-            //         <td></td>
-            //         <td></td>
-            //         <td></td>
-            //         <td></td>
-            //
-            //     </tr>
-            // }
 
             return (
                 <div>
