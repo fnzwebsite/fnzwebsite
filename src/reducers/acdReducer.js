@@ -1,5 +1,5 @@
 import initialState from './initialState';
-import {FETCH_ACD,RECEIVE_ACD} from '../actions/allActions';
+import {FETCH_ACD,RECEIVE_ACD,FETCH_ACD_DATA} from '../actions/allActions';
 
 export default function acd(state = initialState.acd, action) {
     let newState;

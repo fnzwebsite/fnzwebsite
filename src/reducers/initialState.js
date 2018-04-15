@@ -3,5 +3,6 @@ export default {
     price:null,
     acdToday:null,
     acdPrevious:null,
-    acdNext:null
+    acdNext:null,
+    acdData:null
 };
