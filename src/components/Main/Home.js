@@ -6,6 +6,7 @@ import Footer from './Footer'
 import {Router, Route} from 'react-router';
 import Dashboard from '../Dashboard/Dashboard';
 import Acd from '../Admin/Acd';
+import AcdWizard from "../Admin/AcdWizard";
 
 class Home extends React.Component {
     render() {
@@ -21,6 +22,9 @@ class Home extends React.Component {
                         </div>
                         <Footer/>
                     </div>
+                </div>
+                <div className="uk-modal" id="modal_header_footer">
+                   <AcdWizard/>
                 </div>
             </div>
         )
