@@ -51,6 +51,13 @@ server.get('/box/:day/acd/:acdId', (req, res) => {
     }, auth, checkDate, req.params.acdId);
 });
 
+server.get('/getacd', (req, res) => {
+    let auth = req.headers.authorization;
+    getAllAcd(function (data) {
+        res.send(data);
+    }, auth);
+});
+
 var clients = {};
 
 io.use(function (socket, next) {
@@ -160,6 +167,42 @@ function getDealing(callback, auth) {
 
     req.end();
 }
+
+function getAllAcd(callback, auth) {
+    var options = {
+        method: 'GET',
+        host: '35.178.56.52',
+        port: 8081,
+        path: '/api/v1/acd',
+        headers: {
+            Authorization: auth
+        }
+    };
+
+    var req = http.request(options, function (res) {
+        var output = '';
+
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            output += chunk;
+        });
+
+        res.on('end', function () {
+            var obj = JSON.parse(output);
+            if (callback != undefined) {
+                callback(obj);
+            }
+        });
+    });
+
+    req.on('error', function (e) {
+        console.log('problem with request: ' + e.message);
+    });
+
+    req.end();
+}
+
+
 
 function getPriceByKeyDate(callback,auth) {
     var options = {

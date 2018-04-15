@@ -5,40 +5,65 @@
                                     import PropTypes from 'prop-types';
                                     import { Redirect} from 'react-router-dom';
                                     import * as acdDataActions from '../../actions/acdDataActions'
+                                    import $ from 'jquery';
 
                                     class Acd extends React.Component {
-
                                       constructor(props) {
                                         super(props);
+                                        //this.props.acdDataActions.getAllAcdData();
                                       }
 
                                       componentWillMount(){
-                                        //var data=0;
+                                        this.props.acdDataActions.getAllAcdData();
 
-  this.props.acdDataActions.getAllAcdData();
                                       }
-                                      componentWillReceiveProps()
+                                      loadEntities()
                                       {
-                                          this.props.acdDataActions.getAllAcdData();
-                                        alert('data: '+JSON.stringify(this.props.acdDataActions.acdData));
-                                      }
-                                      render() {
-                                        return (
-                                          <div class="mt-6">
-                                          <div class="row">
-                                          <div class="col-md-12 wizard-list">
-                                          <div class="row">
-                                          <div class="md-card uk-margin-medium-bottom">
+                                          let self = this;
+                                        //alert(JSON.stringify(this.props.acdData.name));
+                                          const rows=Object.keys(this.props.acdData).map(function (keyName, keyIndex) {
+                                            return(
+                                              <tr>
+                                                  <td>{self.props.acdData[keyName].name}</td>
+                                                  <td>{self.props.acdData[keyName].networkEntityType}</td>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td>{self.props.acdData[keyName].contact.email}</td>
+                                                  <td>{self.props.acdData[keyName].contact.telephone}</td>
+                                                  <td></td>
+                                                  <td className="uk-text-center">
+                                                <a href="#" className="edit" data-uk-modal="{target:'#modal_header_footer'}"><i className="md-icon material-icons">&#xE254;</i></a>
+                                              <a href="#"><i className="md-icon material-icons">&#xE872;</i></a>
+                                            </td>
+                                              </tr>
+                                            )
 
-                                          <div class="md-card-toolbar">
-                                          <h3 class="md-card-toolbar-heading-text"> Entities</h3>
-                                          <a class="create md-btn md-btn-primary pull-right md-btn-wave-light waves-effect waves-button waves-light" data-uk-modal="{target:'#modal_header_footer'}" href="#"><i class="fa fa-plus"></i>Entity</a>
+                                          });
+
+                                          return rows;
+                                        }
+                                      render() {
+
+                                        if(this.props.acdData)
+                                        {
+                                        return (
+                                          <div class="container-fluid" id="page_content">
+                                          <div className="mt-6">
+                                          <div className="row">
+                                          <div className="col-md-12 wizard-list">
+                                          <div className="row">
+                                          <div className="md-card uk-margin-medium-bottom">
+
+                                          <div className="md-card-toolbar">
+                                          <h3 className="md-card-toolbar-heading-text"> Entities</h3>
+                                          <a className="create md-btn md-btn-primary pull-right md-btn-wave-light waves-effect waves-button waves-light" data-uk-modal="{target:'#modal_header_footer'}" href="#"><i className="fa fa-plus"></i>Entity</a>
                                           </div>
-                                          <div class="md-card-content">
-                                          <table id="dt_default" class="uk-table" cellspacing="0" width="100%">
+                                          <div className="md-card-content">
+                                          <table id="dt_default" className="uk-table" cellSpacing="0" width="100%">
                                           <thead>
                                           <tr>
-                                          <th rowspan="2">Name</th>
+                                          <th rowSpan="2">Name</th>
                                           </tr>
                                           <tr>
                                           <th>Entity Type</th>
@@ -48,11 +73,11 @@
                                           <th>Email</th>
                                           <th>Telephone</th>
                                           <th>Fax</th>
-                                          <th class="action uk-text-center">Action</th>
+                                          <th className="action uk-text-center">Action</th>
                                           </tr>
                                           </thead>
                                           <tbody>
-
+                                          {this.loadEntities()}
                                           </tbody>
                                           </table>
                                           </div>
@@ -61,17 +86,30 @@
                                           </div>
                                           </div>
                                           </div>
+                                          </div>
 
                                         )
+                                        }
+                                        else {
+                                          return <div></div>;
+                                        }
                                       }
                                     }
 
+                                    // const
+                                    // mapStateToProps = (state, props) => {
+                                    //   return {
+                                    //     user: state.user
+                                    //   }
+                                    // };
+
                                     const
-                                    mapStateToProps = (state, props) => {
-                                      return {
-                                        user: state.user
-                                      }
-                                    };
+                                        mapStateToProps = (state, props) => {
+                                            return {
+                                                acdData: state.acdData,
+                                            }
+                                        };
+
 
                                     Acd.propTypes = {
                                       acdDataActions: PropTypes.object,

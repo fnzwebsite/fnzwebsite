@@ -26,15 +26,9 @@ let processData = function (response, dispatch) {
 
 export function getAllAcdData() {
     return (dispatch) => {
-        // const requestOptions = {
-        //
-        //     headers: {authHeader(),mode:'cors'}
-        // };
-        //console.log(JSON.stringify(requestOptions));
-        //console.log('http:/35.178.56.52api/v1/acd');
-        fetch('http://35.178.56.52:8081/api/v1/acd',
+        fetch(getConfig('socketurl')+'getacd',
         {
-          mode:'cors',
+              mode:'cors',
           headers:authHeader()
         })
             .then(response =>
@@ -47,7 +41,5 @@ export function getAllAcdData() {
 };
 
 export function receiveData(data) {
-  //alert(JSON.stringify(data));
-        return {type: allActions.FETCH_ACD_DATA, acdData: data};
-
+        return {type: allActions.RECEIVE_ACD_DATA, acdData: data};
 };
