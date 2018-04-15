@@ -14,7 +14,7 @@ class SideNav extends React.Component {
                     <ul className="list-unstyled">
                         <li className="active">
                             <NavLink to="/" id="home-menu">
-                                <i className="fa fa-home-icon"></i>Admin
+                                <i className="fa fa-home-icon"></i>Home
                             </NavLink>
                         </li>
                         <li>
