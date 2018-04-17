@@ -90,7 +90,6 @@ class BoxToday extends React.Component {
                 netInflowOutflowPrevious = parseFloat(netInflowOutflowPrevious).toFixed(4);
                 broughtForwardPrevious = parseFloat(broughtForwardPrevious).toFixed(4);
                 carryForwardPrevious = parseFloat(carryForwardPrevious).toFixed(4);
-
             }
 
             if(this.props.price.acdNext && this.props.price.acdNext.length) {
@@ -117,35 +116,35 @@ class BoxToday extends React.Component {
                                     <div className="col-6 open">
                                         <div className="row align-items-center justify-content-center h-100">
                                             <h5>Net In/Out Flow</h5>
-                          <h2 className={netInflowOutflowPrevious < 0 ? 'fund-orange':'fund-blue'}><span>&#163;</span>{netInflowOutflowPrevious}<span className="sub-text">mn</span></h2>
+                          <h2 className={netInflowOutflowPrevious < 0 ? 'fund-orange wrap-space':'fund-blue wrap-space'}>{netInflowOutflowPrevious<0?convertCurrency(netInflowOutflowPrevious*(-1)):convertCurrency(netInflowOutflowPrevious)}</h2>
                                         </div>
                                     </div>
-                                    <div className="col-6 closed">
+                                    <div className="col-6 open">
                                         <div className="row">
                                             <div className="col-sm-12 sub-sec">
                                                 <h5>Subscriptions</h5>
-                                                <h2 className='fund-blue'><span>&#163;</span>{subscriptionsPrevious}</h2>
+                                                <h2 className='fund-blue'>{convertCurrency(subscriptionsPrevious)}</h2>
                                             </div>
                                         </div>
                                         <hr/>
                                             <div className="row">
                                                 <div className="col-sm-12">
                                                     <h5>Redemptions</h5>
-                                                    <h2><span>&#163;</span>{redemptionsPrevious}</h2>
+                                                    <h2 className='fund-orange'>{redemptionsPrevious<0?convertCurrency(redemptionsPrevious*(-1)):convertCurrency(redemptionsPrevious)}</h2>
                                                 </div>
                                             </div>
                                             <hr/>
                                                 <div className="row">
                                                     <div className="col-sm-12">
                                                         <h5>Brought Forward</h5>
-                                                        <h2>{broughtForwardPrevious} Units</h2>
+                                                        <h2>{convertCurrency(broughtForwardPrevious)} Units</h2>
                                                     </div>
                                                 </div>
                                                 <hr/>
                                                     <div className="row">
                                                         <div className="col-sm-12">
                                                             <h5>Carry Forward</h5>
-                                                            <h2>{carryForwardPrevious} Units</h2>
+                                                            <h2>{convertCurrency(carryForwardPrevious)} Units</h2>
                                                         </div>
                                                     </div>
                                     </div>
@@ -162,35 +161,35 @@ class BoxToday extends React.Component {
                                     <div className="col-6 open">
                                         <div className="row align-items-center justify-content-center h-100">
                                             <h5>Net In/Out Flow</h5>
-                                            <h2 className={netInflowOutflowToday < 0 ? 'fund-orange':'fund-blue'}><span>&#163;</span>{netInflowOutflowToday}<span className="sub-text">mn</span></h2>
+                                            <h2 className={netInflowOutflowToday < 0 ? 'fund-orange':'fund-blue'}>{netInflowOutflowToday<0?convertCurrency(netInflowOutflowToday*(-1)):convertCurrency(netInflowOutflowToday)}<span className="sub-text" style={{display:'none'}}>mn</span></h2>
                                         </div>
                                     </div>
-                                    <div className="col-6 closed">
+                                    <div className="col-6 open">
                                         <div className="row">
                                             <div className="col-sm-12 sub-sec">
                                                 <h5>Subscriptions</h5>
-                                                <h2 className='fund-blue'><span>&#163;</span>{subscriptionsToday}</h2>
+                                                <h2 className='fund-blue'>{convertCurrency(subscriptionsToday)}</h2>
                                             </div>
                                         </div>
                                         <hr/>
                                             <div className="row">
                                                 <div className="col-sm-12">
                                                     <h5>Redemptions</h5>
-                                                    <h2><span>&#163;</span>{redemptionsToday}</h2>
+                                                    <h2 className='fund-orange'>{redemptionsToday<0?convertCurrency(redemptionsToday*(-1)):convertCurrency(redemptionsToday)}</h2>
                                                 </div>
                                             </div>
                                             <hr/>
                                                 <div className="row">
                                                     <div className="col-sm-12">
                                                         <h5>Brought Forward</h5>
-                                                        <h2>{broughtForwardToday} Units</h2>
+                                                        <h2>{convertCurrency(broughtForwardToday)} Units</h2>
                                                     </div>
                                                 </div>
                                                 <hr/>
                                                     <div className="row">
                                                         <div className="col-sm-12">
                                                             <h5>Carry Forward</h5>
-                                                            <h2>{carryForwardToday} Units</h2>
+                                                            <h2>{convertCurrency(carryForwardToday)} Units</h2>
                                                         </div>
                                                     </div>
                                     </div>
@@ -207,35 +206,35 @@ class BoxToday extends React.Component {
                                     <div className="col-6 open">
                                         <div className="row align-items-center justify-content-center h-100">
                                             <h5>Net In/Out Flow</h5>
-                                            <h2 className={netInflowOutflowNext < 0 ? 'fund-orange':'fund-blue'}><span>&#163;</span>{netInflowOutflowNext}<span className="sub-text">mn</span></h2>
+                                            <h2 className={netInflowOutflowNext < 0 ? 'fund-orange':'fund-blue'}>{netInflowOutflowNext<0?convertCurrency(netInflowOutflowNext*(-1)):convertCurrency(netInflowOutflowNext)}<span className="sub-text" style={{display:'none'}}>mn</span></h2>
                                         </div>
                                     </div>
-                                    <div className="col-6 closed">
+                                    <div className="col-6 open">
                                         <div className="row">
                                             <div className="col-sm-12 sub-sec">
                                                 <h5>Subscriptions</h5>
-                                                <h2 className='fund-blue'><span>&#163;</span>{subscriptionsNext}</h2>
+                                                <h2 className='fund-blue'>{convertCurrency(subscriptionsNext)}</h2>
                                             </div>
                                         </div>
                                         <hr/>
                                             <div className="row">
                                                 <div className="col-sm-12">
                                                     <h5>Redemptions</h5>
-                                                    <h2><span>&#163;</span>{redemptionsNext}</h2>
+                                                    <h2 className='fund-orange'>{redemptionsNext<0?convertCurrency(redemptionsNext*(-1)):convertCurrency(redemptionsNext)}</h2>
                                                 </div>
                                             </div>
                                             <hr/>
                                                 <div className="row">
                                                     <div className="col-sm-12">
                                                         <h5>Brought Forward</h5>
-                                                        <h2>{broughtForwardNext} Units</h2>
+                                                        <h2>{convertCurrency(broughtForwardNext)} Units</h2>
                                                     </div>
                                                 </div>
                                                 <hr/>
                                                     <div className="row">
                                                         <div className="col-sm-12">
                                                             <h5>Carry Forward</h5>
-                                                            <h2>{carryForwardNext} Units</h2>
+                                                            <h2>{convertCurrency(carryForwardNext)} Units</h2>
                                                         </div>
                                                     </div>
                                     </div>
@@ -273,6 +272,17 @@ const
         acdActions: bindActionCreators(acdActions, dispatch)
     });
 
+    function convertCurrency(currency)
+    {
+      return (
+        <span>
+        {new Intl.NumberFormat('en-GB', {
+        style: 'currency',
+        currency: 'GBP'
+        }).format(currency)}
+        </span>
+        )
+    }
 
 export default connect(mapStateToProps,
     mapDispatchToProps)(BoxToday);

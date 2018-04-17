@@ -49,11 +49,11 @@ var Table = createReactClass({
                             <td>{self.props.dealingData[keyName].tradeDate}</td>
                             <td>{self.props.dealingData[keyName].account}</td>
                             <td>{self.props.dealingData[keyName].instrumentKey}</td>
-                            <td>{self.props.dealingData[keyName].dealType.toUpperCase()}</td>
+                            <td className={self.props.dealingData[keyName].dealType.toUpperCase() == "BUY" ? "fund-blue" : "fund-orange"}>{self.props.dealingData[keyName].dealType.toUpperCase()}</td>
                             <td>{self.props.dealingData[keyName].units}</td>
                             <td>{self.props.dealingData[keyName].amount}</td>
                             <td><span
-                                className={self.props.dealingData[keyName].dealType.toUpperCase() == "BUY" ? "badge bg-green" : "badge bg-orange"}>Accepted</span>
+                                className={self.props.dealingData[keyName].dealingStatus.toUpperCase() == "ACCEPTED" ? "badge bg-green" : "badge bg-orange"}>{self.props.dealingData[keyName].dealingStatus}</span>
                             </td>
                         </tr>
                     }
@@ -66,11 +66,11 @@ var Table = createReactClass({
                             <td>{self.props.dealingData[keyName].boxDate}</td>
                             <td>{self.props.dealingData[keyName].account}</td>
                             <td>{self.props.dealingData[keyName].instrumentKey}</td>
-                            <td>{self.props.dealingData[keyName].dealType.toUpperCase()}</td>
+                            <td className={self.props.dealingData[keyName].dealType.toUpperCase() == "BUY" ? "fund-blue" : "fund-orange"}>{self.props.dealingData[keyName].dealType.toUpperCase()}</td>
                             <td>{self.props.dealingData[keyName].units}</td>
                             <td>{self.props.dealingData[keyName].amount}</td>
                             <td><span
-                                className={self.props.dealingData[keyName].dealType.toUpperCase() == "BUY" ? "badge bg-green" : "badge bg-orange"}>Accepted</span>
+                                className={self.props.dealingData[keyName].dealingStatus.toUpperCase() == "ACCEPTED" ? "badge bg-green" : "badge bg-orange"}>{self.props.dealingData[keyName].dealingStatus}</span>
                             </td>
                         </tr>
                     }
@@ -83,11 +83,11 @@ var Table = createReactClass({
                             <td>{self.props.dealingData[keyName].boxDate}</td>
                             <td>{self.props.dealingData[keyName].account}</td>
                             <td>{self.props.dealingData[keyName].instrumentKey}</td>
-                            <td>{self.props.dealingData[keyName].dealType.toUpperCase()}</td>
+                              <td className={self.props.dealingData[keyName].dealType.toUpperCase() == "BUY" ? "fund-blue" : "fund-orange"}>{self.props.dealingData[keyName].dealType.toUpperCase()}</td>
                             <td>{self.props.dealingData[keyName].units}</td>
                             <td>{self.props.dealingData[keyName].amount}</td>
                             <td><span
-                                className={self.props.dealingData[keyName].dealType.toUpperCase() == "BUY" ? "badge bg-green" : "badge bg-orange"}>Accepted</span>
+                                className={self.props.dealingData[keyName].dealingStatus.toUpperCase() == "ACCEPTED" ? "badge bg-green" : "badge bg-orange"}>{self.props.dealingData[keyName].dealingStatus}</span>
                             </td>
                         </tr>
                     }

@@ -1,7 +1,31 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+import $ from 'jquery';
 
 class SideNav extends React.Component {
+  constructor(props) {
+      super(props);
+      this.handleNavClick = this.handleNavClick.bind(this);
+  }
+
+  handleNavClick(objNavVal)
+  {
+    //alert(objNavVal);
+    //this.setState({selected:'home'});
+    //console.log(objNavVal);
+    switch(objNavVal)
+    {
+      case "homeMenu":
+      $("#homeMenu").addClass('active');
+      $("#acdMenu").removeClass('active');
+      break;
+      case "acdMenu":
+      $("#acdMenu").addClass('active');
+      $("#homeMenu").removeClass('active');
+break;
+    }
+
+  }
     render() {
         return (
             <div>
@@ -12,13 +36,13 @@ class SideNav extends React.Component {
                         </a>
                     </div>
                     <ul className="list-unstyled">
-                        <li className="active">
-                            <NavLink to="/" id="home-menu">
+                        <li id="homeMenu" className="active" onClick={() =>{this.handleNavClick('homeMenu')}}>
+                            <NavLink to="/" id="home-menu" >
                                 <i className="fa fa-home-icon"></i>Home
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink to="/acd">
+                        <li id="acdMenu" onClick={() =>{this.handleNavClick('acdMenu')}}>
+                            <NavLink to="/acd" >
                                 <i className="fa fa-admin"></i>Admin
                             </NavLink>
                         </li>

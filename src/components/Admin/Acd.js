@@ -112,8 +112,8 @@ class Acd extends React.Component {
                             <div className="row">
                                 <div className="md-card uk-margin-medium-bottom">
                                     <div className="md-card-toolbar">
-                                        <h3 className="md-card-toolbar-heading-text"> ACD List</h3>
-                                        <a className="create md-btn md-btn-primary pull-right md-btn-wave-light waves-effect waves-button waves-light" data-uk-modal="{target:'#modal_header_footer'}" href="#"><i className="fa fa-plus"></i>ACD</a>
+                                        <h3 className="md-card-toolbar-heading-text"> Entities</h3>
+                                        <a className="create md-btn md-btn-primary pull-right md-btn-wave-light waves-effect waves-button waves-light" data-uk-modal="{target:'#modal_header_footer'}" href="#"><i className="fa fa-plus"></i>Entity</a>
                                     </div>
                                     <div className="md-card-content">
                                         <Table acdData={this.props.acdData} />
