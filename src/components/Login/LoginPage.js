@@ -80,7 +80,8 @@ class LoginPage extends React.Component {
                                                     </div>
                                                 </form>
                                                 <div className="fnz_block">
-                                                    <h3>FNZ Chain</h3>
+                                                    <h3 style={{display:'none'}}>FNZ Chain</h3>
+                                                          <div className="brand-text brand-big"><img src="img/logo.png" alt="logo" className=""/></div>
                                                     <p>&copy; 2018 All Right reserved. Privacy and Terms</p>
                                                 </div>
                                             </div>

@@ -110,9 +110,9 @@ class Dashboard extends React.Component {
                                                         className="fa fa-th-list"></i>Transactions</a>
                                                 </li>
                                             </ul>
-                                            <ul id="tabs_1" className="uk-switcher uk-margin">
+                                            <ul id="tabs_1" className="uk-switcher uk-margin" >
                                                 <li className={this.state.selected == "chart" ? 'uk-active' : ''}>
-                                                    <div className="line-chart-example card">
+                                                    <div className="line-chart-example card"  style={{minHeight:'200px'}}>
                                                         <div className="card-body"
                                                              style={{paddingBottom: '30px'}}>
                                                             <LoadLineChart

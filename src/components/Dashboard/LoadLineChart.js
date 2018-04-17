@@ -145,8 +145,9 @@ class LoadLineChart extends React.Component {
                 },
                 enableInteractivity: false,
                 chartArea: {
-                    width: '90%'
+                    width: '100%'
                 },
+
 //                 bar: {
 //     groupWidth: '100%'
 // },
@@ -207,6 +208,7 @@ class LoadLineChart extends React.Component {
                     min: '00:30:00',
                     max: '23:00:00',
                     type: 'timeseries',
+                    width:'100%',
                     tick: {
                         format: '%H:%M:%S',
                         values: ['00:00:00', '1:00:00', '2:00:00', '3:00:00', '4:00:00', '5:00:00',
@@ -219,7 +221,7 @@ class LoadLineChart extends React.Component {
                 }
             };
             const tooltip= {
-                show: false
+                show: true
             }
 
             const padding= {
@@ -249,7 +251,22 @@ class LoadLineChart extends React.Component {
             )
         }
         else {
-            return null;
+              return (
+                <div class="preloader">
+                                         <span class="line line-1"></span>
+                                         <span class="line line-2"></span>
+                                         <span class="line line-3"></span>
+                                         <span class="line line-4"></span>
+                                         <span class="line line-5"></span>
+                                         <span class="line line-6"></span>
+                                         <span class="line line-7"></span>
+                                         <span class="line line-8"></span>
+                                         <span class="line line-9"></span>
+                                         <div>Loading</div>
+                                     </div>
+              )
+          
+
         }
 
     }

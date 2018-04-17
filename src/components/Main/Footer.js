@@ -5,7 +5,7 @@ class Footer extends React.Component {
     render() {
         return (
             <footer className="main-footer">
-                <div className="container-fluid">
+                <div className="container-fluid" style={{display:'none'}}>
                     <div className="row">
                         <div className="col-sm-12 text-center">
                             <p>&copy; Copyright FNZ UK Ltd 2018.</p>

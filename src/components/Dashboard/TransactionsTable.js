@@ -99,7 +99,7 @@ var Table = createReactClass({
             })
 
             return (
-                <div>
+                <div  style={{minHeight:'200px'}}>
                     <table id="table" className="stripe" cellSpacing="0" width="100%">
                         <thead>
                         <tr>

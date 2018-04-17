@@ -20,7 +20,7 @@ class Home extends React.Component {
                             <Route exact path="/" component={Dashboard} />
                             <Route exact path="/acd" component={Acd} />
                         </div>
-                        <Footer/>
+                      
                     </div>
                 </div>
                 <div className="uk-modal" id="modal_header_footer">

@@ -24,27 +24,27 @@ class BoxToday extends React.Component {
         }
     }
     componentWillMount(){
-        this.props.acdActions.getAcd('today','1cb01fd9-a3be-42aa-9bae-93d8f05f6c67')
-        this.props.acdActions.getAcd('next','1cb01fd9-a3be-42aa-9bae-93d8f05f6c67')
-        this.props.acdActions.getAcd('previous','1cb01fd9-a3be-42aa-9bae-93d8f05f6c67')
+        this.props.acdActions.getAcd('today',localStorage.getItem('acdId'))
+        this.props.acdActions.getAcd('next',localStorage.getItem('acdId'))
+        this.props.acdActions.getAcd('previous',localStorage.getItem('acdId'))
     }
 
     componentWillReceiveProps(nextProps) {
-        this.props.acdActions.getAcd('today','1cb01fd9-a3be-42aa-9bae-93d8f05f6c67')
-        this.props.acdActions.getAcd('next','1cb01fd9-a3be-42aa-9bae-93d8f05f6c67')
-        this.props.acdActions.getAcd('previous','1cb01fd9-a3be-42aa-9bae-93d8f05f6c67')
+        this.props.acdActions.getAcd('today',localStorage.getItem('acdId'))
+        this.props.acdActions.getAcd('next',localStorage.getItem('acdId'))
+        this.props.acdActions.getAcd('previous',localStorage.getItem('acdId'))
     }
 
     render() {
         var today = moment().format("YYYY-MM-DD");
         var tomorrow = moment().add('days', 1).format("YYYY-MM-DD");
         var yesterday = moment().add('days', -1).format("YYYY-MM-DD");
-
+        //console.log(this.props.dealingData);
         if (this.props.dealingData == "logout") {
             return <Redirect to={{ pathname: '/login', state: { from: this.props.location } }} />
         }
 
-        if (this.props.price.acdToday && this.props.price.acdToday.length) {
+        //if (this.props.price.acdToday && this.props.price.acdToday.length) {
             //console.log("hi")
             let subscriptionsPrevious = 0;
             let redemptionsPrevious = 0;
@@ -70,7 +70,7 @@ class BoxToday extends React.Component {
                 redemptionsToday = parseFloat(redemptionsToday) + parseFloat(this.props.price.acdToday[0].unitsSold) * parseFloat(this.props.price.acdToday[0].roundedPrice);
                 broughtForwardToday = parseFloat(broughtForwardToday) + parseFloat(this.props.price.acdToday[0].totalUnitsBroughtForwardBalance);
                 carryForwardToday = parseFloat(carryForwardToday) + parseFloat(this.props.price.acdToday[0].totalUnitsCarriedForward);
-                netInflowOutflowToday = parseFloat(subscriptionsToday) + parseFloat(redemptionsToday);
+                netInflowOutflowToday = parseFloat(subscriptionsToday) - parseFloat(redemptionsToday);
                 subscriptionsToday = parseFloat(subscriptionsToday).toFixed(4);
                 redemptionsToday = parseFloat(redemptionsToday).toFixed(4);
                 netInflowOutflowToday = parseFloat(netInflowOutflowToday).toFixed(4);
@@ -84,7 +84,7 @@ class BoxToday extends React.Component {
                 redemptionsPrevious = parseFloat(redemptionsPrevious) + parseFloat(this.props.price.acdPrevious[0].unitsSold) * parseFloat(this.props.price.acdPrevious[0].roundedPrice);
                 broughtForwardPrevious = parseFloat(broughtForwardPrevious) + parseFloat(this.props.price.acdPrevious[0].totalUnitsBroughtForwardBalance);
                 carryForwardPrevious = parseFloat(carryForwardPrevious) + parseFloat(this.props.price.acdPrevious[0].totalUnitsCarriedForward);
-                netInflowOutflowPrevious = parseFloat(subscriptionsPrevious) + parseFloat(redemptionsPrevious);
+                netInflowOutflowPrevious = parseFloat(subscriptionsPrevious) - parseFloat(redemptionsPrevious);
                 subscriptionsPrevious = parseFloat(subscriptionsPrevious).toFixed(4);
                 redemptionsPrevious = parseFloat(redemptionsPrevious).toFixed(4);
                 netInflowOutflowPrevious = parseFloat(netInflowOutflowPrevious).toFixed(4);
@@ -97,7 +97,7 @@ class BoxToday extends React.Component {
                 redemptionsNext = parseFloat(redemptionsNext) + parseFloat(this.props.price.acdNext[0].unitsSold) * parseFloat(this.props.price.acdNext[0].roundedPrice);
                 broughtForwardNext = parseFloat(broughtForwardNext) + parseFloat(this.props.price.acdNext[0].totalUnitsBroughtForwardBalance);
                 carryForwardNext = parseFloat(carryForwardNext) + parseFloat(this.props.price.acdNext[0].totalUnitsCarriedForward);
-                netInflowOutflowNext = parseFloat(subscriptionsNext) + parseFloat(redemptionsNext);
+                netInflowOutflowNext = parseFloat(subscriptionsNext) - parseFloat(redemptionsNext);
                 subscriptionsNext = parseFloat(subscriptionsNext).toFixed(4);
                 redemptionsNext = parseFloat(redemptionsNext).toFixed(4);
                 netInflowOutflowNext = parseFloat(netInflowOutflowNext).toFixed(4);
@@ -119,7 +119,7 @@ class BoxToday extends React.Component {
                           <h2 className={netInflowOutflowPrevious < 0 ? 'fund-orange wrap-space':'fund-blue wrap-space'}>{netInflowOutflowPrevious<0?convertCurrency(netInflowOutflowPrevious*(-1)):convertCurrency(netInflowOutflowPrevious)}</h2>
                                         </div>
                                     </div>
-                                    <div className="col-6 open">
+                                    <div className="col-6 closed">
                                         <div className="row">
                                             <div className="col-sm-12 sub-sec">
                                                 <h5>Subscriptions</h5>
@@ -164,7 +164,7 @@ class BoxToday extends React.Component {
                                             <h2 className={netInflowOutflowToday < 0 ? 'fund-orange':'fund-blue'}>{netInflowOutflowToday<0?convertCurrency(netInflowOutflowToday*(-1)):convertCurrency(netInflowOutflowToday)}<span className="sub-text" style={{display:'none'}}>mn</span></h2>
                                         </div>
                                     </div>
-                                    <div className="col-6 open">
+                                    <div className="col-6 closed">
                                         <div className="row">
                                             <div className="col-sm-12 sub-sec">
                                                 <h5>Subscriptions</h5>
@@ -209,7 +209,7 @@ class BoxToday extends React.Component {
                                             <h2 className={netInflowOutflowNext < 0 ? 'fund-orange':'fund-blue'}>{netInflowOutflowNext<0?convertCurrency(netInflowOutflowNext*(-1)):convertCurrency(netInflowOutflowNext)}<span className="sub-text" style={{display:'none'}}>mn</span></h2>
                                         </div>
                                     </div>
-                                    <div className="col-6 open">
+                                    <div className="col-6 closed">
                                         <div className="row">
                                             <div className="col-sm-12 sub-sec">
                                                 <h5>Subscriptions</h5>
@@ -244,12 +244,23 @@ class BoxToday extends React.Component {
                     </div>
                 </div>
             )
-        }
-        else {
-            return (
-                <div className="load">Loading ...</div>
-            )
-        }
+        // }
+        // else {
+        //     return (
+        //       <div class="preloader">
+        //                                <span class="line line-1"></span>
+        //                                <span class="line line-2"></span>
+        //                                <span class="line line-3"></span>
+        //                                <span class="line line-4"></span>
+        //                                <span class="line line-5"></span>
+        //                                <span class="line line-6"></span>
+        //                                <span class="line line-7"></span>
+        //                                <span class="line line-8"></span>
+        //                                <span class="line line-9"></span>
+        //                                <div>Loading</div>
+        //                            </div>
+        //     )
+        // }
     }
 }
 

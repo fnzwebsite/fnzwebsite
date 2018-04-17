@@ -30,7 +30,7 @@ nav.navbar {
 }
 
 .mt-6 {
-    margin-top: 6.5rem !important;
+    margin-top: 6.0rem !important;
 }
 
 nav.navbar .search-box form input {
@@ -68,6 +68,14 @@ nav.side-navbar ul li a {
     border-bottom: 1px solid #fff;
     color: #2b58c2;
     font-weight: 500;
+}
+
+.select-option .form-control, .select-option2 .form-control{
+    width: 86%;
+}
+
+.parsley-row.mt26{
+    margin-top: 26px !important;
 }
 /*sub level*/
 
@@ -171,7 +179,15 @@ nav.side-navbar.l1 {
 .side-navbar.l1 li.active a .fa {
     opacity: 1;
 }
-
+.side-navbar.l1 .list-unstyled{
+    margin-top: 0;
+}
+.no-step .steps ul li a{
+    background: none !important;
+}
+.no-step .steps ul li a span{
+    display: none !important;
+}
 nav.side-navbar.l2 {
     z-index: 9990;
     left: 80px;
@@ -179,6 +195,7 @@ nav.side-navbar.l2 {
     max-width: 240px;
     transition: all ease-in-out 0.5s;
     background: #f3f4f5;
+    top: 75px;
 }
 
 nav.side-navbar.l2.shrinked {
@@ -607,9 +624,9 @@ z-index: 9999;
     margin-left: 2px;
 }
 
-.closed h2 {
+/* .closed h2 {
     color: orange !important;
-}
+} */
 
 .closed hr {
     margin: 10px auto 10px !important;
@@ -666,8 +683,10 @@ z-index: 9999;
 }
 
 
-.wizard > .steps > ul > li.error a, .wizard > .steps > ul > li.error a:active, .wizard > .steps > ul > li.error a:hover{
-background: #f8907a;
+.wizard>.steps>ul>li.error a,
+.wizard>.steps>ul>li.error a:active,
+.wizard>.steps>ul>li.error a:hover {
+    background: #f8907a;
 }
 
 .wizard-list .md-btn {
@@ -688,22 +707,22 @@ background: #f8907a;
 .wizard-lg.wizard>.steps>ul>li {
     width: 20%;
 }
-
 /*  .wizard-md.wizard>.steps>ul>li {
     width: 20%;
 }*/
 
-.jumbotron, .jumbotron i {
+.jumbotron,
+.jumbotron i {
     text-align: center;
     color: white;
 }
 
-.jumbotron i{
+.jumbotron i {
     border: 1px solid #fff;
     box-shadow: none;
 }
 
-.jumbotron.mesg-success{
+.jumbotron.mesg-success {
     background: #7cb342;
     display: none;
 }
@@ -714,21 +733,23 @@ background: #f8907a;
     font-size: 1.8rem;
     font-weight: 300
 }*/
-.uk-notify{
+
+.uk-notify {
     width: auto;
     min-width: 350px;
 }
-.uk-notify.uk-notify-top-right{
-     z-index: 99999;
-     right: 25%;
+
+.uk-notify.uk-notify-top-right {
+    z-index: 99999;
+    right: 25%;
 }
-.uk-notify.uk-notify-top-right > div{
+
+.uk-notify.uk-notify-top-right>div {
     background: #7cb342 !important;
     font-size: 1.2rem;
     text-align: center;
-
-
 }
+
 .dataTables_wrapper .uk-table .action .sorting::after {
     content: none !important;
 }
@@ -1722,6 +1743,26 @@ footer.main-footer p {
     width: 40px !important;
 }
 
+#task_flyout {
+    height: 320px;
+
+}
+
+.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+}
+
+@media (max-width: 575px) {
+    .form-control-label {
+        text-align: left;
+    }
+}
+
+
 .fund-orange{
   color: orange !important;
 }
@@ -1733,8 +1774,82 @@ footer.main-footer p {
   white-space: nowrap;
 }
 
-@media (max-width: 575px) {
-    .form-control-label {
-        text-align: left;
+
+.preloader {
+        position: absolute;
+        top: 44%;
+        display: block;
+        left: 44%;
     }
-}
+
+    .preloader>div {
+        text-align: center;
+    }
+
+    .preloader .line {
+        width: 2px;
+        height: 12px;
+        background: #1191fe;
+        margin: 0 1px;
+        display: inline-block;
+        animation: opacity-2 1000ms infinite ease-in-out;
+    }
+
+    .preloader .line-1 {
+        animation-delay: 800ms;
+    }
+
+    .preloader .line-2 {
+        animation-delay: 600ms;
+    }
+
+    .preloader .line-3 {
+        animation-delay: 400ms;
+    }
+
+    .preloader .line-4 {
+        animation-delay: 200ms;
+    }
+
+    .preloader .line-6 {
+        animation-delay: 200ms;
+    }
+
+    .preloader .line-7 {
+        animation-delay: 400ms;
+    }
+
+    .preloader .line-8 {
+        animation-delay: 600ms;
+    }
+
+    .preloader .line-9 {
+        animation-delay: 800ms;
+    }
+
+    @keyframes opacity-1 {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes opacity-2 {
+        0% {
+            opacity: 1;
+            height: 15px;
+        }
+        50% {
+            opacity: 0;
+            height: 12px;
+        }
+        100% {
+            opacity: 1;
+            height: 15px;
+        }
+    }
