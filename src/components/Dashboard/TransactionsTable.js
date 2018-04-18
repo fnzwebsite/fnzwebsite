@@ -48,7 +48,7 @@ var Table = createReactClass({
                         return <tr>
                             <td>{self.props.dealingData[keyName].tradeDate}</td>
                             <td>{self.props.dealingData[keyName].account}</td>
-                            <td>{self.props.dealingData[keyName].instrumentKey}</td>
+                            <td>{self.props.dealingData[keyName].instrumentPrimaryIdentifier}</td>
                             <td className={self.props.dealingData[keyName].dealType.toUpperCase() == "BUY" ? "fund-blue" : "fund-orange"}>{self.props.dealingData[keyName].dealType.toUpperCase()}</td>
                             <td>{self.props.dealingData[keyName].units}</td>
                             <td>{self.props.dealingData[keyName].amount}</td>
@@ -65,7 +65,7 @@ var Table = createReactClass({
                         return <tr>
                             <td>{self.props.dealingData[keyName].boxDate}</td>
                             <td>{self.props.dealingData[keyName].account}</td>
-                            <td>{self.props.dealingData[keyName].instrumentKey}</td>
+                            <td>{self.props.dealingData[keyName].instrumentPrimaryIdentifier}</td>
                             <td className={self.props.dealingData[keyName].dealType.toUpperCase() == "BUY" ? "fund-blue" : "fund-orange"}>{self.props.dealingData[keyName].dealType.toUpperCase()}</td>
                             <td>{self.props.dealingData[keyName].units}</td>
                             <td>{self.props.dealingData[keyName].amount}</td>
@@ -82,7 +82,7 @@ var Table = createReactClass({
                         return <tr>
                             <td>{self.props.dealingData[keyName].boxDate}</td>
                             <td>{self.props.dealingData[keyName].account}</td>
-                            <td>{self.props.dealingData[keyName].instrumentKey}</td>
+                            <td>{self.props.dealingData[keyName].instrumentPrimaryIdentifier}</td>
                               <td className={self.props.dealingData[keyName].dealType.toUpperCase() == "BUY" ? "fund-blue" : "fund-orange"}>{self.props.dealingData[keyName].dealType.toUpperCase()}</td>
                             <td>{self.props.dealingData[keyName].units}</td>
                             <td>{self.props.dealingData[keyName].amount}</td>

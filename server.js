@@ -119,9 +119,13 @@ function getDealingByDate(callback, auth, setDate) {
             output += chunk;
         });
         res.on('end', function () {
+          if(output!=null)
+          {
+            console.log(output);
             var obj = JSON.parse(output);
             if (callback != undefined) {
                 callback(obj);
+            }
             }
         });
     });
@@ -154,6 +158,7 @@ function getDealing(callback, auth) {
         });
 
         res.on('end', function () {
+          console.log(output);
             var obj = JSON.parse(output);
             if (callback != undefined) {
                 callback(obj);
@@ -173,7 +178,7 @@ function getAllAcd(callback, auth) {
         method: 'GET',
         host: '35.178.56.52',
         port: 8081,
-        path: '/api/v1/acd',
+        path: '/api/v1/company',
         headers: {
             Authorization: auth
         }
@@ -188,6 +193,7 @@ function getAllAcd(callback, auth) {
         });
 
         res.on('end', function () {
+          //console.log(output);
             var obj = JSON.parse(output);
             if (callback != undefined) {
                 callback(obj);
@@ -259,9 +265,13 @@ function getAcd(callback, auth, dateValue,acdId) {
         });
 
         res.on('end', function () {
-            var obj = JSON.parse(output);
+
+          if(output!=null && output!=undefined && output.length>0)
+          {
+                        var obj = JSON.parse(output);
             if (callback != undefined) {
                 callback(obj);
+            }
             }
         });
     });

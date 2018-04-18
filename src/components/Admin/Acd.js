@@ -15,10 +15,10 @@ var createReactClass = require('create-react-class');
 var tableAsJqeryElement = null;
 var Table = createReactClass({
     componentDidMount: function () {
-        this.loadDataTable();
+        //this.loadDataTable();
     },
     componentDidUpdate: function (prevProps, prevState) {
-        this.loadDataTable();
+        //this.loadDataTable();
     },
     componentWillReceiveProps: function (prevProps, prevState) {
         if(prevProps.loadThisDay != this.props.loadThisDay || prevProps.dealingData !=  this.props.dealingData) {
@@ -27,11 +27,11 @@ var Table = createReactClass({
                 tableAsJqeryElement = null;
             }
         }
-        this.loadDataTable();
+//        this.loadDataTable();
     },
     loadDataTable: function () {
         setTimeout(function () {
-            tableAsJqeryElement = $('#table').dataTable();
+            // tableAsJqeryElement = $('#table').dataTable();
             if (tableAsJqeryElement) {
                 tableAsJqeryElement.fnDraw();
             }
@@ -44,20 +44,7 @@ var Table = createReactClass({
         let rows = Object.keys(this.props.acdData).map(function (keyName, keyIndex) {
             return (
                 <tr>
-                    <td>{self.props.acdData[keyName].name}</td>
-                    <td>{self.props.acdData[keyName].networkEntityType}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>{self.props.acdData[keyName].contact.email}</td>
-                    <td>{self.props.acdData[keyName].contact.telephone}</td>
-                    <td></td>
-                    <td className="uk-text-center">
-                        <a href="#" className="edit"
-                           data-uk-modal="{target:'#modal_header_footer'}"><i
-                            className="md-icon material-icons">&#xE254;</i></a>
-                        <a href="#"><i className="md-icon material-icons">&#xE872;</i></a>
-                    </td>
+
                 </tr>
             )
 
