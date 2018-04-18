@@ -197,7 +197,14 @@ class LoadLineChart extends React.Component {
             };
             const bar = {
                 width: {
-                    ratio: 0.2 // this makes bar width 50% of length between ticks
+                    ratio: 0.3 // this makes bar width 50% of length between ticks
+
+
+                },
+                spacing: 10,
+                border:{
+                  width:'1px',
+                  color:'white'
                 }
                 // or
                 //width: 100 // this makes bar width 100px
@@ -250,7 +257,7 @@ class LoadLineChart extends React.Component {
                            />
             )
         }
-        else {
+        else if(!this.state.data) {
               return (
                 <div class="preloader">
                                          <span class="line line-1"></span>
@@ -265,7 +272,7 @@ class LoadLineChart extends React.Component {
                                          <div>Loading</div>
                                      </div>
               )
-          
+
 
         }
 

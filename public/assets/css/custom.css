@@ -1853,3 +1853,9 @@ footer.main-footer p {
             height: 15px;
         }
     }
+
+
+    .c3-chart-bar{
+      stroke: 'red' !important;
+      opacity: 10 !important;
+    }
