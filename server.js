@@ -149,6 +149,10 @@ function getDealing(callback, auth) {
         }
     };
 
+
+    console.log('inside dealing');
+    console.log(auth);
+
     var req = http.request(options, function (res) {
         var output = '';
 

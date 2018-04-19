@@ -1,20 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import App from './components/App';
-import './index.css';
-import registerServiceWorker from './registerServiceWorker';
+import { createStore, applyMiddleware } from 'redux'
+import { Provider} from 'react-redux'
+import thunk from 'redux-thunk'
+import createHistory from 'history/createBrowserHistory'
+import { Router} from 'react-router'
+import { routerMiddleware} from 'react-router-redux'
+import configRoutes from './routes'
+import rootReducer from './reducers'
 
-import * as reducers from './reducers/allReducers';
-const store = createStore(combineReducers(reducers), applyMiddleware(thunk));
+
+const history = createHistory()
+const rMiddleware = routerMiddleware(history)
+
+const store = createStore(
+    rootReducer,
+    applyMiddleware(thunk, rMiddleware)
+)
+
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <Router history={history}>
+            <div>
+                {configRoutes()}
+            </div>
+        </Router>
     </Provider>,
     document.getElementById('root')
 );
-
-registerServiceWorker();

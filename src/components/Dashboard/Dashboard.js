@@ -4,13 +4,11 @@ import BoxToday from './BoxDealing'
 import LoadLineChart from './LoadLineChart'
 import TransactionsTable from './TransactionsTable'
 import io from "socket.io-client"
-import * as dealingActions from '../../actions/dealingActions';
+import dealingActions from '../../actions/dealingActions';
 import userActions from '../../actions/user.actions';
-import * as priceActions from '../../actions/priceActions';
 import {authHeader, getConfig} from '../../helpers/index';
 import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
-import moment from 'moment'
 import {Redirect} from 'react-router';
 
 
@@ -39,9 +37,7 @@ class Dashboard extends React.Component {
     }
 
     loadChart(selected) {
-        //console.log(this.state.chart );
         if (this.state.chart != selected) {
-//alert('hi');
             this.props.dealingActions.getDealings();
             this.setState({
                 chart: selected
@@ -79,7 +75,6 @@ class Dashboard extends React.Component {
     }
 
     getPrice() {
-        // this.props.priceActions.getPriceKeyDate();
     }
 
     render() {
@@ -151,14 +146,12 @@ const
 Dashboard.propTypes = {
     userActions: PropTypes.object,
     user: PropTypes.array,
-    price: PropTypes.array,
 };
 
 const
     mapDispatchToProps = (dispatch) => ({
         dealingActions: bindActionCreators(dealingActions, dispatch),
-        userActions: bindActionCreators(userActions, dispatch),
-        priceActions: bindActionCreators(priceActions, dispatch)
+        userActions: bindActionCreators(userActions, dispatch)
     });
 
 

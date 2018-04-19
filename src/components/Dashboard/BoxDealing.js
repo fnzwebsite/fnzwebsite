@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import React from 'react';
 import moment from 'moment'
-import * as acdActions from '../../actions/acdActions';
+import acdActions from '../../actions/acdActions';
 import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
 import { Redirect} from 'react-router-dom';
@@ -33,9 +33,9 @@ class BoxToday extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.props.acdActions.getAcd('today',localStorage.getItem('acdId'))
-        this.props.acdActions.getAcd('next',localStorage.getItem('acdId'))
-        this.props.acdActions.getAcd('previous',localStorage.getItem('acdId'))
+        // this.props.acdActions.getAcd('today',localStorage.getItem('acdId'))
+        // this.props.acdActions.getAcd('next',localStorage.getItem('acdId'))
+        // this.props.acdActions.getAcd('previous',localStorage.getItem('acdId'))
     }
 
     render() {

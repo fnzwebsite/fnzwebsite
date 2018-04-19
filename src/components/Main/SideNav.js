@@ -1,9 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import userActions from '../../actions/user.actions';
-import {bindActionCreators} from 'redux';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import { push }                           from 'react-router-redux';
 
 class SideNav extends React.Component {
     constructor(props) {
@@ -24,7 +21,10 @@ class SideNav extends React.Component {
         this.setState({showSlideMenu:!this.state.showSlideMenu})
     }
     logout(){
-        this.props.userActions.logout()
+        localStorage.removeItem('token');
+        localStorage.removeItem('displayName');
+        localStorage.removeItem('acdId');
+        push('/sign_in')
     }
     render() {
         return (
@@ -37,7 +37,7 @@ class SideNav extends React.Component {
                     </div>
                     <ul className="list-unstyled">
                         <li className={this.state.showMenu=='home' ? 'active':''}>
-                            <Link to="/" id="home-menu" onClick={() => this.handleChangeMenu('home')}>
+                            <Link to="/dashboard" id="home-menu" onClick={() => this.handleChangeMenu('home')}>
                                 <i className="fa fa-home-icon"></i>Home
                             </Link>
                         </li>
@@ -47,7 +47,7 @@ class SideNav extends React.Component {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/login" onClick={() => this.logout()}>
+                            <Link to="/sign_in" onClick={() => this.logout()}>
                                 <i className="" ></i>Logout
                             </Link>
                         </li>
@@ -78,17 +78,4 @@ class SideNav extends React.Component {
     }
 }
 
-SideNav.propTypes = {
-    userActions: PropTypes.object,
-    user: PropTypes.array
-};
-
-function mapDispatchToProps(dispatch) {
-    return {
-        userActions: bindActionCreators(userActions, dispatch)
-    };
-}
-
-export default connect(
-    mapDispatchToProps
-)(SideNav);
+export default SideNav;

@@ -4,7 +4,7 @@ import moment from 'moment'
 import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
-import * as acdDataActions from '../../actions/acdDataActions'
+import acdDataActions from '../../actions/acdDataActions'
 import $ from 'jquery';
 import 'datatables.net';
 // import 'datatables.net-dt/css/jquery.dataTables.css';

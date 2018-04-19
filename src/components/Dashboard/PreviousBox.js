@@ -15,9 +15,9 @@ class PreviousBox extends React.Component {
       }
   }
 
-  componentWillReceiveProps(nextProps) {
-  this.setState({acdPrevData: nextProps.acdPrevData})
-  }
+  // componentWillReceiveProps(nextProps) {
+  // this.setState({acdPrevData: nextProps.acdPrevData})
+  // }
 
     render() {
       let subscriptionsPrevious = 0;
@@ -26,11 +26,11 @@ class PreviousBox extends React.Component {
       let broughtForwardPrevious = 0;
       let carryForwardPrevious = 0;
 
-      if(this.state.acdPrevData) {
-          subscriptionsPrevious = parseFloat(subscriptionsPrevious) + parseFloat(this.state.acdPrevData[0].unitsPurchased) * parseFloat(this.state.acdPrevData[0].roundedPrice);
-          redemptionsPrevious = parseFloat(redemptionsPrevious) + parseFloat(this.state.acdPrevData[0].unitsSold) * parseFloat(this.state.acdPrevData[0].roundedPrice);
-          broughtForwardPrevious = parseFloat(broughtForwardPrevious) + parseFloat(this.state.acdPrevData[0].totalUnitsBroughtForwardBalance);
-          carryForwardPrevious = parseFloat(carryForwardPrevious) + parseFloat(this.state.acdPrevData[0].totalUnitsCarriedForward);
+      if(this.props.acdPrevData) {
+          subscriptionsPrevious = parseFloat(subscriptionsPrevious) + parseFloat(this.props.acdPrevData[0].unitsPurchased) * parseFloat(this.props.acdPrevData[0].roundedPrice);
+          redemptionsPrevious = parseFloat(redemptionsPrevious) + parseFloat(this.props.acdPrevData[0].unitsSold) * parseFloat(this.props.acdPrevData[0].roundedPrice);
+          broughtForwardPrevious = parseFloat(broughtForwardPrevious) + parseFloat(this.props.acdPrevData[0].totalUnitsBroughtForwardBalance);
+          carryForwardPrevious = parseFloat(carryForwardPrevious) + parseFloat(this.props.acdPrevData[0].totalUnitsCarriedForward);
           netInflowOutflowPrevious = parseFloat(subscriptionsPrevious) - parseFloat(redemptionsPrevious);
           subscriptionsPrevious = parseFloat(subscriptionsPrevious).toFixed(4);
           redemptionsPrevious = parseFloat(redemptionsPrevious).toFixed(4);
@@ -38,7 +38,7 @@ class PreviousBox extends React.Component {
           broughtForwardPrevious = parseFloat(broughtForwardPrevious).toFixed(4);
           carryForwardPrevious = parseFloat(carryForwardPrevious).toFixed(4);
       }
-      if(this.state.acdPrevData)
+      if(this.props.acdPrevData)
       {
 return (
   <div className="row">

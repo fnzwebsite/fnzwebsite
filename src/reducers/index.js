@@ -1,10 +1,18 @@
-import { combineReducers } from 'redux';
+import { combineReducers }  from 'redux';
+import session              from './session';
+import dealingReducer         from './dealingReducer'
+import pricePreviousReducer         from './pricePreviousReducer'
+import priceTodayReducer         from './priceTodayReducer'
+import priceNextReducer         from './priceNextReducer'
+import acdDataReducer         from './acdDataReducer'
+// import challenges           from '../../reducers/challenges'
+// import currentChallenge     from '../../reducers/currentChallenge'
 
-import { users } from './users.reducer';
-import { alert } from './alert.reducer';
-
-const rootReducer = combineReducers({
-  alert
+export default combineReducers({
+    dealing: dealingReducer,
+    session: session,
+    acdToday:priceTodayReducer,
+    acdPrevious:pricePreviousReducer,
+    acdNext:priceNextReducer,
+    acdData:acdDataReducer
 });
-
-export default rootReducer;

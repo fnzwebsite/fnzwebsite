@@ -17,7 +17,7 @@ class Home extends React.Component {
                     <div className="content-inner">
                         <Header/>
                         <div className="container-fluid">
-                            <Route exact path="/" component={Dashboard} />
+                            <Route exact path="/dashboard" component={Dashboard} />
                             <Route exact path="/acd" component={Acd} />
                         </div>
                       

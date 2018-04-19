@@ -14,9 +14,9 @@ class NextBox extends React.Component {
         acdNextData:null
       }
   }
-  componentWillReceiveProps(nextProps) {
-  this.setState({acdNextData: nextProps.acdNextData})
-  }
+  // componentWillReceiveProps(nextProps) {
+  // this.setState({acdNextData: nextProps.acdNextData})
+  // }
     render() {
       let subscriptionsNext = 0;
       let redemptionsNext = 0;
@@ -24,11 +24,11 @@ class NextBox extends React.Component {
       let broughtForwardNext = 0;
       let carryForwardNext = 0;
 
-      if(this.state.acdNextData && this.state.acdNextData.length) {
-        subscriptionsNext = parseFloat(subscriptionsNext) + parseFloat(this.state.acdNextData[0].unitsPurchased) * parseFloat(this.state.acdNextData[0].roundedPrice);
-        redemptionsNext = parseFloat(redemptionsNext) + parseFloat(this.state.acdNextData[0].unitsSold) * parseFloat(this.state.acdNextData[0].roundedPrice);
-        broughtForwardNext = parseFloat(broughtForwardNext) + parseFloat(this.state.acdNextData[0].totalUnitsBroughtForwardBalance);
-        carryForwardNext = parseFloat(carryForwardNext) + parseFloat(this.state.acdNextData[0].totalUnitsCarriedForward);
+      if(this.props.acdNextData && this.props.acdNextData.length) {
+        subscriptionsNext = parseFloat(subscriptionsNext) + parseFloat(this.props.acdNextData[0].unitsPurchased) * parseFloat(this.props.acdNextData[0].roundedPrice);
+        redemptionsNext = parseFloat(redemptionsNext) + parseFloat(this.props.acdNextData[0].unitsSold) * parseFloat(this.props.acdNextData[0].roundedPrice);
+        broughtForwardNext = parseFloat(broughtForwardNext) + parseFloat(this.props.acdNextData[0].totalUnitsBroughtForwardBalance);
+        carryForwardNext = parseFloat(carryForwardNext) + parseFloat(this.props.acdNextData[0].totalUnitsCarriedForward);
         netInflowOutflowNext = parseFloat(subscriptionsNext) - parseFloat(redemptionsNext);
         subscriptionsNext = parseFloat(subscriptionsNext).toFixed(4);
         redemptionsNext = parseFloat(redemptionsNext).toFixed(4);
@@ -36,7 +36,7 @@ class NextBox extends React.Component {
         broughtForwardNext = parseFloat(broughtForwardNext).toFixed(4);
         carryForwardNext = parseFloat(carryForwardNext).toFixed(4);
       }
-      if(this.state.acdNextData)
+      if(this.props.acdNextData)
       {
 return (
   <div className="row">

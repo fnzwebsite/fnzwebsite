@@ -15,9 +15,9 @@ class TodayBox extends React.Component {
       }
   }
 
-  componentWillReceiveProps(nextProps) {
-  this.setState({acdTodayData: nextProps.acdTodayData})
-  }
+  // componentWillReceiveProps(nextProps) {
+  // this.setState({acdTodayData: nextProps.acdTodayData})
+  // }
 
 
     render() {
@@ -27,12 +27,12 @@ class TodayBox extends React.Component {
       let broughtForwardToday = 0;
       let carryForwardToday = 0;
 
-      if(this.state.acdTodayData && this.state.acdTodayData.length) {
-        //  console.log(JSON.stringify(this.state.acdTodayData));
-          subscriptionsToday = parseFloat(subscriptionsToday) + parseFloat(this.state.acdTodayData[0].unitsPurchased) * parseFloat(this.state.acdTodayData[0].roundedPrice);
-          redemptionsToday = parseFloat(redemptionsToday) + parseFloat(this.state.acdTodayData[0].unitsSold) * parseFloat(this.state.acdTodayData[0].roundedPrice);
-          broughtForwardToday = parseFloat(broughtForwardToday) + parseFloat(this.state.acdTodayData[0].totalUnitsBroughtForwardBalance);
-          carryForwardToday = parseFloat(carryForwardToday) + parseFloat(this.state.acdTodayData[0].totalUnitsCarriedForward);
+      if(this.props.acdTodayData && this.props.acdTodayData.length) {
+        //  console.log(JSON.stringify(this.props.acdTodayData));
+          subscriptionsToday = parseFloat(subscriptionsToday) + parseFloat(this.props.acdTodayData[0].unitsPurchased) * parseFloat(this.props.acdTodayData[0].roundedPrice);
+          redemptionsToday = parseFloat(redemptionsToday) + parseFloat(this.props.acdTodayData[0].unitsSold) * parseFloat(this.props.acdTodayData[0].roundedPrice);
+          broughtForwardToday = parseFloat(broughtForwardToday) + parseFloat(this.props.acdTodayData[0].totalUnitsBroughtForwardBalance);
+          carryForwardToday = parseFloat(carryForwardToday) + parseFloat(this.props.acdTodayData[0].totalUnitsCarriedForward);
           netInflowOutflowToday = parseFloat(subscriptionsToday) - parseFloat(redemptionsToday);
           subscriptionsToday = parseFloat(subscriptionsToday).toFixed(4);
           redemptionsToday = parseFloat(redemptionsToday).toFixed(4);
@@ -42,7 +42,7 @@ class TodayBox extends React.Component {
           //console.log(broughtForwardToday);
           //console.log(carryForwardToday);
       }
-      if(this.state.acdTodayData)
+      if(this.props.acdTodayData)
       {
 return (<div className="row">
     <div className="col-6 open">
