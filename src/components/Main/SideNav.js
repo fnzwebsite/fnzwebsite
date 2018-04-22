@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import { push }                           from 'react-router-redux';
+import { push } from 'react-router-redux';
 
 class SideNav extends React.Component {
     constructor(props) {
@@ -48,7 +48,7 @@ class SideNav extends React.Component {
                         </li>
                         <li>
                             <Link to="/sign_in" onClick={() => this.logout()}>
-                                <i className="" ></i>Logout
+                                <i className="fa fa-power-off" ></i>Logout
                             </Link>
                         </li>
                     </ul>
