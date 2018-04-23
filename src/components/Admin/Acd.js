@@ -8,7 +8,7 @@ import acdDataActions from '../../actions/acdDataActions'
 //import * from 'jquery';
 import $ from 'jquery';
 import 'datatables.net';
-import AcdWizard from './AcdWizard';
+
 // import 'datatables.net-dt/css/jquery.dataTables.css';
 // import 'datatables.net-responsive/js/dataTables.responsive';
 // import 'datatables.net-responsive-dt/css/responsive.dataTables.css';
@@ -17,16 +17,16 @@ var createReactClass = require('create-react-class');
 var tableAsJqeryElement = null;
 var Table = createReactClass({
     componentDidMount: function () {
-       const list = ['ReactJS', 'JSX', 'JavaScript', 'jQuery', 'jQuery UI'];
+    //   const list = ['ReactJS', 'JSX', 'JavaScript', 'jQuery', 'jQuery UI'];
         this.loadDataTable();
-        $(document).on('click', '#editRow', function(){
-          //alert('edit....')
-            $("#modal_header_footer").addClass("uk-open");
-              $("#modal_header_footer").attr("aria-expanded","true");
-                $("#modal_header_footer").modal('show');
-            //  this.trigger("show.uk.dropdown",$("#modal_header_footer"))
-
-        });
+        // $(document).on('click', '#editRow', function(){
+        //   //alert('edit....')
+        //     $("#modal_header_footer").addClass("uk-open");
+        //       $("#modal_header_footer").attr("aria-expanded","true");
+        //         $("#modal_header_footer").modal('show');
+        //     //  this.trigger("show.uk.dropdown",$("#modal_header_footer"))
+        //
+        // });
 
     },
     componentDidUpdate: function (prevProps, prevState) {
@@ -51,10 +51,10 @@ var Table = createReactClass({
             }
         }, 0)
     },
-    showModal: function() {
-    $("#acdmodalDialog").modal('show')
-//   ReactDOM.findDOMNode().modal();
- },
+//     showModal: function() {
+//     $("#acdmodalDialog").modal('show')
+// //   ReactDOM.findDOMNode().modal();
+//  },
 
     render: function () {
         let LoadRows = null;
@@ -102,7 +102,7 @@ var Table = createReactClass({
                         {LoadRows}
                         </tbody>
                     </table>
-                    <AcdWizard ref="modal"/>
+                    
                 </div>
             );
         } else {

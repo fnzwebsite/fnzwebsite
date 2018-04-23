@@ -1,7 +1,6 @@
 import {connect} from 'react-redux';
 import React from 'react';
 import $ from 'jquery';
-import ReactDOM from 'react-dom'
 import Acd from './Acd'
 class AcdWizard extends React.Component {
   componentDidMount()
