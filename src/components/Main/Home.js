@@ -1,14 +1,21 @@
-import {connect} from 'react-redux';
 import React from 'react';
 import SideNav from './SideNav'
 import Header from './Header'
-import Footer from './Footer'
-import {Router, Route} from 'react-router';
+import Route from 'react-router-hooks';
 import Dashboard from '../Dashboard/Dashboard';
 import Acd from '../Admin/Acd';
-import AcdWizard from "../Admin/AcdWizard";
 
 class Home extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            acdData: null,
+        };
+        this.loadAcdData = this.loadAcdData.bind(this);
+    }
+    loadAcdData(){
+        alert('hi');
+    }
     render() {
         return (
             <div className="page">
@@ -16,15 +23,10 @@ class Home extends React.Component {
                     <SideNav/>
                     <div className="content-inner">
                         <Header/>
-                        <div className="container-fluid">
-                            <Route exact path="/dashboard" component={Dashboard} />
-                            <Route exact path="/acd" component={Acd} />
-                        </div>
-                      
+                        <Route exact path="/dashboard" component={Dashboard} />
+                        <Route exact path='/acd' component={Acd} />
+
                     </div>
-                </div>
-                <div className="uk-modal" id="modal_header_footer">
-                   <AcdWizard/>
                 </div>
             </div>
         )

@@ -31,7 +31,6 @@ function login(username, password) {
 
 function logout() {
     localStorage.removeItem('user');
-  //  history.push('/login');
     return { type: allActions.LOGOUT };
 }
 
