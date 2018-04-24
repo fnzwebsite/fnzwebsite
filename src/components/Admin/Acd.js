@@ -72,7 +72,6 @@ var Table = createReactClass({
                     <td>{self.props.acdData[keyName].telephone}</td>
                     <td>{self.props.acdData[keyName].fax}</td>
                     <td class="uk-text-center">
-                        <Link to={{ pathname: '/acd', state: { foo: 'bar'} }}>My route</Link>
                         <Link to={'/acd'} params={{ testvalue: "hello" }} className="handle-edit-modal" data-id={keyName}
                            data-uk-modal="{target:'#modal_header_footer'}"><i
                             class="md-icon material-icons">&#xE254;</i></Link>
