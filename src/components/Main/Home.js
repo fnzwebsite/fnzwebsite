@@ -25,7 +25,6 @@ class Home extends React.Component {
                         <Header/>
                         <Route exact path="/dashboard" component={Dashboard} />
                         <Route exact path='/acd' component={Acd} />
-
                     </div>
                 </div>
             </div>

@@ -158,9 +158,9 @@ class Acd extends React.Component {
     }
 
     loadEditAcdData(acdEditData) {
-        // this.setState({
-        //     acdEditData: acdEditData
-        // })
+        this.setState({
+            acdEditData: acdEditData
+        })
     }
 
     componentWillMount() {
