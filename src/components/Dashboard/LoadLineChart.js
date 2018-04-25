@@ -62,10 +62,10 @@ class LoadLineChart extends React.Component {
             sell.push('SELL');
             sell.push(0);
             let self = this;
-            let loadAmount = Object.keys(dealing).sort((a, b) => a.tradeDate - b.tradeDate).map(function (keyName, keyIndex) {
+            let loadAmount = Object.keys(dealing).sort((a, b) => a.tradeTime - b.tradeTime).map(function (keyName, keyIndex) {
                 if (loadThisDay == 'today') {
                     if (moment(dealing[keyName].boxDate).isSame(today, 'day')) {
-                        let tdate = moment(dealing[keyName].tradeDate);//.tz('Europe/London');
+                        let tdate = moment(dealing[keyName].tradeTime);//.tz('Europe/London');
                         datetime.push(tdate._d[3] + ':' + tdate._d[4] + ':' + tdate._d[5])
                         if (dealing[keyName].dealType.toUpperCase() == "BUY") {
                             buy.push(dealing[keyName].units)
@@ -79,7 +79,7 @@ class LoadLineChart extends React.Component {
                 }
                 if (loadThisDay == 'next') {
                     if (moment(dealing[keyName].boxDate).isSame(tomorrow, 'day')) {
-                        let tdate = moment(dealing[keyName].tradeDate);//.tz('Europe/London');
+                        let tdate = moment(dealing[keyName].tradeTime);//.tz('Europe/London');
                         datetime.push(tdate._d[3] + ':' + tdate._d[4] + ':' + tdate._d[5])
                         if (dealing[keyName].dealType.toUpperCase() == "BUY") {
                             buy.push(dealing[keyName].units)
@@ -93,7 +93,7 @@ class LoadLineChart extends React.Component {
                 }
                 if (loadThisDay == 'previous') {
                     if (moment(dealing[keyName].boxDate).isSame(yesterday, 'day')) {
-                        let tdate = moment(dealing[keyName].tradeDate);//.tz('Europe/London');
+                        let tdate = moment(dealing[keyName].tradeTime);//.tz('Europe/London');
                         console.log(parseInt(tdate.format('hh')));
                         datetime.push(tdate._d[3] + ':' + tdate._d[4] + ':' + tdate._d[5])
                         if (dealing[keyName].dealType.toUpperCase() == "BUY") {
