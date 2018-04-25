@@ -66,7 +66,7 @@ class LoadLineChart extends React.Component {
                 if (loadThisDay == 'today') {
                     if (moment(dealing[keyName].boxDate).isSame(today, 'day')) {
                         let tdate = moment(dealing[keyName].tradeDate);//.tz('Europe/London');
-                        datetime.push(tdate._a[3] + ':' + tdate._a[4] + ':' + tdate._a[5])
+                        datetime.push(tdate._d[3] + ':' + tdate._d[4] + ':' + tdate._d[5])
                         if (dealing[keyName].dealType.toUpperCase() == "BUY") {
                             buy.push(dealing[keyName].units)
                             sell.push(0)

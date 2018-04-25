@@ -3235,8 +3235,8 @@ a > code {
 * 8. CARD
 */
 .card {
-  background-color: #fff;
-  border: 0 solid #eee;
+  /*background-color: #fff;*/
+  /*border: 0 solid #eee;*/
   border-radius: 0;
 }
 
