@@ -4,7 +4,7 @@ import Acd from './Acd'
 
 class AddAcdWizard extends React.Component {
     componentDidMount() {
-        window.$("#wizard_edit").steps({
+        window.$("#wizard_add").steps({
             headerTag: "h3",
             bodyTag: "section",
             transitionEffect: "slideLeft",
@@ -135,7 +135,7 @@ class AddAcdWizard extends React.Component {
                     <div className="md-card uk-margin-large-bottom">
                         <div className="md-card-content">
                             <form className="uk-form-stacked" id="wizard_advanced_form">
-                                <div id="wizard_edit" data-uk-observe>
+                                <div id="wizard_add" data-uk-observe>
                                     <h3>Step 1</h3>
                                     <section>
                                         <h2 className="heading_a">

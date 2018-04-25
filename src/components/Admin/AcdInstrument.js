@@ -5,10 +5,11 @@ import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
 import acdInstrumentActions from '../../actions/acdInstrumentActions';
 //import * from 'jquery';
-import $ from 'jquery';
-import 'datatables.net';
-import AcdInstrumentWizard from "../Admin/AcdInstrumentWizard";
+// import $ from 'jquery';
+// import 'datatables.net';
+import AcdInstrumentWizard from "./AddAcdInstrumentWizard";
 import {Link} from 'react-router-dom';
+import EditInstrumentWizard from "./EditAcdInstrumentWizard";
 
 var createReactClass = require('create-react-class');
 var tableAsJqeryElement = null;
@@ -30,30 +31,26 @@ var Table = createReactClass({
         this.loadDataTable();
     },
     componentWillReceiveProps: function (prevProps, prevState) {
-        if (prevProps.loadThisDay != this.props.loadThisDay || prevProps.dealingData != this.props.dealingData) {
-            if (tableAsJqeryElement) {
-                tableAsJqeryElement.fnDestroy();
-                tableAsJqeryElement = null;
-            }
-        }
-        this.loadDataTable();
+        // if (prevProps.loadThisDay != this.props.loadThisDay || prevProps.dealingData != this.props.dealingData) {
+        //     if (tableAsJqeryElement) {
+        //         tableAsJqeryElement.fnDestroy();
+        //         tableAsJqeryElement = null;
+        //     }
+        // }
+        // this.loadDataTable();
     },
     loadDataTable: function () {
+        window.$('#table').dataTable({
+            "order": [[0, "desc"]],
+            "bDestroy": true
+        });
         let self = this;
-        setTimeout(function () {
-            tableAsJqeryElement = $('#table').dataTable({
-                "order": [[0, "desc"]]
-            });
-            if (tableAsJqeryElement) {
-                tableAsJqeryElement.fnDraw();
-            }
+        window.$('#table tbody').on('click', 'a.handle-edit-modal', function (e) {
+            let key = window.$(this).data("id")
+            let acdInstrumentEditData = self.props.acdInstrumentData[key];
+            self.props.loadEditInstrumentAcdData(acdInstrumentEditData);
 
-            $('#table tbody').on('click', 'a.handle-edit-modal', function (e) {
-                let key = $(this).data("id")
-                let acdInstrumentEditData = self.props.acdInstrumentData[key];
-                self.props.loadEditInstrumentAcdData(acdInstrumentEditData);
-            });
-        }, 0)
+        });
     },
 
     render: function () {
@@ -71,7 +68,6 @@ var Table = createReactClass({
               <td>{self.props.acdInstrumentData[keyName].instrumentLevel}</td>
               <td>{self.props.acdInstrumentData[keyName].instrumentBasis}</td>
                     <td class="uk-text-center">
-                        <Link to={{ pathname: '/acdinstrument', state: { foo: 'bar'} }}>My route</Link>
                         <Link to={'/acdinstrument'} params={{ testvalue: "hello" }} className="handle-edit-modal" data-id={keyName}
                            data-uk-modal="{target:'#modal_header_footer'}"><i
                             class="md-icon material-icons">&#xE254;</i></Link>
@@ -116,14 +112,26 @@ var Table = createReactClass({
 class AcdInstrument extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            modalType: "add",
+            show: true
+        };
 //        this.props.acdDataActions.getAllAcdData();
 //        this.handleClick = this.handleClick.bind(this);
         this.loadEditInstrumentAcdData = this.loadEditInstrumentAcdData.bind(this);
+        this.loadAddAcdData = this.loadAddAcdData.bind(this);
     }
 
     loadEditInstrumentAcdData(acdInstrumentEditData) {
         this.setState({
-            acdInstrumentEditData: acdInstrumentEditData
+            acdInstrumentEditData: acdInstrumentEditData,
+            modalType: "edit"
+        })
+    }
+
+    loadAddAcdData() {
+        this.setState({
+            modalType: "add"
         })
     }
 
@@ -142,7 +150,8 @@ class AcdInstrument extends React.Component {
             return (
                 <div className="container-fluid" id="page_content">
                     <div className="uk-modal" id="modal_header_footer">
-                        <AcdInstrumentWizard acdInstrumentEditData={this.props.acdInstrumentData}/>
+                        {this.state.modalType == "add" && <AcdInstrumentWizard/>}
+                        {this.state.modalType == "edit" &&<EditInstrumentWizard acdInstrumentEditData={this.state.acdInstrumentEditData}/>}
                     </div>
                     <div className="mt-6">
                         <div className="row">
@@ -151,12 +160,12 @@ class AcdInstrument extends React.Component {
                                     <div className="md-card uk-margin-medium-bottom">
                                         <div className="md-card-toolbar">
                                             <h3 className="md-card-toolbar-heading-text"> Instrument List</h3>
-                                            <a className="create md-btn md-btn-primary pull-right md-btn-wave-light waves-effect waves-button waves-light"
+                                            <a onClick={this.loadAddAcdData} className="create md-btn md-btn-primary pull-right md-btn-wave-light waves-effect waves-button waves-light"
                                                data-uk-modal="{target:'#modal_header_footer'}" href="#"><i
                                                 className="fa fa-plus"></i>Instrument</a>
                                         </div>
                                         <div className="md-card-content">
-                                            <Table acdInstrumentData={this.props.acdInstrumentData} loadEditInstrumentAcdData={this.props.acdInstrumentData}/>
+                                            <Table acdInstrumentData={this.props.acdInstrumentData} loadEditInstrumentAcdData={this.loadEditInstrumentAcdData}/>
                                         </div>
                                     </div>
                                 </div>

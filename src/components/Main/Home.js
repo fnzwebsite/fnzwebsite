@@ -5,8 +5,8 @@ import Route from 'react-router-hooks';
 import Dashboard from '../Dashboard/Dashboard';
 import Acd from '../Admin/Acd';
 import AcdInstrument from '../Admin/AcdInstrument';
-import AcdInstrumentWizard from "../Admin/AcdInstrumentWizard";
-import DealDetails from "../deals/DealDetails";
+import AcdInstrumentWizard from "../Admin/AddAcdInstrumentWizard";
+import DealDetails from "../Deals/DealDetails";
 class Home extends React.Component {
     constructor(props) {
         super(props);

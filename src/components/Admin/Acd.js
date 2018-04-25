@@ -197,7 +197,7 @@ class Acd extends React.Component {
                                                 className="fa fa-plus"></i>Entity</a>
                                         </div>
                                         <div className="md-card-content">
-                                            <Table show={this.state.show} animateIn={this.animateIn} animateOut={this.animateOut} acdData={this.props.acdData} loadEditAcdData={this.loadEditAcdData}/>
+                                            <Table acdData={this.props.acdData} loadEditAcdData={this.loadEditAcdData}/>
                                         </div>
                                     </div>
                                 </div>
