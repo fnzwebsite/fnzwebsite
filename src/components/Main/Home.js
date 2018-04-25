@@ -6,7 +6,7 @@ import Dashboard from '../Dashboard/Dashboard';
 import Acd from '../Admin/Acd';
 import AcdInstrument from '../Admin/AcdInstrument';
 import AcdInstrumentWizard from "../Admin/AcdInstrumentWizard";
-import DealDetails from "../../deals/DealDetails";
+import DealDetails from "../deals/DealDetails";
 class Home extends React.Component {
     constructor(props) {
         super(props);
