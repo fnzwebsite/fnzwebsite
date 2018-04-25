@@ -3,64 +3,57 @@ import React from 'react';
 import moment from 'moment'
 import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
-
 import acdDataActions from '../../actions/acdDataActions'
-//import * from 'jquery';
-import $ from 'jquery';
-import 'datatables.net';
-import AcdWizard from "../Admin/AcdWizard";
+import AddAcdWizard from "./AddAcdWizard";
+import EditAcdWizard from "./EditAcdWizard";
 import {Link} from 'react-router-dom';
+
 
 var createReactClass = require('create-react-class');
 var tableAsJqeryElement = null;
 var Table = createReactClass({
     componentDidMount: function () {
-        //   const list = ['ReactJS', 'JSX', 'JavaScript', 'jQuery', 'jQuery UI'];
-        this.loadDataTable();
-        // $(document).on('click', '#editRow', function(){
-        //   //alert('edit....')
-        //     $("#modal_header_footer").addClass("uk-open");
-        //       $("#modal_header_footer").attr("aria-expanded","true");
-        //         $("#modal_header_footer").modal('show');
-        //     //  this.trigger("show.uk.dropdown",$("#modal_header_footer"))
-        //
-        // });
-
+        // this.loadDataTable();
     },
     componentDidUpdate: function (prevProps, prevState) {
         this.loadDataTable();
     },
     componentWillReceiveProps: function (prevProps, prevState) {
-        if (prevProps.loadThisDay != this.props.loadThisDay || prevProps.dealingData != this.props.dealingData) {
-            if (tableAsJqeryElement) {
-                tableAsJqeryElement.fnDestroy();
-                tableAsJqeryElement = null;
-            }
-        }
-        this.loadDataTable();
+        // if (prevProps.loadThisDay != this.props.loadThisDay || prevProps.dealingData != this.props.dealingData) {
+        //     if (tableAsJqeryElement) {
+        //         tableAsJqeryElement.fnDestroy();
+        //         tableAsJqeryElement = null;
+        //     }
+        // }
+        // this.loadDataTable();
     },
     loadDataTable: function () {
+        window.$('#table').dataTable({
+            "order": [[0, "desc"]],
+            "bDestroy": true
+        });
         let self = this;
-        setTimeout(function () {
-            tableAsJqeryElement = $('#table').dataTable({
-                "order": [[0, "desc"]]
-            });
-            if (tableAsJqeryElement) {
-                tableAsJqeryElement.fnDraw();
-            }
+        window.$('#table tbody').on('click', 'a.handle-edit-modal', function (e) {
+            let key = window.$(this).data("id")
+            let acdEditData = self.props.acdData[key];
+            self.props.loadEditAcdData(acdEditData);
+        });
 
-            $('#table tbody').on('click', 'a.handle-edit-modal', function (e) {
-                let key = $(this).data("id")
-                let acdEditData = self.props.acdData[key];
-                self.props.loadEditAcdData(acdEditData);
-            });
-        }, 0)
+        // let self = this;
+        // setTimeout(function () {
+        //     tableAsJqeryElement = $('#table').dataTable({
+        //         "order": [[0, "desc"]]
+        //     });
+        //     if (tableAsJqeryElement) {
+        //         tableAsJqeryElement.fnDraw();
+        //     }
+        //
+        // }, 0)
     },
 
     render: function () {
         let LoadRows = null;
         let self = this;
-        //console.log(JSON.stringify(this.props.acdData));
         if (this.props.acdData) {
             LoadRows = Object.keys(this.props.acdData).sort((a, b) => b.name - a.name).map(function (keyName, keyIndex) {
                 return <tr>
@@ -71,11 +64,11 @@ var Table = createReactClass({
                     <td>{self.props.acdData[keyName].email}</td>
                     <td>{self.props.acdData[keyName].telephone}</td>
                     <td>{self.props.acdData[keyName].fax}</td>
-                    <td class="uk-text-center">
-                        <Link to={'/acd'} params={{ testvalue: "hello" }} className="handle-edit-modal" data-id={keyName}
-                           data-uk-modal="{target:'#modal_header_footer'}"><i
-                            class="md-icon material-icons">&#xE254;</i></Link>
-                        <a href="#"><i class="md-icon material-icons">&#xE872;</i></a>
+                    <td className="uk-text-center">
+                        <Link to={'/acd'} params={{testvalue: "hello"}} className="handle-edit-modal" data-id={keyName}
+                              data-uk-modal="{target:'#modal_header_footer'}"><i
+                            className="md-icon material-icons">&#xE254;</i></Link>
+                        <a href="#"><i className="md-icon material-icons">&#xE872;</i></a>
                     </td>
                 </tr>
             });
@@ -116,9 +109,14 @@ var Table = createReactClass({
 class Acd extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            modalType: "add",
+            show: true
+        };
 //        this.props.acdDataActions.getAllAcdData();
         this.handleClick = this.handleClick.bind(this);
         this.loadEditAcdData = this.loadEditAcdData.bind(this);
+        this.loadAddAcdData = this.loadAddAcdData.bind(this);
 
 
         this.state = {
@@ -158,7 +156,14 @@ class Acd extends React.Component {
 
     loadEditAcdData(acdEditData) {
         this.setState({
-            acdEditData: acdEditData
+            acdEditData: acdEditData,
+            modalType: "edit"
+        })
+    }
+
+    loadAddAcdData() {
+        this.setState({
+            modalType: "add"
         })
     }
 
@@ -172,13 +177,14 @@ class Acd extends React.Component {
     }
 
     render() {
-
-
             return (
                 <div className="container-fluid" id="page_content">
+
                     <div className="uk-modal" id="modal_header_footer">
-                        <AcdWizard acdEditData={this.state.acdEditData}/>
+                        {this.state.modalType == "add" && <AddAcdWizard/>}
+                        {this.state.modalType == "edit" &&<EditAcdWizard acdEditData={this.state.acdEditData}/>}
                     </div>
+
                     <div className="mt-6">
                         <div className="row">
                             <div className="col-md-12 wizard-list">
@@ -186,12 +192,12 @@ class Acd extends React.Component {
                                     <div className="md-card uk-margin-medium-bottom">
                                         <div className="md-card-toolbar">
                                             <h3 className="md-card-toolbar-heading-text"> Entities</h3>
-                                            <a className="create md-btn md-btn-primary pull-right md-btn-wave-light waves-effect waves-button waves-light"
+                                            <a onClick={this.loadAddAcdData} className="create md-btn md-btn-primary pull-right md-btn-wave-light waves-effect waves-button waves-light"
                                                data-uk-modal="{target:'#modal_header_footer'}" href="#"><i
                                                 className="fa fa-plus"></i>Entity</a>
                                         </div>
                                         <div className="md-card-content">
-                                            <Table acdData={this.props.acdData} loadEditAcdData={this.loadEditAcdData}/>
+                                            <Table show={this.state.show} animateIn={this.animateIn} animateOut={this.animateOut} acdData={this.props.acdData} loadEditAcdData={this.loadEditAcdData}/>
                                         </div>
                                     </div>
                                 </div>
@@ -200,17 +206,10 @@ class Acd extends React.Component {
                     </div>
                 </div>
 
-            )
+        )
 
     }
 }
-
-// const
-// mapStateToProps = (state, props) => {
-//   return {
-//     user: state.user
-//   }
-// };
 
 const
     mapStateToProps = (state, props) => {
@@ -232,5 +231,3 @@ const
 
 export default connect(mapStateToProps,
     mapDispatchToProps)(Acd);
-
-//    export default TransactionsTable;
