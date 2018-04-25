@@ -8,6 +8,7 @@ import { Redirect} from 'react-router-dom';
 import TodayBox from './TodayBox'
 import PreviousBox from './PreviousBox'
 import NextBox from './NextBox'
+import {Link} from 'react-router-dom';
 
 class BoxToday extends React.Component {
     constructor(props) {
@@ -109,7 +110,7 @@ class BoxToday extends React.Component {
                     <div className="col-md-4 previous" onClick={() => this.changeView('previous')}>
                         <div className={this.state.selected == "previous" ? 'card funds selected':'card funds'}>
                             <div className="card-header">
-                                <h3>Fund Position</h3> <span className="badge bg-alice pull-right">Previous Day</span></div>
+                                <Link to={{ pathname: '/dealdetails', state: { data: this.props.price.acdPrevious} }}><span className="badge bg-alice pull-right">Previous Day</span></Link></div>
                             <div className="dashboard_card">
                             <PreviousBox acdPrevData={this.props.price.acdPrevious}/>
                             </div>
@@ -118,7 +119,7 @@ class BoxToday extends React.Component {
                     <div className="col-md-4 today" onClick={() => this.changeView('today')}>
                         <div className={this.state.selected == "today" ? 'card funds selected':'card funds'}>
                             <div className="card-header">
-                                <h3>Fund Position</h3> <span className="badge bg-alice pull-right">Today</span></div>
+                                <Link to={{ pathname: '/dealdetails', state: { data: this.props.price.acdToday} }}><span className="badge bg-alice pull-right">Today</span></Link></div>
                             <div className="dashboard_card">
                               <TodayBox acdTodayData={this.props.price.acdToday}/>
                             </div>
@@ -127,7 +128,7 @@ class BoxToday extends React.Component {
                     <div className="col-md-4 next" onClick={() => this.changeView('next')}>
                         <div className={this.state.selected == "next" ? 'card funds selected':'card funds'}>
                             <div className="card-header">
-                                <h3>Fund Position</h3> <span className="badge bg-alice pull-right">Next Day</span></div>
+                              <Link to={{ pathname: '/dealdetails', state: { data: this.props.price.acdNext} }}><span className="badge bg-alice pull-right">Next Day</span></Link></div>
                             <div className="dashboard_card">
                             <NextBox acdNextData={this.props.price.acdNext}/>
                             </div>

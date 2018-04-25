@@ -4,7 +4,9 @@ import Header from './Header'
 import Route from 'react-router-hooks';
 import Dashboard from '../Dashboard/Dashboard';
 import Acd from '../Admin/Acd';
-
+import AcdInstrument from '../Admin/AcdInstrument';
+import AcdInstrumentWizard from "../Admin/AcdInstrumentWizard";
+import DealDetails from "../deals/DealDetails";
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -25,6 +27,8 @@ class Home extends React.Component {
                         <Header/>
                         <Route exact path="/dashboard" component={Dashboard} />
                         <Route exact path='/acd' component={Acd} />
+                        <Route exact path="/acdinstrument" component={AcdInstrument} />
+                        <Route exact path="/dealdetails" component={DealDetails} />
                     </div>
                 </div>
             </div>

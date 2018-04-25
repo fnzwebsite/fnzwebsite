@@ -4,5 +4,6 @@ export default {
     acdToday:null,
     acdPrevious:null,
     acdNext:null,
-    acdData:null
+    acdData:null,
+    acdInstrumentData: null
 };

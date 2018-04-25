@@ -280,3 +280,45 @@ function getAcd(callback, auth, dateValue,acdId) {
 
     req.end();
 }
+
+server.get('/getInstrument', (req, res) => {
+    let auth = req.headers.authorization;
+    getInstrumentAcd(function (data) {
+        res.send(data);
+    }, auth);
+});
+
+function getInstrumentAcd(callback, auth) {
+    var options = {
+        method: 'GET',
+        host: '35.178.56.52',
+        port: 8081,
+        path: '/api/v1/instrument',
+        headers: {
+            Authorization: auth
+        }
+    };
+
+    var req = http.request(options, function (res) {
+        var output = '';
+
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            output += chunk;
+        });
+
+        res.on('end', function () {
+          //console.log(output);
+            var obj = JSON.parse(output);
+            if (callback != undefined) {
+                callback(obj);
+            }
+        });
+    });
+
+    req.on('error', function (e) {
+        console.log('problem with request: ' + e.message);
+    });
+
+    req.end();
+}
