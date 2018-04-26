@@ -63,7 +63,7 @@ class AddAcdWizard extends React.Component {
 
                 , "instrumentType": indexed_array["instrumentType"]
                 , "telephone": indexed_array["telephone"]
-                , "fax": indexed_array["Fax"]
+                , "fax": indexed_array["fax"]
                 , "email": indexed_array["Email"]
                 , "ucitisCompliant": true
             }
@@ -353,9 +353,9 @@ class AddAcdWizard extends React.Component {
                                             <div className="col-sm-4">
                                                 <div className="form-group ">
                                                     <div className="parsley-row uk-margin-top">
-                                                        <label for="fullname">Fax<span
+                                                        <label for="fax">Fax<span
                                                             className="req">*</span></label>
-                                                        <input type="text" name="fullname" required
+                                                        <input type="text" name="fax" required
                                                                className="md-input"/>
                                                     </div>
                                                 </div>
