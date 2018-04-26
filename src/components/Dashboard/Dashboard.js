@@ -2,6 +2,7 @@ import {connect} from 'react-redux';
 import React from 'react';
 import BoxToday from './BoxDealing'
 import LoadLineChart from './LoadLineChart'
+import LoadChart from './LoadChart'
 import TransactionsTable from './TransactionsTable'
 import io from "socket.io-client"
 import dealingActions from '../../actions/dealingActions';
@@ -110,6 +111,7 @@ class Dashboard extends React.Component {
                                                     <div className="line-chart-example card"  style={{minHeight:'200px'}}>
                                                         <div className="card-body"
                                                              style={{paddingBottom: '30px'}}>
+                                                            {/*<LoadChart/>*/}
                                                             <LoadLineChart
                                                                 loadThisDay={this.state.chart}
                                                                 dealingData={dealing}/>

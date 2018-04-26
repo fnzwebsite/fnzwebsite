@@ -1,8 +1,9 @@
 import React from 'react';
-// import 'datatables.net';
-// import 'datatables.net-dt/css/jquery.dataTables.css';
-// import 'datatables.net-responsive/js/dataTables.responsive';
-// import 'datatables.net-responsive-dt/css/responsive.dataTables.css';
+import 'datatables.net';
+import $ from 'jquery';
+import 'datatables.net-dt/css/jquery.dataTables.css';
+import 'datatables.net-responsive/js/dataTables.responsive';
+import 'datatables.net-responsive-dt/css/responsive.dataTables.css';
 import Settings from '../Common/Settings';
 import moment from 'moment';
 var createReactClass = require('create-react-class');
@@ -16,25 +17,28 @@ var Table = createReactClass({
         this.loadDataTable();
     },
     componentWillReceiveProps: function (prevProps, prevState) {
-        // if(prevProps.loadThisDay != this.props.loadThisDay || prevProps.dealingData !=  this.props.dealingData) {
-        //     if (tableAsJqeryElement) {
-        //         tableAsJqeryElement.fnDestroy();
-        //         tableAsJqeryElement = null;
-        //     }
-        // }
-        // this.loadDataTable();
+        if(prevProps.loadThisDay != this.props.loadThisDay || prevProps.dealingData !=  this.props.dealingData) {
+            if (tableAsJqeryElement) {
+                tableAsJqeryElement.fnDestroy();
+                tableAsJqeryElement = null;
+            }
+        }
+        this.loadDataTable();
     },
     loadDataTable: function () {
-        window.$('#table').dataTable({
-            "order": [[0, "desc"]],
-            "bDestroy": true
-        });
-        // setTimeout(function () {
-        //     tableAsJqeryElement = $('#table').dataTable();
-        //     if (tableAsJqeryElement) {
-        //         tableAsJqeryElement.fnDraw();
-        //     }
-        // }, 0)
+        // if(tableAsJqeryElement){
+        //     tableAsJqeryElement.destroy();
+        //     tableAsJqeryElement = null;
+        // }
+        // tableAsJqeryElement = $('#table').DataTable({
+        //     "order": [[0, "desc"]],
+        // });
+        setTimeout(function () {
+            tableAsJqeryElement = window.$('#table').dataTable();
+            if (tableAsJqeryElement) {
+                tableAsJqeryElement.fnDraw();
+            }
+        }, 0)
     },
 
     render: function () {

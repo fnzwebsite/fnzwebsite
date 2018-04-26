@@ -8,8 +8,9 @@ export default function configRoutes() {
   return (
     <div>
       {/*<Route exact path="/" component={App} />*/}
+        <Route exact path="/sign_in" component={SignIn}/>
         <AuthenticatedRoute path='/' component={Home} />
-        <Route path="/sign_in" component={SignIn}/>
+
     </div>
   );
 }

@@ -12,6 +12,9 @@ const acdDataActions = {
                     dispatch({type: allActions.RECEIVE_ACD_DATA, acdData: data});
                 }).catch(err => {
                 if (err.message == "Token Expired or Token not valid.")
+                    // localStorage.removeItem('token');
+                    // localStorage.removeItem('displayName');
+                    // localStorage.removeItem('acdId');
                     dispatch(push('/sign_in'))
             });
         };
