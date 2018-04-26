@@ -37,7 +37,8 @@ var Table = createReactClass({
         let self = this;
         setTimeout(function () {
             tableAsJqeryElement = $('#table').dataTable({
-                "order": [[0, "desc"]]
+               "order": [[0, "desc"]]
+
             });
             if (tableAsJqeryElement) {
                 tableAsJqeryElement.fnDraw();
@@ -54,7 +55,7 @@ var Table = createReactClass({
     render: function () {
         let LoadRows = null;
         let self = this;
-        console.log("hi"+JSON.stringify(this.props.dealData));
+        //alert("hi"+JSON.stringify(this.props.dealData));
         if (this.props.dealData) {
             LoadRows = Object.keys(self.props.dealData).sort((a, b) => b.name - a.name).map(function (keyName, keyIndex) {
                 return <tr>
@@ -69,7 +70,7 @@ var Table = createReactClass({
             LoadRows = LoadRows.filter(function (item) {
                 return item != undefined
             })
-            
+
             return (
                 <div style={{minHeight: '200px'}}>
                     <table id="table" className="stripe" cellSpacing="0" width="100%">
@@ -145,7 +146,6 @@ class DealDetails extends React.Component {
 
    for(var i=0;i < isin.length; i++)
    {
-
       for(var j=0;j < this.props.location.state.data.length; j++)
       {
         if(isin[i]==this.props.location.state.data[j].instrumentKey)
@@ -163,13 +163,14 @@ class DealDetails extends React.Component {
               }
             }
           }
-
           subscriptionSum=cashBuys+parseFloat(subscriptionSum) + parseFloat(this.props.location.state.data[j].unitsPurchased) * parseFloat(this.props.location.state.data[j].roundedPrice);
           redemptionSum=cashSells+parseFloat(redemptionSum) + parseFloat(this.props.location.state.data[j].unitsSold) * parseFloat(this.props.location.state.data[j].roundedPrice);
           netflowSum = parseFloat(subscriptionSum) - parseFloat(redemptionSum);
           roundedPrice = parseFloat(this.props.location.state.data[j].roundedPrice);
         }
       }
+     if(subscriptionSum>0 || redemptionSum>0)
+     {
       tableData[i]={
         "isin":isin[i],
         "subscriptions":subscriptionSum,
@@ -177,8 +178,10 @@ class DealDetails extends React.Component {
         "netFlow":netflowSum,
         "roundedPrice":roundedPrice
       };
+      }
+
    }
-   console.log(JSON.stringify(tableData));
+
    console.log("sub:"+subscriptionSum+"red:"+redemptionSum+"net:"+netflowSum);
       if(this.props.location.state.data && this.props.location.state.data) {
         //  console.log(JSON.stringify(this.props.acdTodayData));
