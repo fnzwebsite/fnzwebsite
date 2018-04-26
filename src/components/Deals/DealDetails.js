@@ -4,24 +4,13 @@ import $ from 'jquery';
 import ReactDOM from 'react-dom';
 import 'datatables.net';
 import PropTypes from 'prop-types';
+import {boxDataCalculation,convertCurrency} from '../../helpers/boxDataCalculation';
+
 
 var createReactClass = require('create-react-class');
 var tableAsJqeryElement = null;
 var Table = createReactClass({
-    componentDidMount: function () {
-        //   const list = ['ReactJS', 'JSX', 'JavaScript', 'jQuery', 'jQuery UI'];
-        this.loadDataTable();
-        // $(document).on('click', '#editRow', function(){
-        //   //alert('edit....')
-        //     $("#modal_header_footer").addClass("uk-open");
-        //       $("#modal_header_footer").attr("aria-expanded","true");
-        //         $("#modal_header_footer").modal('show');
-        //     //  this.trigger("show.uk.dropdown",$("#modal_header_footer"))
-        //
-        // });
-
-    },
-    componentDidUpdate: function (prevProps, prevState) {
+  componentDidUpdate: function (prevProps, prevState) {
         this.loadDataTable();
     },
     componentWillReceiveProps: function (prevProps, prevState) {
@@ -37,7 +26,8 @@ var Table = createReactClass({
         let self = this;
         setTimeout(function () {
             tableAsJqeryElement = $('#table').dataTable({
-                "order": [[0, "desc"]]
+               "order": [[0, "desc"]]
+
             });
             if (tableAsJqeryElement) {
                 tableAsJqeryElement.fnDraw();
@@ -52,16 +42,17 @@ var Table = createReactClass({
     },
 
     render: function () {
-        let LoadRows = null;
+      let LoadRows = null;
         let self = this;
-        console.log("hi"+JSON.stringify(this.props.dealData));
+
+        //alert("hi"+JSON.stringify(this.props.dealData));
         if (this.props.dealData) {
             LoadRows = Object.keys(self.props.dealData).sort((a, b) => b.name - a.name).map(function (keyName, keyIndex) {
                 return <tr>
                     <td>{self.props.dealData[keyIndex].isin}</td>
                     <td>{self.props.dealData[keyIndex].subscriptions}</td>
                     <td>{self.props.dealData[keyIndex].redemptions}</td>
-                    <td>{self.props.dealData[keyIndex].netflow}</td>
+                    <td>{self.props.dealData[keyIndex].netFlow}</td>
                     <td>{self.props.dealData[keyIndex].roundedPrice}</td>
                 </tr>
             });
@@ -69,7 +60,7 @@ var Table = createReactClass({
             LoadRows = LoadRows.filter(function (item) {
                 return item != undefined
             })
-            
+
             return (
                 <div style={{minHeight: '200px'}}>
                     <table id="table" className="stripe" cellSpacing="0" width="100%">
@@ -96,28 +87,22 @@ var Table = createReactClass({
 
 });
 
-
-
 class DealDetails extends React.Component {
-
-
   constructor(props) {
-      super(props)
-      // this.state = {
-      //   this.props.price.acdToday
-      // }
-      //  alert(JSON.stringify(this.props.location.state.data[0].boxDate));
+      super(props);
+      this.state={
+        boxData:boxDataCalculation(this.props.location.state.data)
+      };
 
-      console.log(JSON.stringify(this.props));
     }
 
     componentDidMount()
     {
       this.props=null;
-
     }
 
     render() {
+
       let subscriptions = 0;
       let redemptions = 0;
       let netInflowOutflow = 0;
@@ -132,26 +117,28 @@ class DealDetails extends React.Component {
       let isinkey=0;
       let price=0;
       var tableData=[];
+      let cashData =null;
       // let broughtForward = 0;
       // let carryForward = 0;
-
+      console.log('hi'+JSON.stringify(this.state.boxData.subscriptions));
       for (var i = 0; i < this.props.location.state.data.length; i++) {
         if($.inArray(this.props.location.state.data[i].instrumentKey, this.props.location.state.data[i])==-1)
         {
-            isin.splice(i,0,this.props.location.state.data[i].instrumentKey);
+            isin.push(this.props.location.state.data[i].instrumentKey);
+            //isin.splice(i,0,this.props.location.state.data[i].instrumentIsin);
             console.log("isin:"+isin);
         }
    }
 
    for(var i=0;i < isin.length; i++)
    {
-
       for(var j=0;j < this.props.location.state.data.length; j++)
       {
         if(isin[i]==this.props.location.state.data[j].instrumentKey)
         {
           if(this.props.location.state.data[j].cash && this.props.location.state.data[j].cash.length)
           {
+            cashData=0
             for(var k=0;k<this.props.location.state.data[j].cash.length;k++)
             {
               if(this.props.location.state.data[j].cash[k]>0)
@@ -163,111 +150,105 @@ class DealDetails extends React.Component {
               }
             }
           }
-
+          //cashSells = cashSells*(-1)
           subscriptionSum=cashBuys+parseFloat(subscriptionSum) + parseFloat(this.props.location.state.data[j].unitsPurchased) * parseFloat(this.props.location.state.data[j].roundedPrice);
           redemptionSum=cashSells+parseFloat(redemptionSum) + parseFloat(this.props.location.state.data[j].unitsSold) * parseFloat(this.props.location.state.data[j].roundedPrice);
-          netflowSum = parseFloat(subscriptionSum) - parseFloat(redemptionSum);
+          netflowSum = parseFloat(subscriptionSum) + parseFloat(redemptionSum);
           roundedPrice = parseFloat(this.props.location.state.data[j].roundedPrice);
+          if(redemptionSum<0)
+          {
+            redemptionSum=redemptionSum * (-1);
+          }
+          if(netflowSum<0)
+          {
+            netflowSum=netflowSum * (-1);
+          }
         }
       }
-      tableData[i]={
+     if(cashData!=null)
+     {
+      tableData.push({
         "isin":isin[i],
         "subscriptions":subscriptionSum,
         "redemptions":redemptionSum,
         "netFlow":netflowSum,
         "roundedPrice":roundedPrice
-      };
+      })
+     }
+
    }
-   console.log(JSON.stringify(tableData));
-   console.log("sub:"+subscriptionSum+"red:"+redemptionSum+"net:"+netflowSum);
-      if(this.props.location.state.data && this.props.location.state.data) {
-        //  console.log(JSON.stringify(this.props.acdTodayData));
-          subscriptions = parseFloat(subscriptions) + parseFloat(this.props.location.state.data[0].unitsPurchased) * parseFloat(this.props.location.state.data[0].roundedPrice);
-          redemptions = parseFloat(redemptions) + parseFloat(this.props.location.state.data[0].unitsSold) * parseFloat(this.props.location.state.data[0].roundedPrice);
-        //  broughtForward = parseFloat(broughtForward) + parseFloat(this.props.location.state.data[0].totalUnitsBroughtForwardBalance);
-        //  carryForward = parseFloat(carryForward) + parseFloat(this.props.location.state.data[0].totalUnitsCarriedForward);
-          netInflowOutflow = parseFloat(subscriptions) - parseFloat(redemptions);
-          subscriptions = parseFloat(subscriptions).toFixed(4);
-          redemptions = parseFloat(redemptions).toFixed(4);
-          netInflowOutflow = parseFloat(netInflowOutflow).toFixed(4);
-          //console.log("subscriptions:"+subscriptions+"redemptions:"+redemptions+"netInflowOutflow:"+netInflowOutflow);
-          // broughtForward = parseFloat(broughtForward).toFixed(4);
-          // carryForward = parseFloat(carryForward).toFixed(4);
-          //console.log(broughtForward);
-          //console.log(carryForward);
-      }
 
-        return (
-          <div class="uk-grid uk-grid-divider uk-grid-medium">
-                                               <div class="uk-width-large-2-10 lt-details">
-                                                   <h2>Calendar</h2>
-                                                   <h5>{this.props.location.state.data[0].boxDate}</h5>
-                                                   <hr class="uk-grid-divider"/>
-                                                   <div class="uk-grid uk-grid-small">
-                                                       <h2>Box Status</h2>
-                                                       <h5>{this.props.location.state.data[0].boxStatus}</h5>
-                                                   </div>
+            return (
+              <div class="uk-grid uk-grid-divider uk-grid-medium">
+                                            <div class="uk-width-large-2-10 lt-details">
+                                                <h2>Calendar</h2>
+                                                <h5>{this.props.location.state.data[0].boxDate}</h5>
+                                                <hr class="uk-grid-divider"/>
+                                                <div class="uk-grid uk-grid-small">
+                                                    <h2>Box Status</h2>
+                                                    <h5>{this.props.location.state.data[0].boxStatus}</h5>
+                                                </div>
 
-                                                   <hr class="uk-grid-divider"/>
-                                                   <div class="uk-grid uk-grid-small">
-                                                       <h2>Subscriptions</h2>
-                                                       <h5>{convertCurrency(subscriptions)}</h5>
-                                                   </div>
+                                                <hr class="uk-grid-divider"/>
+                                                <div class="uk-grid uk-grid-small">
+                                                    <h2>Subscriptions</h2>
+                                                    <h5>{convertCurrency(this.state.boxData[0].subscriptions)}</h5>
+                                                </div>
 
-                                                   <hr class="uk-grid-divider"/>
-                                                   <div class="uk-grid uk-grid-small">
-                                                       <h2>Redemptions</h2>
-                                                       <h5>{convertCurrency(redemptions)}</h5>
-                                                   </div>
+                                                <hr class="uk-grid-divider"/>
+                                                <div class="uk-grid uk-grid-small">
+                                                    <h2>Redemptions</h2>
+                                                    <h5 className='fund-orange'>{this.state.boxData[0].redemptions<0?convertCurrency((this.state.boxData[0].redemptions)*(-1)):convertCurrency(this.state.boxData[0].redemptions)}</h5>
+                                                </div>
 
-                                                   <hr class="uk-grid-divider"/>
-                                                   <div class="uk-grid uk-grid-small">
-                                                       <h2>Net Flow</h2>
-                                                       <h5>{convertCurrency(netInflowOutflow)}</h5>
-                                                   </div>
+                                                <hr class="uk-grid-divider"/>
+                                                <div class="uk-grid uk-grid-small">
+                                                    <h2>Net Flow</h2>
+                                                    <h5>{this.state.boxData[0].redemptions<0?convertCurrency((this.state.boxData[0].netFlow)*(-1)):convertCurrency(this.state.boxData[0].netFlow)}</h5>
+                                                </div>
 
-                                                   <hr class="uk-grid-divider"/>
-                                                   <div class="uk-grid uk-grid-small">
-                                                       <h2>Price Date</h2>
-                                                       <h5>{this.props.location.state.data[0].priceDate}</h5>
-                                                   </div>
+                                                <hr class="uk-grid-divider"/>
+                                                <div class="uk-grid uk-grid-small">
+                                                    <h2>Price Date</h2>
+                                                    <h5>{this.props.location.state.data[0].priceDate}</h5>
+                                                </div>
 
-                                                   <hr class="uk-grid-divider"/>
-                                                   <div class="uk-grid uk-grid-small">
-                                                       <h2>Settlement Date</h2>
-                                                       <h5>{this.props.location.state.data[0].settlementDate}</h5>
-                                                   </div>
+                                                <hr class="uk-grid-divider"/>
+                                                <div class="uk-grid uk-grid-small">
+                                                    <h2>Settlement Date</h2>
+                                                    <h5>{this.props.location.state.data[0].settlementDate}</h5>
+                                                </div>
 
-                                               </div>
-                                               <div class="uk-width-large-8-10 rt-details">
-                                                   <div class="md-card-content">
-                                                       <div className="md-card-content">
-                                                            <Table dealData={tableData}/>
-                                                        </div>
-                                                    </div>
-                                              </div>
-                                           </div>
+                                            </div>
+                                            <div class="uk-width-large-8-10 rt-details">
+                                               <div class="md-card-content">
 
-        )
-    }
+                                                     <Table id="dt_colVis" class="uk-table" cellspacing="0" width="100%" dealData={tableData}/>
+
+                                                </div>
+                                          </div>
+                                        </div>
+
+     )
+ }
 }
 
-function convertCurrency(currency)
-{
-  return (
-    <span>
-    {new Intl.NumberFormat('en-GB', {
-    style: 'currency',
-    currency: 'GBP'
-    }).format(currency)}
-    </span>
-    )
-}
+// function convertCurrency(currency)
+// {
+//   return (
+//     <span>
+//     {new Intl.NumberFormat('en-GB', {
+//     style: 'currency',
+//     currency: 'GBP'
+//     }).format(currency)}
+//     </span>
+//     )
+// }
 
 const
     mapStateToProps = (state, props) => {
         return {
-            dealData: this.props.tableData,
+            dealData: this.props.tableData
         }
     };
 

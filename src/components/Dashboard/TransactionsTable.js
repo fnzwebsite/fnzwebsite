@@ -53,7 +53,7 @@ var Table = createReactClass({
                 LoadRows = Object.keys(self.props.dealingData).map(function (keyName, keyIndex) {
                     if (moment(self.props.dealingData[keyName].boxDate).isSame(today, 'd')) {
                         return <tr>
-                            <td>{self.props.dealingData[keyName].tradeDate}</td>
+                            <td>{self.props.dealingData[keyName].tradeTime}</td>
                             <td>{self.props.dealingData[keyName].account}</td>
                             <td>{self.props.dealingData[keyName].instrumentPrimaryIdentifier}</td>
                             <td className={self.props.dealingData[keyName].dealType.toUpperCase() == "BUY" ? "fund-blue" : "fund-orange"}>{self.props.dealingData[keyName].dealType.toUpperCase()}</td>

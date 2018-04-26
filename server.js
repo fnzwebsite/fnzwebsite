@@ -101,7 +101,7 @@ io.sockets.on('connection', function (socket) {
 
 function getDealingByDate(callback, auth, setDate) {
 
-    var post_data = '{"selector": {"tradeDate": {"$gt": "'+setDate+'"}}}';
+    var post_data = '{"selector": {"tradeTime": {"$gt": "'+setDate+'"}}}';
     var options = {
         method: 'POST',
         host: '35.178.56.52',
