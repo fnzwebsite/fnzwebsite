@@ -7,7 +7,8 @@ import Acd from '../Admin/Acd';
 import AcdInstrument from '../Admin/AcdInstrument';
 import AcdInstrumentWizard from "../Admin/AddAcdInstrumentWizard";
 import DealDetails from "../Deals/DealDetails";
-import SignIn                       from '../Login/SignIn';
+import SignIn from '../Login/SignIn';
+import AcdAccount from '../Admin/AcdAccount';
 
 class Home extends React.Component {
     constructor(props) {
@@ -31,6 +32,7 @@ class Home extends React.Component {
                         <Route exact path='/acd' component={Acd} />
                         <Route exact path="/acdinstrument" component={AcdInstrument} />
                         <Route exact path="/dealdetails" component={DealDetails} />
+                        <Route exact path="/acdaccount" component={AcdAccount} />
                     </div>
                 </div>
             </div>

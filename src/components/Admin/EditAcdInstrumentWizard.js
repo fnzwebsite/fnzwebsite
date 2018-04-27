@@ -32,6 +32,7 @@ class EditInstrumentWizard extends React.Component {
       },
        "boxType": "auto",
       "instrumentBasis": "",
+      "calendarDataId":"1cc041dc-3ee3-4784-bc9d-964d08d77e08",
       "cancellationRight": true,
       "fundCompanyKey": "064e977e-4c16-49c1-9626-59055721a99b",
       "currency": "GBP",

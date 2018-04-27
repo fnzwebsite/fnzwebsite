@@ -32,6 +32,7 @@ var reqData={
       "type": "UK"
   },
    "boxType": "auto",
+   "calendarDataId":"1cc041dc-3ee3-4784-bc9d-964d08d77e08",
   "instrumentBasis": "",
   "cancellationRight": true,
   "fundCompanyKey": "064e977e-4c16-49c1-9626-59055721a99b",
@@ -102,7 +103,7 @@ console.log(JSON.stringify(reqData))
   var mode=$('#iisin').val();
   if(mode=="add")
   {
-    alert('add');
+    //alert('add');
     $.ajax({
   type: "POST",
   url: 'http://35.178.56.52:8081/api/v1/instrument',

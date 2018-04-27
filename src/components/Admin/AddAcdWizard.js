@@ -11,9 +11,9 @@ class AddAcdWizard extends React.Component {
             autoFocus: true
         });
 
-        window.$(document).on('click', '#wizard_add .button_finish', function () {
+        window.$(document).on('click', '.button_finish', function () {
             //alert(getFormData($('#wizard_advanced_form')));
-            var unindexed_array = window.$('#wizard_advanced_form_add').serializeArray();
+            var unindexed_array = window.$('#wizard_advanced_form').serializeArray();
             var indexed_array = {};
             window.$.map(unindexed_array, function (n, i) {
                 indexed_array[n['name']] = n['value'];
@@ -31,9 +31,9 @@ class AddAcdWizard extends React.Component {
                     "city": indexed_array["registeredCity"],
                     "county": indexed_array["registeredCounty"]
                     ,
-                    "country": (indexed_array["registeredCountry"] != null && indexed_array["registeredCountry"] != undefined && indexed_array["registeredCountry"].length > 0) ? indexed_array["registeredCountry"] : ""
+                    "country": "United Kingdom"
                     ,
-                    "postcode": indexed_array["registeredPostCode"]
+                    "postcode": indexed_array["registeredPostalCode"]
                 }
 
                 , "postalAddress": {
@@ -44,7 +44,7 @@ class AddAcdWizard extends React.Component {
                     "city": indexed_array["postalCity"],
                     "county": indexed_array["postalCounty"]
                     ,
-                    "country": (indexed_array["postalCountry"] != null && indexed_array["postalCountry"] != undefined && indexed_array["postalCountry"].length > 0) ? indexed_array["postalCountry"] : ""
+                    "country": "United Kingdom"
                     ,
                     "postcode": indexed_array["postalPostCode"]
                 }
@@ -138,7 +138,7 @@ class AddAcdWizard extends React.Component {
                 <div className="col-sm-12 create-sec">
                     <div className="md-card uk-margin-large-bottom">
                         <div className="md-card-content">
-                            <form className="uk-form-stacked" id="wizard_advanced_form_add">
+                            <form className="uk-form-stacked" id="wizard_advanced_form">
                                 <div id="wizard_add" data-uk-observe>
                                     <h3>Step 1</h3>
                                     <section>
@@ -237,20 +237,27 @@ class AddAcdWizard extends React.Component {
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="col-sm-6">
-                                                <div className="form-group">
-                                                    <div className="parsley-row uk-margin-top">
-                                                        <div className="select-option"></div>
-                                                    </div>
+                                            <div class="col-sm-7">
+                                                <div class="form-group mt-4">
+                                                  <div class="parsley-row uk-margin-top">
+                                                       <div class="select-option2">
+                                                   <select id="rCountryCombo" class="form-control">
+                                                       <option value="UK">UK</option>
+                                                       <option value="France">France</option>
+                                                       <option value="Italy">Italy</option>
+                                                   </select>
+                                               </div>
+                                                  </div>
                                                 </div>
                                             </div>
-                                            <div className="col-sm-6">
+
+                                                <div className="col-sm-5">
                                                 <div className="form-group ">
                                                     <div className="parsley-row uk-margin-top">
-                                                        <label for="registeredPostalCode">Postcode<span
-                                                            className="req">*</span></label>
-                                                        <input type="text" name="registeredPostalCode" required
-                                                               className="md-input"/>
+                                                    <label for="registeredPostalCode">Postcode<span
+                                                         className="req">*</span></label>
+                                                     <input type="text" name="registeredPostalCode" required
+                                                            className="md-input"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -308,24 +315,33 @@ class AddAcdWizard extends React.Component {
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="col-sm-6">
-                                                <div className="form-group">
-                                                    <div className="parsley-row uk-margin-top">
-                                                        <div className="select-option"></div>
-                                                    </div>
+
+                                            <div class="col-sm-7">
+                                                <div class="form-group mt-4">
+                                                  <div class="parsley-row uk-margin-top">
+                                                       <div class="select-option2">
+                                                   <select id="pCountryCombo" class="form-control">
+                                                       <option value="UK">UK</option>
+                                                       <option value="France">France</option>
+                                                       <option value="Italy">Italy</option>
+                                                   </select>
+                                               </div>
+                                                  </div>
                                                 </div>
                                             </div>
-                                            <div className="col-sm-6">
+
+										                            <div className="col-sm-5">
                                                 <div className="form-group ">
                                                     <div className="parsley-row uk-margin-top">
-                                                        <label for="postalPostCode">Postcode<span
+                                                       <label for="postalPostCode">Postcode<span
                                                             className="req">*</span></label>
                                                         <input type="text" name="postalPostCode" required
                                                                className="md-input"/>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                      </div>
+
                                     </section>
                                     <h3>Step 4</h3>
                                     <section>
@@ -337,9 +353,9 @@ class AddAcdWizard extends React.Component {
                                             <div className="col-sm-4">
                                                 <div className="form-group ">
                                                     <div className="parsley-row uk-margin-top">
-                                                        <label for="Telephone">Telephone<span
+                                                        <label for="telephone">Telephone<span
                                                             className="req">*</span></label>
-                                                        <input type="text" name="Telephone" required
+                                                        <input type="text" name="telephone" required
                                                                className="md-input"/>
                                                     </div>
                                                 </div>
@@ -397,9 +413,9 @@ class AddAcdWizard extends React.Component {
                                                 <div className="form-group">
                                                     <div className="parsley-row">
                                                         <div className="parsley-row uk-margin-top">
-                                                            <label for="Relation">Relation<span
+                                                            <label for="relation">Relation<span
                                                                 className="req">*</span></label>
-                                                            <input type="text" name="Relation" required
+                                                            <input type="text" name="relation" required
                                                                    className="md-input"/>
                                                         </div>
                                                         <input type="hidden" value="add" name ="iisin" id="iisin"/>
