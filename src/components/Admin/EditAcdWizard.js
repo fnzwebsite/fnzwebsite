@@ -1,6 +1,7 @@
 import {connect} from 'react-redux';
 import React from 'react';
-import Acd from './Acd'
+import Acd from './Acd';
+import $ from 'jquery';
 
 class EditAcdWizard extends React.Component {
     componentDidMount() {
@@ -69,22 +70,26 @@ class EditAcdWizard extends React.Component {
         }
         console.log(JSON.stringify(reqData))
         //alert(localStorage.getItem('token'));
-        window.$.ajax({
-            type: "PUT",
-            url: 'http://35.178.56.52:8081/api/v1/company',
-            headers: {authorization: JSON.parse(localStorage.getItem('token'))}
-            , data: JSON.stringify(reqData),
-            success: function (res) {
-                alert(JSON.stringify(res));
-                window.location.href = "/acd";
-                //  ReactDOM.render(<Acd />,$(this));
-            },
-            error: function (err) {
-                alert(JSON.stringify(err));
-            },
-            dataType: 'json',
-            contentType: 'application/json'
-        });
+        var mode=$('#iisin').val();
+        if(mode=="edit")
+        {
+          window.$.ajax({
+              type: "PUT",
+              url: 'http://35.178.56.52:8081/api/v1/company',
+              headers: {authorization: JSON.parse(localStorage.getItem('token'))}
+              , data: JSON.stringify(reqData),
+              success: function (res) {
+                  alert(JSON.stringify(res));
+                  window.location.href = "/acd";
+                  //  ReactDOM.render(<Acd />,$(this));
+              },
+              error: function (err) {
+                  alert(JSON.stringify(err));
+              },
+              dataType: 'json',
+              contentType: 'application/json'
+          });
+        }
     });
 
     window.$('body').on('click', '#AMLBtnGroup .btn', function (event) {
@@ -403,6 +408,7 @@ componentWillReceiveProps() {
                                                             <input type="text" value={this.props.acdEditData.relationshipManager.relation} name="Relation" required
                                                                    className="md-input"/>
                                                         </div>
+                                                        <input type="hidden" value="edit" name ="iisin" id="iisin"/>
                                                     </div>
                                                 </div>
                                             </div>

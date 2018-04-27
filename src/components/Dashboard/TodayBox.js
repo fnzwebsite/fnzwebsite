@@ -66,7 +66,7 @@ return (<div className="row">
             <div className="row">
                 <div className="col-sm-12">
                     <h5>Redemptions</h5>
-                    <h2 className='fund-orange'>{this.state.boxData[0].redemptions<0?convertCurrency((this.state.boxData[0].redemptions)*(-1)):convertCurrency(this.state.boxData.redemptions)}</h2>
+                    <h2 className='fund-orange'>{this.state.boxData[0].redemptions<0?convertCurrency((this.state.boxData[0].redemptions)*(-1)):convertCurrency(this.state.boxData[0].redemptions)}</h2>
                 </div>
             </div>
             <hr/>

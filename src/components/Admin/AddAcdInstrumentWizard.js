@@ -89,7 +89,7 @@ var reqData={
   "faCrossRef": "",
   "sedol": indexed_array["sedol"],
   "status": 0,
-  "subFundKey": "subfundKey1",
+    "subFundKey": indexed_array["fundNameDisplay"],
   "totalExpenseRatio": 0,
   "trusteeKey": "",
   "unitsPrecision": 3,
@@ -99,6 +99,10 @@ var reqData={
   }
 console.log(JSON.stringify(reqData))
   //alert(localStorage.getItem('token'));
+  var mode=$('#iisin').val();
+  if(mode=="add")
+  {
+    alert('add');
     $.ajax({
   type: "POST",
   url: 'http://35.178.56.52:8081/api/v1/instrument',
@@ -115,6 +119,11 @@ console.log(JSON.stringify(reqData))
   dataType: 'json',
   contentType:'application/json'
 });
+  }
+
+  //if($('#isin').val)
+  //alert(("insert");
+
     });
 
    $('body').on('click', '#AMLBtnGroup .btn', function(event) {
@@ -250,6 +259,7 @@ console.log(JSON.stringify(reqData))
                                                                 <button type="button" id="partialAML" class="btn ">Accumulation</button>
                                                             </div>
                                                             <input type="hidden" name ="companyType" id="companyType"/>
+                                                            <input type="hidden" value="add" name ="iisin" id="iisin"/>
                                                         </div>
                                                     </div>
                                                 </div>

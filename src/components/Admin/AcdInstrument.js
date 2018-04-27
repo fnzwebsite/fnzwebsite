@@ -60,7 +60,7 @@ var Table = createReactClass({
         if (this.props.acdInstrumentData) {
             LoadRows = Object.keys(this.props.acdInstrumentData).sort((a, b) => b.name - a.name).map(function (keyName, keyIndex) {
                 return <tr>
-                <td></td>
+                <td>{self.props.acdInstrumentData[keyName].subFundKey}</td>
                <td></td>
                <td>{self.props.acdInstrumentData[keyName].isin}</td>
                <td>{self.props.acdInstrumentData[keyName].mexId}</td>

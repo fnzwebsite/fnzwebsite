@@ -88,7 +88,7 @@ class EditInstrumentWizard extends React.Component {
       "faCrossRef": "",
       "sedol": indexed_array["sedol"],
       "status": 0,
-      "subFundKey": "subfundKey1",
+      "subFundKey": indexed_array["subFundName"],
       "totalExpenseRatio": 0,
       "trusteeKey": "",
       "unitsPrecision": 3,
@@ -98,6 +98,9 @@ class EditInstrumentWizard extends React.Component {
       }
     console.log(JSON.stringify(reqData))
       //alert(localStorage.getItem('token'));
+      var mode=$('#iisin').val();
+      if(mode=="edit")
+      {
         $.ajax({
       type: "PUT",
       url: 'http://35.178.56.52:8081/api/v1/instrument',
@@ -114,6 +117,8 @@ class EditInstrumentWizard extends React.Component {
       dataType: 'json',
       contentType:'application/json'
     });
+      }
+
         });
 
        $('body').on('click', '#AMLBtnGroup .btn', function(event) {
@@ -171,7 +176,7 @@ class EditInstrumentWizard extends React.Component {
                                                 <div className="form-group ">
                                                     <div className="parsley-row uk-margin-top">
                                                         <label for="fundNameDisplay">Fund Name Display<span className="req">*</span></label>
-                                                        <input type="text" name="fundNameDisplay" required className="md-input" />
+                                                        <input type="text" value={this.props.acdInstrumentEditData.name} name="fundNameDisplay" required className="md-input" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -179,7 +184,7 @@ class EditInstrumentWizard extends React.Component {
                                                 <div className="form-group ">
                                                     <div className="parsley-row uk-margin-top">
                                                         <label for="shareClassName">Share Class Name<span className="req">*</span></label>
-                                                        <input type="text" value={this.props.acdInstrumentEditData.name} name="shareClassName" required className="md-input" />
+                                                        <input type="text" name="shareClassName" required className="md-input" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -249,6 +254,7 @@ class EditInstrumentWizard extends React.Component {
                                                                 <button type="button" id="partialAML" class="btn ">Accumulation</button>
                                                             </div>
                                                             <input type="hidden" name ="companyType" id="companyType"/>
+                                                            <input type="hidden" value="edit" name ="iisin" id="iisin"/>
                                                         </div>
                                                     </div>
                                                 </div>
