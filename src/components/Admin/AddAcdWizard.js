@@ -11,9 +11,9 @@ class AddAcdWizard extends React.Component {
             autoFocus: true
         });
 
-        window.$(document).on('click', '.button_finish', function () {
+        window.$(document).on('click', '#wizard_add .button_finish', function () {
             //alert(getFormData($('#wizard_advanced_form')));
-            var unindexed_array = window.$('#wizard_advanced_form').serializeArray();
+            var unindexed_array = window.$('#wizard_advanced_form_add').serializeArray();
             var indexed_array = {};
             window.$.map(unindexed_array, function (n, i) {
                 indexed_array[n['name']] = n['value'];
@@ -134,7 +134,7 @@ class AddAcdWizard extends React.Component {
                 <div className="col-sm-12 create-sec">
                     <div className="md-card uk-margin-large-bottom">
                         <div className="md-card-content">
-                            <form className="uk-form-stacked" id="wizard_advanced_form">
+                            <form className="uk-form-stacked" id="wizard_advanced_form_add">
                                 <div id="wizard_add" data-uk-observe>
                                     <h3>Step 1</h3>
                                     <section>
