@@ -1,0 +1,552 @@
+<!doctype html>
+<!--[if lte IE 9]> <html class="lte-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Remove Tap Highlight on Windows Phone IE -->
+    <meta name="msapplication-tap-highlight" content="no" />
+    <link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
+    <title>Create Deal</title>
+    <!-- additional styles for plugins -->
+    <!-- weather icons -->
+    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bower_components/weather-icons/css/weather-icons.min.css" media="all">
+    <!-- metrics graphics (charts) -->
+    <link rel="stylesheet" href="bower_components/metrics-graphics/dist/metricsgraphics.css">
+    <!-- chartist -->
+    <link rel="stylesheet" href="bower_components/chartist/dist/chartist.min.css">
+    <!-- kendo UI -->
+    <link rel="stylesheet" href="bower_components/kendo-ui/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="bower_components/kendo-ui/styles/kendo.material.min.css" />
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap-reboot.min.css">
+    <!-- uikit -->
+    <link rel="stylesheet" href="bower_components/uikit/css/uikit.almost-flat.min.css" media="all">
+    <!-- flag icons -->
+    <link rel="stylesheet" href="assets/icons/flags/flags.min.css" media="all">
+    <!-- altair admin -->
+    <link rel="stylesheet" href="assets/css/main.min.css" media="all">
+    <link rel="stylesheet" href="assets/css/style.default.css" media="all">
+    <link rel="stylesheet" href="assets/css/custom.css" media="all">
+    <!-- <link href="https://tempusdominus.github.io/bootstrap-4/theme/css/tempusdominus-bootstrap-4.css" rel="stylesheet"> -->
+    <!-- matchMedia polyfill for testing media queries in JS -->
+    <!--[if lte IE 9]>
+        <script type="text/javascript" src="bower_components/matchMedia/matchMedia.js"></script>
+        <script type="text/javascript" src="bower_components/matchMedia/matchMedia.addListener.js"></script>
+    <![endif]-->
+    <script src="assets/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="page">
+        <!-- Main Navbar-->
+        <div class="page-content d-flex align-items-stretch">
+            <!-- Side Navbar level one -->
+            <nav class="side-navbar l1">
+                <div><a id="toggle-btn" href="#" class="menu-btn">
+                           <img src="img/menu-arrow.png" alt="menu-toggle" class="">
+                            </a></div>
+                <ul class="list-unstyled">
+                    <li><a href="dashboard.html"> <i class="fa fa-home-icon"></i>Home</a></li>
+                    <li class="active"><a href="create-entity.html" id="home-menu"> <i class="fa fa-admin"></i>Admin</a></li>
+                    <li><a href="javascript:void(0)"> <i class="fa fa-power-off"></i>Logout</a></li>
+                </ul>
+            </nav>
+            <!-- Side Navbar -->
+            <nav class="side-navbar l2 shrinked">
+                <!-- Sidebar Header-->
+                <ul class="list-unstyled">
+                    <li><a href="create-entity.html"> <i class="fa fa-handshake-o"></i>Entity</a></li>
+                    <li><a href="create-account.html"> <i class="fa fa-tag"></i>Account</a></li>
+                    <li><a href="create-instrument.html"> <i class="fa fa-tag"></i>Instrument</a></li>
+                    <li class="active"><a href="create-deal.html"> <i class="fa fa-tag"></i>Deal</a></li>
+
+                    <!-- <li><a href="create-distributor.html"> <i class="fa fa-settle"></i>Distributor</a></li> -->
+                    <!-- <li><a href=""> <i class="fa fa-power-off"></i>Logout</a></li> -->
+                </ul>
+            </nav>
+            <div class="content-inner">
+                <!-- menu -->
+                <!-- header -->
+                <header class="header">
+                    <nav class="navbar fixed-top">
+                        <!-- Search Box-->
+                        <div class="search-box">
+                            <button class="dismiss"><i class="icon-close"></i></button>
+                            <form id="searchForm" action="#" role="search">
+                                <input type="search" placeholder="What are you looking for..." class="form-control">
+                            </form>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="navbar-holder d-flex align-items-center justify-content-between">
+                                <!-- Navbar Menu -->
+                                <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                                    <li class="nav-item">
+                                        <div class="avatar"><img src="img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
+                                    </li>
+                                    <li class="nav-item"><a href="" class="nav-link">Welcome! John Smith</a></li>
+                                </ul>
+                                <!-- Navbar Header-->
+                                <div class="navbar-header">
+                                    <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                                        <!-- Search-->
+                                        <li class="nav-item d-flex align-items-center"><a id="search" href="#"><i class="icon-search"></i></a></li>
+                                        <!-- Notifications-->
+                                        <li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell-o"></i><span class="badge bg-yellow badge-corner">4</span></a>
+                                        </li>
+                                    </ul>
+                                    <!-- Navbar Brand -->
+                                    <a href="" class="navbar-brand">
+                                        <div class="brand-text brand-big"><img src="img/logo.png" alt="logo" class=""></div>
+                                        <div class="brand-text brand-small"><img src="img/logo.png" alt="logo" class=""></div>
+                                    </a>
+                                    <!-- Toggle Button-->
+                                    <a href="" class="dots-nav"><img src="img/dots-nav.png" alt="..." class=""></a>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </header>
+                <div class="container-fluid" id="page_content">
+                    <div class="">
+                        <div class="row">
+                            <div class="col-md-12 wizard-list">
+                                <div class="row">
+                                    <div class="md-card uk-margin-medium-bottom">
+                                        <div class="md-card-toolbar">
+                                            <h3 class="md-card-toolbar-heading-text">Deal List</h3>
+                                            <div id="uploadText" class="upload"></div>
+                                            <a class="create md-btn md-btn-primary pull-right md-btn-wave-light waves-effect waves-button waves-light" data-uk-modal="{target:'#modal_header_footer'}" href="#"><i class="fa fa-plus"></i>Deal</a>
+                                        </div>
+                                        <div class="md-card-content">
+                                            <table id="dt_default" class="uk-table" cellspacing="0" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th rowspan="2">Account</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Deal Type</th>
+                                                        <th>Fund</th>
+                                                        <th>Quantity</th>
+                                                        <th>Currency</th>
+                                                        <th class="action uk-text-center actions ">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>ADC4543DC4KGN543</td>
+                                                        <td>Buy</td>
+                                                        <td>Indexed</td>
+                                                        <td><span>£</span>169,000</td>
+                                                        <td>GBP</td>
+                                                        <td class="uk-text-center">
+                                                            <a href="#" class="edit" data-uk-modal="{target:'#modal_header_footer'}"><i class="md-icon material-icons">&#xE254;</i></a>
+                                                            <!-- <button class="md-btn" data-uk-modal="{target:'#modal_header_footer'}">Open</button> -->
+                                                            <a href="#"><i class="md-icon material-icons">&#xE872;</i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>ADC4236DC4KGN565</td>
+                                                        <td>Buy</td>
+                                                        <td>Balanced</td>
+                                                        <td>132000</td>
+                                                        <td>GBP</td>
+                                                        <td class="uk-text-center">
+                                                            <a href="#" class="edit" data-uk-modal="{target:'#modal_header_footer'}"><i class="md-icon material-icons">&#xE254;</i></a>
+                                                            <!-- <button class="md-btn" data-uk-modal="{target:'#modal_header_footer'}">Open</button> -->
+                                                            <a href="#"><i class="md-icon material-icons">&#xE872;</i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>ADC4543DC4KGN543</td>
+                                                        <td>Sell</td>
+                                                        <td>Indexed</td>
+                                                        <td>126000</td>
+                                                        <td>Euro</td>
+                                                        <td class="uk-text-center">
+                                                            <a href="#" class="edit" data-uk-modal="{target:'#modal_header_footer'}"><i class="md-icon material-icons">&#xE254;</i></a>
+                                                            <!-- <button class="md-btn" data-uk-modal="{target:'#modal_header_footer'}">Open</button> -->
+                                                            <a href="#"><i class="md-icon material-icons">&#xE872;</i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>ADC4543DC4KGN543</td>
+                                                        <td>Sell</td>
+                                                        <td>Balanced</td>
+                                                        <td><span>£</span>172,000</td>
+                                                        <td>EURO</td>
+                                                        <td class="uk-text-center">
+                                                            <a href="#" class="edit" data-uk-modal="{target:'#modal_header_footer'}"><i class="md-icon material-icons">&#xE254;</i></a>
+                                                            <!-- <button class="md-btn" data-uk-modal="{target:'#modal_header_footer'}">Open</button> -->
+                                                            <a href="#"><i class="md-icon material-icons">&#xE872;</i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>ADC4543DC4KGN543</td>
+                                                        <td>Buy</td>
+                                                        <td>Growth</td>
+                                                        <td><span>£</span>189,000</td>
+                                                        <td>GBP</td>
+                                                        <td class="uk-text-center">
+                                                            <a href="#" class="edit" data-uk-modal="{target:'#modal_header_footer'}"><i class="md-icon material-icons">&#xE254;</i></a>
+                                                            <!-- <button class="md-btn" data-uk-modal="{target:'#modal_header_footer'}">Open</button> -->
+                                                            <a href="#"><i class="md-icon material-icons">&#xE872;</i></a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Page Footer-->
+                <!--  <footer class="main-footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <p>&copy; Copyright FNZ UK Ltd 2018.</p>
+                            </div>
+                        </div>
+                    </div>
+                </footer> -->
+            </div>
+        </div>
+        <!-- Modal Popups -->
+        <!-- CREATE ACD Modal -->
+        <div class="uk-modal" id="modal_header_footer">
+            <div class="uk-modal-dialog">
+                <button type="button" class="uk-modal-close uk-close"></button>
+                <!-- wizard-popup -->
+                <div class="uk-modal-header">
+                    <h3 class="uk-modal-title">Create Deal</h3>
+                </div>
+                <div class="col-sm-12 create-sec">
+                    <div class="md-card uk-margin-large-bottom">
+                        <div class="md-card-content">
+                            <form class="uk-form-stacked" id="wizard_advanced_form">
+                                <div id="wizard_advanced" class="wizard-lg no-step deal" data-uk-observe>
+                                    <!-- first section -->
+                                    <h3>Step 1</h3>
+                                    <section>
+                                        <h2 class="heading_a">
+                                                        Deal Details
+                                                        <span class="sub-heading">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
+                                                        </h2>
+                                        <hr class="md-hr" />
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group ">
+                                                    <div class="parsley-row uk-margin-top">
+                                                        <div class="select-option"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <div class="uk-form-row parsley-row mt-4">
+                                                        <label for="gender" class="clabel">Deal Type<span class="req">*</span></label>
+                                                        <div class="parsley-row icheck-inline">
+                                                            <!-- toggles -->
+                                                            <div class="btn-group" data-toggle="buttons-checkbox" id="fooBtnGroup">
+                                                                <button type="button" id="savings_1" class="btn btn-success" data-toggle="button">Buy</button>
+                                                                <button type="button" id="current_1" class="btn ">Sell</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group ">
+                                                    <div class="parsley-row uk-margin-top">
+                                                        <div class="select-option2"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <div class="parsley-row icheck-inline quan">
+                                                        <div class="parsley-row uk-margin-top">
+                                                            <label for="fullname">Quantity<span class="req">*</span></label>
+                                                            <input type="text" name="fullname" required class="md-input" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="parsley-row icheck-inline">
+                                                        <!-- toggles -->
+                                                        <div class="btn-group" data-toggle="buttons-checkbox" id="fooBtnGroup">
+                                                            <button type="button" id="savings_2" class="btn btn-success" data-toggle="button">Amount</button>
+                                                            <button type="button" id="current_2" class="btn ">Units</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group ">
+                                                    <div class="parsley-row mt-4">
+                                                        <div class="select-option3"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <!-- first section End-->
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- form -->
+            </div>
+        </div>
+        <!-- menu end -->
+    </div>
+    </div>
+    </div>
+    <!-- CREATE ACD Modal End-->
+    <!-- JavaScript files-->
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <!-- common functions -->
+    <script src="assets/js/common.min.js"></script>
+    <!-- uikit functions -->
+    <script src="assets/js/uikit_custom.min.js"></script>
+    <!-- altair common functions/helpers -->
+    <script src="assets/js/altair_admin_common.min.js"></script>
+    <script>
+    // load parsley config (altair_admin_common.js)
+    // altair_forms.parsley_validation_config();
+    // load extra validators
+    // altair_forms.parsley_extra_validators();
+    </script>
+    <!-- page specific plugins -->
+    <script src="bower_components/parsleyjs/dist/parsley.min.js"></script>
+    <!-- parsley (validation) -->
+    <!-- jquery steps -->
+    <script src="assets/js/custom/wizard_steps.min.js"></script>
+    <!--  forms wizard functions -->
+    <script src="assets/js/pages/forms_wizard.min.js"></script>
+    <!-- datatables -->
+    <script src="bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <!-- datatables colVis-->
+    <script src="bower_components/datatables-colvis/js/dataTables.colVis.js"></script>
+    <!-- datatables tableTools-->
+    <script src="bower_components/datatables-tabletools/js/dataTables.tableTools.js"></script>
+    <!-- datatables custom integration -->
+    <script src="assets/js/custom/datatables_uikit.min.js"></script>
+    <!--  datatables functions -->
+    <script src="assets/js/pages/plugins_datatables.min.js"></script>
+    <!-- kendo UI -->
+    <script src="assets/js/kendoui_custom.min.js"></script>
+    <!--  kendoui functions -->
+    <script src="assets/js/pages/kendoui.min.js"></script>
+    <!--  notifications functions -->
+    <script src="assets/js/pages/components_notifications.min.js"></script>
+    <!-- custom js -->
+    <!-- <script src="assets/js/custom/front.js"></script> -->
+    <!--  datatables functions -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment-with-locales.min.js"></script>
+    <script src="https://tempusdominus.github.io/bootstrap-4/theme/js/tempusdominus-bootstrap-4.js"></script>
+    <!--  forms_file_upload functions -->
+    <!-- <script src="assets/js/pages/forms_file_input.min.js"></script> -->
+    <script>
+    $(document).ready(function() {
+
+        var selectDialogueLink = $('<a href="" class="md-btn md-btn-success" ><i class="fa fa-upload"></i>Upload File</a>');
+        var fileSelector = $('<input type="file">');
+
+        selectDialogueLink.click(function() {
+            fileSelector.click();
+            return false;
+        });
+        $('#uploadText').html(selectDialogueLink);
+
+
+        //create a variable which holds key/value pairs
+        var data = { 'Account': 'Account', 'ADC4543DC4KGN543': 'ADC4543DC4KGN543', 'ADC4236DC4KGN565': 'ADC4236DC4KGN565', 'ADC4543DC4KGN543': 'ADC4543DC4KGN543' };
+        var data2 = { 'Fund': 'Fund', 'Indexed Fund': 'Indexed Fund', 'Balanced Fund': 'Balanced Fund', 'Growth Fund': 'Growth Fund' };
+        var data3 = { 'Currency': 'Currency', 'GBP': 'GBP', 'EURO': 'EURO', 'USD': 'USD' };
+        //create a variable that holds select tag with an id="combo", you can also put 'class' attribute instead of combo
+        var p = $('<select id="combo" class="form-control" />');
+        var q = $('<select id="combo2" class="form-control" />');
+        var n = $('<select id="combo3" class="form-control" />');
+        //iterate through each key/value in 'data' and create an option tag out of it
+        for (var val in data) {
+            $('<option />', { value: val, text: data[val] }).appendTo(p);
+        }
+        for (var val in data2) {
+            $('<option />', { value: val, text: data2[val] }).appendTo(q);
+        }
+        for (var val in data3) {
+            $('<option />', { value: val, text: data3[val] }).appendTo(n);
+        }
+
+        p.appendTo('.select-option');
+        q.appendTo('.select-option2');
+        n.appendTo('.select-option3');
+
+
+
+
+
+        $(".edit").click(function() {
+
+            $(".uk-modal-title").html("Edit Deal");
+        });
+        $(".create").click(function() {
+
+            $(".uk-modal-title").html("Create Deal");
+        });
+
+
+        // notifications
+        $('.button_finish').attr('data-message', 'You have successfully created the Deal');
+        $('.button_finish').attr('data-pos', 'top-right');
+
+        // Datepicker
+
+
+
+        // create DateTimePicker from input HTML element
+        // $(".datetimepicker").kendoDatePicker({
+        //     format: "d-MM-yyyy"
+        // });
+
+
+
+        // $(input).kendoDatePicker({
+        //     format: "d-MM-yyyy"
+        // });
+
+
+        $('#datetimepicker3, #datetimepicker4').datetimepicker({
+            format: 'LT'
+        });
+
+        // ------------------------------------------------------- //
+        // Sidebar Functionality
+        // ------------------------------------------------------ //
+        $('#toggle-btn, #home-menu').on('click', function(e) {
+            e.preventDefault();
+            $(this).toggleClass('active');
+
+            $('.side-navbar.l2').toggleClass('shrinked');
+            $('.content-inner').toggleClass('active');
+            $(document).trigger('sidebarChanged');
+
+            if ($(window).outerWidth() > 1183) {
+                if ($('#toggle-btn').hasClass('active')) {
+                    $('.navbar-header .brand-small').hide();
+                    $('.navbar-header .brand-big').show();
+                } else {
+                    $('.navbar-header .brand-small').show();
+                    $('.navbar-header .brand-big').hide();
+                }
+            }
+
+            if ($(window).outerWidth() < 1183) {
+                $('.navbar-header .brand-small').show();
+            }
+        });
+
+        $('.content-inner').on('click', function(e) {
+            e.preventDefault();
+
+            $('.side-navbar.l2').addClass('shrinked')
+
+        });
+
+
+    });
+    </script>
+    <script type="text/javascript">
+    $('body').on('click', '#fooBtnGroup .btn', function(event) {
+        event.stopPropagation(); // prevent default bootstrap behavior
+
+        <!-- if ($(this).attr('data-toggle') != 'button') { // don't toggle if data-toggle="button" -->
+        <!-- $(this).toggleClass('active'); -->
+
+        var idval = $(this).attr('id');
+
+        var seq = idval.substr(idval.length - 1);
+
+        if (($(this).attr('id') == 'savings_1') || ($(this).attr('id') == 'savings_2') || ($(this).attr('id') == 'savings_3') || ($(this).attr('id') == 'savings_4') || ($(this).attr('id') == 'savings_5') || ($(this).attr('id') == 'savings_6') || ($(this).attr('id') == 'savings_7') || ($(this).attr('id') == 'savings_8')) {
+
+            $('#current_' + seq).removeClass('data-toggle');
+            $(this).addClass('btn btn-success');
+            $('#current_' + seq).removeClass('btn-success');
+            <!-- $(this).toggleClass('active'); -->
+            $(this).attr('data-toggle', 'button');
+        };
+
+        if (($(this).attr('id') == 'current_1') || ($(this).attr('id') == 'current_2') || ($(this).attr('id') == 'current_3') || ($(this).attr('id') == 'current_4') || ($(this).attr('id') == 'current_5') || ($(this).attr('id') == 'current_6') || ($(this).attr('id') == 'current_7') || ($(this).attr('id') == 'current_8')) {
+            $('#savings_' + seq).removeAttr('data-toggle');
+            $('#savings_' + seq).removeClass('btn-success');
+            $(this).addClass('btn btn-success');
+            <!-- $(this).toggleClass('active'); -->
+            $(this).attr('data-toggle', 'button');
+        };
+
+        <!-- } -->
+        <!-- alert( $(this).hasClass( 'active' ) ); // button state AFTER the click -->
+    });
+    $('body').on('click', '#AMLBtnGroup .btn', function(event) {
+        event.stopPropagation(); // prevent default bootstrap behavior
+
+        if ($(this).attr('data-toggle') != 'button') { // don't toggle if data-toggle="button"
+            <!-- $(this).toggleClass('active'); -->
+
+            var idval = $(this).attr('id');
+
+            if ($(this).attr('id') == 'NotAML') {
+                $('#partialAML,#fullAML').removeAttr('data-toggle');
+                $(this).addClass('btn btn-success');
+                $('#partialAML,#fullAML').removeClass('btn-success');
+                <!-- $(this).toggleClass('active'); -->
+                $(this).attr('data-toggle', 'button');
+            };
+
+
+            if ($(this).attr('id') == 'partialAML') {
+                $('#NotAML,#fullAML').removeAttr('data-toggle');
+                $(this).addClass('btn btn-success');
+                $('#NotAML,#fullAML').removeClass('btn-success');
+                <!-- $(this).toggleClass('active'); -->
+                $(this).attr('data-toggle', 'button');
+            };
+
+
+            if ($(this).attr('id') == 'fullAML') {
+                $('#NotAML,#partialAML').removeAttr('data-toggle');
+                $(this).addClass('btn btn-success');
+                $('#NotAML,#partialAML').removeClass('btn-success');
+                <!-- $(this).toggleClass('active'); -->
+                $(this).attr('data-toggle', 'button');
+            };
+
+
+        }
+        // button state AFTER the click -->
+    });
+    </script>
+    <script>
+    $(window).load(function() {
+        $("#dt_colVis2, #dt_colVis3").dataTable();
+        $("#dt_default_wrapper .dataTables_filter").after('<a class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light">Approve</a><a class="md-btn md-btn-warning md-btn-wave-light waves-effect waves-button waves-light">Reject</a>');
+    });
+    </script>
+</body>
+
+</html>

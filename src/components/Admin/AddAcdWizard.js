@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import React from 'react';
 import Acd from './Acd'
-
+import $ from 'jquery';
 class AddAcdWizard extends React.Component {
     componentDidMount() {
         window.$("#wizard_add").steps({
@@ -69,22 +69,26 @@ class AddAcdWizard extends React.Component {
             }
             console.log(JSON.stringify(reqData))
             //alert(localStorage.getItem('token'));
-            window.$.ajax({
-                type: "POST",
-                url: 'http://35.178.56.52:8081/api/v1/company',
-                headers: {authorization: JSON.parse(localStorage.getItem('token'))}
-                , data: JSON.stringify(reqData),
-                success: function (res) {
-                    alert(JSON.stringify(res));
-                    window.location.href = "/acd";
-                    //  ReactDOM.render(<Acd />,$(this));
-                },
-                error: function (err) {
-                    alert(JSON.stringify(err));
-                },
-                dataType: 'json',
-                contentType: 'application/json'
-            });
+            var mode=$('#iisin').val();
+            if(mode=="add")
+            {
+              window.$.ajax({
+                  type: "POST",
+                  url: 'http://35.178.56.52:8081/api/v1/company',
+                  headers: {authorization: JSON.parse(localStorage.getItem('token'))}
+                  , data: JSON.stringify(reqData),
+                  success: function (res) {
+                      alert(JSON.stringify(res));
+                      window.location.href = "/acd";
+                      //  ReactDOM.render(<Acd />,$(this));
+                  },
+                  error: function (err) {
+                      alert(JSON.stringify(err));
+                  },
+                  dataType: 'json',
+                  contentType: 'application/json'
+              });
+            }
         });
 
         window.$('body').on('click', '#AMLBtnGroup .btn', function (event) {
@@ -194,7 +198,7 @@ class AddAcdWizard extends React.Component {
                                                     <div className="parsley-row uk-margin-top">
                                                         <label for="raddressLine1">Address Line 1<span
                                                             className="req">*</span></label>
-                                                        <input type="text" value={'this'} name="raddressLine1" required
+                                                        <input type="text" name="raddressLine1" required
                                                                className="md-input"/>
                                                     </div>
                                                 </div>
@@ -398,6 +402,7 @@ class AddAcdWizard extends React.Component {
                                                             <input type="text" name="Relation" required
                                                                    className="md-input"/>
                                                         </div>
+                                                        <input type="hidden" value="add" name ="iisin" id="iisin"/>
                                                     </div>
                                                 </div>
                                             </div>
