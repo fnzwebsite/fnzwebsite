@@ -10,6 +10,7 @@ import acdDealActions from '../../actions/acdDealActions';
 import AcdDealWizard from "./AddAcdDealWizard";
 import {Link} from 'react-router-dom';
 import EditAcdDealWizard from "./EditAcdDealWizard";
+import acdAccountActions from '../../actions/acdAccountActions'
 
 var createReactClass = require('create-react-class');
 var tableAsJqeryElement = null;
@@ -48,15 +49,24 @@ var Table = createReactClass({
         window.$('#table tbody').on('click', 'a.handle-edit-modal', function (e) {
             let key = window.$(this).data("id")
             let acdDealEditData = self.props.acdDealData[key];
-            self.props.loadEditDealAcdData(acdDealEditData);
-
         });
     },
 
     render: function () {
         let LoadRows = null;
         let self = this;
-        //console.log(JSON.stringify(this.props.acdDealData));
+        //console.log('acc'+JSON.stringify(this.props.acdAccountData));
+        var accountsData=[];
+
+        if(this.props.acdAccountData){
+        Object.keys(this.props.acdAccountData).sort((a, b) => b.name - a.name).map(function (keyName, keyIndex) {
+            accountsData[keyIndex]=(self.props.acdAccountData[keyName].identifier)
+          })
+        }
+        else {
+          accountsData.push("No Accounts found");
+        }
+        console.log(accountsData);
         if (this.props.acdDealData) {
             LoadRows = Object.keys(this.props.acdDealData).sort((a, b) => b.name - a.name).map(function (keyName, keyIndex) {
                 return <tr>
@@ -66,7 +76,7 @@ var Table = createReactClass({
                <td></td>
               <td>{self.props.acdDealData[keyName].currency}</td>
               <td class="uk-text-center">
-                        <Link to={'/acdinstrument'} params={{ testvalue: "hello" }} className="handle-edit-modal" data-id={keyName}
+                        <Link to={'/acddeal'} params={{ testvalue: "hello" }} className="handle-edit-modal" data-id={keyName}
                            data-uk-modal="{target:'#modal_header_footer'}"><i
                             class="md-icon material-icons">&#xE254;</i></Link>
                         <a href="#"><i class="md-icon material-icons">&#xE872;</i></a>
@@ -133,6 +143,7 @@ class AcdDeal extends React.Component {
 
     componentWillMount() {
         this.props.acdDealActions.getDealData();
+        this.props.acdAccountActions.getAccountsData();
     }
 
 //     handleClick(event) {
@@ -161,7 +172,7 @@ class AcdDeal extends React.Component {
                                                 className="fa fa-plus"></i>Deal</a>
                                         </div>
                                         <div className="md-card-content">
-                                            <Table acdDealData={this.props.acdDealData} loadEditDealAcdData={this.loadEditDealAcdData}/>
+                                            <Table acdDealData={this.props.acdDealData} loadEditDealAcdData={this.loadEditDealAcdData} acdAccountData={this.props.acdAccountData}/>
                                         </div>
                                     </div>
                                 </div>
@@ -186,18 +197,23 @@ const
     mapStateToProps = (state, props) => {
         return {
             acdDealData: state.acdDealData,
+            acdAccountData: state.acdAccountData
         }
     };
 
 
 AcdDeal.propTypes = {
     acdDealActions: PropTypes.object,
-    acdDealData: PropTypes.array
+    acdDealData: PropTypes.array,
+    acdAccountActions: PropTypes.object,
+    acdAccountData: PropTypes.array,
+    accounts: PropTypes.array
 };
 
 const
     mapDispatchToProps = (dispatch) => ({
-        acdDealActions: bindActionCreators(acdDealActions, dispatch)
+        acdDealActions: bindActionCreators(acdDealActions, dispatch),
+        acdAccountActions: bindActionCreators(acdAccountActions, dispatch)
     });
 
 export default connect(mapStateToProps,

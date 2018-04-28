@@ -19,7 +19,6 @@ class EditAcdDealWizard extends React.Component {
         $.map(unindexed_array, function(n, i){
             indexed_array[n['name']] = n['value'];
         });
-
     var reqData={
       "account": "string",
       "dealType": "string",
@@ -45,7 +44,7 @@ class EditAcdDealWizard extends React.Component {
       ,data: JSON.stringify(reqData),
       success: function(res){
         alert(JSON.stringify(res));
-        window.location.href="/acdaccount";
+        window.location.href="/acddeal";
       //  ReactDOM.render(<Acd />,$(this));
       },
       error:function(err){
