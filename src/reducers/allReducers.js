@@ -6,6 +6,7 @@ import acdPrevious from './pricePreviousReducer';
 import acdData from './acdDataReducer';
 import acdInstrumentData from './acdInstrumentReducer';
 import acdInstrumentData from './acdAccountReducer';
+import acdDealData from './acdDealReducer';
 
 export {
     dealing,
@@ -15,5 +16,6 @@ export {
     acdPrevious,
     acdData,
     acdInstrumentData,
-    acdAccountData
+    acdAccountData,
+    acdDealData
 };

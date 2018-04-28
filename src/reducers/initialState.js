@@ -6,5 +6,6 @@ export default {
     acdNext:null,
     acdData:null,
     acdInstrumentData: null,
-    acdAccountData:null
+    acdAccountData:null,
+    acdDealData:null
 };

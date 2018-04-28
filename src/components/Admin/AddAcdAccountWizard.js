@@ -100,7 +100,7 @@ console.log(JSON.stringify(reqData))
             <div className="uk-modal-dialog" id="acdmodalDialog">
                 <button type="button" className="uk-modal-close uk-close"></button>
                 <div className="uk-modal-header">
-                    <h3 className="uk-modal-title">Create Instrument</h3>
+                    <h3 className="uk-modal-title">Create Account</h3>
                 </div>
                 <div className="col-sm-12 create-sec">
                     <div className="md-card uk-margin-large-bottom">

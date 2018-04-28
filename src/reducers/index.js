@@ -9,6 +9,7 @@ import acdDataReducer         from './acdDataReducer'
 // import currentChallenge     from '../../reducers/currentChallenge'
 import acdInstrumentReducer from './acdInstrumentReducer'
 import acdAccountReducer from './acdAccountReducer'
+import acdDealReducer from './acdDealReducer'
 
 export default combineReducers({
     dealing: dealingReducer,
@@ -18,5 +19,6 @@ export default combineReducers({
     acdNext:priceNextReducer,
     acdData:acdDataReducer,
     acdInstrumentData:acdInstrumentReducer,
-    acdAccountData:acdAccountReducer
+    acdAccountData:acdAccountReducer,
+    acdDealData: acdDealReducer
 });
