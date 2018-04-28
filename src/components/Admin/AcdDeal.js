@@ -48,7 +48,7 @@ var Table = createReactClass({
         window.$('#table tbody').on('click', 'a.handle-edit-modal', function (e) {
             let key = window.$(this).data("id")
             let acdDealEditData = self.props.acdDealData[key];
-            self.props.loadEditInstrumentAcdData(acdDealEditData);
+            self.props.loadEditDealAcdData(acdDealEditData);
 
         });
     },
@@ -56,7 +56,7 @@ var Table = createReactClass({
     render: function () {
         let LoadRows = null;
         let self = this;
-        console.log(JSON.stringify(this.props.acdDealData));
+        //console.log(JSON.stringify(this.props.acdDealData));
         if (this.props.acdDealData) {
             LoadRows = Object.keys(this.props.acdDealData).sort((a, b) => b.name - a.name).map(function (keyName, keyIndex) {
                 return <tr>
@@ -114,18 +114,18 @@ class AcdDeal extends React.Component {
         };
 //        this.props.acdDataActions.getAllAcdData();
 //        this.handleClick = this.handleClick.bind(this);
-        this.loadEditInstrumentAcdData = this.loadEditInstrumentAcdData.bind(this);
-        this.loadAddAcdData = this.loadAddAcdData.bind(this);
+        this.loadEditDealAcdData = this.loadEditDealAcdData.bind(this);
+        this.loadAddDealData = this.loadAddDealData.bind(this);
     }
 
-    loadEditInstrumentAcdData(acdDealEditData) {
+    loadEditDealAcdData(acdDealEditData) {
         this.setState({
             acdDealEditData: acdDealEditData,
             modalType: "edit"
         })
     }
 
-    loadAddAcdData() {
+    loadAddDealData() {
         this.setState({
             modalType: "add"
         })
@@ -156,12 +156,12 @@ class AcdDeal extends React.Component {
                                     <div className="md-card uk-margin-medium-bottom">
                                         <div className="md-card-toolbar">
                                             <h3 className="md-card-toolbar-heading-text"> Deal List</h3>
-                                            <a onClick={this.loadAddAcdData} className="create md-btn md-btn-primary pull-right md-btn-wave-light waves-effect waves-button waves-light"
+                                            <a onClick={this.loadAddDealData} className="create md-btn md-btn-primary pull-right md-btn-wave-light waves-effect waves-button waves-light"
                                                data-uk-modal="{target:'#modal_header_footer'}" href="#"><i
                                                 className="fa fa-plus"></i>Deal</a>
                                         </div>
                                         <div className="md-card-content">
-                                            <Table acdDealData={this.props.acdDealData} loadEditInstrumentAcdData={this.loadEditInstrumentAcdData}/>
+                                            <Table acdDealData={this.props.acdDealData} loadEditDealAcdData={this.loadEditDealAcdData}/>
                                         </div>
                                     </div>
                                 </div>
