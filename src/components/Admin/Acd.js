@@ -68,7 +68,7 @@ var Table = createReactClass({
                         <Link to={'/acd'} params={{testvalue: "hello"}} className="handle-edit-modal" data-id={keyName}
                               data-uk-modal="{target:'#modal_header_footer'}"><i
                             className="md-icon material-icons">&#xE254;</i></Link>
-                        <a href="#"><i className="md-icon material-icons">&#xE872;</i></a>
+
                     </td>
                 </tr>
             });

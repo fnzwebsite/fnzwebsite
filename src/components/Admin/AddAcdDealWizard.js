@@ -2,6 +2,10 @@ import {connect} from 'react-redux';
 import React from 'react';
 import $ from 'jquery';
 import ReactDOM from 'react-dom'
+import acdAccountActions from '../../actions/acdAccountActions';
+import {bindActionCreators} from 'redux';
+import PropTypes from 'prop-types';
+import _ from 'lodash';
 
 class AddAcdAccountWizard extends React.Component {
   componentDidMount()
@@ -12,7 +16,24 @@ class AddAcdAccountWizard extends React.Component {
           transitionEffect: "slideLeft",
           autoFocus: true
       });
+$(document).ready(function(){
+  $.ajax({
+type: "GET",
+url: 'http://35.178.56.52:8081/api/v1/account',
+headers:{authorization:JSON.parse(localStorage.getItem('token'))},
+success: function(res){
+var arr = Object.keys(res).map(function(k) { return res[k] });
 
+  $(arr).each(function(index,item){
+//    console.log(item);
+    $("#ddlAccount").append('<option value="'+item.identifier+'">'+item.name+'</option>')
+  })
+},
+error:function(err){
+  alert(JSON.stringify(err));
+}
+});
+})
     $(document).on('click', '.button_finish', function(){
   //alert(getFormData($('#wizard_advanced_form')));
   var unindexed_array = $('#wizard_advanced_form').serializeArray();
@@ -48,7 +69,7 @@ console.log(JSON.stringify(reqData))
   headers:{authorization:JSON.parse(localStorage.getItem('token'))}
   ,data: JSON.stringify(reqData),
   success: function(res){
-    alert(JSON.stringify(res));
+    //alert(JSON.stringify(res));
     window.location.href="/acddeal";
   //  ReactDOM.render(<Acd />,$(this));
   },
@@ -59,10 +80,6 @@ console.log(JSON.stringify(reqData))
   contentType:'application/json'
 });
   }
-
-  //if($('#isin').val)
-  //alert(("insert");
-
     });
 
    $('body').on('click', '#AMLBtnGroup .btn', function(event) {
@@ -96,8 +113,25 @@ console.log(JSON.stringify(reqData))
    });
   }
 
-
+  componentWillMount() {
+        this.props.acdAccountActions.getAccountsData();
+    }
+loadAccounts()
+{
+  let accountsArray = this.props.acdAccountData
+        accountsArray = _.filter(accountsArray, (obj) => {
+           return obj.name !== null
+        })
+  const accounts = _.values(accountsArray).map((account, index) => {
+    //console.log("Account :" + account.name)
+  return (<option value={account.name}>{account.name}</option>);
+});
+return (accounts);
+}
     render() {
+      let accountsdropDown=null;
+      let self=this;
+
         return (
             <div className="uk-modal-dialog" id="acdmodalDialog">
                 <button type="button" className="uk-modal-close uk-close"></button>
@@ -120,10 +154,9 @@ console.log(JSON.stringify(reqData))
                                                 <div className="form-group ">
                                                     <div className="parsley-row uk-margin-top">
                                                     <div class="select-option2">
-                                                        <select id="accountCombo" class="form-control">
-                                                            <option value="Account">Account</option>
-                                                            <option value="Account Type">1234</option>
-                                                            <option value="Fund Accountant">567</option>
+                                                        <select id="ddlAccount" class="form-control">
+
+
                                                         </select>
                                                     </div>
                                                     </div>
@@ -218,4 +251,24 @@ console.log(JSON.stringify(reqData))
     }
 }
 
-export default AddAcdAccountWizard;
+const
+    mapStateToProps = (state, props) => {
+        return {
+            acdDealData: state.acdDealData,
+            acdAccountData: state.acdAccountData
+        }
+    };
+
+
+AddAcdAccountWizard.propTypes = {
+    acdAccountActions: PropTypes.object,
+    acdAccountData: PropTypes.array
+};
+
+const
+    mapDispatchToProps = (dispatch) => ({
+        acdAccountActions: bindActionCreators(acdAccountActions, dispatch)
+    });
+
+export default connect(mapStateToProps,
+    mapDispatchToProps)(AddAcdAccountWizard);

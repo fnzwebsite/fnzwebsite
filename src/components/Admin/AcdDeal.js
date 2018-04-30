@@ -66,14 +66,15 @@ var Table = createReactClass({
         else {
           accountsData.push("No Accounts found");
         }
-        console.log(accountsData);
+
         if (this.props.acdDealData) {
+          //alert(JSON.stringify(this.props.acdDealData));
             LoadRows = Object.keys(this.props.acdDealData).sort((a, b) => b.name - a.name).map(function (keyName, keyIndex) {
                 return <tr>
                 <td>{self.props.acdDealData[keyName].account}</td>
                <td>{self.props.acdDealData[keyName].dealType}</td>
-               <td></td>
-               <td></td>
+               <td>{self.props.acdDealData[keyName].instrumentPrimaryIdentifier}</td>
+               <td>{self.props.acdDealData[keyName].units}</td>
               <td>{self.props.acdDealData[keyName].currency}</td>
               <td class="uk-text-center">
                         <Link to={'/acddeal'} params={{ testvalue: "hello" }} className="handle-edit-modal" data-id={keyName}
