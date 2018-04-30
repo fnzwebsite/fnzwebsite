@@ -34,11 +34,12 @@ class EditAcdAccountWizard extends React.Component {
     console.log(JSON.stringify(reqData))
       //alert(localStorage.getItem('token'));
       var mode=$('#iisin').val();
+      var editIdentifier =$('#editIdentifier').val();
       if(mode=="edit")
       {
         $.ajax({
       type: "PUT",
-      url: 'http://35.178.56.52:8081/api/v1/account',
+      url: 'http://35.178.56.52:8081/api/v1/account/'+editIdentifier,
       headers:{authorization:JSON.parse(localStorage.getItem('token'))}
       ,data: JSON.stringify(reqData),
       success: function(res){
@@ -130,7 +131,7 @@ class EditAcdAccountWizard extends React.Component {
                                                 </div>
                                                 <input type="hidden" name ="companyType" id="companyType"/>
                                                 <input type="hidden" value="edit" name ="iisin" id="iisin"/>
-
+                                                <input type="hidden" value={this.props.acdAccountEditData.identifier} name ="editIdentifier" id="editIdentifier"/>
                                               </div>
                                           </div>
                                       </div>

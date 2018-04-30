@@ -55,18 +55,6 @@ var Table = createReactClass({
     render: function () {
         let LoadRows = null;
         let self = this;
-        //console.log('acc'+JSON.stringify(this.props.acdAccountData));
-        var accountsData=[];
-
-        if(this.props.acdAccountData){
-        Object.keys(this.props.acdAccountData).sort((a, b) => b.name - a.name).map(function (keyName, keyIndex) {
-            accountsData[keyIndex]=(self.props.acdAccountData[keyName].identifier)
-          })
-        }
-        else {
-          accountsData.push("No Accounts found");
-        }
-        console.log(accountsData);
         if (this.props.acdDealData) {
             LoadRows = Object.keys(this.props.acdDealData).sort((a, b) => b.name - a.name).map(function (keyName, keyIndex) {
                 return <tr>

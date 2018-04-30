@@ -4,6 +4,9 @@ import $ from 'jquery';
 import ReactDOM from 'react-dom'
 import Acd from './Acd'
 class EditAcdDealWizard extends React.Component {
+    componentWillMount(){
+      console.log('zzz'+this.props.location.params); 
+    }
     componentDidMount()
     {
         window.$("#wizard_edit").steps({
@@ -33,6 +36,7 @@ class EditAcdDealWizard extends React.Component {
       "currency": "string"
     }
     console.log(JSON.stringify(reqData))
+    var editIdentifier=$('#editIdentifier').val();
       //alert(localStorage.getItem('token'));
       var mode=$('#iisin').val();
       if(mode=="edit")
@@ -58,38 +62,53 @@ class EditAcdDealWizard extends React.Component {
         });
 
        $('body').on('click', '#AMLBtnGroup .btn', function(event) {
-           event.stopPropagation(); // prevent default bootstrap behavior
-           if ($(this).attr('data-toggle') != 'button') { // don't toggle if data-toggle="button"
-               var idval = $(this).attr('id');
-               if ($(this).attr('id') == 'NotAML') {
-                   $('#partialAML,#fullAML').removeAttr('data-toggle');
-                   $(this).addClass('btn btn-success');
-                   $('#partialAML,#fullAML').removeClass('btn-success');
-                   $(this).attr('data-toggle', 'button');
-                   $("#companyType").val("FundManager");
-               };
-               if ($(this).attr('id') == 'partialAML') {
-                   $('#NotAML,#fullAML').removeAttr('data-toggle');
-                   $(this).addClass('btn btn-success');
-                   $('#NotAML,#fullAML').removeClass('btn-success');
-                   $(this).attr('data-toggle', 'button');
-                    $("#companyType").val("FundAccountant");
-               };
-               if ($(this).attr('id') == 'fullAML') {
-                   $('#NotAML,#partialAML').removeAttr('data-toggle');
-                   $(this).addClass('btn btn-success');
-                   $('#NotAML,#partialAML').removeClass('btn-success');
+         if ($(this).attr('data-toggle') != 'button') { // don't toggle if data-toggle="button"
+             var idval = $(this).attr('id');
+             if ($(this).attr('id') == 'NotAML') {
+                 $('#fullAML').removeAttr('data-toggle');
+                 $(this).addClass('btn btn-success');
+                 $('#fullAML').removeClass('btn-success');
+                 $(this).attr('data-toggle', 'button');
+                 $("#dealType").val("BUY");
+             };
+             if ($(this).attr('id') == 'fullAML') {
+                 $('#NotAML').removeAttr('data-toggle');
+                 $(this).addClass('btn btn-success');
+                 $('#NotAML').removeClass('btn-success');
+                 $(this).attr('data-toggle', 'button');
+                 $("#dealType").val("SELL");
+             };
+         }
 
-                   $(this).attr('data-toggle', 'button');
-                   $("#companyType").val("Trustee");
-               };
-           }
+     });
 
-       });
+     $('body').on('click', '#AMLBtnGroup1 .btn', function(event) {
+         event.stopPropagation(); // prevent default bootstrap behavior
+         if ($(this).attr('data-toggle') != 'button') { // don't toggle if data-toggle="button"
+             var idval = $(this).attr('id');
+             if ($(this).attr('id') == 'NotAML1') {
+                 $('#fullAML1').removeAttr('data-toggle');
+                 $(this).addClass('btn btn-success');
+                 $('#fullAML1').removeClass('btn-success');
+                 $(this).attr('data-toggle', 'button');
+                 $("#quantityType").val("Amount");
+             };
+             if ($(this).attr('id') == 'fullAML1') {
+                 $('#NotAML1').removeAttr('data-toggle');
+                 $(this).addClass('btn btn-success');
+                 $('#NotAML1').removeClass('btn-success');
+                 $(this).attr('data-toggle', 'button');
+                 $("#quantityType").val("Units");
+             };
+         }
+
+     });
+
       }
 
 
     render() {
+
         return (
           <div className="uk-modal-dialog" id="acdmodalDialog">
               <button type="button" className="uk-modal-close uk-close"></button>
@@ -130,15 +149,15 @@ class EditAcdDealWizard extends React.Component {
 
                                                           <div class="btn-group" data-toggle="buttons-checkbox"
                                                                id="AMLBtnGroup">
-                                                              <button type="button" id="partialAML" class="btn ">
-                                                                  BUY
-                                                              </button>
+                                                               <button type="button" id="NotAML" class="btn btn-success" data-toggle="button">
+                                                                   BUY
+                                                               </button>
                                                               <button type="button" id="fullAML" class="btn ">
                                                                   SELL
                                                               </button>
                                                           </div>
-                                                          <input type="hidden" name="companyType"
-                                                                 id="companyType"/>
+                                                          <input type="hidden" name="dealType"
+                                                                 id="dealType"/>
                                                       </div>
                                                   </div>
                                               </div>
@@ -160,29 +179,32 @@ class EditAcdDealWizard extends React.Component {
                                               </div>
                                           </div>
                                           <div class="col-sm-7">
-                                              <div class="form-group mt-4">
-                                                  <div class="uk-form-row parsley-row mt26">
-                                                  <label for="quantity">Quantity<span className="req">*</span></label>
-                                                  <input type="text" name="quantity" required className="md-input" />
-                                                      <div class="parsley-row icheck-inline">
+                                          <div class="form-group">
+                                                <div class="parsley-row icheck-inline quan">
+                                                    <div class="parsley-row uk-margin-top">
+                                                        <div class="md-input-wrapper">
+                                                        <label for="quantity">Quantity<span class="req">*</span></label>
+                                                        <input type="text" name="quantity" required="" class="md-input" data-parsley-id="4"/>
+                                                        <span class="md-input-bar"></span></div>
 
-                                                          <div class="btn-group" data-toggle="buttons-checkbox"
-                                                               id="AMLBtnGroup">
-                                                              <button type="button" id="partialAML" class="btn ">
-                                                                  Amount
-                                                              </button>
-                                                              <button type="button" id="fullAML" class="btn ">
-                                                                  Units
-                                                              </button>
-                                                          </div>
-                                                          <input type="hidden" name="companyType"
-                                                                 id="companyType"/>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
+                                                    </div>
+                                                </div>
+                                                <div class="parsley-row icheck-inline">
+
+                                                    <div class="btn-group" data-toggle="buttons-checkbox" id="AMLBtnGroup1">
+                                                    <button type="button" id="NotAML1" class="btn btn-success" data-toggle="button">
+                                                        Amount
+                                                    </button>
+                                                   <button type="button" id="fullAML1" class="btn ">
+                                                       Units
+                                                   </button>
+                                                   <input type="hidden" name="quantityType"
+                                                          id="quantityType"/>
+                                                    </div>
+                                                </div>
+                                            </div>
                                       </div>
-
+                                      </div>
                                       <div className="row">
                                           <div className="col-sm-5">
                                               <div className="form-group ">
