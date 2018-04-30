@@ -70,12 +70,14 @@ class EditAcdWizard extends React.Component {
         }
         console.log(JSON.stringify(reqData))
         //alert(localStorage.getItem('token'));
+        //console.log('jjjjj'+JSON.stringify(this.props.acdEditData));
         var mode=$('#iisin').val();
         if(mode=="edit")
         {
+          var companyId=$('#editIdentifier').val();
           window.$.ajax({
               type: "PUT",
-              url: 'http://35.178.56.52:8081/api/v1/company',
+              url: 'http://35.178.56.52:8081/api/v1/company/'+companyId,
               headers: {authorization: JSON.parse(localStorage.getItem('token'))}
               , data: JSON.stringify(reqData),
               success: function (res) {
@@ -425,6 +427,7 @@ componentWillReceiveProps() {
                                                                    className="md-input"/>
                                                         </div>
                                                         <input type="hidden" value="edit" name ="iisin" id="iisin"/>
+                                                        <input type="hidden" value={this.props.acdEditData.identifier} name ="editIdentifier" id="editIdentifier"/>
                                                     </div>
                                                 </div>
                                             </div>

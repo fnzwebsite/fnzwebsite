@@ -48,7 +48,7 @@ var reqData={
   "dilutionLevyTriggerRepurchase": 0,
   "dilutionLevyTriggerSwitchIn": 0,
   "dilutionLevyTriggerSwitchOut": 0,
-  "displayName": "",
+  "displayName": indexed_array["fundNameDisplay"],
   "distributionCalendar": "",
   "eusdCapital": true,
   "eusdIncome": true,
@@ -132,26 +132,18 @@ console.log(JSON.stringify(reqData))
        if ($(this).attr('data-toggle') != 'button') { // don't toggle if data-toggle="button"
            var idval = $(this).attr('id');
            if ($(this).attr('id') == 'NotAML') {
-               $('#partialAML,#fullAML').removeAttr('data-toggle');
+               $('#partialAML').removeAttr('data-toggle');
                $(this).addClass('btn btn-success');
-               $('#partialAML,#fullAML').removeClass('btn-success');
+               $('#partialAML').removeClass('btn-success');
                $(this).attr('data-toggle', 'button');
-               $("#companyType").val("FundManager");
+               $("#instrumentType").val("Income");
            };
            if ($(this).attr('id') == 'partialAML') {
-               $('#NotAML,#fullAML').removeAttr('data-toggle');
+               $('#NotAML').removeAttr('data-toggle');
                $(this).addClass('btn btn-success');
-               $('#NotAML,#fullAML').removeClass('btn-success');
+               $('#NotAML').removeClass('btn-success');
                $(this).attr('data-toggle', 'button');
-                $("#companyType").val("FundAccountant");
-           };
-           if ($(this).attr('id') == 'fullAML') {
-               $('#NotAML,#partialAML').removeAttr('data-toggle');
-               $(this).addClass('btn btn-success');
-               $('#NotAML,#partialAML').removeClass('btn-success');
-
-               $(this).attr('data-toggle', 'button');
-               $("#companyType").val("Trustee");
+                $("#instrumentType").val("Accumulation");
            };
        }
 
@@ -259,7 +251,7 @@ console.log(JSON.stringify(reqData))
                                                                 <button type="button" id="NotAML" class="btn btn-success" data-toggle="button">Income</button>
                                                                 <button type="button" id="partialAML" class="btn ">Accumulation</button>
                                                             </div>
-                                                            <input type="hidden" name ="companyType" id="companyType"/>
+                                                            <input type="hidden" name ="instrumentType" id="instrumentType"/>
                                                             <input type="hidden" value="add" name ="iisin" id="iisin"/>
                                                         </div>
                                                     </div>
