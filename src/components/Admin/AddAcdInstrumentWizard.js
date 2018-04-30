@@ -48,7 +48,7 @@ var reqData={
   "dilutionLevyTriggerRepurchase": 0,
   "dilutionLevyTriggerSwitchIn": 0,
   "dilutionLevyTriggerSwitchOut": 0,
-  "displayName": "",
+  "displayName": indexed_array["fundNameDisplay"],
   "distributionCalendar": "",
   "eusdCapital": true,
   "eusdIncome": true,

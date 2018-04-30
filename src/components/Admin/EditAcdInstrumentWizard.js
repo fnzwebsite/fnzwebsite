@@ -47,7 +47,7 @@ class EditInstrumentWizard extends React.Component {
       "dilutionLevyTriggerRepurchase": 0,
       "dilutionLevyTriggerSwitchIn": 0,
       "dilutionLevyTriggerSwitchOut": 0,
-      "displayName": "",
+      "displayName": indexed_array["fundNameDisplay"],
       "distributionCalendar": "",
       "eusdCapital": true,
       "eusdIncome": true,
@@ -169,7 +169,7 @@ class EditInstrumentWizard extends React.Component {
                                                 <div className="form-group ">
                                                     <div className="parsley-row uk-margin-top">
                                                         <label for="fundNameDisplay">Fund Name Display<span className="req">*</span></label>
-                                                        <input type="text" value={this.props.acdInstrumentEditData.name} name="fundNameDisplay" required className="md-input" />
+                                                        <input type="text" value={this.props.acdInstrumentEditData.displayName} name="fundNameDisplay" required className="md-input" />
                                                     </div>
                                                 </div>
                                             </div>
