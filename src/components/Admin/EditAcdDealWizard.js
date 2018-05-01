@@ -7,6 +7,7 @@ import Acd from './Acd'
 class EditAcdDealWizard extends React.Component {
     componentDidUpdate() {
         this.setData();
+
     }
 
     componentDidMount() {
@@ -22,6 +23,21 @@ class EditAcdDealWizard extends React.Component {
         this.setData();
 
         $(document).ready(function () {
+          var deal=$('#dealType').val();
+          //alert(deal);
+          if(deal=="SELL"){
+            $('#NotAML').removeAttr('data-toggle');
+            $('#fullAML').addClass('btn btn-success');
+            $('#NotAML').removeClass('btn-success');
+            $(this).attr('data-toggle', 'button');
+          }
+          var quanType=$('#quantityType').val();
+          if(quanType=="Accepted"){
+            $('#NotAML1').removeAttr('data-toggle');
+            $('#fullAML1').addClass('btn btn-success');
+            $('#NotAML1').removeClass('btn-success');
+            $(this).attr('data-toggle', 'button');
+          }
             $.ajax({
                 type: "GET",
                 url: 'http://35.178.56.52:8081/api/v1/account',
@@ -35,6 +51,8 @@ class EditAcdDealWizard extends React.Component {
                         //    console.log(item);
                         $("#ddlAccount").append('<option value="' + item.identifier + '">' + item.name + '</option>')
                     })
+                    var account=$("#editAccount").val();
+                    $('#ddlAccount').val(account)
                 },
                 error: function (err) {
                     alert(JSON.stringify(err));
@@ -54,6 +72,8 @@ class EditAcdDealWizard extends React.Component {
                         //    console.log(item);
                         $("#ddlInstrument").append('<option value="' + item.isin + '">' + item.name + '</option>')
                     })
+                    var instrument=$("#editInstrument").val();
+                    $('#ddlInstrument').val(instrument)
                 },
                 error: function (err) {
                     alert(JSON.stringify(err));
@@ -101,17 +121,25 @@ class EditAcdDealWizard extends React.Component {
                 }
             }
             console.log(JSON.stringify(reqData))
+            var editIdentifier=$('#editIdentifier').val();
             var mode = $('#iisin').val();
             if (mode == "edit") {
+              $('.button_finish').hide();
                 $.ajax({
                     type: "PUT",
-                    url: 'http://35.178.56.52:8081/api/v1/account',
+                    url: 'http://35.178.56.52:8081/api/v1/dealing/'+editIdentifier,
                     headers: {authorization: JSON.parse(localStorage.getItem('token'))}
                     , data: JSON.stringify(reqData),
                     success: function (res) {
-                        alert(JSON.stringify(res));
-                        window.location.href = "/acddeal";
-                        //  ReactDOM.render(<Acd />,$(this));
+                      if(res[0].status==="SUCCESS")
+                      {
+                        window.toastr.options.onHidden = function() { window.location.href="/acddeal";$('.button_finish').show();  }
+                        window.toastr.success('You have successfully modified Account');
+                      }
+                      else {
+                        window.toastr.options.onHidden = function() {$('.button_finish').show(); } //window.location.href = "/acd"; }
+                        window.toastr.error('Unable to modify account, Error Message: '+ res[0].info);
+                      }
                     },
                     error: function (err) {
                         alert(JSON.stringify(err));
@@ -123,6 +151,14 @@ class EditAcdDealWizard extends React.Component {
 
         });
 
+        $(document).ready(function(){
+          var currencyType=$("#currencyType").val();
+          $('#currencyCombo').val(currencyType)
+
+          //alert(accType);
+
+        //  alert(accType);
+        })
         $('body').on('click', '#AMLBtnGroup .btn', function (event) {
             if ($(this).attr('data-toggle') != 'button') { // don't toggle if data-toggle="button"
                 var idval = $(this).attr('id');
@@ -175,6 +211,8 @@ class EditAcdDealWizard extends React.Component {
     setData() {
         window.$("input#quantity").val(this.props.acdDealEditData.units);
         window.$("select#ddlAccount").val(this.props.acdDealEditData.units);
+        //alert('edit'+JSON.stringify(this.props));
+
     }
 
     render() {
@@ -201,7 +239,7 @@ class EditAcdDealWizard extends React.Component {
                                                 <div className="form-group ">
                                                     <div className="parsley-row uk-margin-top">
                                                         <div class="select-option2">
-                                                            <select id="ddlAccount" class="form-control">
+                                                            <select id="ddlAccount" name="ddlAccount" class="form-control">
                                                                 <option value="">Select Account</option>
                                                             </select>
                                                         </div>
@@ -260,7 +298,7 @@ class EditAcdDealWizard extends React.Component {
                                                             <button type="button" id="fullAML1" class="btn ">
                                                                 Units
                                                             </button>
-                                                            <input type="hidden" name="quantityType"
+                                                            <input type="hidden" name="quantityType" value={this.props.acdDealEditData.dealingStatus}
                                                                    id="quantityType"/>
                                                         </div>
                                                     </div>
@@ -285,8 +323,7 @@ class EditAcdDealWizard extends React.Component {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div className="row">
+                                      
                                             <div class="col-sm-7">
                                                 <div class="form-group mt-4">
                                                     <div class="uk-form-row parsley-row mt26">
@@ -304,11 +341,16 @@ class EditAcdDealWizard extends React.Component {
                                                                     SELL
                                                                 </button>
                                                             </div>
-                                                            <input type="hidden" name="dealType"
+                                                            <input type="hidden" name="dealType" value={this.props.acdDealEditData.dealType}
                                                                    id="dealType"/>
                                                         </div>
                                                         <input type="hidden" name="iisin" value="edit"
                                                                id="iisin"/>
+                                                               <input type="hidden" name="currencyType" value={this.props.acdDealEditData.currency}
+                                                                      id="currencyType"/>
+                                                        <input type="hidden" name ="editaccount" id="editAccount" value={this.props.acdDealEditData.account}/>
+                                                        <input type="hidden" name ="editInstrument" id="editInstrument" value={this.props.acdDealEditData.instrumentPrimaryIdentifier}/>
+                                                        <input type="hidden" name ="editIdentifier" id="editIdentifier" value={this.props.editkey}/>
                                                     </div>
                                                 </div>
                                             </div>

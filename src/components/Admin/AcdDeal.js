@@ -154,11 +154,12 @@
     }
 
     loadEditDealAcdData(acdDealEditData,key) {
-      this.setState({
-        acdDealEditData: acdDealEditData,
-        modalType: "edit",
-        key:key
-      })
+      //alert('load me'+key)
+        this.setState({
+            acdDealEditData: acdDealEditData,
+            modalType: "edit",
+            editkey:key
+        })
     }
 
     loadAddDealData() {
@@ -197,45 +198,38 @@
 
     }
     render() {
-      return (
-        <div className="container-fluid" id="page_content">
-        <div className="uk-modal" id="modal_header_footer">
-        {this.state.modalType == "add" && <AcdDealWizard/>}
-        {this.state.modalType == "edit" &&
-        <EditAcdDealWizard acdDealEditData={this.state.acdDealEditData} key={this.state.key}/>}
-        </div>
-        <div className="mt-6">
-        <div className="row">
-        <div className="col-md-12 wizard-list">
-        <div className="row">
-        <div className="md-card uk-margin-medium-bottom">
-        <div className="md-card-toolbar">
-        <h3 className="md-card-toolbar-heading-text"> Deal List</h3>
-        {/*<input  type="file" onChange={this.onFileUpload} runat="server"
-        className="md-btn md-btn-success pull-right"/>
-        <div class="upload-btn-wrapper pull-right create md-btn md-btn-primary pull-right md-btn-wave-light waves-effect waves-button waves-light">
-        <button class="btn">Upload deal file</button>
-        <input type="file" name="myfile" />
-        </div>*/}
-         <div id="uploadText" class="upload"></div>
-        <a onClick={this.loadAddDealData}
-        className="create md-btn md-btn-primary pull-right md-btn-wave-light waves-effect waves-button waves-light"
-        data-uk-modal="{target:'#modal_header_footer'}" href="#"><i
-        className="fa fa-plus"></i>Deal</a>
-        </div>
-        <div className="md-card-content">
-        <Table acdDealData={this.props.acdDealData}
-        loadEditDealAcdData={this.loadEditDealAcdData}
-        acdAccountData={this.props.acdAccountData}/>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
+        return (
+            <div className="container-fluid" id="page_content">
+                <div className="uk-modal" id="modal_header_footer">
+                    {this.state.modalType == "add" && <AcdDealWizard/>}
+                    {this.state.modalType == "edit" &&
+                    <EditAcdDealWizard acdDealEditData={this.state.acdDealEditData} editkey={this.state.editkey}/>}
+                </div>
+                <div className="mt-6">
+                    <div className="row">
+                        <div className="col-md-12 wizard-list">
+                            <div className="row">
+                                <div className="md-card uk-margin-medium-bottom">
+                                    <div className="md-card-toolbar">
+                                        <h3 className="md-card-toolbar-heading-text"> Deal List</h3>
+                                        <a onClick={this.loadAddDealData}
+                                           className="create md-btn md-btn-primary pull-right md-btn-wave-light waves-effect waves-button waves-light"
+                                           data-uk-modal="{target:'#modal_header_footer'}" href="#"><i
+                                            className="fa fa-plus"></i>Deal</a>
+                                    </div>
+                                    <div className="md-card-content">
+                                        <Table acdDealData={this.props.acdDealData}
+                                               loadEditDealAcdData={this.loadEditDealAcdData}
+                                               acdAccountData={this.props.acdAccountData}/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-      )
+        )
 
     }
   }
