@@ -12,45 +12,53 @@ import {Link} from 'react-router-dom';
 var createReactClass = require('create-react-class');
 var tableAsJqeryElement = null;
 var Table = createReactClass({
+    resetTable: function (seconds) {
+        if (tableAsJqeryElement) {
+            setTimeout(function() {
+                tableAsJqeryElement
+                    .rows()
+                    .draw();
+                let tableOrder = localStorage.getItem('orderAcd');
+                if (tableOrder) {
+                    tableAsJqeryElement.order([[tableOrder.split(',')[0], tableOrder.split(',')[1]]]).draw(false);
+                } else {
+                    tableAsJqeryElement.order([[4, 'desc']]).draw(false);
+                }
+            }, seconds);
+        }
+    },
+
     componentDidMount: function () {
-        // this.loadDataTable();
+        this.resetTable(500);
     },
     componentDidUpdate: function (prevProps, prevState) {
-        this.loadDataTable();
+        // this.resetTable(500);
     },
     componentWillReceiveProps: function (prevProps, prevState) {
-        // if (prevProps.loadThisDay != this.props.loadThisDay || prevProps.dealingData != this.props.dealingData) {
-        //     if (tableAsJqeryElement) {
-        //         tableAsJqeryElement.fnDestroy();
-        //         tableAsJqeryElement = null;
-        //     }
-        // }
-        // this.loadDataTable();
     },
-    loadDataTable: function () {
-        window.$('#table').dataTable({
-            "order": [[0, "desc"]],
-            "bDestroy": true
-        });
-        let self = this;
-        window.$('#table tbody').on('click', 'a.handle-edit-modal', function (e) {
-            let key = window.$(this).data("id")
-            let acdEditData = self.props.acdData[key];
-            self.props.loadEditAcdData(acdEditData);
-        });
+    loadDataTable: function (elem) {
+        if(tableAsJqeryElement == null) {
+            var self = this;
+            window.$('a.handle-edit-modal').off('click');
+            window.$('a.handle-edit-modal').on('click', function (e) {
+                let key = window.$(this).data("id")
+                let acdEditData = self.props.acdData[key];
+                self.props.loadEditAcdData(acdEditData);
+            });
+        }
 
-        // let self = this;
-        // setTimeout(function () {
-        //     tableAsJqeryElement = $('#table').dataTable({
-        //         "order": [[0, "desc"]]
-        //     });
-        //     if (tableAsJqeryElement) {
-        //         tableAsJqeryElement.fnDraw();
-        //     }
-        //
-        // }, 0)
+        tableAsJqeryElement = window.$(elem).DataTable();
+        if (tableAsJqeryElement) {
+            tableAsJqeryElement.on('order.dt', function(e, dt, type, indexes) {
+                if (tableAsJqeryElement) {
+                    var order = tableAsJqeryElement.order();
+                    if (order != undefined && order.length > 0 && order[0][0] != 0 && order[0][1] != undefined) {
+                        localStorage.setItem('orderAcd', order);
+                    }
+                }
+            });
+        }
     },
-
     render: function () {
         let LoadRows = null;
         let self = this;
@@ -65,9 +73,9 @@ var Table = createReactClass({
                     <td>{self.props.acdData[keyName].telephone}</td>
                     <td>{self.props.acdData[keyName].fax}</td>
                     <td className="uk-text-center">
-                        <Link to={'/acd'} params={{testvalue: "hello"}} className="handle-edit-modal" data-id={keyName}
+                        <a className="handle-edit-modal" data-id={keyName}
                               data-uk-modal="{target:'#modal_header_footer'}"><i
-                            className="md-icon material-icons">&#xE254;</i></Link>
+                            className="md-icon material-icons">&#xE254;</i></a>
                         <a href="#"><i className="md-icon material-icons">&#xE872;</i></a>
                     </td>
                 </tr>
@@ -79,7 +87,7 @@ var Table = createReactClass({
 
             return (
                 <div style={{minHeight: '200px'}}>
-                    <table id="table" className="stripe" cellSpacing="0" width="100%">
+                    <table ref={elem => this.loadDataTable(elem)} id="table" className="stripe" cellSpacing="0" width="100%">
                         <thead>
                         <tr>
                             <th>Name</th>
@@ -117,6 +125,7 @@ class Acd extends React.Component {
         this.handleClick = this.handleClick.bind(this);
         this.loadEditAcdData = this.loadEditAcdData.bind(this);
         this.loadAddAcdData = this.loadAddAcdData.bind(this);
+        this.reloadAcd = this.reloadAcd.bind(this);
 
 
         this.state = {
@@ -176,13 +185,17 @@ class Acd extends React.Component {
         this.props.acdDataActions.postAcdData(this.state);
     }
 
+    reloadAcd(){
+        this.props.acdDataActions.getAllAcdData();
+    }
+
     render() {
             return (
                 <div className="container-fluid" id="page_content">
 
                     <div className="uk-modal" id="modal_header_footer">
-                        {this.state.modalType == "add" && <AddAcdWizard/>}
-                        {this.state.modalType == "edit" &&<EditAcdWizard acdEditData={this.state.acdEditData}/>}
+                        {this.state.modalType == "add" && <AddAcdWizard reloadAcd={this.reloadAcd}/>}
+                        {this.state.modalType == "edit" &&<EditAcdWizard reloadAcd={this.reloadAcd} acdEditData={this.state.acdEditData}/>}
                     </div>
 
                     <div className="mt-6">

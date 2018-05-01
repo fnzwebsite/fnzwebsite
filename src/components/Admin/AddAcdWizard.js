@@ -4,6 +4,7 @@ import Acd from './Acd'
 import $ from 'jquery';
 class AddAcdWizard extends React.Component {
     componentDidMount() {
+        var self = this;
         window.$("#wizard_add").steps({
             headerTag: "h3",
             bodyTag: "section",
@@ -80,6 +81,7 @@ class AddAcdWizard extends React.Component {
                   success: function (res) {
                       alert(JSON.stringify(res));
                       window.location.href = "/acd";
+                      self.props.reloadAcd();
                       //  ReactDOM.render(<Acd />,$(this));
                   },
                   error: function (err) {
@@ -88,6 +90,7 @@ class AddAcdWizard extends React.Component {
                   dataType: 'json',
                   contentType: 'application/json'
               });
+
             }
         });
 
