@@ -2,159 +2,105 @@ import {connect} from 'react-redux';
 import React from 'react';
 import Acd from './Acd'
 import $ from 'jquery';
-
 class AddAcdWizard extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: '',
-            submitted: false
-        };
-        // this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-    }
-
     componentDidMount() {
         var self = this;
-        // window.$("#wizard_add").steps({
-        //     headerTag: "h3",
-        //     bodyTag: "section",
-        //     transitionEffect: "slideLeft",
-        //     autoFocus: true
-        // });
-
-
-        window.$("#wizard_advanced_form_add").validate({
-                // Specify validation rules
-                rules: {
-                    // The key name on the left side is the name attribute
-                    // of an input field. Validation rules are defined
-                    // on the right side
-                    firstname: "required",
-                    lastname: "required",
-                    email: {
-                        required: true,
-                        // Specify that email should be validated
-                        // by the built-in "email" rule
-                        email: true
-                    },
-                    password: {
-                        required: true,
-                        minlength: 5
-                    }
-                },
-                // Specify validation error messages
-                messages: {
-                    firstname: "Please enter your firstname",
-                    lastname: "Please enter your lastname",
-                    password: {
-                        required: "Please provide a password",
-                        minlength: "Your password must be at least 5 characters long"
-                    },
-                    email: "Please enter a valid email address"
-                },
-                // Make sure the form is submitted to the destination defined
-                // in the "action" attribute of the form when valid
-                submitHandler: function(form) {
-                    form.submit();
-                }
-            });
+        window.$("#wizard_add").steps({
+            headerTag: "h3",
+            bodyTag: "section",
+            transitionEffect: "slideLeft",
+            autoFocus: true
+        });
 
         window.$(document).on('click', '#wizard_add .button_finish', function () {
+            //alert(getFormData($('#wizard_advanced_form')));
+            var unindexed_array = window.$('#wizard_advanced_form_add').serializeArray();
+            var indexed_array = {};
+            window.$.map(unindexed_array, function (n, i) {
+                indexed_array[n['name']] = n['value'];
+            });
 
-            self.setState({submitted: true});
-            const {name} = self.state;
-            if (name) {
-                //alert(getFormData($('#wizard_advanced_form')));
-                var unindexed_array = window.$('#wizard_advanced_form_add').serializeArray();
-                var indexed_array = {};
-                window.$.map(unindexed_array, function (n, i) {
-                    indexed_array[n['name']] = n['value'];
+            var reqData = {
+                "companyType": indexed_array["companyType"]
+                , "name": indexed_array["name"]
+
+                , "registeredAddress": {
+                    "addressLine1": indexed_array["raddressLine1"]
+                    ,
+                    "addressLine2": indexed_array["raddressLine2"]
+                    ,
+                    "city": indexed_array["registeredCity"],
+                    "county": indexed_array["registeredCounty"]
+                    ,
+                    "country": "United Kingdom"
+                    ,
+                    "postcode": indexed_array["registeredPostalCode"]
+                }
+
+                , "postalAddress": {
+                    "addressLine1": indexed_array["paddressLine1"]
+                    ,
+                    "addressLine2": indexed_array["paddressLine2"]
+                    ,
+                    "city": indexed_array["postalCity"],
+                    "county": indexed_array["postalCounty"]
+                    ,
+                    "country": "United Kingdom"
+                    ,
+                    "postcode": indexed_array["postalPostCode"]
+                }
+
+                , "domicile": indexed_array["domicile"]
+                , "amlStatus": indexed_array["amlStatus"]
+                , "kycStatus": indexed_array["kycStatus"]
+
+                , "relationshipManager": {
+                    "name": indexed_array["RelationshipName"]
+                    ,
+                    "email": (indexed_array["relationshipemail"] != null && indexed_array["relationshipemail"] != undefined && indexed_array["relationshipemail"].length > 0) ? indexed_array["relationshipemail"] : ""
+                    ,
+                    "relation": (indexed_array["relation"] != null && indexed_array["relation"] != undefined && indexed_array["relation"].length > 0) ? indexed_array["relation"] : ""
+                }
+
+                , "instrumentType": indexed_array["instrumentType"]
+                , "telephone": indexed_array["telephone"]
+                , "fax": indexed_array["fax"]
+                , "email": indexed_array["Email"]
+                , "ucitisCompliant": true
+            }
+            console.log(JSON.stringify(reqData))
+            //alert(localStorage.getItem('token'));
+            var mode=$('#iisin').val();
+            if(mode=="add")
+            {
+                window.$.ajax({
+                    type: "POST",
+                    url: 'http://35.178.56.52:8081/api/v1/company',
+                    headers: {authorization: JSON.parse(localStorage.getItem('token'))}
+                    , data: JSON.stringify(reqData),
+                    success: function (res) {
+                        if(res[0].status==="SUCCESS")
+                        {
+                            window.toastr.options.onHidden = function() {
+                                window.location.href = "/acd";
+                                $('.button_finish').show();
+                                self.props.reloadAcd();
+                            }
+                            window.toastr.success('You have Successfully Created Company');
+                        }
+                        else {
+                            window.toastr.options.onHidden = function() {$('.button_finish').show();} //window.location.href = "/acd"; }
+                            window.toastr.error('Unable to create Company, Error Message: '+ res[0].info);
+                        }
+                    },
+                    error: function (err) {
+                        alert(JSON.stringify(err));
+                    },
+                    dataType: 'json',
+                    contentType: 'application/json'
                 });
 
-                var reqData = {
-                    "companyType": indexed_array["companyType"]
-                    , "name": indexed_array["name"]
-
-                    , "registeredAddress": {
-                        "addressLine1": indexed_array["raddressLine1"]
-                        ,
-                        "addressLine2": indexed_array["raddressLine2"]
-                        ,
-                        "city": indexed_array["registeredCity"],
-                        "county": indexed_array["registeredCounty"]
-                        ,
-                        "country": "United Kingdom"
-                        ,
-                        "postcode": indexed_array["registeredPostalCode"]
-                    }
-
-                    , "postalAddress": {
-                        "addressLine1": indexed_array["paddressLine1"]
-                        ,
-                        "addressLine2": indexed_array["paddressLine2"]
-                        ,
-                        "city": indexed_array["postalCity"],
-                        "county": indexed_array["postalCounty"]
-                        ,
-                        "country": "United Kingdom"
-                        ,
-                        "postcode": indexed_array["postalPostCode"]
-                    }
-
-                    , "domicile": indexed_array["domicile"]
-                    , "amlStatus": indexed_array["amlStatus"]
-                    , "kycStatus": indexed_array["kycStatus"]
-
-                    , "relationshipManager": {
-                        "name": indexed_array["RelationshipName"]
-                        ,
-                        "email": (indexed_array["relationshipemail"] != null && indexed_array["relationshipemail"] != undefined && indexed_array["relationshipemail"].length > 0) ? indexed_array["relationshipemail"] : ""
-                        ,
-                        "relation": (indexed_array["relation"] != null && indexed_array["relation"] != undefined && indexed_array["relation"].length > 0) ? indexed_array["relation"] : ""
-                    }
-
-                    , "instrumentType": indexed_array["instrumentType"]
-                    , "telephone": indexed_array["telephone"]
-                    , "fax": indexed_array["fax"]
-                    , "email": indexed_array["Email"]
-                    , "ucitisCompliant": true
-                }
-                console.log(JSON.stringify(reqData))
-                //alert(localStorage.getItem('token'));
-                var mode = $('#iisin').val();
-                if (mode == "add") {
-                    window.$.ajax({
-                        type: "POST",
-                        url: 'http://35.178.56.52:8081/api/v1/company',
-                        headers: {authorization: JSON.parse(localStorage.getItem('token'))}
-                        , data: JSON.stringify(reqData),
-                        success: function (res) {
-                            if (res[0].status === "SUCCESS") {
-                                window.toastr.options.onHidden = function () {
-                                    window.location.href = "/acd";
-                                    $('.button_finish').show();
-                                    self.props.reloadAcd();
-                                }
-                                window.toastr.success('You have Successfully Created Company');
-                            }
-                            else {
-                                window.toastr.options.onHidden = function () {
-                                    $('.button_finish').show();
-                                } //window.location.href = "/acd"; }
-                                window.toastr.error('Unable to create Company, Error Message: ' + res[0].info);
-                            }
-                        },
-                        error: function (err) {
-                            alert(JSON.stringify(err));
-                        },
-                        dataType: 'json',
-                        contentType: 'application/json'
-                    });
-
-                }
             }
-
         });
 
         window.$('body').on('click', '#AMLBtnGroup .btn', function (event) {
@@ -212,14 +158,7 @@ class AddAcdWizard extends React.Component {
 
     componentWillReceiveProps() {
     }
-
-    handleChange(e) {
-        const {name, value} = e.target;
-        this.setState({[name]: value});
-    }
-
     render() {
-        const { name, submitted } = this.state;
         return (
             <div className="uk-modal-dialog" id="acdmodalDialog">
                 <button type="button" className="uk-modal-close uk-close"></button>
@@ -242,8 +181,8 @@ class AddAcdWizard extends React.Component {
                                                 <div className="form-group ">
                                                     <div className="parsley-row uk-margin-top">
                                                         <label for="name">Name<span className="req">*</span></label>
-                                                        <input value={name} type="text" id="name" name="name"
-                                                               className="md-input" onChange={this.handleChange} required/>
+                                                        <input type="text" name="name" required
+                                                               className="md-input"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -511,7 +450,7 @@ class AddAcdWizard extends React.Component {
                                                             <input type="text" name="relation" required
                                                                    className="md-input"/>
                                                         </div>
-                                                        <input type="hidden" value="add" name="iisin" id="iisin"/>
+                                                        <input type="hidden" value="add" name ="iisin" id="iisin"/>
                                                     </div>
                                                 </div>
                                             </div>
