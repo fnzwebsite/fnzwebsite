@@ -112,7 +112,8 @@ class Dashboard extends React.Component {
                                                         <div className="card-body"
                                                              style={{paddingBottom: '30px'}}>
                                                             {/*<LoadChart/>*/}
-                                                            <LoadLineChart
+                                                          
+                                                           <LoadLineChart
                                                                 loadThisDay={this.state.chart}
                                                                 dealingData={dealing}/>
                                                         </div>

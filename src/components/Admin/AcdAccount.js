@@ -3,41 +3,21 @@ import React from 'react';
 import moment from 'moment'
 import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
-import acdInstrumentActions from '../../actions/acdInstrumentActions';
-//import * from 'jquery';
-// import $ from 'jquery';
-// import 'datatables.net';
-import AcdInstrumentWizard from "./AddAcdInstrumentWizard";
+import acdAccountActions from '../../actions/acdAccountActions';
+import AcdAccountWizard from "./AddAcdAccountWizard";
 import {Link} from 'react-router-dom';
-import EditInstrumentWizard from "./EditAcdInstrumentWizard";
+import EditAcdAccountWizard from "./EditAcdAccountWizard";
 
 var createReactClass = require('create-react-class');
 var tableAsJqeryElement = null;
 var Table = createReactClass({
     componentDidMount: function () {
-        //   const list = ['ReactJS', 'JSX', 'JavaScript', 'jQuery', 'jQuery UI'];
-        this.loadDataTable();
-        // $(document).on('click', '#editRow', function(){
-        //   //alert('edit....')
-        //     $("#modal_header_footer").addClass("uk-open");
-        //       $("#modal_header_footer").attr("aria-expanded","true");
-        //         $("#modal_header_footer").modal('show');
-        //     //  this.trigger("show.uk.dropdown",$("#modal_header_footer"))
-        //
-        // });
-
     },
     componentDidUpdate: function (prevProps, prevState) {
         this.loadDataTable();
     },
     componentWillReceiveProps: function (prevProps, prevState) {
-        // if (prevProps.loadThisDay != this.props.loadThisDay || prevProps.dealingData != this.props.dealingData) {
-        //     if (tableAsJqeryElement) {
-        //         tableAsJqeryElement.fnDestroy();
-        //         tableAsJqeryElement = null;
-        //     }
-        // }
-        // this.loadDataTable();
+         this.loadDataTable();
     },
     loadDataTable: function () {
         window.$('#table').dataTable({
@@ -47,60 +27,59 @@ var Table = createReactClass({
         let self = this;
         window.$('#table tbody').on('click', 'a.handle-edit-modal', function (e) {
             let key = window.$(this).data("id")
-            let acdInstrumentEditData = self.props.acdInstrumentData[key];
-            self.props.loadEditInstrumentAcdData(acdInstrumentEditData);
+            let acdAccountEditData = self.props.acdAccountData[key];
+            self.props.loadEditAcdAccountData(acdAccountEditData);
+
         });
     },
+
     render: function () {
         let LoadRows = null;
         let self = this;
-        if (this.props.acdInstrumentData) {
-            LoadRows = Object.keys(this.props.acdInstrumentData).sort((a, b) => b.name - a.name).map(function (keyName, keyIndex) {
+        //alert(JSON.stringify(this.props.acdAccountData));
+        //console.log(JSON.stringify(this.props.acdAccountData));
+        if (this.props.acdAccountData) {
+            LoadRows = Object.keys(this.props.acdAccountData).sort((a, b) => b.identifier - a.identifier).map(function (keyName, keyIndex) {
                 return <tr>
-                <td>{self.props.acdInstrumentData[keyName].subFundKey}</td>
-               <td></td>
-               <td>{self.props.acdInstrumentData[keyName].isin}</td>
-              <td>{self.props.acdInstrumentData[keyName].instrumentType}</td>
-              <td>{self.props.acdInstrumentData[keyName].instrumentLevel}</td>
-              <td>{self.props.acdInstrumentData[keyName].instrumentBasis}</td>
+                <td>{self.props.acdAccountData[keyName].name}</td>
+               <td>{self.props.acdAccountData[keyName].accountType}</td>
                     <td class="uk-text-center">
-                        <Link to={'/acdinstrument'} params={{ testvalue: "hello" }} className="handle-edit-modal" data-id={keyName}
+                        <Link to={'/acdaccount'} params={{ testvalue: "hello" }} className="handle-edit-modal" data-id={keyName}
                            data-uk-modal="{target:'#modal_header_footer'}"><i
                             class="md-icon material-icons">&#xE254;</i></Link>
                     </td>
                 </tr>
             });
+
             LoadRows = LoadRows.filter(function (item) {
                 return item != undefined
             })
+
             return (
                 <div style={{minHeight: '200px'}}>
                     <table id="table" className="stripe" cellSpacing="0" width="100%">
                         <thead>
                         <tr>
-                        <th>Sub Fund Name</th>
-                        <th>Share Class Name</th>
-                        <th>ISIN</th>
-                        <th>Instrument Type</th>
-                        <th>Instrument Level</th>
-                        <th>Instrument Basis</th>
-                            <th className="action uk-text-center">Action</th>
+                        <th>Account</th>
+                        <th>Account Type</th>
+                        <th className="action uk-text-center">Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         {LoadRows}
                         </tbody>
                     </table>
+
                 </div>
             );
         } else {
-            return <td colSpan='7'>No Instruments Found</td>;
+            return <td colSpan='7'>No Accounts Found</td>;
         }
     },
 
 });
 
-class AcdInstrument extends React.Component {
+class AcdAccount extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -109,13 +88,13 @@ class AcdInstrument extends React.Component {
         };
 //        this.props.acdDataActions.getAllAcdData();
 //        this.handleClick = this.handleClick.bind(this);
-        this.loadEditInstrumentAcdData = this.loadEditInstrumentAcdData.bind(this);
+        this.loadEditAcdAccountData = this.loadEditAcdAccountData.bind(this);
         this.loadAddAcdData = this.loadAddAcdData.bind(this);
     }
 
-    loadEditInstrumentAcdData(acdInstrumentEditData) {
+    loadEditAcdAccountData(acdAccountEditData) {
         this.setState({
-            acdInstrumentEditData: acdInstrumentEditData,
+            acdAccountEditData: acdAccountEditData,
             modalType: "edit"
         })
     }
@@ -127,7 +106,7 @@ class AcdInstrument extends React.Component {
     }
 
     componentWillMount() {
-        this.props.acdInstrumentActions.getInstrumentData();
+        this.props.acdAccountActions.getAccountsData();
     }
 
 //     handleClick(event) {
@@ -141,8 +120,8 @@ class AcdInstrument extends React.Component {
             return (
                 <div className="container-fluid" id="page_content">
                     <div className="uk-modal" id="modal_header_footer">
-                        {this.state.modalType == "add" && <AcdInstrumentWizard/>}
-                        {this.state.modalType == "edit" &&<EditInstrumentWizard acdInstrumentEditData={this.state.acdInstrumentEditData}/>}
+                        {this.state.modalType == "add" && <AcdAccountWizard/>}
+                        {this.state.modalType == "edit" &&<EditAcdAccountWizard acdAccountEditData={this.state.acdAccountEditData}/>}
                     </div>
                     <div className="mt-6">
                         <div className="row">
@@ -150,13 +129,13 @@ class AcdInstrument extends React.Component {
                                 <div className="row">
                                     <div className="md-card uk-margin-medium-bottom">
                                         <div className="md-card-toolbar">
-                                            <h3 className="md-card-toolbar-heading-text"> Instrument List</h3>
+                                            <h3 className="md-card-toolbar-heading-text"> Account List</h3>
                                             <a onClick={this.loadAddAcdData} className="create md-btn md-btn-primary pull-right md-btn-wave-light waves-effect waves-button waves-light"
                                                data-uk-modal="{target:'#modal_header_footer'}" href="#"><i
-                                                className="fa fa-plus"></i>Instrument</a>
+                                                className="fa fa-plus"></i>Account</a>
                                         </div>
                                         <div className="md-card-content">
-                                            <Table acdInstrumentData={this.props.acdInstrumentData} loadEditInstrumentAcdData={this.loadEditInstrumentAcdData}/>
+                                            <Table acdAccountData={this.props.acdAccountData} loadEditAcdAccountData={this.loadEditAcdAccountData}/>
                                         </div>
                                     </div>
                                 </div>
@@ -180,22 +159,22 @@ class AcdInstrument extends React.Component {
 const
     mapStateToProps = (state, props) => {
         return {
-            acdInstrumentData: state.acdInstrumentData,
+            acdAccountData: state.acdAccountData,
         }
     };
 
 
-AcdInstrument.propTypes = {
-    acdInstrumentActions: PropTypes.object,
-    acdInstrumentData: PropTypes.array
+AcdAccount.propTypes = {
+    acdAccountActions: PropTypes.object,
+    acdAccountData: PropTypes.array
 };
 
 const
     mapDispatchToProps = (dispatch) => ({
-        acdInstrumentActions: bindActionCreators(acdInstrumentActions, dispatch)
+        acdAccountActions: bindActionCreators(acdAccountActions, dispatch)
     });
 
 export default connect(mapStateToProps,
-    mapDispatchToProps)(AcdInstrument);
+    mapDispatchToProps)(AcdAccount);
 
 //    export default TransactionsTable;

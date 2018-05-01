@@ -42,11 +42,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="../node_modules/jquery-steps/build/jquery.steps.js"></script>
     <link href="/node_modules/jquery-steps/demo/css/jquery.steps.css">
+
+    <link rel="stylesheet" href="assets/js/toastr/toastr.min.css"/>
+    <script src="assets/js/toastr/toastr.min.js"></script>
 </head>
   <body>
     <div id="root">
+
     </div>
-    
+
     <script src="assets/js/common.min.js"></script>
     <!-- uikit functions -->
     <script src="assets/js/uikit_custom.min.js"></script>
@@ -54,9 +58,9 @@
     <script src="assets/js/altair_admin_common.min.js"></script>
     <script>
         // load parsley config (altair_admin_common.js)
-      //   altair_forms.parsley_validation_config();
+         altair_forms.parsley_validation_config();
         // load extra validators
-        // altair_forms.parsley_extra_validators();
+         altair_forms.parsley_extra_validators();
     </script>
     <!-- page specific plugins -->
     <script src="bower_components/parsleyjs/dist/parsley.min.js"></script>

@@ -3,10 +3,13 @@ import React from 'react';
 import Acd from './Acd';
 import $ from 'jquery';
 
+
 var stepsWizard = null;
 
 class EditAcdWizard extends React.Component {
     componentDidMount() {
+
+
         var self = this;
 
         window.$("#wizard_edit").steps({
@@ -18,9 +21,9 @@ class EditAcdWizard extends React.Component {
 
         this.setData();
 
-        window.$(document).on('click', '#wizard_edit .button_finish', function () {
+        window.$(document).on('click', '.button_finish', function () {
             //alert(getFormData($('#wizard_advanced_form')));
-            var unindexed_array = window.$('#wizard_advanced_form_edit').serializeArray();
+            var unindexed_array = window.$('#wizard_advanced_form').serializeArray();
             var indexed_array = {};
             window.$.map(unindexed_array, function (n, i) {
                 indexed_array[n['name']] = n['value'];
@@ -38,9 +41,9 @@ class EditAcdWizard extends React.Component {
                     "city": indexed_array["registeredCity"],
                     "county": indexed_array["registeredCounty"]
                     ,
-                    "country": (indexed_array["registeredCountry"] != null && indexed_array["registeredCountry"] != undefined && indexed_array["registeredCountry"].length > 0) ? indexed_array["registeredCountry"] : ""
+                    "country": "United Kingdom"
                     ,
-                    "postcode": indexed_array["registeredPostCode"]
+                    "postcode": indexed_array["registeredPostalCode"]
                 }
 
                 , "postalAddress": {
@@ -51,7 +54,7 @@ class EditAcdWizard extends React.Component {
                     "city": indexed_array["postalCity"],
                     "county": indexed_array["postalCounty"]
                     ,
-                    "country": (indexed_array["postalCountry"] != null && indexed_array["postalCountry"] != undefined && indexed_array["postalCountry"].length > 0) ? indexed_array["postalCountry"] : ""
+                    "country": "United Kingdom"
                     ,
                     "postcode": indexed_array["postalPostCode"]
                 }
@@ -76,21 +79,42 @@ class EditAcdWizard extends React.Component {
             }
             console.log(JSON.stringify(reqData))
             //alert(localStorage.getItem('token'));
+            //console.log('jjjjj'+JSON.stringify(this.props.acdEditData));
             var mode = $('#iisin').val();
             if (mode == "edit") {
+                var companyId = $('#editIdentifier').val();
+                $('.button_finish').hide();
                 window.$.ajax({
                     type: "PUT",
-                    url: 'http://35.178.56.52:8081/api/v1/company',
+                    url: 'http://35.178.56.52:8081/api/v1/company/' + companyId,
                     headers: {authorization: JSON.parse(localStorage.getItem('token'))}
                     , data: JSON.stringify(reqData),
+                    beforeSend: function () {
+                        //$("#loading-image").show();
+                    },
                     success: function (res) {
-                        alert(JSON.stringify(res));
-                        window.location.href = "/acd";
-                        self.props.reloadAcd();
+                        //  alert(JSON.stringify(res));
+                        //      $("#loading-image").hide();
+                        if (res[0].status === "SUCCESS") {
+                            window.toastr.options.onHidden = function () {
+                                self.props.reloadAcd();
+                                window.location.href = "/acd";
+                                $('.button_finish').show();
+                            }
+                            window.toastr.success('You have Successfully modified Company');
+                        }
+                        else {
+                            window.toastr.options.onHidden = function () {
+                                $('.button_finish').show();
+                            } //window.location.href = "/acd"; }
+                            window.toastr.error('Unable to Modify Company, Error Message: ' + res[0].info);
+                        }
+
                         //  ReactDOM.render(<Acd />,$(this));
                     },
                     error: function (err) {
-                        alert(JSON.stringify(err));
+                        alert(err.responseText);
+                        $('.button_finish').show();
                     },
                     dataType: 'json',
                     contentType: 'application/json'
@@ -107,7 +131,7 @@ class EditAcdWizard extends React.Component {
                     window.$(this).addClass('btn btn-success');
                     window.$('#partialAML,#fullAML').removeClass('btn-success');
                     window.$(this).attr('data-toggle', 'button');
-                    window.$("#companyType").val("FundManager");
+                    window.$("#companyType").val("FMA");
                 }
                 ;
                 if (window.$(this).attr('id') == 'partialAML') {
@@ -115,7 +139,7 @@ class EditAcdWizard extends React.Component {
                     window.$(this).addClass('btn btn-success');
                     window.$('#NotAML,#fullAML').removeClass('btn-success');
                     window.$(this).attr('data-toggle', 'button');
-                    window.$("#companyType").val("FundAccountant");
+                    window.$("#companyType").val("FAA");
                 }
                 ;
                 if (window.$(this).attr('id') == 'fullAML') {
@@ -124,9 +148,17 @@ class EditAcdWizard extends React.Component {
                     window.$('#NotAML,#partialAML').removeClass('btn-success');
 
                     window.$(this).attr('data-toggle', 'button');
-                    window.$("#companyType").val("Trustee");
+                    window.$("#companyType").val("TA");
                 }
                 ;
+
+                if (window.$(this).attr('id') != 'fullAML' && window.$(this).attr('id') != 'partialAML' && window.$(this).attr('id') != 'NotAML') {
+                    window.$('#partialAML,#fullAML').removeAttr('data-toggle');
+                    window.$(this).addClass('btn btn-success');
+                    window.$('#partialAML,#fullAML').removeClass('btn-success');
+                    window.$(this).attr('data-toggle', 'button');
+                    window.$("#companyType").val("FMA");
+                }
             }
 
         });
@@ -154,12 +186,13 @@ class EditAcdWizard extends React.Component {
         window.$("input#Relation").val(this.props.acdEditData.relationshipManager.relation);
     }
 
+
     render() {
         return (
             <div className="uk-modal-dialog" id="acdmodalDialog">
                 <button type="button" className="uk-modal-close uk-close"></button>
                 <div className="uk-modal-header">
-                    <h3 className="uk-modal-title">Edit ACD</h3>
+                    <h3 className="uk-modal-title">Edit Company</h3>
                 </div>
                 <div className="col-sm-12 create-sec">
                     <div className="md-card uk-margin-large-bottom">
@@ -169,7 +202,7 @@ class EditAcdWizard extends React.Component {
                                     <h3>Step 1</h3>
                                     <section>
                                         <h2 className="heading_a">
-                                            ACD Information
+                                            Company Information
                                         </h2>
                                         <hr className="md-hr"/>
                                         <div className="row">
@@ -186,7 +219,7 @@ class EditAcdWizard extends React.Component {
                                             <div className="col-sm-7">
                                                 <div className="form-group mt-4">
                                                     <div className="uk-form-row parsley-row mt26">
-                                                        <label for="gender" className="clabel">Entity Type<span
+                                                        <label for="gender" className="clabel">Company Type<span
                                                             className="req">*</span></label>
                                                         <div className="parsley-row icheck-inline">
 
@@ -467,12 +500,7 @@ class EditAcdWizard extends React.Component {
                     </div>
                 </div>
             </div>
-
-
-
-
         )
-
     }
 }
 

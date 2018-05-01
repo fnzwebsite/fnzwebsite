@@ -32,6 +32,7 @@ class EditInstrumentWizard extends React.Component {
       },
        "boxType": "auto",
       "instrumentBasis": "",
+      "calendarDataId":"1cc041dc-3ee3-4784-bc9d-964d08d77e08",
       "cancellationRight": true,
       "fundCompanyKey": "064e977e-4c16-49c1-9626-59055721a99b",
       "currency": "GBP",
@@ -46,7 +47,7 @@ class EditInstrumentWizard extends React.Component {
       "dilutionLevyTriggerRepurchase": 0,
       "dilutionLevyTriggerSwitchIn": 0,
       "dilutionLevyTriggerSwitchOut": 0,
-      "displayName": "",
+      "displayName": indexed_array["fundNameDisplay"],
       "distributionCalendar": "",
       "eusdCapital": true,
       "eusdIncome": true,
@@ -59,7 +60,7 @@ class EditInstrumentWizard extends React.Component {
       "incomeDetails": "",
       "interestDividend": "interest",
       "initialCharge": 0,
-      "instrumentType": "income",
+      "instrumentType": indexed_array["instrumentType"]==""?"Income":indexed_array["instrumentType"],
       "isin": indexed_array["isin"],
       "largeDealSize": {
         "type": "unit",
@@ -126,26 +127,18 @@ class EditInstrumentWizard extends React.Component {
            if ($(this).attr('data-toggle') != 'button') { // don't toggle if data-toggle="button"
                var idval = $(this).attr('id');
                if ($(this).attr('id') == 'NotAML') {
-                   $('#partialAML,#fullAML').removeAttr('data-toggle');
+                   $('#partialAML').removeAttr('data-toggle');
                    $(this).addClass('btn btn-success');
-                   $('#partialAML,#fullAML').removeClass('btn-success');
+                   $('#partialAML').removeClass('btn-success');
                    $(this).attr('data-toggle', 'button');
-                   $("#companyType").val("FundManager");
+                   $("#instrumentType").val("Income");
                };
                if ($(this).attr('id') == 'partialAML') {
-                   $('#NotAML,#fullAML').removeAttr('data-toggle');
+                   $('#NotAML').removeAttr('data-toggle');
                    $(this).addClass('btn btn-success');
-                   $('#NotAML,#fullAML').removeClass('btn-success');
+                   $('#NotAML').removeClass('btn-success');
                    $(this).attr('data-toggle', 'button');
-                    $("#companyType").val("FundAccountant");
-               };
-               if ($(this).attr('id') == 'fullAML') {
-                   $('#NotAML,#partialAML').removeAttr('data-toggle');
-                   $(this).addClass('btn btn-success');
-                   $('#NotAML,#partialAML').removeClass('btn-success');
-
-                   $(this).attr('data-toggle', 'button');
-                   $("#companyType").val("Trustee");
+                    $("#instrumentType").val("Accumulation");
                };
            }
 
@@ -176,7 +169,7 @@ class EditInstrumentWizard extends React.Component {
                                                 <div className="form-group ">
                                                     <div className="parsley-row uk-margin-top">
                                                         <label for="fundNameDisplay">Fund Name Display<span className="req">*</span></label>
-                                                        <input type="text" value={this.props.acdInstrumentEditData.name} name="fundNameDisplay" required className="md-input" />
+                                                        <input type="text" value={this.props.acdInstrumentEditData.displayName} name="fundNameDisplay" required className="md-input" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -253,7 +246,7 @@ class EditInstrumentWizard extends React.Component {
                                                                 <button type="button" id="NotAML" class="btn btn-success" data-toggle="button">Income</button>
                                                                 <button type="button" id="partialAML" class="btn ">Accumulation</button>
                                                             </div>
-                                                            <input type="hidden" name ="companyType" id="companyType"/>
+                                                            <input type="hidden" name ="instrumentType" id="instrumentType"/>
                                                             <input type="hidden" value="edit" name ="iisin" id="iisin"/>
                                                         </div>
                                                     </div>
