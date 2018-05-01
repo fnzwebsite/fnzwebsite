@@ -8,7 +8,9 @@ var express = require('express'),
     momenttz = require('moment-timezone'),
     moment = require('moment');
 
-var setDate = momenttz.tz(momenttz.now(), "Europe/London").subtract(2, 'hour').format();
+var hostIP='35.178.56.52';
+
+var setDate = momenttz.tz(momenttz.now(), "Europe/London").subtract(2,'hour').format();
 
 io.set('log level', 1);
 server.use(function (req, res, next) {
@@ -34,8 +36,8 @@ server.get('/price', (req, res) => {
 
 
 server.get('/box/:day/acd/:acdId', (req, res) => {
-    // console.log("hi")
-    // var checkDate;
+    console.log("hi")
+    var checkDate;
     if (req.params.day == 'today') {
         checkDate = moment().format("YYYY-MM-DD");
     } else if (req.params.day == 'next') {
@@ -43,7 +45,7 @@ server.get('/box/:day/acd/:acdId', (req, res) => {
     } else if (req.params.day == 'previous') {
         checkDate = moment().add('days', -1).format("YYYY-MM-DD");
     }
-    // console.log(checkDate);
+    console.log(checkDate);
     var priceData = [];
     let auth = req.headers.authorization;
     getAcd(function (data) {
@@ -67,8 +69,8 @@ io.use(function (socket, next) {
                 if (data.status != 400) {
                     io.sockets.emit('dealingbydate', data);
                 }
-            }, socket.handshake.query.auth, setDate);
-            setDate = momenttz.tz(momenttz.now(), "Europe/London").subtract(2, 'hour').format();
+            }, socket.handshake.query.auth,setDate);
+            setDate = momenttz.tz(momenttz.now(), "Europe/London").subtract(2,'hour').format();
             return next();
         }, 30000);
     }
@@ -90,7 +92,7 @@ io.sockets.on('connection', function (socket) {
         getDealingByDate(function () {
             io.sockets.emit('dealingbydate', data);
         }, msg['query'], setDate);
-        setDate = momenttz.tz(momenttz.now(), "Europe/London").subtract(2, 'hour').format();
+        setDate = momenttz.tz(momenttz.now(), "Europe/London").subtract(2,'hour').format();
     });
 
     socket.on('disconnect', function () {
@@ -101,10 +103,10 @@ io.sockets.on('connection', function (socket) {
 
 function getDealingByDate(callback, auth, setDate) {
 
-    var post_data = '{"selector": {"tradeTime": {"$gt": "' + setDate + '"}}}';
+    var post_data = '{"selector": {"tradeTime": {"$gt": "'+setDate+'"}}}';
     var options = {
         method: 'POST',
-        host: '35.178.56.52',
+        host: hostIP,
         port: 8081,
         path: '/api/v1/dealquery',
         headers: {
@@ -119,8 +121,9 @@ function getDealingByDate(callback, auth, setDate) {
             output += chunk;
         });
         res.on('end', function () {
-            if (output != null) {
-                // console.log(output);
+            if(output!=null)
+            {
+                console.log(output);
                 var obj = JSON.parse(output);
                 if (callback != undefined) {
                     callback(obj);
@@ -138,7 +141,7 @@ function getDealingByDate(callback, auth, setDate) {
 function getDealing(callback, auth) {
     var options = {
         method: 'GET',
-        host: '35.178.56.52',
+        host: hostIP,
         port: 8081,
         path: '/api/v1/dealing',
         headers: {
@@ -155,7 +158,7 @@ function getDealing(callback, auth) {
         });
 
         res.on('end', function () {
-            // console.log(output);
+            console.log(output);
             var obj = JSON.parse(output);
             if (callback != undefined) {
                 callback(obj);
@@ -173,7 +176,7 @@ function getDealing(callback, auth) {
 function getAllAcd(callback, auth) {
     var options = {
         method: 'GET',
-        host: '35.178.56.52',
+        host: hostIP,
         port: 8081,
         path: '/api/v1/company',
         headers: {
@@ -206,10 +209,11 @@ function getAllAcd(callback, auth) {
 }
 
 
-function getPriceByKeyDate(callback, auth) {
+
+function getPriceByKeyDate(callback,auth) {
     var options = {
         method: 'GET',
-        host: '35.178.56.52',
+        host: hostIP,
         port: 8081,
         path: '/api/v1/price',
         headers: {
@@ -240,13 +244,13 @@ function getPriceByKeyDate(callback, auth) {
     req1.end();
 }
 
-function getAcd(callback, auth, dateValue, acdId) {
-    console.log('/api/v1/box/' + dateValue + '/acd/' + acdId)
+function getAcd(callback, auth, dateValue,acdId) {
+    console.log('/api/v1/box/'+dateValue+'/acd/'+acdId)
     var options = {
         method: 'GET',
-        host: '35.178.56.52',
+        host: hostIP,
         port: 8081,
-        path: '/api/v1/box/' + dateValue + '/acd/' + acdId,
+        path: '/api/v1/box/'+dateValue+'/acd/'+acdId,
         headers: {
             Authorization: auth
         }
@@ -261,19 +265,13 @@ function getAcd(callback, auth, dateValue, acdId) {
         });
 
         res.on('end', function () {
-            if (output != null && output != undefined && output.length > 0) {
+
+            if(output!=null && output!=undefined && output.length>0)
+            {
                 var obj = JSON.parse(output);
-                console.log(obj);
                 if (callback != undefined) {
                     callback(obj);
                 }
-            }
-            else {
-                callback([{
-                    "subscriptions": 0,
-                    "redemptions": 0,
-                    "netFlow": 0
-                }]);
             }
         });
     });
@@ -295,7 +293,7 @@ server.get('/getInstrument', (req, res) => {
 function getInstrumentAcd(callback, auth) {
     var options = {
         method: 'GET',
-        host: '35.178.56.52',
+        host: hostIP,
         port: 8081,
         path: '/api/v1/instrument',
         headers: {
@@ -312,7 +310,7 @@ function getInstrumentAcd(callback, auth) {
         });
 
         res.on('end', function () {
-            //console.log(output);
+          //console.log(output);
             var obj = JSON.parse(output);
             if (callback != undefined) {
                 callback(obj);
@@ -337,7 +335,7 @@ server.get('/getAcdAccountData', (req, res) => {
 function getAcdAccountData(callback, auth) {
     var options = {
         method: 'GET',
-        host: '35.178.56.52',
+        host: hostIP,
         port: 8081,
         path: '/api/v1/account',
         headers: {
@@ -354,7 +352,7 @@ function getAcdAccountData(callback, auth) {
         });
 
         res.on('end', function () {
-            //console.log(output);
+          //console.log(output);
             var obj = JSON.parse(output);
             if (callback != undefined) {
                 callback(obj);
@@ -379,7 +377,7 @@ server.get('/getAcdDealData', (req, res) => {
 function getAcdDealData(callback, auth) {
     var options = {
         method: 'GET',
-        host: '35.178.56.52',
+        host: hostIP,
         port: 8081,
         path: '/api/v1/dealing',
         headers: {
@@ -396,7 +394,7 @@ function getAcdDealData(callback, auth) {
         });
 
         res.on('end', function () {
-            //console.log(output);
+          //console.log(output);
             var obj = JSON.parse(output);
             if (callback != undefined) {
                 callback(obj);
