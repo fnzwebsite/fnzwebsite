@@ -12,29 +12,12 @@ var createReactClass = require('create-react-class');
 var tableAsJqeryElement = null;
 var Table = createReactClass({
     componentDidMount: function () {
-        //   const list = ['ReactJS', 'JSX', 'JavaScript', 'jQuery', 'jQuery UI'];
-        this.loadDataTable();
-        // $(document).on('click', '#editRow', function(){
-        //   //alert('edit....')
-        //     $("#modal_header_footer").addClass("uk-open");
-        //       $("#modal_header_footer").attr("aria-expanded","true");
-        //         $("#modal_header_footer").modal('show');
-        //     //  this.trigger("show.uk.dropdown",$("#modal_header_footer"))
-        //
-        // });
-
     },
     componentDidUpdate: function (prevProps, prevState) {
         this.loadDataTable();
     },
     componentWillReceiveProps: function (prevProps, prevState) {
-        // if (prevProps.loadThisDay != this.props.loadThisDay || prevProps.dealingData != this.props.dealingData) {
-        //     if (tableAsJqeryElement) {
-        //         tableAsJqeryElement.fnDestroy();
-        //         tableAsJqeryElement = null;
-        //     }
-        // }
-        // this.loadDataTable();
+         this.loadDataTable();
     },
     loadDataTable: function () {
         window.$('#table').dataTable({
@@ -53,17 +36,17 @@ var Table = createReactClass({
     render: function () {
         let LoadRows = null;
         let self = this;
-        console.log(JSON.stringify(this.props.acdAccountData));
+        //alert(JSON.stringify(this.props.acdAccountData));
+        //console.log(JSON.stringify(this.props.acdAccountData));
         if (this.props.acdAccountData) {
-            LoadRows = Object.keys(this.props.acdAccountData).sort((a, b) => b.name - a.name).map(function (keyName, keyIndex) {
+            LoadRows = Object.keys(this.props.acdAccountData).sort((a, b) => b.identifier - a.identifier).map(function (keyName, keyIndex) {
                 return <tr>
-                <td>{self.props.acdAccountData[keyName].identifier}</td>
+                <td>{self.props.acdAccountData[keyName].name}</td>
                <td>{self.props.acdAccountData[keyName].accountType}</td>
                     <td class="uk-text-center">
                         <Link to={'/acdaccount'} params={{ testvalue: "hello" }} className="handle-edit-modal" data-id={keyName}
                            data-uk-modal="{target:'#modal_header_footer'}"><i
                             class="md-icon material-icons">&#xE254;</i></Link>
-                        <a href="#"><i class="md-icon material-icons">&#xE872;</i></a>
                     </td>
                 </tr>
             });
@@ -90,7 +73,7 @@ var Table = createReactClass({
                 </div>
             );
         } else {
-            return <p>no data</p>;
+            return <td colSpan='7'>No Accounts Found</td>;
         }
     },
 

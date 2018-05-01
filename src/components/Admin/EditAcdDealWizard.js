@@ -5,39 +5,91 @@ import ReactDOM from 'react-dom'
 import Acd from './Acd'
 class EditAcdDealWizard extends React.Component {
     componentWillMount(){
-      console.log('zzz'+this.props.location.params); 
+      console.log('zzz'+this.props.location.params);
     }
     componentDidMount()
     {
-        window.$("#wizard_edit").steps({
+        window.$("#wizard_add").steps({
             headerTag: "h3",
             bodyTag: "section",
             transitionEffect: "slideLeft",
             autoFocus: true
         });
-        $(document).on('click', '.button_finish', function(){
-      //alert(getFormData($('#wizard_advanced_form')));
-      var unindexed_array = $('#wizard_advanced_form').serializeArray();
-        var indexed_array = {};
-        $.map(unindexed_array, function(n, i){
-            indexed_array[n['name']] = n['value'];
-        });
-    var reqData={
-      "account": "string",
-      "dealType": "string",
-      "instrumentPrimaryIdentifier": "string",
-      "units": "string",
+  $(document).ready(function(){
+    $.ajax({
+  type: "GET",
+  url: 'http://35.178.56.52:8081/api/v1/account',
+  headers:{authorization:JSON.parse(localStorage.getItem('token'))},
+  success: function(res){
+  var arr = Object.keys(res).map(function(k) { return res[k] });
+
+    $(arr).each(function(index,item){
+  //    console.log(item);
+      $("#ddlAccount").append('<option value="'+item.identifier+'">'+item.name+'</option>')
+    })
+  },
+  error:function(err){
+    alert(JSON.stringify(err));
+  }
+  });
+
+  $.ajax({
+      type: "GET",
+      url: 'http://35.178.56.52:8081/api/v1/instrument',
+      headers:{authorization:JSON.parse(localStorage.getItem('token'))},
+      success: function(res){
+      var arr = Object.keys(res).map(function(k) { return res[k] });
+
+      $(arr).each(function(index,item){
+      //    console.log(item);
+        $("#ddlInstrument").append('<option value="'+item.isin+'">'+item.name+'</option>')
+  })
+  },
+  error:function(err){
+  alert(JSON.stringify(err));
+  }
+  });
+  })
+      $(document).on('click', '.button_finish', function(){
+    //alert(getFormData($('#wizard_advanced_form')));
+    var unindexed_array = $('#wizard_advanced_form').serializeArray();
+      var indexed_array = {};
+      $.map(unindexed_array, function(n, i){
+          indexed_array[n['name']] = n['value'];
+      });
+  //alert($('#ddlInstrument').val());
+  var deal=$('AMLBtnGroup1').val();
+  var reqData
+  if(deal=='Amount'){
+    reqData={
+      "account": $('#ddlAccount').val(),
+      "dealType": indexed_array['dealType']==""?"BUY":indexed_array['dealType'],
+      "instrumentPrimaryIdentifier": $('#ddlInstrument').val(),
+      "units": indexed_array['AMLBtnGroup1']=="Amount"?0:indexed_array['quantity'],
       "price": 0,
-      "amount": "string",
-      "tradeFor": "string",
-      "dealingStatus": "string",
-      "source": "string",
-      "id": "string",
-      "currency": "string"
+      "amount":indexed_array['quantity'],
+      "tradeFor": "U",
+      "currency": indexed_array['currencyCombo'],
+      "source": "STP",
+      "tradeTime": "2018-04-25T13:57:14.910Z"
+
     }
-    console.log(JSON.stringify(reqData))
-    var editIdentifier=$('#editIdentifier').val();
-      //alert(localStorage.getItem('token'));
+  }
+  else{
+    reqData={
+      "account": $('#ddlAccount').val(),
+      "dealType": indexed_array['dealType']==""?"BUY":indexed_array['dealType'],
+      "instrumentPrimaryIdentifier": $('#ddlInstrument').val(),
+      "units": indexed_array['AMLBtnGroup1']=="Amount"?0:indexed_array['quantity'],
+      "price": 0,
+    "units":indexed_array['quantity'],
+      "tradeFor": "U",
+      "currency": indexed_array['currencyCombo'],
+      "source": "STP",
+      "tradeTime": "2018-04-25T13:57:14.910Z"
+    }
+  }
+  console.log(JSON.stringify(reqData))
       var mode=$('#iisin').val();
       if(mode=="edit")
       {
@@ -131,86 +183,77 @@ class EditAcdDealWizard extends React.Component {
                                               <div className="form-group ">
                                                   <div className="parsley-row uk-margin-top">
                                                   <div class="select-option2">
-                                                      <select id="accountCombo" class="form-control">
-                                                          <option value="Account">Account</option>
-                                                          <option value="Account Type">1234</option>
-                                                          <option value="Fund Accountant">567</option>
+                                                      <select id="ddlAccount" class="form-control">
+                                                      <option value="">Select Account</option>
+
                                                       </select>
                                                   </div>
                                                   </div>
                                               </div>
                                           </div>
-                                          <div class="col-sm-7">
-                                              <div class="form-group mt-4">
-                                                  <div class="uk-form-row parsley-row mt26">
-                                                      <label for="gender" class="clabel">Deal Type<span
-                                                          class="req">*</span></label>
-                                                      <div class="parsley-row icheck-inline">
+                                          <div className="col-sm-5">
+                                                  <div className="form-group ">
+                                                      <div className="parsley-row uk-margin-top">
+                                                      <div class="select-option2">
+                                                          <select id="ddlInstrument" name="ddlInstrument" class="form-control">
+                                                          <option value="">Select Instrument</option>
 
-                                                          <div class="btn-group" data-toggle="buttons-checkbox"
-                                                               id="AMLBtnGroup">
-                                                               <button type="button" id="NotAML" class="btn btn-success" data-toggle="button">
-                                                                   BUY
-                                                               </button>
-                                                              <button type="button" id="fullAML" class="btn ">
-                                                                  SELL
-                                                              </button>
-                                                          </div>
-                                                          <input type="hidden" name="dealType"
-                                                                 id="dealType"/>
+                                                          </select>
+                                                      </div>
                                                       </div>
                                                   </div>
                                               </div>
-                                          </div>
                                       </div>
                                       <div className="row">
-                                          <div className="col-sm-5">
-                                              <div className="form-group ">
-                                                  <div className="parsley-row uk-margin-top">
-                                                  <div class="select-option2">
-                                                      <select id="fundCombo" class="form-control">
-                                                          <option value="Fund">Fund</option>
-                                                          <option value="Indexed Fund">Indexed Fund</option>
-                                                          <option value="Balanced Fund">Balanced Fund</option>
-                                                          <option value="Growth Fund">Growth Fund</option>
-                                                      </select>
-                                                  </div>
+                                      <div className="col-sm-5">
+                                                  <div className="form-group ">
+                                                      <div className="parsley-row uk-margin-top">
+                                                      <div class="select-option2">
+                                                          <select id="fundCombo" class="form-control">
+                                                              <option value="Fund">Fund</option>
+                                                              <option value="Indexed Fund">Indexed Fund</option>
+                                                              <option value="Balanced Fund">Balanced Fund</option>
+                                                              <option value="Growth Fund">Growth Fund</option>
+                                                          </select>
+                                                      </div>
+                                                      </div>
                                                   </div>
                                               </div>
-                                          </div>
-                                          <div class="col-sm-7">
-                                          <div class="form-group">
-                                                <div class="parsley-row icheck-inline quan">
-                                                    <div class="parsley-row uk-margin-top">
-                                                        <div class="md-input-wrapper">
-                                                        <label for="quantity">Quantity<span class="req">*</span></label>
-                                                        <input type="text" name="quantity" required="" class="md-input" data-parsley-id="4"/>
-                                                        <span class="md-input-bar"></span></div>
+                                      <div class="col-sm-7">
+                                     <div class="form-group">
+                                           <div class="parsley-row icheck-inline quan">
+                                               <div class="parsley-row uk-margin-top">
+                                                   <div class="md-input-wrapper">
+                                                   <label for="quantity">Quantity<span class="req">*</span></label>
+                                                   <input type="text" name="quantity" required="" class="md-input" data-parsley-id="4"/>
+                                                   <span class="md-input-bar"></span></div>
 
-                                                    </div>
-                                                </div>
-                                                <div class="parsley-row icheck-inline">
+                                               </div>
+                                           </div>
+                                           <div class="parsley-row icheck-inline">
 
-                                                    <div class="btn-group" data-toggle="buttons-checkbox" id="AMLBtnGroup1">
-                                                    <button type="button" id="NotAML1" class="btn btn-success" data-toggle="button">
-                                                        Amount
-                                                    </button>
-                                                   <button type="button" id="fullAML1" class="btn ">
-                                                       Units
-                                                   </button>
-                                                   <input type="hidden" name="quantityType"
-                                                          id="quantityType"/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                      </div>
-                                      </div>
+                                               <div class="btn-group" data-toggle="buttons-checkbox" id="AMLBtnGroup1">
+                                               <button type="button" id="NotAML1" class="btn btn-success" data-toggle="button">
+                                                   Amount
+                                               </button>
+                                              <button type="button" id="fullAML1" class="btn ">
+                                                  Units
+                                              </button>
+                                              <input type="hidden" name="quantityType"
+                                                     id="quantityType"/>
+                                               </div>
+                                           </div>
+                                       </div>
+                                 </div>
+
+
+                                           </div>
                                       <div className="row">
                                           <div className="col-sm-5">
                                               <div className="form-group ">
                                                   <div className="parsley-row uk-margin-top">
                                                   <div class="select-option3">
-                                                      <select id="currencyCombo" class="form-control">
+                                                      <select id="currencyCombo" name="currencyCombo" class="form-control">
                                                           <option value="Currency">Currency</option>
                                                           <option value="GBP">GBP</option>
                                                           <option value="EURO">EURO</option>
@@ -221,6 +264,32 @@ class EditAcdDealWizard extends React.Component {
                                               </div>
                                           </div>
                                           </div>
+                                          <div className="row">
+                                          <div class="col-sm-7">
+                                                       <div class="form-group mt-4">
+                                                           <div class="uk-form-row parsley-row mt26">
+                                                               <label for="gender" class="clabel">Deal Type<span
+                                                                   class="req">*</span></label>
+                                                               <div class="parsley-row icheck-inline">
+
+                                                                   <div class="btn-group" data-toggle="buttons-checkbox"
+                                                                        id="AMLBtnGroup">
+                                                                        <button type="button" id="NotAML" class="btn btn-success" data-toggle="button">
+                                                                            BUY
+                                                                        </button>
+                                                                       <button type="button" id="fullAML" class="btn ">
+                                                                           SELL
+                                                                       </button>
+                                                                   </div>
+                                                                   <input type="hidden" name="dealType"
+                                                                          id="dealType"/>
+                                                               </div>
+                                                               <input type="hidden" name="iisin" value="edit"
+                                                                      id="iisin"/>
+                                                           </div>
+                                                       </div>
+                                                   </div>
+                                              </div>
                                   </section>
                               </div>
                           </form>

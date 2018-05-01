@@ -21,7 +21,7 @@ class EditAcdAccountWizard extends React.Component {
         });
 
     var reqData={
-      "accountType": "Nominee",
+      "accountType": $('#accountCombo').val(),
       "name": indexed_array["account"],
       "wallet": {
         "address": "string",
@@ -37,18 +37,28 @@ class EditAcdAccountWizard extends React.Component {
       var editIdentifier =$('#editIdentifier').val();
       if(mode=="edit")
       {
+          $('.button_finish').hide();
         $.ajax({
       type: "PUT",
       url: 'http://35.178.56.52:8081/api/v1/account/'+editIdentifier,
       headers:{authorization:JSON.parse(localStorage.getItem('token'))}
       ,data: JSON.stringify(reqData),
       success: function(res){
-        alert(JSON.stringify(res));
-        window.location.href="/acdaccount";
-      //  ReactDOM.render(<Acd />,$(this));
+        //alert(JSON.stringify(res));
+        if(res[0].status==="SUCCESS")
+        {
+          window.toastr.options.onHidden = function() { window.location.href="/acdaccount";$('.button_finish').show();  }
+          window.toastr.success('You have successfully modified Account');
+        }
+        else {
+          window.toastr.options.onHidden = function() {$('.button_finish').show(); } //window.location.href = "/acd"; }
+          window.toastr.error('Unable to modify account, Error Message: '+ res[0].info);
+        }
+
       },
       error:function(err){
-        alert(JSON.stringify(err));
+        window.toastr.error(JSON.stringify(err));
+        $('.button_finish').show();
       },
       dataType: 'json',
       contentType:'application/json'
@@ -56,7 +66,11 @@ class EditAcdAccountWizard extends React.Component {
       }
 
         });
-
+        $(document).ready(function(){
+          var accType=$("#editaccountType").val();
+          $('#accountCombo').val(accType)
+        //  alert(accType);
+        })
        $('body').on('click', '#AMLBtnGroup .btn', function(event) {
            event.stopPropagation(); // prevent default bootstrap behavior
            if ($(this).attr('data-toggle') != 'button') { // don't toggle if data-toggle="button"
@@ -86,6 +100,7 @@ class EditAcdAccountWizard extends React.Component {
            }
 
        });
+
       }
 
 
@@ -120,16 +135,18 @@ class EditAcdAccountWizard extends React.Component {
                                               <div class="form-group mt-4">
                                                 <div class="parsley-row uk-margin-top">
                                                     <div class="select-option2">
-                                                        <select id="combo2" class="form-control">
-                                                        <option value="Account Type">Account Type</option>
-                                                        <option value="Fund Accountant">Nominee</option>
-                                                        <option value="Trustee">GIA</option>
-                                                        <option value="Entity Type">JISA</option>
-                                                        <option value="Fund Accountant">Joint Account</option>
-                                                        </select>
+                                                    <select id="accountCombo" name="accountCombo" class="form-control">
+                                                        <option value="">Account Type</option>
+                                                        <option value="Nominee">Nominee</option>
+                                                        <option value="GIA" selected>GIA</option>
+                                                        <option value="ISA">ISA</option>
+                                                        <option value="JISA">JISA</option>
+                                                        <option value="Joint Account">Joint Account</option>
+                                                    </select>
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name ="companyType" id="companyType"/>
+                                                <input type="hidden" name ="editaccountType" id="editaccountType" value={this.props.acdAccountEditData.accountType}/>
                                                 <input type="hidden" value="edit" name ="iisin" id="iisin"/>
                                                 <input type="hidden" value={this.props.acdAccountEditData.identifier} name ="editIdentifier" id="editIdentifier"/>
                                               </div>

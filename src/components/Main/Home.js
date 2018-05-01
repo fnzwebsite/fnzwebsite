@@ -21,7 +21,7 @@ class Home extends React.Component {
         this.loadAcdData = this.loadAcdData.bind(this);
     }
     loadAcdData(){
-        alert('hi');
+//        alert('hi');
     }
     render() {
         return (

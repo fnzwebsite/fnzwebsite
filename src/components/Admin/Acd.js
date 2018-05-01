@@ -13,7 +13,7 @@ var createReactClass = require('create-react-class');
 var tableAsJqeryElement = null;
 var Table = createReactClass({
     componentDidMount: function () {
-        // this.loadDataTable();
+         this.loadDataTable();
     },
     componentDidUpdate: function (prevProps, prevState) {
         this.loadDataTable();
@@ -68,7 +68,6 @@ var Table = createReactClass({
                         <Link to={'/acd'} params={{testvalue: "hello"}} className="handle-edit-modal" data-id={keyName}
                               data-uk-modal="{target:'#modal_header_footer'}"><i
                             className="md-icon material-icons">&#xE254;</i></Link>
-
                     </td>
                 </tr>
             });
@@ -100,7 +99,7 @@ var Table = createReactClass({
                 </div>
             );
         } else {
-            return <p>no data</p>;
+            return <td colSpan='7'>No Companies Found</td>;
         }
     },
 
@@ -191,10 +190,10 @@ class Acd extends React.Component {
                                 <div className="row">
                                     <div className="md-card uk-margin-medium-bottom">
                                         <div className="md-card-toolbar">
-                                            <h3 className="md-card-toolbar-heading-text"> Entities</h3>
+                                            <h3 className="md-card-toolbar-heading-text">Companies</h3>
                                             <a onClick={this.loadAddAcdData} className="create md-btn md-btn-primary pull-right md-btn-wave-light waves-effect waves-button waves-light"
                                                data-uk-modal="{target:'#modal_header_footer'}" href="#"><i
-                                                className="fa fa-plus"></i>Entity</a>
+                                                className="fa fa-plus"></i>Company</a>
                                         </div>
                                         <div className="md-card-content">
                                             <Table acdData={this.props.acdData} loadEditAcdData={this.loadEditAcdData}/>

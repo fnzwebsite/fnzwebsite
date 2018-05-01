@@ -49,21 +49,17 @@ var Table = createReactClass({
             let key = window.$(this).data("id")
             let acdInstrumentEditData = self.props.acdInstrumentData[key];
             self.props.loadEditInstrumentAcdData(acdInstrumentEditData);
-
         });
     },
-
     render: function () {
         let LoadRows = null;
         let self = this;
-        console.log(JSON.stringify(this.props.acdInstrumentData));
         if (this.props.acdInstrumentData) {
             LoadRows = Object.keys(this.props.acdInstrumentData).sort((a, b) => b.name - a.name).map(function (keyName, keyIndex) {
                 return <tr>
                 <td>{self.props.acdInstrumentData[keyName].subFundKey}</td>
                <td></td>
                <td>{self.props.acdInstrumentData[keyName].isin}</td>
-               <td>{self.props.acdInstrumentData[keyName].mexId}</td>
               <td>{self.props.acdInstrumentData[keyName].instrumentType}</td>
               <td>{self.props.acdInstrumentData[keyName].instrumentLevel}</td>
               <td>{self.props.acdInstrumentData[keyName].instrumentBasis}</td>
@@ -71,15 +67,12 @@ var Table = createReactClass({
                         <Link to={'/acdinstrument'} params={{ testvalue: "hello" }} className="handle-edit-modal" data-id={keyName}
                            data-uk-modal="{target:'#modal_header_footer'}"><i
                             class="md-icon material-icons">&#xE254;</i></Link>
-                        <a href="#"><i class="md-icon material-icons">&#xE872;</i></a>
                     </td>
                 </tr>
             });
-
             LoadRows = LoadRows.filter(function (item) {
                 return item != undefined
             })
-
             return (
                 <div style={{minHeight: '200px'}}>
                     <table id="table" className="stripe" cellSpacing="0" width="100%">
@@ -88,7 +81,6 @@ var Table = createReactClass({
                         <th>Sub Fund Name</th>
                         <th>Share Class Name</th>
                         <th>ISIN</th>
-                        <th>MEX ID</th>
                         <th>Instrument Type</th>
                         <th>Instrument Level</th>
                         <th>Instrument Basis</th>
@@ -99,11 +91,10 @@ var Table = createReactClass({
                         {LoadRows}
                         </tbody>
                     </table>
-
                 </div>
             );
         } else {
-            return <p>no data</p>;
+            return <td colSpan='7'>No Instruments Found</td>;
         }
     },
 

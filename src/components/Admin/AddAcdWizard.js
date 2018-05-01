@@ -78,9 +78,15 @@ class AddAcdWizard extends React.Component {
                   headers: {authorization: JSON.parse(localStorage.getItem('token'))}
                   , data: JSON.stringify(reqData),
                   success: function (res) {
-                      alert(JSON.stringify(res));
-                      window.location.href = "/acd";
-                      //  ReactDOM.render(<Acd />,$(this));
+                    if(res[0].status==="SUCCESS")
+                    {
+                      window.toastr.options.onHidden = function() { window.location.href = "/acd";$('.button_finish').show(); }
+                      window.toastr.success('You have Successfully Created Company');
+                    }
+                    else {
+                      window.toastr.options.onHidden = function() {$('.button_finish').show();} //window.location.href = "/acd"; }
+                      window.toastr.error('Unable to create Company, Error Message: '+ res[0].info);
+                    }
                   },
                   error: function (err) {
                       alert(JSON.stringify(err));
@@ -96,21 +102,31 @@ class AddAcdWizard extends React.Component {
             if (window.$(this).attr('data-toggle') != 'button') { // don't toggle if data-toggle="button"
                 var idval = window.$(this).attr('id');
                 if (window.$(this).attr('id') == 'NotAML') {
-                    window.$('#partialAML,#fullAML').removeAttr('data-toggle');
-                    window.$(this).addClass('btn btn-success');
-                    window.$('#partialAML,#fullAML').removeClass('btn-success');
-                    window.$(this).attr('data-toggle', 'button');
-                    window.$("#companyType").val("FundManager");
+                  window.$('#partialAML,#fullAML').removeAttr('data-toggle');
+                  window.$(this).addClass('btn btn-success');
+                  window.$('#partialAML,#fullAML').removeClass('btn-success');
+                  window.$(this).attr('data-toggle', 'button');
+                  window.$("#companyType").val("FMA");
                 }
                 ;
                 if (window.$(this).attr('id') == 'partialAML') {
-                    window.$('#NotAML,#fullAML').removeAttr('data-toggle');
-                    window.$(this).addClass('btn btn-success');
-                    window.$('#NotAML,#fullAML').removeClass('btn-success');
-                    window.$(this).attr('data-toggle', 'button');
-                    window.$("#companyType").val("FundAccountant");
+                  window.$('#NotAML,#fullAML').removeAttr('data-toggle');
+                  window.$(this).addClass('btn btn-success');
+                  window.$('#NotAML,#fullAML').removeClass('btn-success');
+                  window.$(this).attr('data-toggle', 'button');
+                  window.$("#companyType").val("FAA");
                 }
                 ;
+                if (window.$(this).attr('id') == 'fullAML') {
+                  window.$('#NotAML,#partialAML').removeAttr('data-toggle');
+                  window.$(this).addClass('btn btn-success');
+                  window.$('#NotAML,#partialAML').removeClass('btn-success');
+
+                  window.$(this).attr('data-toggle', 'button');
+                  window.$("#companyType").val("TA");
+                }
+                ;
+
                 if (window.$(this).attr('id') == 'fullAML') {
                     window.$('#NotAML,#partialAML').removeAttr('data-toggle');
                     window.$(this).addClass('btn btn-success');
@@ -120,20 +136,28 @@ class AddAcdWizard extends React.Component {
                     window.$("#companyType").val("Trustee");
                 }
                 ;
+                if (window.$(this).attr('id') != 'fullAML' && window.$(this).attr('id') != 'partialAML' && window.$(this).attr('id') != 'NotAML') {
+                  window.$('#partialAML,#fullAML').removeAttr('data-toggle');
+                  window.$(this).addClass('btn btn-success');
+                  window.$('#partialAML,#fullAML').removeClass('btn-success');
+                  window.$(this).attr('data-toggle', 'button');
+                  window.$("#companyType").val("FMA");
+                }
             }
 
         });
+
+
     }
 
     componentWillReceiveProps() {
     }
-
     render() {
         return (
             <div className="uk-modal-dialog" id="acdmodalDialog">
                 <button type="button" className="uk-modal-close uk-close"></button>
                 <div className="uk-modal-header">
-                    <h3 className="uk-modal-title">Create ACD</h3>
+                    <h3 className="uk-modal-title">Create Company</h3>
                 </div>
                 <div className="col-sm-12 create-sec">
                     <div className="md-card uk-margin-large-bottom">
@@ -143,7 +167,7 @@ class AddAcdWizard extends React.Component {
                                     <h3>Step 1</h3>
                                     <section>
                                         <h2 className="heading_a">
-                                            ACD Information
+                                            Company Information
                                         </h2>
                                         <hr className="md-hr"/>
                                         <div className="row">
@@ -159,7 +183,7 @@ class AddAcdWizard extends React.Component {
                                             <div class="col-sm-7">
                                                 <div class="form-group mt-4">
                                                     <div class="uk-form-row parsley-row mt26">
-                                                        <label for="gender" class="clabel">Entity Type<span
+                                                        <label for="gender" class="clabel">Company Type<span
                                                             class="req">*</span></label>
                                                         <div class="parsley-row icheck-inline">
 
@@ -237,11 +261,12 @@ class AddAcdWizard extends React.Component {
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div class="col-sm-7">
-                                                <div class="form-group mt-4">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
                                                   <div class="parsley-row uk-margin-top">
-                                                       <div class="select-option2">
+                                                       <div class="select-option">
                                                    <select id="rCountryCombo" class="form-control">
+                                                          <option value="">Select Country</option>
                                                        <option value="UK">UK</option>
                                                        <option value="France">France</option>
                                                        <option value="Italy">Italy</option>
@@ -251,7 +276,7 @@ class AddAcdWizard extends React.Component {
                                                 </div>
                                             </div>
 
-                                                <div className="col-sm-5">
+                                                <div className="col-sm-6">
                                                 <div className="form-group ">
                                                     <div className="parsley-row uk-margin-top">
                                                     <label for="registeredPostalCode">Postcode<span
@@ -267,8 +292,7 @@ class AddAcdWizard extends React.Component {
                                     <section>
                                         <h2 className="heading_a">
                                             Postal Address
-                                            <span className="sub-heading">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
-                                        </h2>
+                                       </h2>
                                         <hr className="md-hr"/>
                                         <div className="row">
                                             <div className="col-sm-6">
@@ -276,6 +300,7 @@ class AddAcdWizard extends React.Component {
                                                     <div className="parsley-row uk-margin-top">
                                                         <label for="paddressLine1">Address Line 1<span
                                                             className="req">*</span></label>
+
                                                         <input type="text" name="paddressLine1" required
                                                                className="md-input"/>
                                                     </div>
@@ -316,21 +341,22 @@ class AddAcdWizard extends React.Component {
                                         </div>
                                         <div className="row">
 
-                                            <div class="col-sm-7">
-                                                <div class="form-group mt-4">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
                                                   <div class="parsley-row uk-margin-top">
-                                                       <div class="select-option2">
+                                                      <div class="select-option">
                                                    <select id="pCountryCombo" class="form-control">
+                                                       <option value="">Select Country</option>
                                                        <option value="UK">UK</option>
                                                        <option value="France">France</option>
                                                        <option value="Italy">Italy</option>
                                                    </select>
-                                               </div>
+                                                  </div>
                                                   </div>
                                                 </div>
                                             </div>
 
-										                            <div className="col-sm-5">
+										                            <div className="col-sm-6">
                                                 <div className="form-group ">
                                                     <div className="parsley-row uk-margin-top">
                                                        <label for="postalPostCode">Postcode<span

@@ -60,7 +60,7 @@ class EditInstrumentWizard extends React.Component {
       "incomeDetails": "",
       "interestDividend": "interest",
       "initialCharge": 0,
-      "instrumentType": "income",
+      "instrumentType": indexed_array["instrumentType"]==""?"Income":indexed_array["instrumentType"],
       "isin": indexed_array["isin"],
       "largeDealSize": {
         "type": "unit",

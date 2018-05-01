@@ -57,7 +57,7 @@ var Table = createReactClass({
         let self = this;
 
         if (this.props.acdDealData) {
-          //alert(JSON.stringify(this.props.acdDealData));
+          alert(JSON.stringify(this.props.acdDealData));
             LoadRows = Object.keys(this.props.acdDealData).sort((a, b) => b.name - a.name).map(function (keyName, keyIndex) {
                 return <tr>
                 <td>{self.props.acdDealData[keyName].account}</td>
@@ -69,7 +69,6 @@ var Table = createReactClass({
                         <Link to={'/acddeal'} params={{ testvalue: "hello" }} className="handle-edit-modal" data-id={keyName}
                            data-uk-modal="{target:'#modal_header_footer'}"><i
                             class="md-icon material-icons">&#xE254;</i></Link>
-                        <a href="#"><i class="md-icon material-icons">&#xE872;</i></a>
                     </td>
                 </tr>
             });

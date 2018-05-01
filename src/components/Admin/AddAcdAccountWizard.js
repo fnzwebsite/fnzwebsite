@@ -22,10 +22,10 @@ class AddAcdAccountWizard extends React.Component {
     });
 
 var reqData={
-  "accountType": "Nominee",
+  "accountType": $('#accountCombo').val(),
   "name": indexed_array["account"],
   "wallet": {
-    "address": "string",
+    "address": "",
     "owner": [
       null
     ],
@@ -33,35 +33,38 @@ var reqData={
   }
 }
 
-
 console.log(JSON.stringify(reqData))
   //alert(localStorage.getItem('token'));
   var mode=$('#iisin').val();
   if(mode=="add")
   {
-    //alert('add');
+    $('.button_finish').hide();
     $.ajax({
   type: "POST",
   url: 'http://35.178.56.52:8081/api/v1/account',
   headers:{authorization:JSON.parse(localStorage.getItem('token'))}
   ,data: JSON.stringify(reqData),
   success: function(res){
-    alert(JSON.stringify(res));
-    window.location.href="/acdaccount";
-  //  ReactDOM.render(<Acd />,$(this));
+//    alert(JSON.stringify(res));
+if(res[0].status==="SUCCESS")
+{
+  window.toastr.options.onHidden = function() { window.location.href="/acdaccount";$('.button_finish').show();  }
+  window.toastr.success('You have Successfully Created Account');
+}
+else {
+  window.toastr.options.onHidden = function() {$('.button_finish').show(); } //window.location.href = "/acd"; }
+  window.toastr.error('Unable to create account, Error Message: '+ res[0].info);
+}
   },
   error:function(err){
-    alert(JSON.stringify(err));
+    window.toastr.error(err.responseText);
+    $('.button_finish').show();
   },
   dataType: 'json',
   contentType:'application/json'
 });
   }
-
-  //if($('#isin').val)
-  //alert(("insert");
-
-    });
+});
 
    $('body').on('click', '#AMLBtnGroup .btn', function(event) {
        event.stopPropagation(); // prevent default bootstrap behavior
@@ -126,12 +129,13 @@ console.log(JSON.stringify(reqData))
                                                 <div class="form-group mt-4">
                                                   <div class="parsley-row uk-margin-top">
                                                       <div class="select-option2">
-                                                          <select id="accountCombo" class="form-control">
-                                                              <option value="Account Type">Account Type</option>
-                                                              <option value="Fund Accountant">Nominee</option>
-                                                              <option value="Trustee">GIA</option>
-                                                              <option value="Entity Type">JISA</option>
-                                                              <option value="Fund Accountant">Joint Account</option>
+                                                          <select id="accountCombo" name="accountCombo" class="form-control">
+                                                              <option value="">Account Type</option>
+                                                              <option value="Nominee">Nominee</option>
+                                                              <option value="GIA">GIA</option>
+                                                              <option value="ISA">ISA</option>
+                                                              <option value="JISA">JISA</option>
+                                                              <option value="Joint Account">Joint Account</option>
                                                           </select>
                                                       </div>
                                                   </div>
