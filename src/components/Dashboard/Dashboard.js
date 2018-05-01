@@ -86,7 +86,8 @@ class Dashboard extends React.Component {
             var dealing = this.state.dealing || this.props.data.dealing;
             //        console.log(dealing);
             return (
-                <div className="mt-6">
+                <div className="container-fluid">
+                    <div className="mt-6">
                     <BoxToday loadChart={this.loadChart} dealingData={dealing} price={this.props.data}/>
                     <div className="row">
                         <div className="col-sm-12">
@@ -130,6 +131,7 @@ class Dashboard extends React.Component {
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
             )
         }

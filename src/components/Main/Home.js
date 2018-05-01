@@ -7,7 +7,8 @@ import AcdInstrument from '../Admin/AcdInstrument';
 import DealDetails from "../Deals/DealDetails";
 import AcdAccount from '../Admin/AcdAccount';
 import AcdDeal from '../Admin/AcdDeal';
-import {Route, Redirect}    from 'react-router-dom'
+import {Route, Redirect} from 'react-router-dom'
+import Footer from "./Footer";
 
 class Home extends React.Component {
     constructor(props) {
@@ -17,15 +18,17 @@ class Home extends React.Component {
         };
         this.loadAcdData = this.loadAcdData.bind(this);
     }
-    loadAcdData(){
+
+    loadAcdData() {
 //        alert('hi');
     }
+
     render() {
-        if(this.props.location && this.props.location.pathname == "/"){
-            return <Redirect to={{ pathname: '/dashboard'}}/>
+        if (this.props.location && this.props.location.pathname == "/") {
+            return <Redirect to={{pathname: '/dashboard'}}/>
         }
-        if(this.props.location && this.props.location.pathname == "/sign_in"){
-            return <Redirect to={{ pathname: '/sign_in'}}/>
+        if (this.props.location && this.props.location.pathname == "/sign_in") {
+            return <Redirect to={{pathname: '/sign_in'}}/>
         }
         return (
             <div className="page">
@@ -33,12 +36,15 @@ class Home extends React.Component {
                     <SideNav/>
                     <div className="content-inner">
                         <Header/>
-                        <Route exact path="/dashboard" component={Dashboard} />
-                        <Route exact path='/acd' component={Acd} />
-                        <Route exact path="/acdinstrument" component={AcdInstrument} />
-                        <Route exact path="/dealdetails" component={DealDetails} />
-                        <Route exact path="/acdaccount" component={AcdAccount} />
-                        <Route exact path="/acddeal" component={AcdDeal} />
+
+                            <Route exact path="/dashboard" component={Dashboard}/>
+                            <Route exact path='/acd' component={Acd}/>
+                            <Route exact path="/acdinstrument" component={AcdInstrument}/>
+                            <Route exact path="/dealdetails" component={DealDetails}/>
+                            <Route exact path="/acdaccount" component={AcdAccount}/>
+                            <Route exact path="/acddeal" component={AcdDeal}/>
+
+                        <Footer/>
                     </div>
                 </div>
             </div>

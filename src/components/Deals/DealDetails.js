@@ -163,54 +163,59 @@ class DealDetails extends React.Component {
                 }
             }
 
-                tableData.push({
-                    "isin": isin[i],
-                    "subscriptions": subscriptionSum,
-                    "redemptions": redemptionSum,
-                    "netFlow": netflowSum,
-                    "roundedPrice": roundedPrice,
-                    "priceDate": priceDate
-                })
+            tableData.push({
+                "isin": isin[i],
+                "subscriptions": subscriptionSum,
+                "redemptions": redemptionSum,
+                "netFlow": netflowSum,
+                "roundedPrice": roundedPrice,
+                "priceDate": priceDate
+            })
 
 
         }
 
         return (
-            <div class="uk-grid uk-grid-divider uk-grid-medium">
-                <div class="uk-width-large-2-10 lt-details">
-                    <h2>Calendar</h2>
-                    <h5>{this.props.location.state.data[0].boxDate}</h5>
+            <div className="container-fluid">
+                <div className="mt-6">
+                    <div class="uk-grid uk-grid-divider uk-grid-medium">
+                        <div class="uk-width-large-2-10 lt-details">
+                            <h2>Calendar</h2>
+                            <h5>{this.props.location.state.data[0].boxDate}</h5>
 
-                    <hr class="uk-grid-divider"/>
-                    <div class="uk-grid uk-grid-small">
-                        <h2>Subscriptions</h2>
-                        <h5>{convertCurrency(this.state.boxData[0].subscriptions)}</h5>
-                    </div>
+                            <hr class="uk-grid-divider"/>
+                            <div class="uk-grid uk-grid-small">
+                                <h2>Subscriptions</h2>
+                                <h5>{convertCurrency(this.state.boxData[0].subscriptions)}</h5>
+                            </div>
 
-                    <hr class="uk-grid-divider"/>
-                    <div class="uk-grid uk-grid-small">
-                        <h2>Redemptions</h2>
-                        <h5 className='fund-orange'>{this.state.boxData[0].redemptions < 0 ? convertCurrency((this.state.boxData[0].redemptions) * (-1)) : convertCurrency(this.state.boxData[0].redemptions)}</h5>
-                    </div>
+                            <hr class="uk-grid-divider"/>
+                            <div class="uk-grid uk-grid-small">
+                                <h2>Redemptions</h2>
+                                <h5 className='fund-orange'>{this.state.boxData[0].redemptions < 0 ? convertCurrency((this.state.boxData[0].redemptions) * (-1)) : convertCurrency(this.state.boxData[0].redemptions)}</h5>
+                            </div>
 
-                    <hr class="uk-grid-divider"/>
-                    <div class="uk-grid uk-grid-small">
-                        <h2>Net Flow</h2>
-                        <h5>{this.state.boxData[0].netFlow < 0 ? convertCurrency((this.state.boxData[0].netFlow) * (-1)) : convertCurrency(this.state.boxData[0].netFlow)}</h5>
-                    </div>
+                            <hr class="uk-grid-divider"/>
+                            <div class="uk-grid uk-grid-small">
+                                <h2>Net Flow</h2>
+                                <h5>{this.state.boxData[0].netFlow < 0 ? convertCurrency((this.state.boxData[0].netFlow) * (-1)) : convertCurrency(this.state.boxData[0].netFlow)}</h5>
+                            </div>
 
-                    <hr class="uk-grid-divider"/>
-                    <div class="uk-grid uk-grid-small">
-                        <h2>Settlement Date</h2>
-                        <h5>{this.props.location.state.data[0].settlementDate}</h5>
-                    </div>
+                            <hr class="uk-grid-divider"/>
+                            <div class="uk-grid uk-grid-small">
+                                <h2>Settlement Date</h2>
+                                <h5>{this.props.location.state.data[0].settlementDate}</h5>
+                            </div>
 
-                </div>
-                <div class="uk-width-large-8-10 rt-details">
-                    <div class="md-card-content">
+                        </div>
+                        <div class="uk-width-large-8-10 rt-details">
+                            <div class="md-card-content">
 
-                        <Table id="dt_colVis" class="uk-table" cellspacing="0" width="100%" dealData={tableData}/>
+                                <Table id="dt_colVis" class="uk-table" cellspacing="0" width="100%"
+                                       dealData={tableData}/>
 
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
