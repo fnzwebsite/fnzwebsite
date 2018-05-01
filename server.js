@@ -273,6 +273,16 @@ function getAcd(callback, auth, dateValue,acdId) {
                     callback(obj);
                 }
             }
+            else {
+                callback([{
+                    "subscriptions": 0,
+                    "redemptions": 0,
+                    "netFlow": 0,
+                    "unitsPurchased":0,
+                    "unitsSold":0,
+                    "roundedPrice":0
+                }]);
+            }
         });
     });
 

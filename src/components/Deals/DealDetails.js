@@ -165,7 +165,7 @@ class DealDetails extends React.Component {
                     }
                 }
             }
-            if (cashData != null) {
+
                 tableData.push({
                     "isin": isin[i],
                     "subscriptions": subscriptionSum,
@@ -174,7 +174,7 @@ class DealDetails extends React.Component {
                     "roundedPrice": roundedPrice,
                     "priceDate": priceDate
                 })
-            }
+
 
         }
 
