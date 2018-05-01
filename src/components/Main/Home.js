@@ -1,16 +1,13 @@
 import React from 'react';
 import SideNav from './SideNav'
 import Header from './Header'
-import Route from 'react-router-hooks';
 import Dashboard from '../Dashboard/Dashboard';
 import Acd from '../Admin/Acd';
 import AcdInstrument from '../Admin/AcdInstrument';
-import AcdInstrumentWizard from "../Admin/AddAcdInstrumentWizard";
 import DealDetails from "../Deals/DealDetails";
-import SignIn from '../Login/SignIn';
 import AcdAccount from '../Admin/AcdAccount';
 import AcdDeal from '../Admin/AcdDeal';
-
+import {Route, Redirect}    from 'react-router-dom'
 
 class Home extends React.Component {
     constructor(props) {
@@ -24,6 +21,12 @@ class Home extends React.Component {
 //        alert('hi');
     }
     render() {
+        if(this.props.location && this.props.location.pathname == "/"){
+            return <Redirect to={{ pathname: '/dashboard'}}/>
+        }
+        if(this.props.location && this.props.location.pathname == "/sign_in"){
+            return <Redirect to={{ pathname: '/sign_in'}}/>
+        }
         return (
             <div className="page">
                 <div className="page-content d-flex align-items-stretch">

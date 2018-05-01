@@ -66,10 +66,10 @@ class SideNav extends React.Component {
                     }
                     {this.state.showMenu=='admin' &&
                     <ul class="list-unstyled">
-                        <li class="active"><a href="Acd"> <i class="fa fa-handshake-o"></i>Entity</a></li>
-                        <li><a href="AcdAccount"> <i class="fa fa-tag"></i>Account</a></li>
-                        <li><a href="AcdInstrument"> <i class="fa fa-tag"></i>Instrument</a></li>
-                        <li><a href="AcdDeal"> <i class="fa fa-tag"></i>Deal</a></li>
+                        <li class="active"><Link to="/Acd"> <i class="fa fa-handshake-o"></i>Entity</Link></li>
+                        <li><Link to="/AcdAccount"> <i class="fa fa-tag"></i>Account</Link></li>
+                        <li><Link to="/AcdInstrument"> <i class="fa fa-tag"></i>Instrument</Link></li>
+                        <li><Link to="/AcdDeal"> <i class="fa fa-tag"></i>Deal</Link></li>
                     </ul>
                     }
                 </nav>
