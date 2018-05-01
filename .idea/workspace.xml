@@ -6,9 +6,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0690c2d6-c039-4662-a950-a80c345b563f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Admin/Acd.js" afterPath="$PROJECT_DIR$/src/components/Admin/Acd.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Admin/AcdDeal.js" afterPath="$PROJECT_DIR$/src/components/Admin/AcdDeal.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Admin/EditAcdDealWizard.js" afterPath="$PROJECT_DIR$/src/components/Admin/EditAcdDealWizard.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Admin/AddAcdWizard.js" afterPath="$PROJECT_DIR$/src/components/Admin/AddAcdWizard.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Dashboard/BoxDealing.js" afterPath="$PROJECT_DIR$/src/components/Dashboard/BoxDealing.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Dashboard/NextBox.js" afterPath="$PROJECT_DIR$/src/components/Dashboard/NextBox.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Dashboard/PreviousBox.js" afterPath="$PROJECT_DIR$/src/components/Dashboard/PreviousBox.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Dashboard/TodayBox.js" afterPath="$PROJECT_DIR$/src/components/Dashboard/TodayBox.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Deals/DealDetails.js" afterPath="$PROJECT_DIR$/src/components/Deals/DealDetails.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Login/SignIn.js" afterPath="$PROJECT_DIR$/src/components/Login/SignIn.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -22,63 +29,78 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="AcdDeal.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Admin/AcdDeal.js">
+      <file leaf-file-name="PreviousBox.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Dashboard/PreviousBox.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="144" column="54" lean-forward="false" selection-start-line="144" selection-start-column="39" selection-end-line="144" selection-end-column="54" />
+            <state relative-caret-position="230">
+              <caret line="80" column="9" lean-forward="true" selection-start-line="80" selection-start-column="9" selection-end-line="80" selection-end-column="9" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
-                <element signature="e#554#1052#0" expanded="false" />
+                <element signature="e#1172#1428#0" expanded="false" />
+                <element signature="e#1449#3949#0" expanded="false" />
+                <element signature="e#1506#3922#0" expanded="false" />
+                <element signature="e#4050#4741#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EditAcdDealWizard.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/Admin/EditAcdDealWizard.js">
+      <file leaf-file-name="TodayBox.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Dashboard/TodayBox.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="176" column="24" lean-forward="false" selection-start-line="176" selection-start-column="24" selection-end-line="176" selection-end-column="24" />
+            <state relative-caret-position="223">
+              <caret line="50" column="20" lean-forward="false" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
-                <element signature="n#!!block;n#componentDidUpdate#0;n#EditAcdDealWizard#0" expanded="false" />
-                <element signature="n#!!block;n#componentDidMount#0;n#EditAcdDealWizard#0" expanded="false" />
-                <element signature="e#345#488#0" expanded="false" />
-                <element signature="e#555#2083#0" expanded="false" />
-                <element signature="e#4955#5880#0" expanded="false" />
-                <element signature="e#5953#6971#0" expanded="false" />
+                <element signature="e#2260#2506#0" expanded="false" />
+                <element signature="e#2527#5021#0" expanded="false" />
+                <element signature="e#2584#4994#0" expanded="false" />
+                <element signature="e#2634#3185#0" expanded="false" />
+                <element signature="e#3214#4963#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EditAcdWizard.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Admin/EditAcdWizard.js">
+      <file leaf-file-name="BoxDealing.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Dashboard/BoxDealing.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="186" column="5" lean-forward="true" selection-start-line="170" selection-start-column="4" selection-end-line="186" selection-end-column="5" />
+            <state relative-caret-position="136">
+              <caret line="56" column="107" lean-forward="false" selection-start-line="56" selection-start-column="107" selection-end-line="56" selection-end-column="107" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
-                <element signature="n#!!block;n#componentDidMount#0;n#EditAcdWizard#0" expanded="false" />
-                <element signature="e#279#422#0" expanded="false" />
-                <element signature="n#!!block;n#setData#0;n#EditAcdWizard#0" expanded="false" />
+                <element signature="e#1524#1628#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Acd.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Admin/Acd.js">
+      <file leaf-file-name="signinActions.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/actions/signinActions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="26" column="6" lean-forward="false" selection-start-line="12" selection-start-column="4" selection-end-line="26" selection-end-column="6" />
-              <folding>
-                <element signature="e#0#36#0" expanded="true" />
-                <element signature="e#477#975#0" expanded="false" />
-                <element signature="e#1263#2187#0" expanded="false" />
-                <element signature="e#2448#3393#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="200">
+              <caret line="10" column="8" lean-forward="true" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user.actions.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/actions/user.actions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="308">
+              <caret line="61" column="19" lean-forward="true" selection-start-line="61" selection-start-column="19" selection-end-line="61" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5610">
+              <caret line="275" column="18" lean-forward="false" selection-start-line="275" selection-start-column="18" selection-end-line="275" selection-end-column="18" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -96,27 +118,9 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>total_traffic_6mo</find>
-      <find>volume</find>
-      <find>data</find>
-      <find>highlight</find>
-      <find>ornl-cr5::to_ornl_ip-a</find>
-      <find>series</find>
-      <find>Ring</find>
-      <find>&quot;in&quot;</find>
-      <find>visb</find>
-      <find>pipeline</find>
-      <find>LoadChart</find>
-      <find>button_finish</find>
-      <find>form</find>
-      <find>wizard_add</find>
-      <find>reloadAcd</find>
-      <find>hi1</find>
       <find>$</find>
       <find>wizard_advanced_form</find>
       <find>click</find>
-      <find>wizard_advanced_form_add</find>
-      <find>input</find>
       <find>raddressLine2</find>
       <find>name</find>
       <find>#name</find>
@@ -126,9 +130,26 @@
       <find>wizard_edit</find>
       <find>loadEditDealAcdData</find>
       <find>ddlAccount</find>
+      <find>inpu</find>
+      <find>input</find>
+      <find>$(</find>
+      <find>handleChange</find>
+      <find>$(</find>
+      <find>wizard_add</find>
+      <find>boots</find>
+      <find>wizard_advanced_form_add</find>
+      <find>toda</find>
+      <find>console</find>
+      <find>console.log</find>
+      <find>console.log(output)</find>
+      <find>{}</find>
+      <find>acdPrevData</find>
+      <find>14e74de9-4299-4d91-a40c-55cce0ca77d8</find>
+      <find>acdToday</find>
+      <find>acdTodayData</find>
+      <find>boxData</find>
     </findStrings>
     <replaceStrings>
-      <replace>Money</replace>
       <replace>money</replace>
       <replace>data</replace>
       <replace>MONEY</replace>
@@ -158,6 +179,7 @@
       <replace>_d</replace>
       <replace>&quot;buy&quot;</replace>
       <replace>this</replace>
+      <replace>window.$(</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\Windows\Project\test\fnzwebsite\src\components\views\registrations</dir>
@@ -169,7 +191,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/components/views/shared/nav.js" />
         <option value="$PROJECT_DIR$/src/components/Login/signin.js" />
         <option value="$PROJECT_DIR$/src/components/actions/registrations.js" />
         <option value="$PROJECT_DIR$/src/helpers/auth-header.js" />
@@ -178,15 +199,9 @@
         <option value="$PROJECT_DIR$/src/reducers/index.js" />
         <option value="$PROJECT_DIR$/src/components/routes/index.js" />
         <option value="$PROJECT_DIR$/src/components/utils/index.js" />
-        <option value="$PROJECT_DIR$/src/components/Dashboard/BoxDealing.js" />
-        <option value="$PROJECT_DIR$/src/components/Dashboard/TodayBox.js" />
-        <option value="$PROJECT_DIR$/src/components/Dashboard/PreviousBox.js" />
-        <option value="$PROJECT_DIR$/src/components/Dashboard/NextBox.js" />
         <option value="$PROJECT_DIR$/src/reducers/session.js" />
         <option value="$PROJECT_DIR$/src/utils/index.js" />
         <option value="$PROJECT_DIR$/src/components/Login/LoginPage.js" />
-        <option value="$PROJECT_DIR$/src/actions/signinActions.js" />
-        <option value="$PROJECT_DIR$/src/components/Login/SignIn.js" />
         <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/actions/user.actions.js" />
         <option value="$PROJECT_DIR$/public/assets/js/pages/forms_advanced.min.js" />
@@ -196,8 +211,6 @@
         <option value="$PROJECT_DIR$/src/components/Admin/AcdWizard.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/public/create-acd.html" />
-        <option value="$PROJECT_DIR$/public/index.html" />
-        <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/public/assets/js/pages/forms_wizard.min.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/AddAcdInstrumentWizard.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/AcdInstrument.js" />
@@ -215,11 +228,20 @@
         <option value="$PROJECT_DIR$/src/components/Dashboard/LoadLineChart.js" />
         <option value="$PROJECT_DIR$/src/components/Dashboard/Dashboard.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/EditAcdInstrumentWizard.js" />
-        <option value="$PROJECT_DIR$/src/components/Admin/AddAcdWizard.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/EditAcdWizard.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/Acd.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/AcdDeal.js" />
         <option value="$PROJECT_DIR$/src/components/Admin/EditAcdDealWizard.js" />
+        <option value="$PROJECT_DIR$/src/components/Login/SignIn.js" />
+        <option value="$PROJECT_DIR$/src/components/Admin/AddAcdWizard.js" />
+        <option value="$PROJECT_DIR$/public/index.html" />
+        <option value="$PROJECT_DIR$/server.js" />
+        <option value="$PROJECT_DIR$/src/components/Dashboard/NextBox.js" />
+        <option value="$PROJECT_DIR$/src/components/Dashboard/PreviousBox.js" />
+        <option value="$PROJECT_DIR$/src/components/Deals/DealDetails.js" />
+        <option value="$PROJECT_DIR$/src/components/Dashboard/BoxDealing.js" />
+        <option value="$PROJECT_DIR$/src/components/Dashboard/TodayBox.js" />
+        <option value="$PROJECT_DIR$/src/actions/signinActions.js" />
       </list>
     </option>
   </component>
@@ -268,7 +290,18 @@
             <path>
               <item name="fnzwebsite" type="b2602c69:ProjectViewProjectNode" />
               <item name="fnzwebsite" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fnzwebsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fnzwebsite" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fnzwebsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fnzwebsite" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="actions" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="fnzwebsite" type="b2602c69:ProjectViewProjectNode" />
@@ -289,6 +322,20 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="Dashboard" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fnzwebsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fnzwebsite" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="Deals" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fnzwebsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fnzwebsite" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="Login" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -386,21 +433,22 @@
       <workItem from="1524584328027" duration="10513000" />
       <workItem from="1524650825634" duration="9000" />
       <workItem from="1524652909153" duration="20561000" />
-      <workItem from="1524723815428" duration="49320000" />
+      <workItem from="1524723815428" duration="61645000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="489345000" />
+    <option name="totallyTimeSpent" value="501670000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32369038" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2775606" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32906765" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6727605" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6654479" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -413,7 +461,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6727605" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -504,37 +551,17 @@
           <properties />
           <option name="timeStamp" value="42" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/Dashboard/BoxDealing.js</url>
+          <properties />
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="43" />
+      <option name="time" value="44" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/react-router-hooks/lib/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/js/pages/forms_advanced.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1300">
-          <caret line="124" column="21" lean-forward="true" selection-start-line="124" selection-start-column="21" selection-end-line="124" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/AcdReCheck.js" />
-    <entry file="file://$PROJECT_DIR$/public/assets/js/custom/wizard_steps.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="13748" lean-forward="false" selection-start-line="0" selection-start-column="13748" selection-end-line="0" selection-end-column="13748" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/uikit-react/lib/Modal/Dialog.js" />
-    <entry file="file://$PROJECT_DIR$/node_modules/uikit-react/lib/Modal/index.js" />
-    <entry file="file://$PROJECT_DIR$/node_modules/uikit-react/lib/Modal/Prompt.js" />
     <entry file="file://$PROJECT_DIR$/node_modules/uikit-react/lib/Icon/icons.js" />
     <entry file="file://$PROJECT_DIR$/node_modules/react-uikit-modal/lib/comfirmButton.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -554,16 +581,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="346">
           <caret line="39" column="29" lean-forward="true" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Dashboard/TodayBox.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1739">
-          <caret line="11" column="18" lean-forward="true" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#36#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -589,28 +606,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/create-acd.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="123" column="39" lean-forward="false" selection-start-line="123" selection-start-column="39" selection-end-line="123" selection-end-column="39" />
-          <folding>
-            <element signature="n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="23" lean-forward="false" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/jquery-steps/build/jquery.steps.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="279">
           <caret line="1313" column="0" lean-forward="false" selection-start-line="1313" selection-start-column="0" selection-end-line="1313" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -621,17 +621,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="66" column="41" lean-forward="false" selection-start-line="66" selection-start-column="41" selection-end-line="66" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/assets/js/pages/forms_wizard.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -652,16 +646,6 @@
           <folding>
             <element signature="e#0#36#0" expanded="false" />
             <element signature="e#322#381#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Deals/DealDetails.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="187" column="42" lean-forward="false" selection-start-line="187" selection-start-column="42" selection-end-line="187" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#36#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -700,24 +684,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/allActions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/signinActions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#68#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/react-timeseries-charts/lib/components/BarChart.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8006">
@@ -750,68 +716,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Dashboard/LoadChart.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="800">
-          <caret line="44" column="23" lean-forward="true" selection-start-line="44" selection-start-column="23" selection-end-line="44" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#139#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/acdInstrumentActions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="16" column="56" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="16" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Dashboard/BoxDealing.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="99" column="52" lean-forward="false" selection-start-line="99" selection-start-column="42" selection-end-line="99" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#36#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/dealingActions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/acdActions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="24" column="56" lean-forward="false" selection-start-line="22" selection-start-column="23" selection-end-line="24" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/acdDataActions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="16" column="56" lean-forward="false" selection-start-line="14" selection-start-column="19" selection-end-line="16" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Dashboard/TransactionsTable.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="36" column="42" lean-forward="false" selection-start-line="36" selection-start-column="42" selection-end-line="36" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#26#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Main/Home.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
@@ -824,22 +728,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="3" column="117" lean-forward="false" selection-start-line="3" selection-start-column="94" selection-end-line="3" selection-end-column="117" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/user.actions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
-          <caret line="42" column="11" lean-forward="true" selection-start-line="42" selection-start-column="11" selection-end-line="42" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Dashboard/Dashboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="110" column="63" lean-forward="false" selection-start-line="110" selection-start-column="63" selection-end-line="110" selection-end-column="63" />
           <folding />
         </state>
       </provider>
@@ -870,36 +758,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/AddAcdWizard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="258" column="77" lean-forward="true" selection-start-line="258" selection-start-column="77" selection-end-line="258" selection-end-column="77" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/Acd.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="26" column="6" lean-forward="false" selection-start-line="12" selection-start-column="4" selection-end-line="26" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-            <element signature="e#477#975#0" expanded="false" />
-            <element signature="e#1263#2187#0" expanded="false" />
-            <element signature="e#2448#3393#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Admin/AcdDeal.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="197">
           <caret line="144" column="54" lean-forward="false" selection-start-line="144" selection-start-column="39" selection-end-line="144" selection-end-column="54" />
           <folding>
-            <element signature="e#0#36#0" expanded="true" />
+            <element signature="e#0#36#0" expanded="false" />
             <element signature="e#554#1052#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/EditAcdDealWizard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="176" column="24" lean-forward="false" selection-start-line="176" selection-start-column="24" selection-end-line="176" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#36#0" expanded="false" />
+            <element signature="n#!!block;n#componentDidUpdate#0;n#EditAcdDealWizard#0" expanded="false" />
+            <element signature="n#!!block;n#componentDidMount#0;n#EditAcdDealWizard#0" expanded="false" />
+            <element signature="e#345#488#0" expanded="false" />
+            <element signature="e#555#2083#0" expanded="false" />
+            <element signature="e#4955#5880#0" expanded="false" />
+            <element signature="e#5953#6971#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/create-acd.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="142" column="58" lean-forward="true" selection-start-line="142" selection-start-column="58" selection-end-line="142" selection-end-column="58" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -917,19 +808,233 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Admin/EditAcdDealWizard.js">
+    <entry file="file://$PROJECT_DIR$/src/components/Login/SignIn.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="176" column="24" lean-forward="false" selection-start-line="176" selection-start-column="24" selection-end-line="176" selection-end-column="24" />
+        <state relative-caret-position="208">
+          <caret line="54" column="40" lean-forward="true" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#28#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="44" column="19" lean-forward="false" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/AddAcdWizard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="26" column="54" lean-forward="false" selection-start-line="26" selection-start-column="46" selection-end-line="26" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#36#0" expanded="false" />
+            <element signature="e#795#1467#0" expanded="false" />
+            <element signature="e#1548#1957#0" expanded="false" />
+            <element signature="e#2678#2756#0" expanded="false" />
+            <element signature="e#2790#5118#0" expanded="false" />
+            <element signature="e#5309#6836#0" expanded="false" />
+            <element signature="e#6940#9496#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/acdAccountActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/acdDataActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="16" column="56" lean-forward="false" selection-start-line="14" selection-start-column="19" selection-end-line="16" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/acdDealActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/acdInstrumentActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="16" column="56" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="16" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/allActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="28" column="47" lean-forward="false" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/acdActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="15" column="36" lean-forward="true" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/dealingActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Dashboard/Dashboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="110" column="63" lean-forward="false" selection-start-line="110" selection-start-column="63" selection-end-line="110" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Admin/Acd.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2550">
+          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
-            <element signature="n#!!block;n#componentDidUpdate#0;n#EditAcdDealWizard#0" expanded="false" />
-            <element signature="n#!!block;n#componentDidMount#0;n#EditAcdDealWizard#0" expanded="false" />
-            <element signature="e#345#488#0" expanded="false" />
-            <element signature="e#555#2083#0" expanded="false" />
-            <element signature="e#4955#5880#0" expanded="false" />
-            <element signature="e#5953#6971#0" expanded="false" />
+            <element signature="e#477#975#0" expanded="false" />
+            <element signature="e#1263#2187#0" expanded="false" />
+            <element signature="e#2448#3393#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Dashboard/TransactionsTable.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-225">
+          <caret line="36" column="42" lean-forward="false" selection-start-line="36" selection-start-column="42" selection-end-line="36" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Dashboard/LoadChart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="44" column="23" lean-forward="true" selection-start-line="44" selection-start-column="23" selection-end-line="44" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5610">
+          <caret line="275" column="18" lean-forward="false" selection-start-line="275" selection-start-column="18" selection-end-line="275" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helpers/boxDataCalculation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="4" column="16" lean-forward="false" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/user.actions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="61" column="19" lean-forward="true" selection-start-line="61" selection-start-column="19" selection-end-line="61" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Dashboard/NextBox.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="81" column="22" lean-forward="true" selection-start-line="81" selection-start-column="22" selection-end-line="81" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+            <element signature="e#1561#3969#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Dashboard/BoxDealing.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="56" column="107" lean-forward="false" selection-start-line="56" selection-start-column="107" selection-end-line="56" selection-end-column="107" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+            <element signature="e#1524#1628#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Deals/DealDetails.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1759">
+          <caret line="7" column="53" lean-forward="true" selection-start-line="7" selection-start-column="53" selection-end-line="7" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Dashboard/TodayBox.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="50" column="20" lean-forward="false" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+            <element signature="e#2260#2506#0" expanded="false" />
+            <element signature="e#2527#5021#0" expanded="false" />
+            <element signature="e#2584#4994#0" expanded="false" />
+            <element signature="e#2634#3185#0" expanded="false" />
+            <element signature="e#3214#4963#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Dashboard/PreviousBox.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="80" column="9" lean-forward="true" selection-start-line="80" selection-start-column="9" selection-end-line="80" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+            <element signature="e#1172#1428#0" expanded="false" />
+            <element signature="e#1449#3949#0" expanded="false" />
+            <element signature="e#1506#3922#0" expanded="false" />
+            <element signature="e#4050#4741#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/signinActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" column="8" lean-forward="true" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>

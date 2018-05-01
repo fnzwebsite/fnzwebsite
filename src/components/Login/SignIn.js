@@ -56,7 +56,7 @@ class SessionsNew extends React.Component {
                             <div className="form-group">
                               <input id="login-username" type="text" name="username" value={username} onChange={this.handleChange}  placeholder="Username" className="form-control"/>
                                 {submitted && !username &&
-                                <div className="help-block">Username is required</div>
+                                    <div className="help-block">Username is required</div>
                                 }
                             </div>
                             <div className="form-group">
