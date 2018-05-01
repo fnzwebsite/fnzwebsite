@@ -9,31 +9,28 @@ var createReactClass = require('create-react-class');
 var tableAsJqeryElement = null;
 var Table = createReactClass({
     componentDidMount: function () {
-        // this.loadDataTable();
+        this.loadDataTable();
     },
     componentDidUpdate: function (prevProps, prevState) {
         this.loadDataTable();
     },
-    componentWillReceiveProps: function (prevProps, prevState) {
-        // if (prevProps.loadThisDay != this.props.loadThisDay || prevProps.dealingData != this.props.dealingData) {
-        //     if (tableAsJqeryElement) {
-        //         tableAsJqeryElement.fnDestroy();
-        //         tableAsJqeryElement = null;
-        //     }
-        // }
-        // this.loadDataTable();
-    },
     loadDataTable: function () {
-        window.$('#table').dataTable({
-            "order": [[0, "desc"]],
-            "bDestroy": true
-        });
-        let self = this;
-        window.$('#table tbody').on('click', 'a.handle-edit-modal', function (e) {
-            let key = window.$(this).data("id")
-            let acdEditData = self.props.acdData[key];
-            self.props.loadEditAcdData(acdEditData);
-        });
+        setTimeout(function () {
+            tableAsJqeryElement = window.$('#table').dataTable();
+            if (tableAsJqeryElement) {
+                tableAsJqeryElement.fnDraw();
+            }
+        }, 0)
+        // window.$('#table').dataTable({
+        //     "order": [[0, "desc"]],
+        //     "bDestroy": true
+        // });
+        // let self = this;
+        // window.$('#table tbody').on('click', 'a.handle-edit-modal', function (e) {
+        //     let key = window.$(this).data("id")
+        //     let acdEditData = self.props.acdData[key];
+        //     self.props.loadEditAcdData(acdEditData);
+        // });
 
         // let self = this;
         // setTimeout(function () {
