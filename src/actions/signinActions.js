@@ -5,11 +5,11 @@ import { httpGet, httpPost, httpDelete }  from '../utils/index';
 const Actions = {
   signIn: (data) => {
     return dispatch => {
-      const data = {
-          'enrollmentId':'test2@fnzchain.com',
-          'enrollmentSecret': 'T3sting1'
+      const data1 = {
+          'enrollmentId':data.email,
+          'enrollmentSecret': data.password
       };
-      httpPost('http://35.178.56.52:8081/login', data)
+      httpPost('http://35.178.56.52:8081/login', data1)
       .then((response) => {
         localStorage.setItem('token', JSON.stringify(response.token));
         localStorage.setItem('displayName', response.enrollmentId);

@@ -37,8 +37,9 @@ var Table = createReactClass({
             window.$('a.handle-edit-modal').off('click');
             window.$('a.handle-edit-modal').on('click', function (e) {
                 let key = window.$(this).data("id")
+                //alert('deal'+key);
                 let acdDealData = self.props.acdDealData[key];
-                self.props.loadEditDealAcdData(acdDealData);
+                self.props.loadEditDealAcdData(acdDealData,key);
             });
         }
 
@@ -118,10 +119,12 @@ class AcdDeal extends React.Component {
         this.loadAddDealData = this.loadAddDealData.bind(this);
     }
 
-    loadEditDealAcdData(acdDealEditData) {
+    loadEditDealAcdData(acdDealEditData,key) {
+      //alert('load me'+key)
         this.setState({
             acdDealEditData: acdDealEditData,
-            modalType: "edit"
+            modalType: "edit",
+            editkey:key
         })
     }
 
@@ -142,7 +145,7 @@ class AcdDeal extends React.Component {
                 <div className="uk-modal" id="modal_header_footer">
                     {this.state.modalType == "add" && <AcdDealWizard/>}
                     {this.state.modalType == "edit" &&
-                    <EditAcdDealWizard acdDealEditData={this.state.acdDealEditData}/>}
+                    <EditAcdDealWizard acdDealEditData={this.state.acdDealEditData} editkey={this.state.editkey}/>}
                 </div>
                 <div className="mt-6">
                     <div className="row">
