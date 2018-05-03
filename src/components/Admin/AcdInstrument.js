@@ -11,45 +11,56 @@ import AcdInstrumentWizard from "./AddAcdInstrumentWizard";
 import {Link} from 'react-router-dom';
 import EditInstrumentWizard from "./EditAcdInstrumentWizard";
 
+
 var createReactClass = require('create-react-class');
 var tableAsJqeryElement = null;
 var Table = createReactClass({
-    componentDidMount: function () {
-        //   const list = ['ReactJS', 'JSX', 'JavaScript', 'jQuery', 'jQuery UI'];
-        this.loadDataTable();
-        // $(document).on('click', '#editRow', function(){
-        //   //alert('edit....')
-        //     $("#modal_header_footer").addClass("uk-open");
-        //       $("#modal_header_footer").attr("aria-expanded","true");
-        //         $("#modal_header_footer").modal('show');
-        //     //  this.trigger("show.uk.dropdown",$("#modal_header_footer"))
-        //
-        // });
+    resetTable: function (seconds) {
+        if (tableAsJqeryElement) {
+            setTimeout(function() {
+                tableAsJqeryElement
+                    .rows()
+                    .draw();
+                let tableOrder = localStorage.getItem('orderAcd');
+                if (tableOrder) {
+                    tableAsJqeryElement.order([[tableOrder.split(',')[0], tableOrder.split(',')[1]]]).draw(false);
+                } else {
+                    tableAsJqeryElement.order([[4, 'desc']]).draw(false);
+                }
+            }, seconds);
+        }
+    },
 
+    componentDidMount: function () {
+        this.resetTable(500);
     },
     componentDidUpdate: function (prevProps, prevState) {
-        this.loadDataTable();
+        // this.resetTable(500);
     },
     componentWillReceiveProps: function (prevProps, prevState) {
-        // if (prevProps.loadThisDay != this.props.loadThisDay || prevProps.dealingData != this.props.dealingData) {
-        //     if (tableAsJqeryElement) {
-        //         tableAsJqeryElement.fnDestroy();
-        //         tableAsJqeryElement = null;
-        //     }
-        // }
-        // this.loadDataTable();
     },
-    loadDataTable: function () {
-        window.$('#table').dataTable({
-            "order": [[0, "desc"]],
-            "bDestroy": true
-        });
-        let self = this;
-        window.$('#table tbody').on('click', 'a.handle-edit-modal', function (e) {
-            let key = window.$(this).data("id")
-            let acdInstrumentEditData = self.props.acdInstrumentData[key];
-            self.props.loadEditInstrumentAcdData(acdInstrumentEditData);
-        });
+    loadDataTable: function (elem) {
+        if(tableAsJqeryElement == null) {
+            var self = this;
+            window.$('a.handle-edit-modal').off('click');
+            window.$('a.handle-edit-modal').on('click', function (e) {
+                let key = window.$(this).data("id")
+                let acdEditData = self.props.acdInstrumentData[key];
+                self.props.loadEditAcdInstrumentData(acdEditData);
+            });
+        }
+
+        tableAsJqeryElement = window.$(elem).DataTable();
+        if (tableAsJqeryElement) {
+            tableAsJqeryElement.on('order.dt', function(e, dt, type, indexes) {
+                if (tableAsJqeryElement) {
+                    var order = tableAsJqeryElement.order();
+                    if (order != undefined && order.length > 0 && order[0][0] != 0 && order[0][1] != undefined) {
+                        localStorage.setItem('orderAcd', order);
+                    }
+                }
+            });
+        }
     },
     render: function () {
         let LoadRows = null;
@@ -58,24 +69,27 @@ var Table = createReactClass({
             LoadRows = Object.keys(this.props.acdInstrumentData).sort((a, b) => b.name - a.name).map(function (keyName, keyIndex) {
                 return <tr>
                 <td>{self.props.acdInstrumentData[keyName].subFundKey}</td>
-               <td></td>
-               <td>{self.props.acdInstrumentData[keyName].isin}</td>
-              <td>{self.props.acdInstrumentData[keyName].instrumentType}</td>
-              <td>{self.props.acdInstrumentData[keyName].instrumentLevel}</td>
-              <td>{self.props.acdInstrumentData[keyName].instrumentBasis}</td>
-                    <td class="uk-text-center">
-                        <Link to={'/acdinstrument'} params={{ testvalue: "hello" }} className="handle-edit-modal" data-id={keyName}
-                           data-uk-modal="{target:'#modal_header_footer'}"><i
-                            class="md-icon material-icons">&#xE254;</i></Link>
+                 <td></td>
+                 <td>{self.props.acdInstrumentData[keyName].isin}</td>
+                <td>{self.props.acdInstrumentData[keyName].instrumentType}</td>
+                <td>{self.props.acdInstrumentData[keyName].instrumentLevel}</td>
+                <td>{self.props.acdInstrumentData[keyName].instrumentBasis}</td>
+                    <td className="uk-text-center">
+                        <a className="handle-edit-modal" data-id={keyName}
+                              data-uk-modal="{target:'#modal_header_footer'}"><i
+                            className="md-icon material-icons">&#xE254;</i></a>
+                        <a href="#"><i className="md-icon material-icons">&#xE872;</i></a>
                     </td>
                 </tr>
             });
+
             LoadRows = LoadRows.filter(function (item) {
                 return item != undefined
             })
+
             return (
                 <div style={{minHeight: '200px'}}>
-                    <table id="table" className="stripe" cellSpacing="0" width="100%">
+                    <table ref={elem => this.loadDataTable(elem)} id="table" className="stripe" cellSpacing="0" width="100%">
                         <thead>
                         <tr>
                         <th>Sub Fund Name</th>
@@ -91,10 +105,11 @@ var Table = createReactClass({
                         {LoadRows}
                         </tbody>
                     </table>
+
                 </div>
             );
         } else {
-            return <td colSpan='7'>No Instruments Found</td>;
+            return <td colSpan='7'>No Instrument Found</td>;
         }
     },
 
@@ -107,20 +122,21 @@ class AcdInstrument extends React.Component {
             modalType: "add",
             show: true
         };
-//        this.props.acdDataActions.getAllAcdData();
-//        this.handleClick = this.handleClick.bind(this);
-        this.loadEditInstrumentAcdData = this.loadEditInstrumentAcdData.bind(this);
-        this.loadAddAcdData = this.loadAddAcdData.bind(this);
+
+        this.loadEditAcdInstrumentData = this.loadEditAcdInstrumentData.bind(this);
+        this.loadAddAcdInstrumentData = this.loadAddAcdInstrumentData.bind(this);
+        this.reloadAcdInstrument = this.reloadAcdInstrument.bind(this);
+
     }
 
-    loadEditInstrumentAcdData(acdInstrumentEditData) {
+    loadEditAcdInstrumentData(acdEditData) {
         this.setState({
-            acdInstrumentEditData: acdInstrumentEditData,
+            acdEditData: acdEditData,
             modalType: "edit"
         })
     }
 
-    loadAddAcdData() {
+    loadAddAcdInstrumentData() {
         this.setState({
             modalType: "add"
         })
@@ -130,33 +146,34 @@ class AcdInstrument extends React.Component {
         this.props.acdInstrumentActions.getInstrumentData();
     }
 
-//     handleClick(event) {
-// //      alert('handle click...');
-//         this.props.acdInstrumentActions.postAcdData(this.state);
-//     }
+
+
+    reloadAcdInstrument(){
+        this.props.acdInstrumentActions.getInstrumentData();
+    }
 
     render() {
-
-
             return (
                 <div className="container-fluid" id="page_content">
+
                     <div className="uk-modal" id="modal_header_footer">
-                        {this.state.modalType == "add" && <AcdInstrumentWizard/>}
-                        {this.state.modalType == "edit" &&<EditInstrumentWizard acdInstrumentEditData={this.state.acdInstrumentEditData}/>}
+                        {this.state.modalType == "add" && <AcdInstrumentWizard reloadAcdInstrument={this.reloadAcdInstrument}/>}
+                        {this.state.modalType == "edit" &&<EditInstrumentWizard reloadAcdInstrument={this.reloadAcdInstrument} acdEditData={this.state.acdEditData}/>}
                     </div>
+
                     <div className="mt-6">
                         <div className="row">
                             <div className="col-md-12 wizard-list">
                                 <div className="row">
                                     <div className="md-card uk-margin-medium-bottom">
                                         <div className="md-card-toolbar">
-                                            <h3 className="md-card-toolbar-heading-text"> Instrument List</h3>
-                                            <a onClick={this.loadAddAcdData} className="create md-btn md-btn-primary pull-right md-btn-wave-light waves-effect waves-button waves-light"
+                                            <h3 className="md-card-toolbar-heading-text">Instrument List</h3>
+                                            <a onClick={this.loadAddAcdInstrumentData} className="create md-btn md-btn-primary pull-right md-btn-wave-light waves-effect waves-button waves-light"
                                                data-uk-modal="{target:'#modal_header_footer'}" href="#"><i
                                                 className="fa fa-plus"></i>Instrument</a>
                                         </div>
                                         <div className="md-card-content">
-                                            <Table acdInstrumentData={this.props.acdInstrumentData} loadEditInstrumentAcdData={this.loadEditInstrumentAcdData}/>
+                                            <Table acdInstrumentData={this.props.acdInstrumentData} loadEditAcdInstrumentData={this.loadEditAcdInstrumentData}/>
                                         </div>
                                     </div>
                                 </div>
@@ -165,17 +182,10 @@ class AcdInstrument extends React.Component {
                     </div>
                 </div>
 
-            )
+        )
 
     }
 }
-
-// const
-// mapStateToProps = (state, props) => {
-//   return {
-//     user: state.user
-//   }
-// };
 
 const
     mapStateToProps = (state, props) => {
@@ -197,5 +207,3 @@ const
 
 export default connect(mapStateToProps,
     mapDispatchToProps)(AcdInstrument);
-
-//    export default TransactionsTable;

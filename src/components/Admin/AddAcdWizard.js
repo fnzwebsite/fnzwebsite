@@ -2,6 +2,8 @@ import {connect} from 'react-redux';
 import React from 'react';
 import Acd from './Acd'
 import $ from 'jquery';
+import {getConfig} from '../../helpers/index';
+
 class AddAcdWizard extends React.Component {
     componentDidMount() {
         var self = this;
@@ -75,7 +77,7 @@ class AddAcdWizard extends React.Component {
             {
                 window.$.ajax({
                     type: "POST",
-                    url: 'http://35.178.56.52:8081/api/v1/company',
+                    url: getConfig('ApiUrl')+'api/v1/company',
                     headers: {authorization: JSON.parse(localStorage.getItem('token'))}
                     , data: JSON.stringify(reqData),
                     success: function (res) {

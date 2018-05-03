@@ -6,6 +6,7 @@ import acdAccountActions from '../../actions/acdAccountActions';
 import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import {getConfig} from '../../helpers/index';
 
 class AddAcdAccountWizard extends React.Component {
 
@@ -18,7 +19,8 @@ class AddAcdAccountWizard extends React.Component {
   }
   componentDidMount()
   {
-    window.$("#wizard_add").steps({
+      var self = this;
+    window.$("#wizard_add_deal").steps({
       headerTag: "h3",
       bodyTag: "section",
       transitionEffect: "slideLeft",
@@ -27,7 +29,7 @@ class AddAcdAccountWizard extends React.Component {
     $(document).ready(function(){
       $.ajax({
         type: "GET",
-        url: 'http://35.178.56.52:8081/api/v1/account',
+        url: getConfig('ApiUrl')+'api/v1/account',
         headers:{authorization:JSON.parse(localStorage.getItem('token'))},
         success: function(res){
           var arr = Object.keys(res).map(function(k) { return res[k] });
@@ -44,7 +46,7 @@ class AddAcdAccountWizard extends React.Component {
 
       $.ajax({
         type: "GET",
-        url: 'http://35.178.56.52:8081/api/v1/instrument',
+        url: getConfig('ApiUrl')+'api/v1/instrument',
         headers:{authorization:JSON.parse(localStorage.getItem('token'))},
         success: function(res){
           var arr = Object.keys(res).map(function(k) { return res[k] });
@@ -59,7 +61,7 @@ class AddAcdAccountWizard extends React.Component {
         }
       });
     })
-    $(document).on('click', '.button_finish', function(){
+    $(document).on('click', '#wizard_add_deal .button_finish', function(){
       //alert(getFormData($('#wizard_advanced_form')));
       var unindexed_array = $('#wizard_advanced_form').serializeArray();
       var indexed_array = {};
@@ -67,37 +69,40 @@ class AddAcdAccountWizard extends React.Component {
         indexed_array[n['name']] = n['value'];
       });
       //alert($('#ddlInstrument').val());
-      var deal=$('AMLBtnGroup1').val();
-      var reqData
-      if(deal=='Amount'){
-        reqData={
-          "account": $('#ddlAccount').val(),
-          "dealType": indexed_array['dealType']==""?"BUY":indexed_array['dealType'],
-          "instrumentPrimaryIdentifier": $('#ddlInstrument').val(),
-          "units": indexed_array['AMLBtnGroup1']=="Amount"?0:indexed_array['quantity'],
-          "price": 0,
-          "amount":indexed_array['quantity'],
-          "tradeFor": "U",
-          "currency": indexed_array['currencyCombo'],
-          "source": "STP",
-          "tradeTime": "2018-04-25T13:57:14.910Z"
+      var deal = indexed_array['quantityType'];
+      if(deal==""){
+        deal='Amount'
+      }
+        var reqData
+        if (deal == 'Amount') {
+            reqData = {
+                "account": $('#ddlAccount').val(),
+                "dealType": indexed_array['dealType'] == "" ? "BUY" : indexed_array['dealType'],
+                "instrumentPrimaryIdentifier": $('#ddlInstrument').val(),
+                "units": 0,
+                "price": 0,
+                "amount": indexed_array['quantity'],
+                "tradeFor": "U",
+                "currency": indexed_array['currencyCombo'],
+                "source": "STP",
+                "tradeTime": "2018-04-25T13:57:14.910Z"
 
+            }
         }
-      }
-      else{
-        reqData={
-          "account": $('#ddlAccount').val(),
-          "dealType": indexed_array['dealType']==""?"BUY":indexed_array['dealType'],
-          "instrumentPrimaryIdentifier": $('#ddlInstrument').val(),
-          "units": indexed_array['AMLBtnGroup1']=="Amount"?0:indexed_array['quantity'],
-          "price": 0,
-          "units":indexed_array['quantity'],
-          "tradeFor": "U",
-          "currency": indexed_array['currencyCombo'],
-          "source": "STP",
-          "tradeTime": "2018-04-25T13:57:14.910Z"
+        else {
+            reqData = {
+                "account": $('#ddlAccount').val(),
+                "dealType": indexed_array['dealType'] == "" ? "BUY" : indexed_array['dealType'],
+                "instrumentPrimaryIdentifier": $('#ddlInstrument').val(),
+                "units": indexed_array['quantity'],
+                "price": 0,
+                "amount": 0,
+                "tradeFor": "U",
+                "currency": indexed_array['currencyCombo'],
+                "source": "STP",
+                "tradeTime": "2018-04-25T13:57:14.910Z"
+            }
         }
-      }
       console.log(JSON.stringify(reqData))
       //alert(localStorage.getItem('token'));
       var mode=$('#iisin').val();
@@ -107,14 +112,18 @@ class AddAcdAccountWizard extends React.Component {
         $('.button_finish').hide();
         $.ajax({
           type: "POST",
-          url: 'http://35.178.56.52:8081/api/v1/dealing',
+          url: getConfig('ApiUrl')+'api/v1/dealing',
           headers:{authorization:JSON.parse(localStorage.getItem('token'))}
           ,data: JSON.stringify(reqData),
           success: function(res){
             //alert(JSON.stringify(res));
             if(res[0].status==="SUCCESS")
             {
-              window.toastr.options.onHidden = function() { window.location.href="/acddeal";$('.button_finish').show();  }
+              window.toastr.options.onHidden = function() {
+                  window.location.href = "/acd";
+                  $('.button_finish').show();
+                  self.props.reloadAcdDeal();
+              }
               window.toastr.success('You have Successfully Created Deal');
             }
             else {
@@ -178,7 +187,7 @@ class AddAcdAccountWizard extends React.Component {
 }
 
 componentWillMount() {
-  this.props.acdAccountActions.getAccountsData();
+
 }
 loadAccounts()
 {
@@ -197,7 +206,7 @@ render() {
   let self=this;
 
   return (
-    <div className="uk-modal-dialog" id="acdmodalDialog">
+    <div className="uk-modal-dialog" id="acdAddDealmodalDialog">
     <button type="button" className="uk-modal-close uk-close"></button>
     <div className="uk-modal-header">
     <h3 className="uk-modal-title">Create Deal</h3>
@@ -206,7 +215,7 @@ render() {
     <div className="md-card uk-margin-large-bottom">
     <div className="md-card-content">
     <form className="uk-form-stacked" id="wizard_advanced_form">
-    <div id="wizard_add" data-uk-observe>
+    <div id="wizard_add_deal" data-uk-observe>
     <h3>Step 1</h3>
     <section>
     <h2 className="heading_a">
@@ -268,7 +277,7 @@ render() {
     <div class="parsley-row icheck-inline">
 
     <div class="btn-group" data-toggle="buttons-checkbox" id="AMLBtnGroup1">
-    <button type="button" id="NotAML1" class="btn btn-success" data-toggle="button">
+    <button type="button" id="NotAML1" name="NotAML1" class="btn btn-success" data-toggle="button">
     Amount
     </button>
     <button type="button" id="fullAML1" class="btn ">
@@ -334,24 +343,4 @@ render() {
 }
 }
 
-const
-mapStateToProps = (state, props) => {
-  return {
-    acdDealData: state.acdDealData,
-    acdAccountData: state.acdAccountData
-  }
-};
-
-
-AddAcdAccountWizard.propTypes = {
-  acdAccountActions: PropTypes.object,
-  acdAccountData: PropTypes.array
-};
-
-const
-mapDispatchToProps = (dispatch) => ({
-  acdAccountActions: bindActionCreators(acdAccountActions, dispatch)
-});
-
-export default connect(mapStateToProps,
-  mapDispatchToProps)(AddAcdAccountWizard);
+export default AddAcdAccountWizard;

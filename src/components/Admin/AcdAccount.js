@@ -8,45 +8,71 @@ import AcdAccountWizard from "./AddAcdAccountWizard";
 import {Link} from 'react-router-dom';
 import EditAcdAccountWizard from "./EditAcdAccountWizard";
 
+
+
 var createReactClass = require('create-react-class');
 var tableAsJqeryElement = null;
 var Table = createReactClass({
+    resetTable: function (seconds) {
+        if (tableAsJqeryElement) {
+            setTimeout(function() {
+                tableAsJqeryElement
+                    .rows()
+                    .draw();
+                let tableOrder = localStorage.getItem('orderAcd');
+                // if (tableOrder) {
+                //     tableAsJqeryElement.order([[tableOrder.split(',')[0], tableOrder.split(',')[1]]]).draw(false);
+                // } else {
+                //     tableAsJqeryElement.order([[4, 'desc']]).draw(false);
+                // }
+            }, seconds);
+        }
+    },
+
     componentDidMount: function () {
+        this.resetTable(500);
     },
     componentDidUpdate: function (prevProps, prevState) {
-        this.loadDataTable();
+        // this.resetTable(500);
     },
     componentWillReceiveProps: function (prevProps, prevState) {
-         this.loadDataTable();
     },
-    loadDataTable: function () {
-        window.$('#table').dataTable({
-            "order": [[0, "desc"]],
-            "bDestroy": true
-        });
-        let self = this;
-        window.$('#table tbody').on('click', 'a.handle-edit-modal', function (e) {
-            let key = window.$(this).data("id")
-            let acdAccountEditData = self.props.acdAccountData[key];
-            self.props.loadEditAcdAccountData(acdAccountEditData);
+    loadDataTable: function (elem) {
+        if(tableAsJqeryElement == null) {
+            var self = this;
+            window.$('a.handle-edit-modal').off('click');
+            window.$('a.handle-edit-modal').on('click', function (e) {
+                let key = window.$(this).data("id")
+                let acdEditData = self.props.acdAccountData[key];
+                self.props.loadEditAcdAccountData(acdEditData);
+            });
+        }
 
-        });
+        tableAsJqeryElement = window.$(elem).DataTable();
+        if (tableAsJqeryElement) {
+            tableAsJqeryElement.on('order.dt', function(e, dt, type, indexes) {
+                if (tableAsJqeryElement) {
+                    var order = tableAsJqeryElement.order();
+                    if (order != undefined && order.length > 0 && order[0][0] != 0 && order[0][1] != undefined) {
+                        localStorage.setItem('orderAcd', order);
+                    }
+                }
+            });
+        }
     },
-
     render: function () {
         let LoadRows = null;
         let self = this;
-        //alert(JSON.stringify(this.props.acdAccountData));
-        //console.log(JSON.stringify(this.props.acdAccountData));
         if (this.props.acdAccountData) {
-            LoadRows = Object.keys(this.props.acdAccountData).sort((a, b) => b.identifier - a.identifier).map(function (keyName, keyIndex) {
+            LoadRows = Object.keys(this.props.acdAccountData).sort((a, b) => b.name - a.name).map(function (keyName, keyIndex) {
                 return <tr>
                 <td>{self.props.acdAccountData[keyName].name}</td>
-               <td>{self.props.acdAccountData[keyName].accountType}</td>
-                    <td class="uk-text-center">
-                        <Link to={'/acdaccount'} params={{ testvalue: "hello" }} className="handle-edit-modal" data-id={keyName}
-                           data-uk-modal="{target:'#modal_header_footer'}"><i
-                            class="md-icon material-icons">&#xE254;</i></Link>
+                <td>{self.props.acdAccountData[keyName].accountType}</td>
+                <td className="uk-text-center">
+                        <a className="handle-edit-modal" data-id={keyName}
+                              data-uk-modal="{target:'#modal_header_footer'}"><i
+                            className="md-icon material-icons">&#xE254;</i></a>
+                        <a href="#"><i className="md-icon material-icons">&#xE872;</i></a>
                     </td>
                 </tr>
             });
@@ -57,7 +83,7 @@ var Table = createReactClass({
 
             return (
                 <div style={{minHeight: '200px'}}>
-                    <table id="table" className="stripe" cellSpacing="0" width="100%">
+                    <table ref={elem => this.loadDataTable(elem)} id="table" className="stripe" cellSpacing="0" width="100%">
                         <thead>
                         <tr>
                         <th>Account</th>
@@ -86,20 +112,19 @@ class AcdAccount extends React.Component {
             modalType: "add",
             show: true
         };
-//        this.props.acdDataActions.getAllAcdData();
-//        this.handleClick = this.handleClick.bind(this);
         this.loadEditAcdAccountData = this.loadEditAcdAccountData.bind(this);
-        this.loadAddAcdData = this.loadAddAcdData.bind(this);
-    }
+        this.loadAddAcdAccountData = this.loadAddAcdAccountData.bind(this);
+        this.reloadAcdAccount = this.reloadAcdAccount.bind(this);
+}
 
-    loadEditAcdAccountData(acdAccountEditData) {
+    loadEditAcdAccountData(acdEditData) {
         this.setState({
-            acdAccountEditData: acdAccountEditData,
+            acdEditData: acdEditData,
             modalType: "edit"
         })
     }
 
-    loadAddAcdData() {
+    loadAddAcdAccountData() {
         this.setState({
             modalType: "add"
         })
@@ -109,28 +134,27 @@ class AcdAccount extends React.Component {
         this.props.acdAccountActions.getAccountsData();
     }
 
-//     handleClick(event) {
-// //      alert('handle click...');
-//         this.props.acdInstrumentActions.postAcdData(this.state);
-//     }
+    reloadAcdAccount(){
+        this.props.acdAccountActions.getAccountsData();
+    }
 
     render() {
-
-
             return (
                 <div className="container-fluid" id="page_content">
+
                     <div className="uk-modal" id="modal_header_footer">
-                        {this.state.modalType == "add" && <AcdAccountWizard/>}
-                        {this.state.modalType == "edit" &&<EditAcdAccountWizard acdAccountEditData={this.state.acdAccountEditData}/>}
+                        {this.state.modalType == "add" && <AcdAccountWizard reloadAcdAccount={this.reloadAcdAccount}/>}
+                        {this.state.modalType == "edit" &&<EditAcdAccountWizard reloadAcdAccount={this.reloadAcdAccount} acdEditData={this.state.acdEditData}/>}
                     </div>
+
                     <div className="mt-6">
                         <div className="row">
                             <div className="col-md-12 wizard-list">
                                 <div className="row">
                                     <div className="md-card uk-margin-medium-bottom">
                                         <div className="md-card-toolbar">
-                                            <h3 className="md-card-toolbar-heading-text"> Account List</h3>
-                                            <a onClick={this.loadAddAcdData} className="create md-btn md-btn-primary pull-right md-btn-wave-light waves-effect waves-button waves-light"
+                                            <h3 className="md-card-toolbar-heading-text">Account List</h3>
+                                            <a onClick={this.loadAddAcdAccountData} className="create md-btn md-btn-primary pull-right md-btn-wave-light waves-effect waves-button waves-light"
                                                data-uk-modal="{target:'#modal_header_footer'}" href="#"><i
                                                 className="fa fa-plus"></i>Account</a>
                                         </div>
@@ -144,17 +168,10 @@ class AcdAccount extends React.Component {
                     </div>
                 </div>
 
-            )
+        )
 
     }
 }
-
-// const
-// mapStateToProps = (state, props) => {
-//   return {
-//     user: state.user
-//   }
-// };
 
 const
     mapStateToProps = (state, props) => {
@@ -176,5 +193,3 @@ const
 
 export default connect(mapStateToProps,
     mapDispatchToProps)(AcdAccount);
-
-//    export default TransactionsTable;

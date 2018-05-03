@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import React from 'react';
 import Acd from './Acd';
 import $ from 'jquery';
-
+import {getConfig} from '../../helpers/index';
 
 var stepsWizard = null;
 
@@ -86,7 +86,7 @@ class EditAcdWizard extends React.Component {
                 $('.button_finish').hide();
                 window.$.ajax({
                     type: "PUT",
-                    url: 'http://35.178.56.52:8081/api/v1/company/' + companyId,
+                    url: getConfig('ApiUrl')+'api/v1/company/' + companyId,
                     headers: {authorization: JSON.parse(localStorage.getItem('token'))}
                     , data: JSON.stringify(reqData),
                     beforeSend: function () {

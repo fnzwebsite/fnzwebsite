@@ -57,6 +57,7 @@ class Dashboard extends React.Component {
         //var socket = io('http://localhost:3700', {query: "auth=" + authHeader()['Authorization']});
         var socket = io(getConfig('socketurl'), {query: "auth=" + authHeader()['Authorization']});
         socket.on('dealingbydate', function (dealingbydate) {
+          if(dealingbydate && dealingbydate.length){
             if (Object.keys(dealingbydate).length > 0) {
                 var data = self.state.dealing;
                 if (!self.state.dealing) {
@@ -72,6 +73,7 @@ class Dashboard extends React.Component {
                     dealing: data
                 })
             }
+          }
         })
     }
 
@@ -113,7 +115,7 @@ class Dashboard extends React.Component {
                                                         <div className="card-body"
                                                              style={{paddingBottom: '30px'}}>
                                                             {/*<LoadChart/>*/}
-                                                          
+
                                                            <LoadLineChart
                                                                 loadThisDay={this.state.chart}
                                                                 dealingData={dealing}/>

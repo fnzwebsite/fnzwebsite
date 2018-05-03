@@ -1,7 +1,7 @@
 import * as allActions from './allActions';
 import alertActions  from './alert.actions';
 import { history } from '../helpers';
-
+import {getConfig} from '../helpers/index';
 const userActions = {
     login,
     logout
@@ -40,7 +40,7 @@ function postLogin(username, password) {
     form.append('enrollmentId',username)
     form.append('enrollmentSecret', password)
 
-    return fetch('http://35.178.56.52:8081/login',{
+    return fetch(getConfig('ApiUrl')+'login',{
         //pass cookies, for authentication
         method: 'post',
         mode:'cors',

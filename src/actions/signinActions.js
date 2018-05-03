@@ -1,6 +1,7 @@
 import { push }                           from 'react-router-redux';
 import Constants                          from '../constants/index';
 import { httpGet, httpPost, httpDelete }  from '../utils/index';
+import {getConfig} from '../helpers/index';
 
 const Actions = {
   signIn: (data) => {
@@ -9,7 +10,7 @@ const Actions = {
           'enrollmentId':data.email,
           'enrollmentSecret':data.password
       };
-      httpPost('http://35.178.56.52:8081/login', data1)
+      httpPost(getConfig('ApiUrl')+'login', data1)
       .then((response) => {
         localStorage.setItem('token', JSON.stringify(response.token));
         localStorage.setItem('displayName', response.enrollmentId);
