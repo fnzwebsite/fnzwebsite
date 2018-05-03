@@ -1,0 +1,20 @@
+import * as allActions from '../../Admin/actions/allActions';
+
+export function alert(state = {}, action) {
+  switch (action.type) {
+    case allActions.ALERT_SUCCESS:
+      return {
+        type: 'alert-success',
+        message: action.message
+      };
+    case allActions.ALERT_ERROR:
+      return {
+        type: 'alert-danger',
+        message: action.message
+      };
+    case allActions.ALERT_CLEAR:
+      return {};
+    default:
+      return state
+  }
+}
