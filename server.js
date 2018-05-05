@@ -7,6 +7,11 @@ var express = require('express'),
     io = require('socket.io').listen(server.listen(port), {log: debug}),
     momenttz = require('moment-timezone'),
     moment = require('moment');
+var bodyParser=require("body-parser");
+const querystring = require('querystring');
+
+var request = require('request');
+
 
 var hostIP='35.178.56.52';
 
@@ -19,6 +24,17 @@ server.use(function (req, res, next) {
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     next();
 });
+server.use(bodyParser.urlencoded({ extended: false }));
+server.use(bodyParser.json());
+
+server.post('/account',function(request,response){
+    let auth = request.headers.authorization;
+    let body = request.body;
+    postAccount(function (data) {
+        response.send(data);
+    }, auth,body);
+});
+
 server.get('/dealing', (req, res) => {
     let auth = req.headers.authorization;
     getDealing(function (data) {
@@ -33,7 +49,6 @@ server.get('/price', (req, res) => {
         res.send(priceDataRes);
     }, auth);
 });
-
 
 server.get('/box/:day/acd/:acdId', (req, res) => {
     console.log("hi")
@@ -173,6 +188,48 @@ function getDealing(callback, auth) {
     req.end();
 }
 
+function postAccount(callback, auth, body) {
+    const postData = querystring.stringify(body);
+    var options = {
+        method: 'POST',
+        host: hostIP,
+        port: 8081,
+        path: '/api/v1/account',
+        headers: {
+            Authorization: auth,
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Length': postData.length
+        }
+    };
+    console.log(options);
+    console.log(auth);
+    console.log(body);
+
+    var req = http.request(options, (res) => {
+        var output = '';
+
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            output += chunk;
+        });
+
+        res.on('end', function () {
+            var obj = JSON.parse(output);
+            console.log(obj);
+            if (callback != undefined) {
+                callback(obj);
+            }
+        });
+    });
+
+    req.on('error', (e) => {
+        console.error(e);
+    });
+
+    req.write(postData);
+    req.end();
+}
+
 function getAllAcd(callback, auth) {
     var options = {
         method: 'GET',
@@ -207,8 +264,6 @@ function getAllAcd(callback, auth) {
 
     req.end();
 }
-
-
 
 function getPriceByKeyDate(callback,auth) {
     var options = {

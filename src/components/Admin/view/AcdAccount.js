@@ -90,6 +90,7 @@ class AcdAccount extends React.Component {
 //        this.handleClick = this.handleClick.bind(this);
         this.loadEditAcdAccountData = this.loadEditAcdAccountData.bind(this);
         this.loadAddAcdData = this.loadAddAcdData.bind(this);
+        this.updateAccount = this.updateAccount.bind(this);
     }
 
     loadEditAcdAccountData(acdAccountEditData) {
@@ -98,7 +99,9 @@ class AcdAccount extends React.Component {
             modalType: "edit"
         })
     }
-
+    updateAccount(){
+        this.props.acdAccountActions.getAccountsData();
+    }
     loadAddAcdData() {
         this.setState({
             modalType: "add"
@@ -120,7 +123,7 @@ class AcdAccount extends React.Component {
             return (
                 <div className="container-fluid" id="page_content">
                     <div className="uk-modal" id="modal_header_footer">
-                        {this.state.modalType == "add" && <AcdAccountWizard/>}
+                        {this.state.modalType == "add" && <AcdAccountWizard updateAccount={this.updateAccount}/>}
                         {this.state.modalType == "edit" &&<EditAcdAccountWizard acdAccountEditData={this.state.acdAccountEditData}/>}
                     </div>
                     <div className="mt-6">

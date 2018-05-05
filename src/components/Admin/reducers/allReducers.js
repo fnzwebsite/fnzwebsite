@@ -7,6 +7,8 @@ import acdData from './acdDataReducer';
 import acdInstrumentData from './acdInstrumentReducer';
 import acdInstrumentData from './acdAccountReducer';
 import acdDealData from './acdDealReducer';
+import acdAccountData from './acdAccountReducer';
+import postAcdAccountData from './postAccountReducer';
 
 export {
     dealing,
@@ -17,5 +19,6 @@ export {
     acdData,
     acdInstrumentData,
     acdAccountData,
-    acdDealData
+    acdDealData,
+    postAcdAccountData
 };

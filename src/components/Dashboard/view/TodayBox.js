@@ -88,49 +88,49 @@ class TodayBox extends React.Component {
                         </div>
                     </div>
                 </div>
-                        );
+            );
 
-                    }
-                    else {
-                    return (
-                    <div style={{height: '200px'}}>
+        }
+        else {
+            return (
+                <div style={{height: '200px'}}>
 
                     <div class="preloader">
-                    <span class="line line-1"></span>
-                    <span class="line line-2"></span>
-                    <span class="line line-3"></span>
-                    <span class="line line-4"></span>
-                    <span class="line line-5"></span>
-                    <span class="line line-6"></span>
-                    <span class="line line-7"></span>
-                    <span class="line line-8"></span>
-                    <span class="line line-9"></span>
-                    <div>Loading</div>
+                        <span class="line line-1"></span>
+                        <span class="line line-2"></span>
+                        <span class="line line-3"></span>
+                        <span class="line line-4"></span>
+                        <span class="line line-5"></span>
+                        <span class="line line-6"></span>
+                        <span class="line line-7"></span>
+                        <span class="line line-8"></span>
+                        <span class="line line-9"></span>
+                        <div>Loading</div>
                     </div>
-                    </div>
-                    )
-                }
-                    }
+                </div>
+            )
+        }
+    }
 
 
-                    }
+}
 
-                    const
-                    mapStateToProps = (state, props) => {
-                    return {
-                    acdToday: state.acdToday
-                }
-                };
+const
+    mapStateToProps = (state, props) => {
+        return {
+            acdToday: state.acdToday
+        }
+    };
 
-                    TodayBox.propTypes = {
-                    acdActions: PropTypes.object,
-                    acdToday: PropTypes.array
-                };
+TodayBox.propTypes = {
+    acdActions: PropTypes.object,
+    acdToday: PropTypes.array
+};
 
-                    const
-                    mapDispatchToProps = (dispatch) => ({
-                    acdActions: bindActionCreators(acdActions, dispatch)
-                });
+const
+    mapDispatchToProps = (dispatch) => ({
+        acdActions: bindActionCreators(acdActions, dispatch)
+    });
 
-                    export default connect(mapStateToProps,
-                    mapDispatchToProps)(TodayBox);
+export default connect(mapStateToProps,
+    mapDispatchToProps)(TodayBox);

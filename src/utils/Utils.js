@@ -10,7 +10,7 @@ const defaultHeaders = {
 };
 
 function buildHeaders() {
-  const authToken = localStorage.getItem('token');
+  const authToken = JSON.parse(localStorage.getItem('token'));
 
   return { ...defaultHeaders, Authorization: authToken };
 }
@@ -65,6 +65,19 @@ export function httpPost(url, data) {
   })
   .then(checkStatus)
   .then(parseJSON);
+}
+
+export function httpServerPost(url, data) {
+    const body = JSON.stringify(data);
+//console.log(JSON.stringify(buildHeaders()));
+    return fetch(getConfig('socketurl')+url, {
+        method: 'post',
+        headers: buildHeaders(),
+        body: body,
+        mode:'cors'
+    })
+        .then(checkStatus)
+        .then(parseJSON);
 }
 
 export function httpNodeServerPost(url, data) {
