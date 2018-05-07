@@ -111,6 +111,7 @@ class AcdInstrument extends React.Component {
 //        this.handleClick = this.handleClick.bind(this);
         this.loadEditInstrumentAcdData = this.loadEditInstrumentAcdData.bind(this);
         this.loadAddAcdData = this.loadAddAcdData.bind(this);
+        this.updateInstrument=this.updateInstrument.bind(this)
     }
 
     loadEditInstrumentAcdData(acdInstrumentEditData) {
@@ -130,6 +131,10 @@ class AcdInstrument extends React.Component {
         this.props.acdInstrumentActions.getInstrumentData();
     }
 
+    updateInstrument(){
+      this.props.acdInstrumentActions.getInstrumentData();
+    }
+
 //     handleClick(event) {
 // //      alert('handle click...');
 //         this.props.acdInstrumentActions.postAcdData(this.state);
@@ -141,7 +146,7 @@ class AcdInstrument extends React.Component {
             return (
                 <div className="container-fluid" id="page_content">
                     <div className="uk-modal" id="modal_header_footer">
-                        {this.state.modalType == "add" && <AcdInstrumentWizard/>}
+                        {this.state.modalType == "add" && <AcdInstrumentWizard updateInstrument={this.updateInstrument}/>}
                         {this.state.modalType == "edit" &&<EditInstrumentWizard acdInstrumentEditData={this.state.acdInstrumentEditData}/>}
                     </div>
                     <div className="mt-6">
@@ -180,7 +185,7 @@ class AcdInstrument extends React.Component {
 const
     mapStateToProps = (state, props) => {
         return {
-            acdInstrumentData: state.acdInstrumentData,
+            acdInstrumentData: state.acdInstrumentData
         }
     };
 

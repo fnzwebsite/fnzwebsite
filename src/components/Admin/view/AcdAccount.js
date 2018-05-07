@@ -162,7 +162,7 @@ class AcdAccount extends React.Component {
 const
     mapStateToProps = (state, props) => {
         return {
-            acdAccountData: state.acdAccountData,
+            acdAccountData: state.acdAccountData
         }
     };
 

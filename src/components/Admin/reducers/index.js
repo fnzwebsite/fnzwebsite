@@ -11,6 +11,10 @@ import acdInstrumentReducer from './acdInstrumentReducer'
 import acdAccountReducer from './acdAccountReducer'
 import postAcdAccountReducer from './postAccountReducer'
 import acdDealReducer from './acdDealReducer'
+import postAcdReducer from './postAcdReducer'
+import postInstrumentReducer from './postInstrumentReducer'
+import postDealReducer from './postDealReducer'
+
 
 export default combineReducers({
     dealing: dealingReducer,
@@ -22,5 +26,8 @@ export default combineReducers({
     acdInstrumentData:acdInstrumentReducer,
     acdAccountData:acdAccountReducer,
     acdDealData: acdDealReducer,
-    postAcdAccountData:postAcdAccountReducer
+    postAcdAccountData:postAcdAccountReducer,
+    postAcdData: postAcdReducer,
+    postAcdInstrumentData: postInstrumentReducer,
+    postAcdDealData:postDealReducer
 });

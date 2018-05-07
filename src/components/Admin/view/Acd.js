@@ -119,11 +119,10 @@ class Acd extends React.Component {
             modalType: "add",
             show: true
         };
-//        this.props.acdDataActions.getAllAcdData();
-        this.handleClick = this.handleClick.bind(this);
+
         this.loadEditAcdData = this.loadEditAcdData.bind(this);
         this.loadAddAcdData = this.loadAddAcdData.bind(this);
-        this.reloadAcd = this.reloadAcd.bind(this);
+        this.updateAcd = this.updateAcd.bind(this);
 
 
         this.state = {
@@ -178,12 +177,9 @@ class Acd extends React.Component {
         this.props.acdDataActions.getAllAcdData();
     }
 
-    handleClick(event) {
-//      alert('handle click...');
-        this.props.acdDataActions.postAcdData(this.state);
-    }
 
-    reloadAcd(){
+
+    updateAcd(){
         this.props.acdDataActions.getAllAcdData();
     }
 
@@ -192,7 +188,7 @@ class Acd extends React.Component {
                 <div className="container-fluid" id="page_content">
 
                     <div className="uk-modal" id="modal_header_footer">
-                        {this.state.modalType == "add" && <AddAcdWizard reloadAcd={this.reloadAcd}/>}
+                        {this.state.modalType == "add" && <AddAcdWizard updateAcd={this.updateAcd}/>}
                         {this.state.modalType == "edit" &&<EditAcdWizard reloadAcd={this.reloadAcd} acdEditData={this.state.acdEditData}/>}
                     </div>
 

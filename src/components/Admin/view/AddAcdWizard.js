@@ -2,7 +2,20 @@ import {connect} from 'react-redux';
 import React from 'react';
 import Acd from './Acd'
 import $ from 'jquery';
+import acdActions from '../actions/acdDataActions';
+import moment from 'moment'
+import {bindActionCreators} from 'redux';
+import PropTypes from 'prop-types';
+import acdDataActions from '../actions/acdDataActions';
+
 class AddAcdWizard extends React.Component {
+
+  componentWillReceiveProps(prevProps, prevState){
+      if(prevProps.postAcdData.status=="SUCCESS"){
+          this.props.updateAcd();
+          window.toastr.success('You have Successfully Created Account');
+      }
+  }
     componentDidMount() {
         var self = this;
         window.$("#wizard_add").steps({
@@ -73,32 +86,34 @@ class AddAcdWizard extends React.Component {
             var mode=$('#iisin').val();
             if(mode=="add")
             {
-                window.$.ajax({
-                    type: "POST",
-                    url: 'http://35.178.56.52:8081/api/v1/company',
-                    headers: {authorization: JSON.parse(localStorage.getItem('token'))}
-                    , data: JSON.stringify(reqData),
-                    success: function (res) {
-                        if(res[0].status==="SUCCESS")
-                        {
-                            window.toastr.options.onHidden = function() {
-                                window.location.href = "/acd";
-                                $('.button_finish').show();
-                                self.props.reloadAcd();
-                            }
-                            window.toastr.success('You have Successfully Created Company');
-                        }
-                        else {
-                            window.toastr.options.onHidden = function() {$('.button_finish').show();} //window.location.href = "/acd"; }
-                            window.toastr.error('Unable to create Company, Error Message: '+ res[0].info);
-                        }
-                    },
-                    error: function (err) {
-                        alert(JSON.stringify(err));
-                    },
-                    dataType: 'json',
-                    contentType: 'application/json'
-                });
+              $('.button_finish').hide();
+              self.props.acdDataActions.postCompanyData(reqData);
+                // window.$.ajax({
+                //     type: "POST",
+                //     url: 'http://35.178.56.52:8081/api/v1/company',
+                //     headers: {authorization: JSON.parse(localStorage.getItem('token'))}
+                //     , data: JSON.stringify(reqData),
+                //     success: function (res) {
+                //         if(res[0].status==="SUCCESS")
+                //         {
+                //             window.toastr.options.onHidden = function() {
+                //                 window.location.href = "/acd";
+                //                 $('.button_finish').show();
+                //                 self.props.reloadAcd();
+                //             }
+                //             window.toastr.success('You have Successfully Created Company');
+                //         }
+                //         else {
+                //             window.toastr.options.onHidden = function() {$('.button_finish').show();} //window.location.href = "/acd"; }
+                //             window.toastr.error('Unable to create Company, Error Message: '+ res[0].info);
+                //         }
+                //     },
+                //     error: function (err) {
+                //         alert(JSON.stringify(err));
+                //     },
+                //     dataType: 'json',
+                //     contentType: 'application/json'
+                // });
 
             }
         });
@@ -466,4 +481,23 @@ class AddAcdWizard extends React.Component {
     }
 }
 
-export default AddAcdWizard;
+const
+    mapStateToProps = (state, props) => {
+        return {
+            postAcdAccountData: state.postAcdAccountData,
+        }
+    };
+
+
+AddAcdWizard.propTypes = {
+    acdAccountActions: PropTypes.object,
+    postAcdData: PropTypes.array
+};
+
+const
+    mapDispatchToProps = (dispatch) => ({
+        acdDataActions: bindActionCreators(acdDataActions, dispatch)
+    });
+
+export default connect(mapStateToProps,
+    mapDispatchToProps)(AddAcdWizard);

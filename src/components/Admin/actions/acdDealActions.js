@@ -1,6 +1,6 @@
 import * as allActions from './allActions'
 import { push }               from 'react-router-redux';
-import { httpGet, httpPost,httpNodeServerPost }  from '../../../utils/Utils';
+import { httpGet, httpServerPost,httpNodeServerPost }  from '../../../utils/Utils';
 
 
 const acdDealActions = {
@@ -15,6 +15,19 @@ const acdDealActions = {
                     // localStorage.removeItem('token');
                     // localStorage.removeItem('displayName');
                     // localStorage.removeItem('acdId');
+                    dispatch(push('/sign_in'))
+            });
+        };
+    },
+
+    postDealData: (body) => {
+        return dispatch => {
+            httpServerPost('addDeal',body)
+                .then((data) => {
+                    dispatch({type: allActions.POST_ACDDEAL_DATA, postAcdDealData: data[0]});
+
+                }).catch(err => {
+                if (err.message == "Token Expired or Token not valid.")
                     dispatch(push('/sign_in'))
             });
         };

@@ -3,9 +3,20 @@ import React from 'react';
 import $ from 'jquery';
 import ReactDOM from 'react-dom'
 import Acd from './Acd'
+import acdInstrumentActions from '../actions/acdInstrumentActions';
+import {bindActionCreators} from 'redux';
+import PropTypes from 'prop-types';
+
 class AcdInstrumentWizard extends React.Component {
+  componentWillReceiveProps(prevProps, prevState){
+      if(prevProps.postAcdInstrumentData.status=="SUCCESS"){
+          this.props.updateInstrument();
+          window.toastr.success('You have Successfully Created Account');
+      }
+  }
   componentDidMount()
   {
+    let self = this;
     window.$("#wizard_add").steps({
       headerTag: "h3",
       bodyTag: "section",
@@ -109,30 +120,31 @@ class AcdInstrumentWizard extends React.Component {
       {
         //alert('add');
         $('.button_finish').hide();
-        $.ajax({
-          type: "POST",
-          url: 'http://35.178.56.52:8081/api/v1/instrument',
-          headers:{authorization:JSON.parse(localStorage.getItem('token'))}
-          ,data: JSON.stringify(reqData),
-          success: function(res){
-            //alert(JSON.stringify(res));
-            if(res[0].status==="SUCCESS")
-            {
-              window.toastr.options.onHidden = function() { window.location.href="/acdinstrument";
-              $('.button_finish').show(); }
-              window.toastr.success('You have Successfully created Instrument');
-            }
-            else {
-              window.toastr.options.onHidden = function() {$('.button_finish').show();} //window.location.href = "/acd"; }
-              window.toastr.error('Unable to Create Instrument, Error Message: '+ res[0].info);
-            }
-          },
-          error:function(err){
-            window.toastr.error(err.responseText);
-          },
-          dataType: 'json',
-          contentType:'application/json'
-        });
+        self.props.acdInstrumentActions.postInstrumentData(reqData);
+        // $.ajax({
+        //   type: "POST",
+        //   url: 'http://35.178.56.52:8081/api/v1/instrument',
+        //   headers:{authorization:JSON.parse(localStorage.getItem('token'))}
+        //   ,data: JSON.stringify(reqData),
+        //   success: function(res){
+        //     //alert(JSON.stringify(res));
+        //     if(res[0].status==="SUCCESS")
+        //     {
+        //       window.toastr.options.onHidden = function() { window.location.href="/acdinstrument";
+        //       $('.button_finish').show(); }
+        //       window.toastr.success('You have Successfully created Instrument');
+        //     }
+        //     else {
+        //       window.toastr.options.onHidden = function() {$('.button_finish').show();} //window.location.href = "/acd"; }
+        //       window.toastr.error('Unable to Create Instrument, Error Message: '+ res[0].info);
+        //     }
+        //   },
+        //   error:function(err){
+        //     window.toastr.error(err.responseText);
+        //   },
+        //   dataType: 'json',
+        //   contentType:'application/json'
+        // });
       }
 
       //if($('#isin').val)
@@ -281,4 +293,23 @@ render() {
 }
 }
 
-export default AcdInstrumentWizard;
+const
+    mapStateToProps = (state, props) => {
+        return {
+            postAcdAccountData: state.postAcdAccountData,
+        }
+    };
+
+
+AcdInstrumentWizard.propTypes = {
+    acdInstrumentActions: PropTypes.object,
+    postAcdInstrumentData: PropTypes.array
+};
+
+const
+    mapDispatchToProps = (dispatch) => ({
+        acdInstrumentActions: bindActionCreators(acdInstrumentActions, dispatch)
+    });
+
+export default connect(mapStateToProps,
+    mapDispatchToProps)(AcdInstrumentWizard);

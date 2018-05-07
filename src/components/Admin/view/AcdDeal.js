@@ -151,6 +151,7 @@
       };
       this.loadEditDealAcdData = this.loadEditDealAcdData.bind(this);
       this.loadAddDealData = this.loadAddDealData.bind(this);
+      this.updateDeal= this.updateDeal.bind(this);
     }
 
     loadEditDealAcdData(acdDealEditData,key) {
@@ -173,6 +174,9 @@
       this.props.acdAccountActions.getAccountsData();
     }
 
+    updateDeal(){
+        this.props.acdDealActions.getDealData();
+    }
     onFileUpload(e) {
       var currentFile = e.target.files[0];
       this.setState({file: currentFile})
@@ -201,7 +205,7 @@
         return (
             <div className="container-fluid" id="page_content">
                 <div className="uk-modal" id="modal_header_footer">
-                    {this.state.modalType == "add" && <AcdDealWizard/>}
+                    {this.state.modalType == "add" && <AcdDealWizard updateDeal={this.updateDeal}/>}
                     {this.state.modalType == "edit" &&
                     <EditAcdDealWizard acdDealEditData={this.state.acdDealEditData} editkey={this.state.editkey}/>}
                 </div>

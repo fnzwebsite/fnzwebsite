@@ -8,5 +8,8 @@ export default {
     acdInstrumentData: null,
     acdAccountData:null,
     acdDealData:null,
-    postAcdAccountData:null
+    postAcdAccountData:null,
+    postAcdData: null,
+    postAcdInstrumentData: null,
+    postAcdDealData: null
 };

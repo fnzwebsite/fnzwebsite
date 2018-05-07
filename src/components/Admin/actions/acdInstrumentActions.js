@@ -1,6 +1,6 @@
 import * as allActions from './allActions'
 import { push }               from 'react-router-redux';
-import { httpGet, httpPost,httpNodeServerPost }  from '../../../utils/Utils';
+import { httpGet, httpServerPost,httpNodeServerPost }  from '../../../utils/Utils';
 
 
 const acdInstrumentActions = {
@@ -18,23 +18,23 @@ const acdInstrumentActions = {
                     dispatch(push('/sign_in'))
             });
         };
+    },
+
+    postInstrumentData: (body) => {
+        return dispatch => {
+            httpServerPost('addInstrument',body)
+                .then((data) => {
+                    dispatch({type: allActions.POST_ACDINSTRUMENT_DATA, postAcdInstrumentData: data[0]});
+
+                }).catch(err => {
+                if (err.message == "Token Expired or Token not valid.")
+                    dispatch(push('/sign_in'))
+            });
+        };
     }
 };
 
 
-// export function AddAcdData(body){
-//   return fetch('http://35.178.56.52:8081/api/v1/company', {
-//       method: 'POST',
-//       mode: 'CORS',
-//       body: JSON.stringify(body),
-//       headers: {
-//           'Authorization':authHeader()
-//       }
-//   }).then(res => {
-//     debugger;
-//       return res;
-// })
-// }
 
 
 export default acdInstrumentActions;

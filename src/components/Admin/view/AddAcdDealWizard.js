@@ -6,58 +6,97 @@ import acdAccountActions from '../actions/acdAccountActions';
 import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import acdDealActions from '../actions/acdDealActions';
+import acdInstrumentActions from '../actions/acdInstrumentActions';
 
-class AddAcdAccountWizard extends React.Component {
+class AddAcdDealWizard extends React.Component {
 
-  constructor(props) {
-    super(props);
-  };
-
-  componentWillMount() {
-    this.props.acdAccountActions.getAccountsData();
+  componentWillReceiveProps(prevProps, prevState){
+      if(prevProps.postAcdDealData && prevProps.postAcdDealData.status=="SUCCESS"){
+          this.props.updateDeal();
+          window.toastr.success('You have Successfully Created Account');
+      }
   }
+
+  componentDidUpdate(){
+    let self=this;
+    this.props.acdAccountActions.getAccountsData();
+    this.props.acdInstrumentActions.getInstrumentData();
+
+    if(self.props.acdAccountData){
+      var arr = Object.keys(self.props.acdAccountData).map(function(k) { return self.props.acdAccountData[k] });
+          $(arr).each(function(index,item){
+            //    console.log(item);
+            $("#ddlAccount").append('<option value="'+item.identifier+'">'+item.name+'</option>')
+          })
+    }
+
+      if (this.props.acdInstrumentData) {
+            var arr = Object.keys(self.props.acdInstrumentData).map(function(k) { return self.props.acdInstrumentData[k] });
+
+            $(arr).each(function(index,item){
+              //    console.log(item);
+              $("#ddlInstrument").append('<option value="'+item.isin+'">'+item.name+'</option>')
+            })
+      }
+  }
+
   componentDidMount()
   {
+    let self=this;
     window.$("#wizard_add").steps({
       headerTag: "h3",
       bodyTag: "section",
       transitionEffect: "slideLeft",
       autoFocus: true
     });
+    this.props.acdAccountActions.getAccountsData();
     $(document).ready(function(){
-      $.ajax({
-        type: "GET",
-        url: 'http://35.178.56.52:8081/api/v1/account',
-        headers:{authorization:JSON.parse(localStorage.getItem('token'))},
-        success: function(res){
-          var arr = Object.keys(res).map(function(k) { return res[k] });
+      //self.acdAccountActions.getAccountsData();
+      //alert(JSON.stringify(self.props.acdAccountData));
+      // if(self.props.acdAccountData && self.props.acdAccountData.length){
+      //   var arr = Object.keys(self.props.acdAccountData).map(function(k) { return self.props.acdAccountData[k] });
+      //       $(arr).each(function(index,item){
+      //         //    console.log(item);
+      //         $("#ddlAccount").append('<option value="'+item.identifier+'">'+item.name+'</option>')
+      //       })
+      // }
 
-          $(arr).each(function(index,item){
-            //    console.log(item);
-            $("#ddlAccount").append('<option value="'+item.identifier+'">'+item.name+'</option>')
-          })
-        },
-        error:function(err){
-          alert(JSON.stringify(err));
-        }
-      });
 
-      $.ajax({
-        type: "GET",
-        url: 'http://35.178.56.52:8081/api/v1/instrument',
-        headers:{authorization:JSON.parse(localStorage.getItem('token'))},
-        success: function(res){
-          var arr = Object.keys(res).map(function(k) { return res[k] });
 
-          $(arr).each(function(index,item){
-            //    console.log(item);
-            $("#ddlInstrument").append('<option value="'+item.isin+'">'+item.name+'</option>')
-          })
-        },
-        error:function(err){
-          alert(JSON.stringify(err));
-        }
-      });
+      // $.ajax({
+      //   type: "GET",
+      //   url: 'http://35.178.56.52:8081/api/v1/account',
+      //   headers:{authorization:JSON.parse(localStorage.getItem('token'))},
+      //   success: function(res){
+      //     var arr = Object.keys(res).map(function(k) { return res[k] });
+      //
+      //     $(arr).each(function(index,item){
+      //       //    console.log(item);
+      //       $("#ddlAccount").append('<option value="'+item.identifier+'">'+item.name+'</option>')
+      //     })
+      //   },
+      //   error:function(err){
+      //     alert(JSON.stringify(err));
+      //   }
+      // });
+
+      // $.ajax({
+      //   type: "GET",
+      //   url: 'http://35.178.56.52:8081/api/v1/instrument',
+      //   headers:{authorization:JSON.parse(localStorage.getItem('token'))},
+      //   success: function(res){
+      //     var arr = Object.keys(res).map(function(k) { return res[k] });
+      //
+      //     $(arr).each(function(index,item){
+      //       //    console.log(item);
+      //       $("#ddlInstrument").append('<option value="'+item.isin+'">'+item.name+'</option>')
+      //     })
+      //   },
+      //   error:function(err){
+      //     alert(JSON.stringify(err));
+      //   }
+      // });
     })
     $(document).on('click', '.button_finish', function(){
       //alert(getFormData($('#wizard_advanced_form')));
@@ -105,31 +144,32 @@ class AddAcdAccountWizard extends React.Component {
       {
         //alert('add');
         $('.button_finish').hide();
-        $.ajax({
-          type: "POST",
-          url: 'http://35.178.56.52:8081/api/v1/dealing',
-          headers:{authorization:JSON.parse(localStorage.getItem('token'))}
-          ,data: JSON.stringify(reqData),
-          success: function(res){
-            //alert(JSON.stringify(res));
-            if(res[0].status==="SUCCESS")
-            {
-              window.toastr.options.onHidden = function() { window.location.href="/acddeal";$('.button_finish').show();  }
-              window.toastr.success('You have Successfully Created Deal');
-            }
-            else {
-              window.toastr.options.onHidden = function() {$('.button_finish').show(); } //window.location.href = "/acd"; }
-              window.toastr.error('Unable to create Deal, Error Message: '+ res[0].info);
-            }
-            //  ReactDOM.render(<Acd />,$(this));
-          },
-          error:function(err){
-            window.toastr.error(JSON.stringify(err));
-            $('.button_finish').show();
-          },
-          dataType: 'json',
-          contentType:'application/json'
-        });
+        self.props.acdDealActions.postDealData(reqData);
+        // $.ajax({
+        //   type: "POST",
+        //   url: 'http://35.178.56.52:8081/api/v1/dealing',
+        //   headers:{authorization:JSON.parse(localStorage.getItem('token'))}
+        //   ,data: JSON.stringify(reqData),
+        //   success: function(res){
+        //     //alert(JSON.stringify(res));
+        //     if(res[0].status==="SUCCESS")
+        //     {
+        //       window.toastr.options.onHidden = function() { window.location.href="/acddeal";$('.button_finish').show();  }
+        //       window.toastr.success('You have Successfully Created Deal');
+        //     }
+        //     else {
+        //       window.toastr.options.onHidden = function() {$('.button_finish').show(); } //window.location.href = "/acd"; }
+        //       window.toastr.error('Unable to create Deal, Error Message: '+ res[0].info);
+        //     }
+        //     //  ReactDOM.render(<Acd />,$(this));
+        //   },
+        //   error:function(err){
+        //     window.toastr.error(JSON.stringify(err));
+        //     $('.button_finish').show();
+        //   },
+        //   dataType: 'json',
+        //   contentType:'application/json'
+        // });
       }
     });
 
@@ -177,25 +217,7 @@ class AddAcdAccountWizard extends React.Component {
 });
 }
 
-componentWillMount() {
-  this.props.acdAccountActions.getAccountsData();
-}
-loadAccounts()
-{
-  let accountsArray = this.props.acdAccountData
-  accountsArray = _.filter(accountsArray, (obj) => {
-    return obj.name !== null
-  })
-  const accounts = _.values(accountsArray).map((account, index) => {
-    //console.log("Account :" + account.name)
-    return (<option value={account.name}>{account.name}</option>);
-  });
-  return (accounts);
-}
 render() {
-  let accountsdropDown=null;
-  let self=this;
-
   return (
     <div className="uk-modal-dialog" id="acdmodalDialog">
     <button type="button" className="uk-modal-close uk-close"></button>
@@ -335,23 +357,30 @@ render() {
 }
 
 const
-mapStateToProps = (state, props) => {
-  return {
-    acdDealData: state.acdDealData,
-    acdAccountData: state.acdAccountData
-  }
-};
+    mapStateToProps = (state, props) => {
+        return {
+            postAcdDealData: state.postAcdDealData,
+            acdAccountData: state.acdAccountData,
+            acdInstrumentData: state.acdInstrumentData
+        }
+    };
 
 
-AddAcdAccountWizard.propTypes = {
-  acdAccountActions: PropTypes.object,
-  acdAccountData: PropTypes.array
+AddAcdDealWizard.propTypes = {
+    acdDealActions: PropTypes.object,
+    postAcdDealData: PropTypes.array,
+    acdAccountActions: PropTypes.object,
+    acdAccountData: PropTypes.array,
+    acdInstrumentActions: PropTypes.object,
+    acdInstrumentData: PropTypes.array
 };
 
 const
-mapDispatchToProps = (dispatch) => ({
-  acdAccountActions: bindActionCreators(acdAccountActions, dispatch)
-});
+    mapDispatchToProps = (dispatch) => ({
+        acdDealActions: bindActionCreators(acdDealActions, dispatch),
+        acdAccountActions: bindActionCreators(acdAccountActions, dispatch),
+        acdInstrumentActions: bindActionCreators(acdInstrumentActions, dispatch)
+    });
 
 export default connect(mapStateToProps,
-  mapDispatchToProps)(AddAcdAccountWizard);
+    mapDispatchToProps)(AddAcdDealWizard);

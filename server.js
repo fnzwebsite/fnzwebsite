@@ -197,7 +197,7 @@ function postAccount(callback, auth, body) {
         path: '/api/v1/account',
         headers: {
             Authorization: auth,
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/JSON',
             'Content-Length': postData.length
         }
     };
@@ -211,13 +211,17 @@ function postAccount(callback, auth, body) {
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
             output += chunk;
+            console.log(output);
         });
 
         res.on('end', function () {
-            var obj = JSON.parse(output);
-            console.log(obj);
-            if (callback != undefined) {
-                callback(obj);
+            if(output!=null)
+            {
+                console.log(output);
+                var obj = JSON.parse(output);
+                if (callback != undefined) {
+                    callback(obj);
+                }
             }
         });
     });
@@ -471,5 +475,161 @@ function getAcdDealData(callback, auth) {
         console.log('problem with request: ' + e.message);
     });
 
+    req.end();
+}
+
+
+server.post('/addCompany',function(request,response){
+    let auth = request.headers.authorization;
+    let body = request.body;
+    postCompany(function (data) {
+        response.send(data);
+    }, auth,body);
+});
+
+
+function postCompany(callback, auth, body) {
+    const postData = querystring.stringify(body);
+    var options = {
+        method: 'POST',
+        host: hostIP,
+        port: 8081,
+        path: '/api/v1/company',
+        headers: {
+            Authorization: auth,
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Length': postData.length
+        }
+    };
+    console.log(options);
+    console.log(auth);
+    console.log(body);
+
+    var req = http.request(options, (res) => {
+        var output = '';
+
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            output += chunk;
+        });
+
+        res.on('end', function () {
+            var obj = JSON.parse(output);
+            console.log(obj);
+            if (callback != undefined) {
+                callback(obj);
+            }
+        });
+    });
+
+    req.on('error', (e) => {
+        console.error(e);
+    });
+
+    req.write(postData);
+    req.end();
+}
+
+
+server.post('/addInstrument',function(request,response){
+    let auth = request.headers.authorization;
+    let body = request.body;
+    postInstrument(function (data) {
+        response.send(data);
+    }, auth,body);
+});
+
+
+function postInstrument(callback, auth, body) {
+    const postData = querystring.stringify(body);
+    var options = {
+        method: 'POST',
+        host: hostIP,
+        port: 8081,
+        path: '/api/v1/instrument',
+        headers: {
+            Authorization: auth,
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Length': postData.length
+        }
+    };
+    console.log(options);
+    console.log(auth);
+    console.log(body);
+
+    var req = http.request(options, (res) => {
+        var output = '';
+
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            output += chunk;
+        });
+
+        res.on('end', function () {
+            var obj = JSON.parse(output);
+            console.log(obj);
+            if (callback != undefined) {
+                callback(obj);
+            }
+        });
+    });
+
+    req.on('error', (e) => {
+        console.error(e);
+    });
+
+    req.write(postData);
+    req.end();
+}
+
+
+server.post('/addDeal',function(request,response){
+    let auth = request.headers.authorization;
+    let body = request.body;
+    postDeal(function (data) {
+        response.send(data);
+    }, auth,body);
+});
+
+
+function postDeal(callback, auth, body) {
+    const postData = querystring.stringify(body);
+    var options = {
+        method: 'POST',
+        host: hostIP,
+        port: 8081,
+        path: '/api/v1/dealing',
+        headers: {
+            Authorization: auth,
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Length': postData.length
+        }
+    };
+    console.log(options);
+    console.log(auth);
+    console.log(body);
+
+    var req = http.request(options, (res) => {
+        var output = '';
+
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            output += chunk;
+        });
+
+        res.on('end', function () {
+            var obj = JSON.parse(output);
+            console.log(obj);
+            if (callback != undefined) {
+                callback(obj);
+            }
+        });
+    });
+
+    req.on('error', (e) => {
+        console.error(e);
+    });
+
+    req.write(postData);
     req.end();
 }
