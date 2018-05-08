@@ -33,6 +33,10 @@ export function boxDataCalculation(data) {
             subscriptions = parseFloat(subscriptions).toFixed(4);
             redemptions = parseFloat(redemptions).toFixed(4);
             netFlow = parseFloat(netFlow).toFixed(4);
+            // subscriptions = parseFloat(10000).toFixed(4);
+            // redemptions = parseFloat(15000).toFixed(4);
+            // netFlow=subscriptions-redemptions;
+            netFlow = parseFloat(netFlow).toFixed(4);
 
         }
     }
@@ -48,11 +52,11 @@ export function boxDataCalculation(data) {
 
 export function convertCurrency(currency) {
     return (
-        <span>
+        <label className="">
     {new Intl.NumberFormat('en-GB', {
-        style: 'currency',
+      style: 'currency',
         currency: 'GBP'
     }).format(currency)}
-    </span>
+    </label>
     )
 }

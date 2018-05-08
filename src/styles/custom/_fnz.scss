@@ -1,0 +1,517 @@
+    // Header
+    // Footer
+    // Side_Navbar
+    .slimScrollDiv {
+        z-index: 99999;
+    }
+
+    body {
+        background-color: #e2e2e2;
+    }
+    a{
+        outline: none !important;
+    }
+
+    .app-logo img {
+        height: 50px;
+        margin-left: 40px;
+    }
+
+    .tran-tab .jr-card,
+    .chart-tab .jr-card,
+    .tran-tab .MuiPaper-shadow2-16,
+    .tran-tab .MuiPaper-shadow2-573 {
+        box-shadow: none;
+    }
+
+    .tran-tab {
+        .jr-card {
+            padding-bottom: 0;
+        }
+        table {
+            th {
+
+                text-align: center !important;
+                color: #444;
+            }
+            tbody {
+                td {
+                    text-transform: uppercase;
+                }
+            }
+
+            .stat {
+                padding-right: 0px !important;
+            }
+        }
+        div {
+            box-shadow: none;
+        }
+    }
+
+    th.tran.t-center {
+        padding-right: 24px;
+    }
+
+    th.tran.t-center.colwidth124 {
+        padding-right: 0px;
+    }
+
+    .tran.t-center {
+
+        text-align: center !important;
+    }
+
+    .tran.t-left {
+
+        text-align: left !important;
+    }
+
+    .tran.t-right {
+
+        text-align: right !important;
+    }
+
+    .colwidth180 {
+        min-width: 180px;
+    }
+
+    .colwidth124 {
+        min-width: 124px;
+    }
+
+    .colwidth230 {
+        min-width: 230px;
+    }
+
+    .dashboard_card {
+        table {
+            th {
+
+                text-align: center !important;
+                color: #444;
+            }
+        }
+    }
+
+    .cus-dialog {
+        table {
+            th {
+
+                color: #444;
+            }
+        }
+    }
+
+    table {
+        th {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        td {
+            font-weight: 500;
+
+            .zmdi-play {
+                margin-left: 5px;
+            }
+            .zmdi-eye {
+                font-size: 18px;
+            }
+            span {
+                padding: 3px;
+            }
+        }
+    }
+
+    tfoot {
+        td {
+
+            span, div {
+                font-size: 0.875rem !important;
+                color: #3f51b5 !important;
+            }
+
+            div{
+                svg{
+                    left:20px;
+                    top:5px;
+                }
+            }
+        }
+    }
+
+
+
+
+    .dashboard_card .open h2 {
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    .dashboard_card .open h5 {
+        font-size: 0.875rem;
+        text-transform: uppercase;
+    }
+
+    .cust-header {
+        .app-main-header {
+            background: #e2e2e2 !important;
+            box-shadow: 0px 1px 1px #c4c3d2 !important;
+            border-bottom: 1px solid #817eb2 !important;
+        }
+    } // transaction table
+    // Fund position cards
+    .card-header .badge {
+        box-shadow: none;
+        text-transform: uppercase;
+        font-weight: 600;
+        float: left;
+    }
+
+    .welcome {
+        padding-right: 10px;
+    }
+
+    .fund-card,
+    .app_cards {
+        .card-header {
+            padding: 12px 12px 6px 12px;
+            font-size: 0.8125rem;
+            min-height: 40px;
+            font-weight: 500;
+            span,
+            a {
+                color: white;
+                text-transform: uppercase;
+            }
+            i {
+                margin-right: 10px;
+                font-size: 17px;
+            }
+        }
+        .con {
+            margin-right: 0px;
+            margin-left: 0px;
+            .stack-order {
+                span {
+                    font-size: 12px;
+                    text-transform: uppercase;
+                    font-weight: 500;
+                    color: #888
+                }
+                h4 {
+                    font-size: 18px;
+                    color: #2196F3;
+                    span {
+                        margin-right: 3px;
+                        color: #666;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    } // span[class^="MuiTab-label"] {
+    //     font-size: 0.875rem !important;
+    // }
+    .user-detail h4 {
+        font-size: 13px;
+        color: black;
+    }
+
+    .con>div {
+        padding: 0 6px;
+    }
+
+    .selected .card-body {
+        background: #061b45;
+    }
+
+    .chart-sec .card-body {
+        background: #fff;
+    }
+
+    .card-body {
+        /*background: #0574e0;*/
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .quick-menu .icon-btn {
+        color: black;
+    }
+
+    .link-color {
+        color: #3f51b5 !important;
+    }
+
+    .link-color:hover {
+        color: #0693E3 !important;
+        text-decoration: underline;
+    }
+    /* .card-body .form-group{
+    margin-bottom: 5px;
+}*/
+
+    .card-body .form-control:focus {
+        color: #495057;
+        background-color: #fff;
+        border-color: #2196f3;
+        outline: none;
+        -webkit-box-shadow: 0 0 0 0.2rem rgba(121, 106, 238, 0.25);
+        box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.25);
+    }
+
+    .closed h2 {
+        color: orange !important;
+    }
+
+    .closed hr {
+        margin: 10px auto 10px !important;
+        width: 50% !important;
+    }
+
+    .blue {
+        color: #0595e0 !important;
+    }
+
+    .orange {
+        background: #f07700 !important;
+    }
+
+    .fa-orange {
+        color: #f07700 !important;
+    }
+
+    .fa-gray {
+        color: #444 !important;
+    }
+
+    .bg-alice {
+        background: #00acc1 !important;
+        color: #fff;
+    }
+
+    .dashboard_card {
+        text-align: center;
+        padding: 17px 0;
+    }
+
+    .dashboard_card h5 {
+        color: #444; // font-weight: 500;
+        margin-bottom: 5px;
+        width: 100%;
+        font-size: 0.85rem;
+    }
+
+    .dashboard_card h2 {
+        color: #2051ba; // font-weight: 700;
+        // font-size: 1.2rem;
+        margin: 0;
+    }
+
+    .dashboard_card .h-100 {
+        height: 20% !important;
+        margin-top: 28%;
+        margin-left: 6px;
+    }
+
+    .dashboard_card h2 sub {
+        font-size: 0.8rem;
+    }
+
+    .dashboard_card p {
+        color: #818181;
+        font-size: 0.8rem; // font-weight: 500;
+    }
+
+    .dashboard_icon h2 {
+        margin-bottom: 0;
+    }
+
+    .dashboard_icon i {
+        // font-size: 5.25rem;
+    }
+
+    .dashboard_icon h5 {
+        margin-bottom: 0;
+    }
+
+    @keyframes example {
+        0% {
+            left: 0px;
+            top: 0px;
+        } // 25% {
+        //   left: 200px;
+        //   top: 0px;
+        // }
+        // 50% {
+        //   right: 200px;
+        //   bottom: 200px;
+        // }
+        // 75% {
+        //   left: 0px;
+        //   top: 0px;
+        // }
+        100% {
+            left: 0px;
+            top: 0px;
+        }
+    }
+
+    .panel-fullscreen {
+        display: block;
+        z-index: 9999;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        overflow: auto;
+        animation-name: example;
+        animation-duration: 1s;
+    }
+    /* header card*/
+
+    .menu-icon {
+        background: black !important;
+    }
+
+    .app_cards {
+        .card-header {
+            padding: 12px 24px 0px;
+        }
+    }
+
+    .app_cards .badge {
+        margin-bottom: 0;
+    }
+
+    .app_cards .zmdi {
+        line-height: 1.3rem;
+    }
+
+    .app_cards .dashboard_card {
+        padding: 17px 15px;
+    }
+
+    .dark-blue .app-main-header {
+        background-color: #f1f1f1 !important;
+    }
+
+    .tab-icon {
+        height: 42px !important;
+    }
+
+    .chart-tab {
+        span {
+            span {
+                padding-left: 6px !important;
+                font-weight: 500;
+            }
+        }
+        header {
+            height: 42px;
+        }
+    }
+
+    .app_cards {
+        .closed {
+
+            div {
+                box-shadow: none;
+            }
+        }
+
+        .open {
+            padding: 20px;
+            border-right: 1px solid #ddd;
+            .example-custom-input {
+                width: 60%;
+                input {
+                    text-align: center;
+                    font-size: 0.875rem;
+                }
+            }
+            .zmdi-calendar {
+                font-size: 18px !important;
+                color: #3f51b5 !important;
+                padding-left: 5px;
+                padding-top: 5px;
+                top: 6px;
+                position: absolute;
+            }
+            .zmdi-arrow-right {
+                position: absolute;
+                left: 20px;
+                top: 13px;
+                font-size: 14px;
+            }
+            hr {
+                margin: 15px; // border:1px dashed #ddd;
+            }
+        }
+    }
+
+    .closed {
+        padding-left: 20px;
+        table {
+            // width: 50%;
+        }
+    }
+
+    .cus-dialog>div {
+        min-width: 90%;
+        border: none;
+    }
+
+    .cus-head {
+        padding: 15px 20px 0px !important;
+        height: 44px;
+        border-bottom: 1px solid #817eb2 !important;
+        h2 {
+            font-size: 14px;
+            padding-left: 10px;
+            padding-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .zmdi {
+            padding-right: 10px;
+            font-size: 18px;
+            margin-top: 2px;
+        }
+    } // .isin-details{
+    //     th{
+    //         padding-right: 30px !important;
+    //     }
+    // }
+    .isin-details {
+        .netflow {
+            padding-right: 0 !important;
+        }
+
+        th,
+        td {
+            padding-right: 25px !important;
+        }
+        td:last-child {
+            text-align: center !important;
+        }
+    }
+
+
+    @media (min-width: 1025px) and (max-width: 1366px) {
+        .isin-details {
+            .netflow {
+                padding-right: 36px !important;
+            }
+            .pnav {
+                padding-right: 36px !important;
+            }
+            th:last-child {
+                padding-left: 35px;
+            }
+        }
+    }

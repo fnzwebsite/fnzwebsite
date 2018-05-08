@@ -1,4 +1,4 @@
-import * as allActions from '../../Admin/actions/allActions';
+import * as allActions from 'actions/allActions';
 
  const AlertActions = {
     success,

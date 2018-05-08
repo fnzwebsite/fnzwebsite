@@ -339,7 +339,8 @@ function getAcd(callback, auth, dateValue,acdId) {
                     "netFlow": 0,
                     "unitsPurchased":0,
                     "unitsSold":0,
-                    "roundedPrice":0
+                    "roundedPrice":0,
+                    "isAPIReturnedData":false
                 }]);
             }
         });

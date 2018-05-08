@@ -1,31 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux'
-import { Provider} from 'react-redux'
-import thunk from 'redux-thunk'
-import createHistory from 'history/createBrowserHistory'
-import { Router} from 'react-router'
-import { routerMiddleware} from 'react-router-redux'
-import configRoutes from './routes/Routes'
-import rootReducer from './components/Admin/reducers/index'
+import React from "react";
+import ReactDOM from "react-dom";
 
+const rootEl = document.getElementById("app-site");
 
-const history = createHistory()
-const rMiddleware = routerMiddleware(history)
+// Create a reusable render method that we can call more than once
+let render = () => {
+  // Dynamically import our main App component, and render it
+  const MainApp = require("./MainApp").default;
+  ReactDOM.render(
+      <MainApp />,
+    rootEl
+  );
+};
 
-const store = createStore(
-    rootReducer,
-    applyMiddleware(thunk, rMiddleware)
-)
+if (module.hot) {
+  module.hot.accept("./MainApp", () => {
+    const NextApp = require("./MainApp").default;
+    render(
+        <NextApp />,
+      rootEl
+    );
+  });
+}
 
-
-ReactDOM.render(
-    <Provider store={store}>
-        <Router history={history}>
-            <div>
-                {configRoutes()}
-            </div>
-        </Router>
-    </Provider>,
-    document.getElementById('root')
-);
+render();
