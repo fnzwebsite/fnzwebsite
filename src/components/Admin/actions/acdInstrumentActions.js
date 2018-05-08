@@ -1,12 +1,12 @@
 import * as allActions from './allActions'
 import { push }               from 'react-router-redux';
-import { httpGet, httpServerPost,httpNodeServerPost }  from '../../../utils/Utils';
+import { httpDirectGet,httpDirectPost }  from '../../../utils/Utils';
 
 
 const acdInstrumentActions = {
     getInstrumentData: () => {
         return dispatch => {
-                httpGet('getInstrument')
+            httpDirectGet('instrument')
                 .then((data) => {
 
                     dispatch({type: allActions.RECEIVE_ACDINSTRUMENT_DATA, acdInstrumentData: data});
@@ -22,10 +22,9 @@ const acdInstrumentActions = {
 
     postInstrumentData: (body) => {
         return dispatch => {
-            httpServerPost('addInstrument',body)
+            httpDirectPost('instrument',body)
                 .then((data) => {
                     dispatch({type: allActions.POST_ACDINSTRUMENT_DATA, postAcdInstrumentData: data[0]});
-
                 }).catch(err => {
                 if (err.message == "Token Expired or Token not valid.")
                     dispatch(push('/sign_in'))

@@ -1,12 +1,12 @@
 import * as allActions from './allActions'
 import { push }               from 'react-router-redux';
-import { httpGet, httpServerPost,httpNodeServerPost }  from '../../../utils/Utils';
+import { httpDirectGet, httpServerPost,httpNodeServerPost }  from '../../../utils/Utils';
 
 
 const acdDealActions = {
     getDealData: () => {
         return dispatch => {
-                httpGet('getAcdDealData')
+            httpDirectGet('dealing')
                 .then((data) => {
 
                     dispatch({type: allActions.RECEIVE_ACDDEAL_DATA, acdDealData: data});

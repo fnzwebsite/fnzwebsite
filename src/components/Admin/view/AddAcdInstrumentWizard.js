@@ -296,7 +296,7 @@ render() {
 const
     mapStateToProps = (state, props) => {
         return {
-            postAcdAccountData: state.postAcdAccountData,
+            postAcdInstrumentData: state.postAcdInstrumentData,
         }
     };
 

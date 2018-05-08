@@ -1,12 +1,12 @@
 import * as allActions from './allActions'
 import { push }               from 'react-router-redux';
-import { httpGet, httpServerPost,httpNodeServerPost }  from '../../../utils/Utils';
+import { httpDirectGet, httpDirectPost }  from '../../../utils/Utils';
 
 
 const acdDataActions = {
     getAllAcdData: () => {
         return dispatch => {
-                httpGet('getacd')
+            httpDirectGet('company')
                 .then((data) => {
 
                     dispatch({type: allActions.RECEIVE_ACD_DATA, acdData: data});
@@ -22,7 +22,7 @@ const acdDataActions = {
 
     postCompanyData: (body) => {
         return dispatch => {
-            httpServerPost('addCompany',body)
+            httpDirectPost('company',body)
                 .then((data) => {
                     dispatch({type: allActions.POST_ACD_DATA, postAcdData: data[0]});
 

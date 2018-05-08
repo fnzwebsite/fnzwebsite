@@ -1,12 +1,12 @@
 import * as allActions from './allActions'
 import { push }               from 'react-router-redux';
-import { httpGet, httpServerPost,httpNodeServerPost }  from '../../../utils/Utils';
+import { httpDirectGet,httpDirectPost}  from '../../../utils/Utils';
 
 
 const acdAccountActions = {
     getAccountsData: () => {
         return dispatch => {
-                httpGet('getAcdAccountData')
+            httpDirectGet('account')
                 .then((data) => {
                     dispatch({type: allActions.RECEIVE_ACDACCOUNT_DATA, acdAccountData: data});
                 }).catch(err => {
@@ -21,7 +21,7 @@ const acdAccountActions = {
 
     postAccountsData: (body) => {
         return dispatch => {
-            httpServerPost('account',body)
+            httpDirectPost('account',body)
                 .then((data) => {
                     dispatch({type: allActions.POST_ACDACCOUNT_DATA, postAcdAccountData: data[0]});
 

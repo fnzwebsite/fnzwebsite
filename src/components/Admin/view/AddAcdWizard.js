@@ -87,7 +87,8 @@ class AddAcdWizard extends React.Component {
             if(mode=="add")
             {
               $('.button_finish').hide();
-              self.props.acdDataActions.postCompanyData(reqData);
+               // var data =  {"amlStatus":"","companyType":"zzz","docType":"COM","domicile":"","email":"abcd@gmail.com","fax":"0303 333 3331","identifier":"874e96ee-c713-480c-9cca-4a6fed7d2930","instrumentType":"","kycStatus":"","name":"xyz2","postalAddress":{"addressLine1":"a1","addressLine2":"b1","city":"c1","country":"United Kingdom","county":"d1","postcode":"098098"},"registeredAddress":{"addressLine1":"a","addressLine2":"b","city":"c","country":"United Kingdom","county":"d","postcode":"98899"},"relationshipManager":{"address":"","email":"abcd@gmail.com","name":"abcd","relation":"re","telephone":""},"status":10,"telephone":"0303 333 3330","ucitisCompliant":true}
+               self.props.acdDataActions.postCompanyData(reqData);
                 // window.$.ajax({
                 //     type: "POST",
                 //     url: 'http://35.178.56.52:8081/api/v1/company',
@@ -484,7 +485,7 @@ class AddAcdWizard extends React.Component {
 const
     mapStateToProps = (state, props) => {
         return {
-            postAcdAccountData: state.postAcdAccountData,
+            postAcdData: state.postAcdData,
         }
     };
 

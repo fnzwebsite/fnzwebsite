@@ -1,12 +1,12 @@
 import * as allActions from '../../Admin/actions/allActions'
 import { push }               from 'react-router-redux';
-import { httpGet, httpPost }  from '../../../utils/Utils';
+import { httpDirectGet }  from '../../../utils/Utils';
 
 
 const dealingActions = {
     getDealings: () => {
         return dispatch => {
-            httpGet('dealing')
+            httpDirectGet('dealing')
                 .then((data) => {
                     dispatch({
                         type: allActions.RECEIVE_DEALING,
