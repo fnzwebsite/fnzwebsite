@@ -138,7 +138,7 @@ function getDealingByDate(callback, auth, setDate) {
         res.on('end', function () {
             if(output!=null)
             {
-                console.log(output);
+                //console.log(output);
                 var obj = JSON.parse(output);
                 if (callback != undefined) {
                     callback(obj);
@@ -304,12 +304,12 @@ function getPriceByKeyDate(callback,auth) {
 }
 
 function getAcd(callback, auth, dateValue,acdId) {
-    console.log('/api/v1/box/'+dateValue+'/acd/'+acdId)
+    //console.log('/api/v1/box/'+dateValue+'/organisation/'+acdId)
     var options = {
         method: 'GET',
         host: hostIP,
         port: 8081,
-        path: '/api/v1/box/'+dateValue+'/acd/'+acdId,
+        path: '/api/v1/box/'+dateValue+'/organisation/'+acdId,
         headers: {
             Authorization: auth
         }
@@ -324,24 +324,25 @@ function getAcd(callback, auth, dateValue,acdId) {
         });
 
         res.on('end', function () {
-
-            if(output!=null && output!=undefined && output.length>0)
+          // if(JSON.stringify(output) === '{}'){
+          //   console.log('len'+Object.keys(output).length);
+          // }
+          console.log("leng"+Object.keys(output).length);
+            if(Object.keys(output).length!=2)
             {
                 var obj = JSON.parse(output);
+                console.log(obj);
                 if (callback != undefined) {
                     callback(obj);
                 }
             }
             else {
-                callback([{
-                    "subscriptions": 0,
-                    "redemptions": 0,
-                    "netFlow": 0,
-                    "unitsPurchased":0,
-                    "unitsSold":0,
-                    "roundedPrice":0,
-                    "isAPIReturnedData":false
-                }]);
+                callback({
+                  "totalSubscription": 0,
+                  "totalRedemption": 0,
+                  "totalNetflow": 0,
+                  "positions": []
+              });
             }
         });
     });
@@ -502,9 +503,9 @@ function postCompany(callback, auth, body) {
             'Content-Length': postData.length
         }
     };
-    console.log(options);
-    console.log(auth);
-    console.log(body);
+    // console.log(options);
+    // console.log(auth);
+    // console.log(body);
 
     var req = http.request(options, (res) => {
         var output = '';
@@ -554,9 +555,9 @@ function postInstrument(callback, auth, body) {
             'Content-Length': postData.length
         }
     };
-    console.log(options);
-    console.log(auth);
-    console.log(body);
+    // console.log(options);
+    // console.log(auth);
+    // console.log(body);
 
     var req = http.request(options, (res) => {
         var output = '';

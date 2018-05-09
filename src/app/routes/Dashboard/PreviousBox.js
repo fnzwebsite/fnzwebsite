@@ -20,7 +20,7 @@ class PreviousBox extends React.Component {
     }
 
     render() {
-      if (this.props.acdPrevious && this.props.acdPrevious.length) {
+      if (this.props.acdPrevious) {
             this.state = {
                 boxData: boxDataCalculation(this.props.acdPrevious)
             }
@@ -38,14 +38,14 @@ class PreviousBox extends React.Component {
             //console.log(broughtForwardToday);
             //console.log(carryForwardToday);
         }
-        if (this.props.acdPrevious && this.props.acdPrevious.length) {
+        if (this.props.acdPrevious) {
           return (
             <div>
             <div className="card-header d-flex justify-content-between bg-primary">
               <span className="text-white">
 
               <i className="zmdi   zmdi-case px-1" />
-              Today</span>
+              Previous Day</span>
 
               <Link to="/app/table-page">
                 <i
@@ -86,7 +86,7 @@ class PreviousBox extends React.Component {
           return (
                 <div>
 
-                    <div class="preloader">
+                    <div className="preloader">
                         <span class="line line-1"></span>
                         <span class="line line-2"></span>
                         <span class="line line-3"></span>

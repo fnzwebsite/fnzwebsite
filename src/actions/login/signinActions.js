@@ -1,6 +1,6 @@
 import { push }                           from 'react-router-redux';
 import Constants                          from 'constants/index';
-import { httpGet, httpPost, httpDelete }  from 'util/Utils';
+import { httpGet, httpPost, httpDelete }  from 'utils/Utils';
 import {getConfig} from 'helpers/index';
 
 const Actions = {
@@ -14,7 +14,7 @@ const Actions = {
       .then((response) => {
         localStorage.setItem('token', JSON.stringify(response.token));
         localStorage.setItem('displayName', response.enrollmentId);
-        localStorage.setItem('acdId',response.acd);
+        localStorage.setItem('acdId',response.organisations.slice(1, -1));
         dispatch(push('/#/dashboard'));
       })
       .catch((error) => {

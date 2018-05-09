@@ -10,12 +10,18 @@ const defaultHeaders = {
 };
 
 function buildHeaders() {
-  const authToken = JSON.parse(localStorage.getItem('token'));
+  if(localStorage.getItem('token')!="undefined" && localStorage.getItem('token')!=null){
+    const authToken = JSON.parse(localStorage.getItem('token'));
 
-  return { ...defaultHeaders, Authorization: authToken };
+    return { ...defaultHeaders, Authorization: authToken };
+  }
+  else {
+    return { ...defaultHeaders};
+  }
 }
 
 export function checkStatus(response) {
+  //alert(response);
   if (response.status >= 200 && response.status < 300) {
     return response;
   } else {
@@ -56,14 +62,15 @@ export function httpGet(url) {
 
 export function httpPost(url, data) {
   const body = JSON.stringify(data);
-//console.log(JSON.stringify(buildHeaders()));
+  //alert(body);
+  //alert(JSON.stringify(buildHeaders()));
   return fetch(url, {
     method: 'post',
     headers: buildHeaders(),
     body: body,
     mode:'cors'
   })
-  .then(checkStatus)
+  .then(checkData)
   .then(parseJSON);
 }
 

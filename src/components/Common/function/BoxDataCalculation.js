@@ -11,33 +11,38 @@ export function boxDataCalculation(data) {
     let cashBuys = 0;
     var boxData = [];
 
-    console.log('data cash:' + data[0].cash);
-    if (data.length) {
-        for (var i = 0; i < data.length; i++) {
-            if (data[i].cash && data[i].cash.length) {
-                for (var j = 0; j < data[i].cash.length; j++) {
-                    if (data[i].cash[j] >= 0) {
-                        cashBuys = parseFloat(cashBuys) + parseFloat(data[i].cash[j]);
-                    }
-                    else {
-                        cashSells = parseFloat(cashSells) + parseFloat(data[i].cash[j]);
-                    }
-                }
-            }
-            //cashSells=cashSells*(-1);
-            console.log(cashSells);
-            subscriptions = cashBuys + parseFloat(subscriptions) + parseFloat(data[i].unitsPurchased) * parseFloat(data[i].roundedPrice);
-            redemptions = cashSells + parseFloat(redemptions) + parseFloat(data[i].unitsSold) * parseFloat(data[i].roundedPrice);
-            netFlow = parseFloat(subscriptions) + parseFloat(redemptions);
-            console.log('box:subscriptions:' + subscriptions + 'redemptions:' + redemptions + 'netFlow:' + netFlow);
-            subscriptions = parseFloat(subscriptions).toFixed(4);
-            redemptions = parseFloat(redemptions).toFixed(4);
-            netFlow = parseFloat(netFlow).toFixed(4);
-            // subscriptions = parseFloat(10000).toFixed(4);
-            // redemptions = parseFloat(15000).toFixed(4);
-            // netFlow=subscriptions-redemptions;
-            netFlow = parseFloat(netFlow).toFixed(4);
-
+    //console.log('data cash:' + data[0].cash);
+    if (data) {
+        // for (var i = 0; i < data.length; i++) {
+        //     if (data[i].cash && data[i].cash.length) {
+        //         for (var j = 0; j < data[i].cash.length; j++) {
+        //             if (data[i].cash[j] >= 0) {
+        //                 cashBuys = parseFloat(cashBuys) + parseFloat(data[i].cash[j]);
+        //             }
+        //             else {
+        //                 cashSells = parseFloat(cashSells) + parseFloat(data[i].cash[j]);
+        //             }
+        //         }
+        //     }
+        //     //cashSells=cashSells*(-1);
+        //     console.log(cashSells);
+        //     subscriptions = cashBuys + parseFloat(subscriptions) + parseFloat(data[i].unitsPurchased) * parseFloat(data[i].roundedPrice);
+        //     redemptions = cashSells + parseFloat(redemptions) + parseFloat(data[i].unitsSold) * parseFloat(data[i].roundedPrice);
+        //     netFlow = parseFloat(subscriptions) + parseFloat(redemptions);
+        //     console.log('box:subscriptions:' + subscriptions + 'redemptions:' + redemptions + 'netFlow:' + netFlow);
+        //     subscriptions = parseFloat(subscriptions).toFixed(4);
+        //     redemptions = parseFloat(redemptions).toFixed(4);
+        //     netFlow = parseFloat(netFlow).toFixed(4);
+        //     // subscriptions = parseFloat(10000).toFixed(4);
+        //     // redemptions = parseFloat(15000).toFixed(4);
+        //     // netFlow=subscriptions-redemptions;
+        //     netFlow = parseFloat(netFlow).toFixed(4);
+        //
+        // }
+        if(data.positions && data.positions.length>0){
+          subscriptions=data.totalSubscription;
+          redemptions=data.totalRedemption;
+          netFlow=data.totalNetflow;
         }
     }
     boxData.push({

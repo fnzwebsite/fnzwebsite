@@ -1,6 +1,6 @@
-import * as allActions from '../../Admin/actions/allActions'
+import * as allActions from 'actions/allActions'
 import { push }               from 'react-router-redux';
-import { httpGet, httpPost }  from '../../../util/Utils';
+import { httpGet, httpPost }  from 'util/Utils';
 
 
 const dealingActions = {

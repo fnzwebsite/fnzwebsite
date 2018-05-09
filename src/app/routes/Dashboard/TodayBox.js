@@ -20,7 +20,7 @@ class TodayBox extends React.Component {
     }
 
     render() {
-        if (this.props.acdToday && this.props.acdToday.length) {
+        if (this.props.acdToday) {
             this.state = {
                 boxData: boxDataCalculation(this.props.acdToday)
             }
@@ -38,7 +38,7 @@ class TodayBox extends React.Component {
             //console.log(broughtForwardToday);
             //console.log(carryForwardToday);
         }
-        if (this.props.acdToday && this.props.acdToday.length) {
+        if (this.props.acdToday) {
           return (
             <div>
             <div className="card-header d-flex justify-content-between bg-primary">

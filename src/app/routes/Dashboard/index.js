@@ -15,6 +15,8 @@ import acdActions from 'actions/Dashboard/acdActions';
 import TodayBox from './TodayBox'
 import PreviousBox from './PreviousBox'
 import NextBox from './NextBox'
+import io from "socket.io-client"
+import {authHeader, getConfig} from 'helpers/index';
 
 function TabContainer(props) {
   return <div style={{ padding: 20 }}>{props.children}</div>;
@@ -26,6 +28,28 @@ TabContainer.propTypes = {
 };
 
 class Dashboard extends Component {
+
+  constructor(props) {
+      super(props);
+      this.state = {
+          dealing: null,
+          chart: 'today',
+          selected: 'chart'
+      };
+      this.changeView = this.changeView.bind(this);
+      //this.loadChart = this.loadChart.bind(this);
+      //this.getPrice = this.getPrice.bind(this);
+  }
+
+  changeView(selected) {
+
+      if (this.state.selected != selected) {
+
+          this.setState({
+              selected: selected
+          });
+      }
+  }
   state = {
     value: 0
   };
@@ -43,91 +67,91 @@ class Dashboard extends Component {
     const { theme } = this.props;
     const { value } = this.state;
 
-    return (
-      <div className="app-wrapper">
-        <div className="animated slideInUpTiny animation-duration-3">
-          <div className="row">
-            <div className="col-lg-4 col-sm-12 col-md-4">
-              <div className="card fund-card shadow text-center">
-                <PreviousBox/>
-              </div>
-            </div>
-            <div className="col-lg-4 col-sm-12 col-md-4">
-              <div className="card fund-card shadow text-center">
-                <TodayBox/>
-              </div>
-            </div>
-            <div className="col-lg-4 col-sm-12 col-md-4">
-              <div className="card fund-card shadow text-center">
-                <NextBox/>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="animated slideInUpTiny animation-duration-3">
-          <div className="chart-tab">
-            <Card className="shadow border-0">
-              <AppBar className="bg-primary" position="static">
-                <Tabs
-                  value={this.state.value}
-                  onChange={this.handleChange}
-                  fullWidth
-
-                  // indicatorColor="primary"
-                >
-                  <Tab className="tab tab-icon text-white" label="CHARTS" icon={<InsertChart/>} />
-                  <Tab className="tab tab-icon text-white" label="TRANSACTIONS" icon={<List/>}/>
-                  {/* <Tab className="tab" label="TAB 2" /> */}
-                </Tabs>
-              </AppBar>
-
-              <SwipeableViews
-                axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-                index={this.state.value}
-                onChangeIndex={this.handleChangeIndex}
-              >
-                <TabContainer dir={theme.direction}>
-                  <div className="row chart-tab">
-                    <CardBox heading="Simple Line Chart" styleName="col-12">
-                      <SimpleLineChart />
-                    </CardBox>
+        return (
+          <div className="app-wrapper">
+            <div className="animated slideInUpTiny animation-duration-3">
+              <div className="row">
+                <div className="col-lg-4 col-sm-12 col-md-4">
+                  <div className="card fund-card shadow text-center">
+                    <PreviousBox/>
                   </div>
-                </TabContainer>
-                <TabContainer dir={theme.direction}>
-                  <div className="tran-tab">
-                    <CardBox
-                      styleName="col-12"
-                      cardStyle="mb-0 p-0"
-                      // heading={"charan"}
-                      // headerOutside
+                </div>
+                <div className="col-lg-4 col-sm-12 col-md-4">
+                  <div className="card fund-card shadow text-center">
+                    <TodayBox/>
+                  </div>
+                </div>
+                <div className="col-lg-4 col-sm-12 col-md-4">
+                  <div className="card fund-card shadow text-center">
+                    <NextBox/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="animated slideInUpTiny animation-duration-3">
+              <div className="chart-tab">
+                <Card className="shadow border-0">
+                  <AppBar className="bg-primary" position="static">
+                    <Tabs
+                      value={this.state.value}
+                      onChange={this.handleChange}
+                      fullWidth
+
+                      // indicatorColor="primary"
                     >
-                      <DataTable />
-                    </CardBox>
-                  </div>
-                </TabContainer>
-                {/* <TabContainer dir={theme.direction}>
-                <div>
-                  <CardBody>
-                    <h3 className="card-title">Card Title</h3>
-                    <CardSubtitle>Sub-heading text</CardSubtitle>
-                    <CardText>
-                      Small plates, salads & sandwiches in an intimate setting
-                      with 12 indoor seats plus patio seating
-                    </CardText>
-                    <CardText>
-                      Donec imperdiet enim et dignissim interdum. Pellentesque
-                      in ortti tor elit. Curabitur consectetur.
-                    </CardText>
-                  </CardBody>
-                  {/* <CardFooter>2 days ago</CardFooter> */}
-                {/* </div> */}
-                {/* </TabContainer> */} */}
-              </SwipeableViews>
-            </Card>
+                      <Tab className="tab tab-icon text-white" label="CHARTS" icon={<InsertChart/>} />
+                      <Tab className="tab tab-icon text-white" label="TRANSACTIONS" icon={<List/>}/>
+                      {/* <Tab className="tab" label="TAB 2" /> */}
+                    </Tabs>
+                  </AppBar>
+
+                  <SwipeableViews
+                    //axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+                    index={this.state.value}
+                    onChangeIndex={this.handleChangeIndex}
+                  >
+                    <TabContainer>
+                      <div className="row chart-tab">
+                        <CardBox heading="Simple Line Chart" styleName="col-12">
+                          <SimpleLineChart />
+                        </CardBox>
+                      </div>
+                    </TabContainer>
+                    <TabContainer>
+                      <div className="tran-tab">
+                        <CardBox
+                          styleName="col-12"
+                          cardStyle="mb-0 p-0"
+                          // heading={"charan"}
+                          // headerOutside
+                        >
+                          <DataTable loadThisDay={this.state.chart}/>
+                        </CardBox>
+                      </div>
+                    </TabContainer>
+                    {/* <TabContainer dir={theme.direction}>
+                    <div>
+                      <CardBody>
+                        <h3 className="card-title">Card Title</h3>
+                        <CardSubtitle>Sub-heading text</CardSubtitle>
+                        <CardText>
+                          Small plates, salads & sandwiches in an intimate setting
+                          with 12 indoor seats plus patio seating
+                        </CardText>
+                        <CardText>
+                          Donec imperdiet enim et dignissim interdum. Pellentesque
+                          in ortti tor elit. Curabitur consectetur.
+                        </CardText>
+                      </CardBody>
+                      {/* <CardFooter>2 days ago</CardFooter> */}
+                    {/* </div> */}
+                    {/* </TabContainer> */} */}
+                  </SwipeableViews>
+                </Card>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    );
+        );
   }
 }
 

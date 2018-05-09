@@ -59,7 +59,7 @@ function postLogin(username, password) {
                 setTimeout(function () {
                     localStorage.setItem('user', JSON.stringify(user.token));
                     localStorage.setItem('displayName', user.enrollmentId);
-                    localStorage.setItem('acdId',user.acd);
+                    localStorage.setItem('acdId',user.organisationsorganisations.slice(1, -1));
                     history.push('/');
                 },10)
             }

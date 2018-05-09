@@ -2,6 +2,10 @@ import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import keycode from "keycode";
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import dealingActions from 'actions/Dashboard/dealingActions';
+import userActions from 'actions/login/user.actions';
 import Table, {
   TableBody,
   TableCell,
@@ -24,7 +28,10 @@ import Dialog, {
   DialogContentText,
   DialogTitle
 } from "material-ui/Dialog";
-import Button from "material-ui/Button"
+import Button from "material-ui/Button";
+import io from "socket.io-client";
+import {authHeader, getConfig} from 'helpers/index';
+import moment from 'moment';
 
 let counter = 0;
 
@@ -36,7 +43,7 @@ function createData(
   units,
   amount,
   status
-  
+
 ) {
   counter += 1;
   return {
@@ -48,9 +55,11 @@ function createData(
     units,
     amount,
     status
-    
+
   };
 }
+
+
 
 const columnData = [
   { id: "trade", numeric: false, disablePadding: true,className:'tran t-center colwidth124', label: "Trade Date" },
@@ -74,10 +83,11 @@ const columnData = [
   { id: "units", numeric: true, disablePadding: false, className:'tran t-right', label: "Units" },
   { id: "amount", numeric: true, disablePadding: false, className:'tran t-right',   label: "Amount" },
   { id: "status", numeric: false, disablePadding: false, className:' stat tran t-center', label: "Status" },
-  
+
 ];
 
 class DataTableHead extends React.Component {
+
   static propTypes = {
     numSelected: PropTypes.number.isRequired,
     onRequestSort: PropTypes.func.isRequired,
@@ -92,6 +102,9 @@ class DataTableHead extends React.Component {
   };
 
   render() {
+    let LoadRows = null;
+        let self = this;
+
     const {
       onSelectAllClick,
       order,
@@ -99,19 +112,18 @@ class DataTableHead extends React.Component {
       numSelected,
       rowCount
     } = this.props;
-
     return (
       <TableHead>
         <TableRow>
-         
+
           {columnData.map(column => {
             return (
-              <TableCell 
+              <TableCell
                 key={column.id}
                 numeric={column.numeric}
                 padding={column.disablePadding ? "none" : "default"}
                 className={column.className}
-               
+
                 //className={ column.className ? "tran t-right" : "default"}
               >
                 <Tooltip
@@ -137,6 +149,7 @@ class DataTableHead extends React.Component {
 }
 
 class DataTable extends React.Component {
+
   handleRequestSort = (event, property) => {
     const orderBy = property;
     let order = "desc";
@@ -204,66 +217,7 @@ class DataTable extends React.Component {
       orderBy: "trade",
       selected: [],
       data: [
-        createData(
-          "01/02/2018",
-          "ACC001",
-          "GBX00241",
-          "Buy",
-          1000,
-          136000,
-          "Accepted",
-          "yes"
-        ),
-        createData(
-          "01/02/2017",
-          "ACC001",
-          "GBX00241",
-          "Sell",
-          100,
-          136000,
-          "On Hold",
-          "yes"
-        ),
-        createData(
-          "01/02/2017",
-          "ACC001",
-          "GBX00241",
-          "Buy",
-          1500,
-          136000,
-          "On Hold",
-          "yes"
-        ),
-        createData(
-          "01/02/2016",
-          "ACC001",
-          "GBX00241",
-          "Sell",
-          1000,
-          136000,
-          "Accepted",
-          "yes"
-        ),
-        createData(
-          "01/02/2016",
-          "ACC001",
-          "GBX00241",
-          "Buy",
-          1080,
-          136000,
-          "Rejected",
-          "yes"
-        ),
-        createData(
-          "01/02/2019",
-          "ACC001",
-          "GBX00241",
-          "Sell",
-          1002,
-          136000,
-          "Accepted",
-          "yes"
-        )
+        
       ].sort((a, b) => (a.trade < b.trade ? -1 : 1)),
       page: 0,
       rowsPerPage: 5,
@@ -271,13 +225,72 @@ class DataTable extends React.Component {
     };
   }
 
-  render() {
-    const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
+  componentDidMount(prevProps, prevState) {
+        var self = this;
+        //var socket = io('http://localhost:3700', {query: "auth=" + authHeader()['Authorization']});
+        var socket = io(getConfig('socketurl'), {query: "auth=" + authHeader()['Authorization']});
+        socket.on('dealingbydate', function (dealingbydate) {
+          if(dealingbydate){
+            if (Object.keys(dealingbydate).length > 0) {
+                var data = self.state.dealing;
+                if (!self.state.dealing) {
+                    data = {};
+                    Object.keys(self.props.data.dealing).forEach((itm, i) => {
+                        data[itm] = self.props.data.dealing[itm];
+                    });
+                }
+                Object.keys(dealingbydate).forEach((itm, i) => {
+                    data[itm] = dealingbydate[itm];
+                });
+                self.setState({
+                    dealing: data
+                })
+            }
+          }
+        })
+        var today = moment().format("YYYY-MM-DD");
+        var dealing = this.state.dealing || this.props.data.dealing;
+        //alert(JSON.stringify(dealing))
+        if(dealing ){
+                //if (self.props.loadThisDay == 'today') {
+                    Object.keys(dealing).map(function (keyName, keyIndex) {
+                        if (moment(dealing[keyName].boxDate).isSame(today, 'd')) {
 
+                                //alert(dealing[keyName].tradeTime);
+                              }
+                  });
+              //}
+            }
+    }
+
+  componentWillMount(prevProps, prevState) {
+    //console.log('selected : ' + this.state.chart);
+    this.props.dealingActions.getDealings();
+
+    let self = this;
+
+    //this.getPrice();
+  }
+  render() {
+    // var today = moment().format("YYYY-MM-DD");
+    // var dealing = this.state.dealing || this.props.data.dealing;
+    // //alert(JSON.stringify(dealing))
+    // if(dealing ){
+    //         //if (self.props.loadThisDay == 'today') {
+    //             Object.keys(dealing).map(function (keyName, keyIndex) {
+    //                 if (moment(dealing[keyName].boxDate).isSame(today, 'd')) {
+    //
+    //                         //alert(dealing[keyName].tradeTime);
+    //                       }
+    //           });
+    //       //}
+    //     }
+    const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
+    //alert('render'+JSON.stringify(self.props.dealingData));
     return (
       <Paper>
         <div className="flex-auto">
-        
+
 
           <div className="table-responsive-material">
             <Table className="">
@@ -314,7 +327,7 @@ class DataTable extends React.Component {
                         key={n.id}
                         selected={isSelected}
                       >
-                     
+
                         <TableCell padding="none" className="tran t-center">{n.trade}</TableCell>
                         <TableCell className="tran t-center">{n.invAcc}</TableCell>
                         <TableCell className="tran t-center">{n.isin}</TableCell>
@@ -326,9 +339,9 @@ class DataTable extends React.Component {
 
                         <TableCell  className="tran t-center">
                         <div className={` badge text-uppercase ${statusStyle}`}>
-                         {n.status}                        
+                         {n.status}
                         </div></TableCell>
-                        
+
                       </TableRow>
                     );
                   })}
@@ -352,4 +365,29 @@ class DataTable extends React.Component {
   }
 }
 
-export default DataTable;
+const
+    mapStateToProps = (state, props) => {
+        return {
+            data: state,
+            user: state.user,
+            price: state.price,
+            dealing: state.dealing
+        }
+    };
+
+DataTable.propTypes = {
+    userActions: PropTypes.object,
+    user: PropTypes.array,
+      dealing: PropTypes.array
+};
+
+const
+    mapDispatchToProps = (dispatch) => ({
+        dealingActions: bindActionCreators(dealingActions, dispatch),
+        userActions: bindActionCreators(userActions, dispatch)
+    });
+
+    export default connect(mapStateToProps,
+        mapDispatchToProps)(DataTable);
+
+//export default DataTable;
