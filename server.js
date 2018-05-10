@@ -75,6 +75,16 @@ server.get('/getacd', (req, res) => {
     }, auth);
 });
 
+server.get('/dealingbyday/:boxDate',(req,res)=>{
+let auth=req.headers.authorization;
+getDealsByBoxDate(function (data) {
+    if (data.status != 400) {
+        res.send(data);
+        //io.sockets.emit('dealingbyday', req.params.boxDate);
+    }
+},auth,req.params.boxDate);
+});
+
 var clients = {};
 
 io.use(function (socket, next) {
@@ -86,11 +96,7 @@ io.use(function (socket, next) {
                 }
             }, socket.handshake.query.auth,setDate);
 
-            getDealsByBoxDate(function (data) {
-                if (data.status != 400) {
-                    io.sockets.emit('dealingbyday', data);
-                }
-            }, socket.handshake.query.auth,'2018-05-09');
+           
             setDate = momenttz.tz(momenttz.now(), "Europe/London").subtract(2,'hour').format();
             return next();
         }, 30000);

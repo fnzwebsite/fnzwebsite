@@ -5,6 +5,7 @@ import pricePreviousReducer         from '../../Dashboard/reducers/pricePrevious
 import priceTodayReducer         from '../../Dashboard/reducers/priceTodayReducer'
 import priceNextReducer         from '../../Dashboard/reducers/priceNextReducer'
 import acdDataReducer         from './acdDataReducer'
+import dealsByDate from '../../Dashboard/reducers/dealsByDateReducer';
 // import challenges           from '../../reducers/challenges'
 // import currentChallenge     from '../../reducers/currentChallenge'
 import acdInstrumentReducer from './acdInstrumentReducer'
@@ -29,5 +30,6 @@ export default combineReducers({
     postAcdAccountData:postAcdAccountReducer,
     postAcdData: postAcdReducer,
     postAcdInstrumentData: postInstrumentReducer,
-    postAcdDealData:postDealReducer
+    postAcdDealData:postDealReducer,
+    dealsByDate:dealsByDateReducer
 });

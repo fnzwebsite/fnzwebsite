@@ -228,32 +228,34 @@ class DataTable extends React.Component {
 
   componentDidMount(prevProps, prevState) {
         var self = this;
-        //var socket = io('http://localhost:3700', {query: "auth=" + authHeader()['Authorization']});
-        var socket = io(getConfig('socketurl'), {query: "auth=" + authHeader()['Authorization']});
-        socket.on('dealingbyday', function (dealingbydate) {
+        this.props.dealingActions.getDealingsByBoxDate('2018-05-09');
         
-          if(dealingbydate){
-                           var dealData = [];
+        //var socket = io('http://localhost:3700', {query: "auth=" + authHeader()['Authorization']});
+        // var socket = io(getConfig('socketurl'), {query: "auth=" + authHeader()['Authorization']});
+        // socket.on('dealingbyday', function (dealingbydate) {
+        
+        //   if(dealingbydate){
+        //                    var dealData = [];
                 
-                Object.keys(dealingbydate).forEach((itm, i) => {
+        //         Object.keys(dealingbydate).forEach((itm, i) => {
                   
-                   var dealDataObj= createData(dealingbydate[itm].tradeTime
-                      ,dealingbydate[itm].account?dealingbydate[itm].account:" "
-                      ,dealingbydate[itm].instrumentPrimaryIdentifier?dealingbydate[itm].instrumentPrimaryIdentifier:" "
-                      ,dealingbydate[itm].dealType
-                      ,dealingbydate[itm].units
-                    ,dealingbydate[itm].amount
-                  ,dealingbydate[itm].dealingStatus);
-                  console.log(dealDataObj);
-                dealData.push(dealDataObj);
-                });
-                //console.log("Data from socket: "+JSON.stringify(dealData));
-                self.setState({ data: dealData });
-               // this.state.data= dealData;
-           // }
-          }
-        })
-        // var today = moment().format("YYYY-MM-DD");
+        //            var dealDataObj= createData(dealingbydate[itm].tradeTime
+        //               ,dealingbydate[itm].account?dealingbydate[itm].account:" "
+        //               ,dealingbydate[itm].instrumentPrimaryIdentifier?dealingbydate[itm].instrumentPrimaryIdentifier:" "
+        //               ,dealingbydate[itm].dealType
+        //               ,dealingbydate[itm].units
+        //             ,dealingbydate[itm].amount
+        //           ,dealingbydate[itm].dealingStatus);
+        //           console.log(dealDataObj);
+        //         dealData.push(dealDataObj);
+        //         });
+        //         //console.log("Data from socket: "+JSON.stringify(dealData));
+        //         self.setState({data: dealData });
+        //        // this.state.data= dealData;
+        //    // }
+        //   }
+        // })
+        // // var today = moment().format("YYYY-MM-DD");
         // var dealing = this.state.dealing || this.props.data.dealing;
         // //alert(JSON.stringify(dealing))
         // if(dealing ){
@@ -269,9 +271,29 @@ class DataTable extends React.Component {
     }
 
 
-
+ componentWillReceiveProps()
+ {
+   var self=this;
+  console.log('dealing data:' + JSON.stringify(this.props));
+  if(this.props.dealsByDate)
+  {
+    var dealData = [];
+    Object.keys(this.props.dealsByDate).forEach((itm, i) => {
+      var dealDataObj= createData(this.props.dealsByDate[itm].tradeTime
+                      ,this.props.dealsByDate[itm].account?this.props.dealsByDate[itm].account:" "
+                      ,this.props.dealsByDate[itm].instrumentPrimaryIdentifier?this.props.dealsByDate[itm].instrumentPrimaryIdentifier:" "
+                      ,this.props.dealsByDate[itm].dealType
+                      ,this.props.dealsByDate[itm].units
+                    ,this.props.dealsByDate[itm].amount
+                  ,this.props.dealsByDate[itm].dealingStatus);
+                  console.log(dealDataObj);
+                dealData.push(dealDataObj);
+    });
+    self.setState({data: dealData });
+  }
+ }
   componentWillMount(prevProps, prevState) {
-    this.props.dealingActions.getDealings();
+    
   }
   render() {
     //alert('hi'+JSON.stringify(dealing))
@@ -294,22 +316,10 @@ class DataTable extends React.Component {
                 rowCount={data.length}
               />
               <TableBody>
-              if(data && data.length)
-                {
 
-                  data
-
+                {data
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map(n =>{
-
-                    // const statusStyle = n.status.includes("Accepted")
-                    // ? "text-white bg-success"
-                    // : n.status.includes("On Hold")
-                    //   ? "bg-amber"
-                    //   : n.status.includes("Rejected")
-                    //     ? "text-white bg-danger"
-                    //     : "text-white bg-grey";
-
                     const statusStyle = n.status.includes("Accepted")
                     ? "text-white bg-success"
                     : n.status.includes("On Hold")
@@ -375,15 +385,16 @@ const
         return {
             data: state,
             user: state.user,
-            price: state.price,
-            dealing: state.dealing
+      //      price: state.price,
+            dealsByDate: state.dealsByDate
         }
     };
 
 DataTable.propTypes = {
     userActions: PropTypes.object,
     user: PropTypes.array,
-      dealing: PropTypes.array
+   // dealsByDate:PropTypes.array
+      //dealing: PropTypes.array
 };
 
 const

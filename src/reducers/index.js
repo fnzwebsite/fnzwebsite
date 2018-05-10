@@ -6,7 +6,8 @@ import session              from './session';
 import dealingReducer         from './Dashboard/dealingReducer'
 import pricePreviousReducer         from './Dashboard/pricePreviousReducer'
 import priceTodayReducer         from './Dashboard/priceTodayReducer'
-import priceNextReducer         from './Dashboard/priceNextReducer'
+import priceNextReducer         from './Dashboard/priceNextReducer';
+import dealsByDateReducer from './Dashboard/dealsByDateReducer';
 
 
 const reducers = combineReducers({
@@ -17,8 +18,8 @@ const reducers = combineReducers({
   session: session,
   acdToday:priceTodayReducer,
   acdPrevious:pricePreviousReducer,
-  acdNext:priceNextReducer
-
+  acdNext:priceNextReducer,
+  dealsByDate:dealsByDateReducer
 });
 
 export default reducers;
