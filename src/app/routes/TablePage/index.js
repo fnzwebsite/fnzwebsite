@@ -22,8 +22,24 @@ import {
   MuiThemeProvider,
   createMuiTheme
 } from "material-ui/styles";
+import {bindActionCreators} from 'redux';
+import acdActions from 'actions/Dashboard/acdActions';
+import PropTypes from 'prop-types';
+import {boxDataCalculation, convertCurrency} from 'components/Common/function/BoxDataCalculation';
+import {connect} from 'react-redux';
+
 
 class ExampleCustomInput extends React.Component {
+  constructor(props) {
+      super(props)
+      this.state = {
+          boxData: null
+      }
+      alert(JSON.stringify(this.props));
+  }
+  // componentWillMount(){
+  //   alert(JSON.stringify(this.props));
+  // }
   render() {
     return (
       <div>

@@ -222,7 +222,9 @@ class DataTable extends React.Component {
       rowsPerPage: 5,
       open: false
     };
+
   }
+
 
   componentDidMount(prevProps, prevState) {
         var self = this;
@@ -266,28 +268,14 @@ class DataTable extends React.Component {
         //     }
     }
 
+
+
   componentWillMount(prevProps, prevState) {
-    //console.log('selected : ' + this.state.chart);
-    //this.props.dealingActions.getDealings();
-
-  //  let self = this;
-
-    //this.getPrice();
+    this.props.dealingActions.getDealings();
   }
   render() {
-    // var today = moment().format("YYYY-MM-DD");
-    // var dealing = this.state.dealing || this.props.data.dealing;
-    // //alert(JSON.stringify(dealing))
-    // if(dealing ){
-    //         //if (self.props.loadThisDay == 'today') {
-    //             Object.keys(dealing).map(function (keyName, keyIndex) {
-    //                 if (moment(dealing[keyName].boxDate).isSame(today, 'd')) {
-    //
-    //                         //alert(dealing[keyName].tradeTime);
-    //                       }
-    //           });
-    //       //}
-    //     }
+    //alert('hi'+JSON.stringify(dealing))
+
     const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
     //alert('render'+JSON.stringify(data));
     return (
@@ -306,9 +294,13 @@ class DataTable extends React.Component {
                 rowCount={data.length}
               />
               <TableBody>
-                {data
+              if(data && data.length)
+                {
+
+                  data
+
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map(n => {
+                  .map(n =>{
 
                     // const statusStyle = n.status.includes("Accepted")
                     // ? "text-white bg-success"

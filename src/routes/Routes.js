@@ -8,7 +8,7 @@ export default function configRoutes() {
   return (
     <div>
       {/*<Route exact path="/" component={App} />*/}
-        <Route exact path="/sign_in" component={SignIn}/>
+        <Route exact path="/#/signin" component={SignIn}/>
         <AuthenticatedRoute path='/' component={Home} />
 
     </div>
@@ -19,7 +19,6 @@ const AuthenticatedRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={(props) => (
         localStorage.getItem('token')
             ? <Component {...props} />
-            : <Redirect to={{ pathname: '/sign_in'}}/>
+            : <Redirect to={{ pathname: '/#signin'}}/>
     )} />
 )
-

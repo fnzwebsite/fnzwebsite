@@ -98,6 +98,26 @@ io.use(function (socket, next) {
     next(new Error('Authentication error'));
 });
 
+io.use(function (socket, next) {
+  //console.log('hello'+socket.handshake.query.data);
+    if (socket.handshake.query.auth) {
+        setInterval(function () {
+            getDealingByDay(function (data) {
+                if (data.status != 400) {
+                    io.sockets.emit('dealingbyday', data);
+                }
+            }, socket.handshake.query.auth,setDate);
+            setDate = momenttz.tz(momenttz.now(), "Europe/London").subtract(2,'hour').format();
+            return next();
+        }, 30000);
+    }
+    next(new Error('Authentication error'));
+});
+
+
+
+
+
 io.set('origins', '*:*');
 
 io.sockets.on('connection', function (socket) {
@@ -688,5 +708,46 @@ function postDeal(callback, auth, body) {
     });
 
     req.write(postData);
+    req.end();
+}
+
+
+
+
+
+function getDealingByDay(callback, auth, setDate) {
+
+    var post_data = '{"selector": {"boxDate": {"$eq": "'+setDate+'"}}}';
+    var options = {
+        method: 'POST',
+        host: hostIP,
+        port: 8081,
+        path: '/api/v1/dealquery',
+        headers: {
+            Authorization: auth,
+            'Content-Type': 'application/json'
+        }
+    };
+    var req = http.request(options, function (res) {
+        var output = '';
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            output += chunk;
+        });
+        res.on('end', function () {
+            if(output!=null)
+            {
+                //console.log(output);
+                var obj = JSON.parse(output);
+                if (callback != undefined) {
+                    callback(obj);
+                }
+            }
+        });
+    });
+    req.on('error', function (e) {
+        console.log('problem with request: ' + e.message);
+    });
+    req.write(post_data);
     req.end();
 }
