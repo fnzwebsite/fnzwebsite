@@ -47,7 +47,7 @@ class TodayBox extends React.Component {
               <i className="zmdi   zmdi-case px-1" />
               Today</span>
 
-              <Link to="/app/table-page">
+              <Link to={{pathname: "/app/table-page",state: { day: 'today'}}}>
                 <i
                   className={`zmdi zmdi-hc-lg pull-right zmdi-arrow-right`}
                 />

@@ -216,14 +216,14 @@ class DataTable extends React.Component {
       order: "asc",
       orderBy: "trade",
       selected: [],
-      data: [
-        
-      ].sort((a, b) => (a.trade < b.trade ? -1 : 1)),
+      data: [].sort((a, b) => (a.trade < b.trade ? -1 : 1)),
       page: 0,
       rowsPerPage: 5,
       open: false
     };
+
   }
+
 
   componentDidMount(prevProps, prevState) {
         var self = this;
@@ -248,43 +248,61 @@ class DataTable extends React.Component {
             }
           }
         })
-        var today = moment().format("YYYY-MM-DD");
-        var dealing = this.state.dealing || this.props.data.dealing;
-        //alert(JSON.stringify(dealing))
-        if(dealing ){
-                //if (self.props.loadThisDay == 'today') {
-                    Object.keys(dealing).map(function (keyName, keyIndex) {
-                        if (moment(dealing[keyName].boxDate).isSame(today, 'd')) {
 
-                                //alert(dealing[keyName].tradeTime);
-                              }
-                  });
-              //}
-            }
+    }
+
+    componentDidUpdate(previousProps, previousState) {
+      var today = moment().format("YYYY-MM-DD");
+      var tomorrow = moment().add('days', 1).format("YYYY-MM-DD");
+      var yesterday = moment().add('days', -1).format("YYYY-MM-DD");
+      var dealing = this.state.dealing || this.props.data.dealing;
+      var objectdata=[];
+      var obj={}
+      if(dealing ){
+              //if (self.props.loadThisDay == 'today') {
+                  Object.keys(dealing).map(function (keyName, keyIndex) {
+                      if (moment(dealing[keyName].boxDate).isSame(yesterday, 'd')) {
+                        obj=createData(dealing[keyName].tradeTime,
+                            dealing[keyName].account,
+                            dealing[keyName].instrumentPrimaryIdentifier,
+                            dealing[keyName].dealType.toUpperCase(),
+                            dealing[keyName].units,
+                            dealing[keyName].amount,
+                            dealing[keyName].dealingStatus.toUpperCase())
+                            // objectdata.push(createData(dealing[keyName].tradeTime,
+                            //   dealing[keyName].account,
+                            //   dealing[keyName].instrumentPrimaryIdentifier,
+                            //   dealing[keyName].dealType.toUpperCase(),
+                            //   dealing[keyName].units,
+                            //   dealing[keyName].amount,
+                            //   dealing[keyName].dealingStatus.toUpperCase()))
+                            // if (this.props.data.dealing) {
+                            //     this.setState({data:[...this.state.data,obj]});
+                            // }
+                            }
+
+                });
+
+                // var tableData = objectdata.filter(function(x){
+                //   return (x !== (undefined || null || ''));
+                // });
+                console.log(JSON.stringify(objectdata));
+                if (this.props.data.dealing) {
+                    //this.setState({data:[...this.state.data,objectdata]});
+                }
+                else if(previousProps.data.dealing !== this.props.data.dealing) {
+                    //this.setState({data:[...this.state.data,objectdata]});
+                 }
+                 console.log('hiiii'+JSON.stringify(this.state.data));
+          }
     }
 
   componentWillMount(prevProps, prevState) {
-    //console.log('selected : ' + this.state.chart);
     this.props.dealingActions.getDealings();
-
-    let self = this;
-
-    //this.getPrice();
   }
   render() {
-    // var today = moment().format("YYYY-MM-DD");
-    // var dealing = this.state.dealing || this.props.data.dealing;
-    // //alert(JSON.stringify(dealing))
-    // if(dealing ){
-    //         //if (self.props.loadThisDay == 'today') {
-    //             Object.keys(dealing).map(function (keyName, keyIndex) {
-    //                 if (moment(dealing[keyName].boxDate).isSame(today, 'd')) {
-    //
-    //                         //alert(dealing[keyName].tradeTime);
-    //                       }
-    //           });
-    //       //}
-    //     }
+    //alert('hi'+JSON.stringify(dealing))
+
     const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
     //alert('render'+JSON.stringify(self.props.dealingData));
     return (
@@ -303,9 +321,13 @@ class DataTable extends React.Component {
                 rowCount={data.length}
               />
               <TableBody>
-                {data
+              if(data && data.length)
+                {
+
+                  data
+
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map(n => {
+                  .map(n =>{
 
                     const statusStyle = n.status.includes("Accepted")
                     ? "text-white bg-success"
@@ -313,6 +335,8 @@ class DataTable extends React.Component {
                       ? "bg-amber"
                       : n.status.includes("Rejected")
                         ? "text-white bg-danger"
+                        :n.status.includes("Priced")
+                        ? "text-white bg-success"
                         : "text-white bg-grey";
 
                     const isSelected = this.isSelected(n.id);

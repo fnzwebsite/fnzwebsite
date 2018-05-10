@@ -17,7 +17,7 @@ const dealingActions = {
                     // localStorage.removeItem('token');
                     // localStorage.removeItem('displayName');
                     // localStorage.removeItem('acdId');
-                    dispatch(push('/sign_in'))
+                    dispatch(push('/#/signin'))
             });
         };
     }
