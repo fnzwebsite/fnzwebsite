@@ -85,6 +85,12 @@ io.use(function (socket, next) {
                     io.sockets.emit('dealingbydate', data);
                 }
             }, socket.handshake.query.auth,setDate);
+
+            getDealsByBoxDate(function (data) {
+                if (data.status != 400) {
+                    io.sockets.emit('dealingbyday', data);
+                }
+            }, socket.handshake.query.auth,'2018-05-09');
             setDate = momenttz.tz(momenttz.now(), "Europe/London").subtract(2,'hour').format();
             return next();
         }, 30000);
@@ -107,6 +113,13 @@ io.sockets.on('connection', function (socket) {
         getDealingByDate(function () {
             io.sockets.emit('dealingbydate', data);
         }, msg['query'], setDate);
+        setDate = momenttz.tz(momenttz.now(), "Europe/London").subtract(2,'hour').format();
+    });
+
+    socket.on('dealingbyday', function (msg) {
+        getDealsByBoxDate(function () {
+            io.sockets.emit('dealingbyday', data);
+        }, msg['query'], '2018-05-09');
         setDate = momenttz.tz(momenttz.now(), "Europe/London").subtract(2,'hour').format();
     });
 
@@ -140,6 +153,48 @@ function getDealingByDate(callback, auth, setDate) {
             {
                 //console.log(output);
                 var obj = JSON.parse(output);
+                if (callback != undefined) {
+                    callback(obj);
+                }
+            }
+        });
+    });
+    req.on('error', function (e) {
+        console.log('problem with request: ' + e.message);
+    });
+    req.write(post_data);
+    req.end();
+}
+
+function getDealsByBoxDate(callback, auth, setDate) {
+    console.log("BoxDate Method...");
+    var post_data = '{"selector": {"boxDate": {"$eq": "2018-05-09"}, "docType": {"$eq": "DEA"}}}';
+    console.log(post_data);
+    var options = {
+        method: 'POST',
+        host: hostIP,
+        port: 8081,
+        path: '/api/v1/dealquery',
+        headers: {
+            Authorization: auth,
+            'Content-Type': 'application/json'
+        }
+    };
+    var req = http.request(options, function (res) {
+        var output = '';
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            output += chunk;
+        });
+        res.on('end', function () {
+           
+            if(output!=null)
+            {
+                //console.log(output);
+                var obj = JSON.parse(output);
+                console.log("BoxDate output");
+                console.log(obj);
+                console.log("BoxDate output");
                 if (callback != undefined) {
                     callback(obj);
                 }

@@ -217,7 +217,6 @@ class DataTable extends React.Component {
       orderBy: "trade",
       selected: [],
       data: [
-        
       ].sort((a, b) => (a.trade < b.trade ? -1 : 1)),
       page: 0,
       rowsPerPage: 5,
@@ -229,45 +228,49 @@ class DataTable extends React.Component {
         var self = this;
         //var socket = io('http://localhost:3700', {query: "auth=" + authHeader()['Authorization']});
         var socket = io(getConfig('socketurl'), {query: "auth=" + authHeader()['Authorization']});
-        socket.on('dealingbydate', function (dealingbydate) {
+        socket.on('dealingbyday', function (dealingbydate) {
+        
           if(dealingbydate){
-            if (Object.keys(dealingbydate).length > 0) {
-                var data = self.state.dealing;
-                if (!self.state.dealing) {
-                    data = {};
-                    Object.keys(self.props.data.dealing).forEach((itm, i) => {
-                        data[itm] = self.props.data.dealing[itm];
-                    });
-                }
+                           var dealData = [];
+                
                 Object.keys(dealingbydate).forEach((itm, i) => {
-                    data[itm] = dealingbydate[itm];
+                  
+                   var dealDataObj= createData(dealingbydate[itm].tradeTime
+                      ,dealingbydate[itm].account?dealingbydate[itm].account:" "
+                      ,dealingbydate[itm].instrumentPrimaryIdentifier?dealingbydate[itm].instrumentPrimaryIdentifier:" "
+                      ,dealingbydate[itm].dealType
+                      ,dealingbydate[itm].units
+                    ,dealingbydate[itm].amount
+                  ,dealingbydate[itm].dealingStatus);
+                  console.log(dealDataObj);
+                dealData.push(dealDataObj);
                 });
-                self.setState({
-                    dealing: data
-                })
-            }
+                //console.log("Data from socket: "+JSON.stringify(dealData));
+                self.setState({ data: dealData });
+               // this.state.data= dealData;
+           // }
           }
         })
-        var today = moment().format("YYYY-MM-DD");
-        var dealing = this.state.dealing || this.props.data.dealing;
-        //alert(JSON.stringify(dealing))
-        if(dealing ){
-                //if (self.props.loadThisDay == 'today') {
-                    Object.keys(dealing).map(function (keyName, keyIndex) {
-                        if (moment(dealing[keyName].boxDate).isSame(today, 'd')) {
+        // var today = moment().format("YYYY-MM-DD");
+        // var dealing = this.state.dealing || this.props.data.dealing;
+        // //alert(JSON.stringify(dealing))
+        // if(dealing ){
+        //         //if (self.props.loadThisDay == 'today') {
+        //             Object.keys(dealing).map(function (keyName, keyIndex) {
+        //                 if (moment(dealing[keyName].boxDate).isSame(today, 'd')) {
 
-                                //alert(dealing[keyName].tradeTime);
-                              }
-                  });
-              //}
-            }
+        //                         //alert(dealing[keyName].tradeTime);
+        //                       }
+        //           });
+        //       //}
+        //     }
     }
 
   componentWillMount(prevProps, prevState) {
     //console.log('selected : ' + this.state.chart);
-    this.props.dealingActions.getDealings();
+    //this.props.dealingActions.getDealings();
 
-    let self = this;
+  //  let self = this;
 
     //this.getPrice();
   }
@@ -286,7 +289,7 @@ class DataTable extends React.Component {
     //       //}
     //     }
     const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
-    //alert('render'+JSON.stringify(self.props.dealingData));
+    //alert('render'+JSON.stringify(data));
     return (
       <Paper>
         <div className="flex-auto">
@@ -307,14 +310,24 @@ class DataTable extends React.Component {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map(n => {
 
+                    // const statusStyle = n.status.includes("Accepted")
+                    // ? "text-white bg-success"
+                    // : n.status.includes("On Hold")
+                    //   ? "bg-amber"
+                    //   : n.status.includes("Rejected")
+                    //     ? "text-white bg-danger"
+                    //     : "text-white bg-grey";
+
                     const statusStyle = n.status.includes("Accepted")
                     ? "text-white bg-success"
                     : n.status.includes("On Hold")
                       ? "bg-amber"
                       : n.status.includes("Rejected")
                         ? "text-white bg-danger"
+                        : n.status.includes("Priced")
+                        ?"text-white bg-success"
                         : "text-white bg-grey";
-
+                        
                     const isSelected = this.isSelected(n.id);
                     return (
                       <TableRow
