@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import acdActions from 'actions/Dashboard/acdActions';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import moment from "moment";
 import {boxDataCalculation, convertCurrency} from 'components/Common/function/BoxDataCalculation';
 class TodayBox extends React.Component {
 
@@ -15,7 +16,8 @@ class TodayBox extends React.Component {
     }
 
     componentWillMount() {
-        this.props.acdActions.getAcd('today', localStorage.getItem('acdId'))
+        var date = moment().format("YYYY-MM-DD");
+        this.props.acdActions.getAcd(date, localStorage.getItem('acdId'))
         console.log(JSON.stringify(this.props.acdToday));
     }
 
@@ -47,7 +49,7 @@ class TodayBox extends React.Component {
               <i className="zmdi   zmdi-case px-1" />
               Today</span>
 
-              <Link to={{pathname: "/app/table-page",state: { day: 'today'}}}>
+              <Link to={{pathname: "/app/table-page",state: { data: moment().format("YYYY-MM-DD")}}}>
                 <i
                   className={`zmdi zmdi-hc-lg pull-right zmdi-arrow-right`}
                 />

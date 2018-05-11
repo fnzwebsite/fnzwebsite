@@ -52,20 +52,21 @@ server.get('/price', (req, res) => {
 
 server.get('/box/:day/acd/:acdId', (req, res) => {
     console.log("hi")
-    var checkDate;
-    if (req.params.day == 'today') {
-        checkDate = moment().format("YYYY-MM-DD");
-    } else if (req.params.day == 'next') {
-        checkDate = moment().add('days', 1).format("YYYY-MM-DD");
-    } else if (req.params.day == 'previous') {
-        checkDate = moment().add('days', -1).format("YYYY-MM-DD");
-    }
-    console.log(checkDate);
+    // var checkDate;
+    // if (req.params.day == 'today') {
+    //     checkDate = moment().format("YYYY-MM-DD");
+    // } else if (req.params.day == 'next') {
+    //     checkDate = moment().add('days', 1).format("YYYY-MM-DD");
+    // } else if (req.params.day == 'previous') {
+    //     checkDate = moment().add('days', -1).format("YYYY-MM-DD");
+    // }
+    console.log(req.params.day);
+    //console.log(checkDate);
     var priceData = [];
     let auth = req.headers.authorization;
     getAcd(function (data) {
         res.send(data);
-    }, auth, checkDate, req.params.acdId);
+    }, auth, req.params.day, req.params.acdId);
 });
 
 server.get('/getacd', (req, res) => {
@@ -96,7 +97,7 @@ io.use(function (socket, next) {
                 }
             }, socket.handshake.query.auth,setDate);
 
-           
+
             setDate = momenttz.tz(momenttz.now(), "Europe/London").subtract(2,'hour').format();
             return next();
         }, 30000);
@@ -193,7 +194,7 @@ function getDealingByDate(callback, auth, setDate) {
 }
 
 function getDealsByBoxDate(callback, auth, setDate) {
-    console.log("BoxDate Method...");
+    //console.log("BoxDate Method...");
     var post_data = '{"selector": {"boxDate": {"$eq": "2018-05-09"}, "docType": {"$eq": "DEA"}}}';
     console.log(post_data);
     var options = {
@@ -213,14 +214,14 @@ function getDealsByBoxDate(callback, auth, setDate) {
             output += chunk;
         });
         res.on('end', function () {
-           
+
             if(output!=null)
             {
                 //console.log(output);
                 var obj = JSON.parse(output);
-                console.log("BoxDate output");
-                console.log(obj);
-                console.log("BoxDate output");
+                //console.log("BoxDate output");
+                //console.log(obj);
+                //console.log("BoxDate output");
                 if (callback != undefined) {
                     callback(obj);
                 }
@@ -395,6 +396,7 @@ function getAcd(callback, auth, dateValue,acdId) {
             Authorization: auth
         }
     };
+    console.log('/api/v1/box/'+dateValue+'/organisation/'+acdId);
 
     var req = http.request(options, function (res) {
         var output = '';
@@ -408,7 +410,7 @@ function getAcd(callback, auth, dateValue,acdId) {
           // if(JSON.stringify(output) === '{}'){
           //   console.log('len'+Object.keys(output).length);
           // }
-          console.log("leng"+Object.keys(output).length);
+          //console.log("leng"+Object.keys(output).length);
             if(Object.keys(output).length!=2)
             {
                 var obj = JSON.parse(output);
@@ -418,6 +420,7 @@ function getAcd(callback, auth, dateValue,acdId) {
                 }
             }
             else {
+              //console.log('else');
                 callback({
                   "totalSubscription": 0,
                   "totalRedemption": 0,
@@ -598,7 +601,7 @@ function postCompany(callback, auth, body) {
 
         res.on('end', function () {
             var obj = JSON.parse(output);
-            console.log(obj);
+            //console.log(obj);
             if (callback != undefined) {
                 callback(obj);
             }
@@ -650,7 +653,7 @@ function postInstrument(callback, auth, body) {
 
         res.on('end', function () {
             var obj = JSON.parse(output);
-            console.log(obj);
+            //console.log(obj);
             if (callback != undefined) {
                 callback(obj);
             }
@@ -702,7 +705,7 @@ function postDeal(callback, auth, body) {
 
         res.on('end', function () {
             var obj = JSON.parse(output);
-            console.log(obj);
+            //console.log(obj);
             if (callback != undefined) {
                 callback(obj);
             }

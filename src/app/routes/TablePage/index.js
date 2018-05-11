@@ -16,6 +16,7 @@ import DataTable from "./Components/dataTable/DataTable";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import moment from "moment";
+import dealingActions from 'actions/Dashboard/dealingActions';
 import "react-datepicker/dist/react-datepicker.css";
 import {
   withStyles,
@@ -28,18 +29,19 @@ import PropTypes from 'prop-types';
 import {boxDataCalculation, convertCurrency} from 'components/Common/function/BoxDataCalculation';
 import {connect} from 'react-redux';
 
-
 class ExampleCustomInput extends React.Component {
   constructor(props) {
       super(props)
       this.state = {
           boxData: null
       }
-      alert(JSON.stringify(this.props));
+      //alert(JSON.stringify(this.props));
+      //this.handletextChange=this.handletextChange.bind(this)
   }
-  // componentWillMount(){
-  //   alert(JSON.stringify(this.props));
-  // }
+
+  handletextChange(e){
+    alert('text');
+  }
   render() {
     return (
       <div>
@@ -51,11 +53,10 @@ class ExampleCustomInput extends React.Component {
           className="example-custom-input"
           onClick={this.props.onClick}
           value={this.props.value}
+    onChange={this.handletextChange}
+
         />
-        <i
-          className="zmdi zmdi-calendar zmdi-hc-2x"
-          onClick={this.props.onClick}
-        />
+
       </div>
     );
   }
@@ -64,20 +65,41 @@ class ExampleCustomInput extends React.Component {
 class TablePage extends React.Component {
   constructor(props) {
     super(props);
+    var date=this.props.location.state.data;
     this.state = {
-      startDate: moment(),
-      isOpen: false
+      startDate: moment(date),
+      isOpen: false,
+      boxValues: []
     };
     this.handleChange = this.handleChange.bind(this);
+    //alert(JSON.stringify(this.props.location.state.data))
   }
 
   handleChange(date) {
     this.setState({
       startDate: date
     });
+    var date=moment(this.state.startDate).format("YYYY-MM-DD");
+    this.props.acdActions.getAcdByDay(date, localStorage.getItem('acdId'));
+    //alert(JSON.stringify(this.props.acdPrice));
+    //console.log(JSON.stringify(this.props.acdPrice));
   }
 
+  componentWillMount(prevProps, prevState) {
+    // this.props.acdActions.getAcdByDay('2018-05-09', localStorage.getItem('acdId'));
+    // alert(JSON.stringify(this.props.acdPrice))
+  }
+  componentDidMount(prevProps, prevState) {
+        var dateValue=this.props.location.state.data
+        this.props.acdActions.getAcdByDay(dateValue, localStorage.getItem('acdId'));
+        var self=this;
+        //var box=boxDataCalculation(this.props.acdPrice)
+        self.setState({boxValues: boxDataCalculation(this.props.acdPrice) });
+        //alert(JSON.stringify(this.state.boxValues))
+      }
+
   render() {
+    if (this.props.acdPrice && this.state.boxValues && this.state.boxValues.length) {
     return (
       <div className="app-wrapper">
         <div className="App app_cards">
@@ -133,7 +155,7 @@ class TablePage extends React.Component {
                     </Typography>
 
                     <Typography component="h2">
-                      <span>£</span>23.4678 mn<span className="sub-text"></span>
+                      {convertCurrency(this.state.boxValues[0].subscriptions)} mn<span className="sub-text"></span>
                     </Typography>
                   </div>
                   <hr />
@@ -143,7 +165,7 @@ class TablePage extends React.Component {
                     </Typography>
 
                     <Typography component="h2"  className="text-warning">
-                      <span>£</span>9.3256 mn<span className="sub-text"></span>
+                      {convertCurrency(this.state.boxValues[0].redemptions)} mn<span className="sub-text"></span>
                     </Typography>
                   </div>
                   <hr />
@@ -153,12 +175,12 @@ class TablePage extends React.Component {
                     </Typography>
 
                     <Typography component="h2">
-                      <span>£</span>23.46 mn<span className="sub-text"></span>
+                      {convertCurrency(this.state.boxValues[0].netFlow)} mn<span className="sub-text"></span>
                     </Typography>
                   </div>
                 </div>
                 <div className="col-md-10 col-sm-12 closed">
-                  <DataTable />
+                  <DataTable tableData={this.props.acdPrice.positions}/>
                 </div>
               </div>
             </CardBody>
@@ -167,6 +189,50 @@ class TablePage extends React.Component {
       </div>
     );
   }
+  else{
+
+    return (
+          <div>
+
+              <div class="preloader">
+                  <span class="line line-1"></span>
+                  <span class="line line-2"></span>
+                  <span class="line line-3"></span>
+                  <span class="line line-4"></span>
+                  <span class="line line-5"></span>
+                  <span class="line line-6"></span>
+                  <span class="line line-7"></span>
+                  <span class="line line-8"></span>
+                  <span class="line line-9"></span>
+                  <div>Loading</div>
+              </div>
+          </div>
+      );
+
+  }
+
+  }
 }
 
-export default TablePage;
+const
+    mapStateToProps = (state, props) => {
+        return {
+            acdPrice: state.acdPrice
+        }
+    };
+
+TablePage.propTypes = {
+    acdActions: PropTypes.object,
+    acdPrice: PropTypes.array
+};
+
+const
+    mapDispatchToProps = (dispatch) => ({
+        acdActions: bindActionCreators(acdActions, dispatch)
+    });
+
+export default connect(mapStateToProps,
+    mapDispatchToProps)(TablePage);
+
+
+//export default TablePage;

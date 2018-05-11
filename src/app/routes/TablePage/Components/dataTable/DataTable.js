@@ -143,8 +143,8 @@ class DataTableHead extends React.Component {
                 key={column.id}
                 numeric={column.numeric}
                 padding={column.disablePadding ? "none" : "default"}
-              
-                className={column.className} 
+
+                className={column.className}
               >
                 <Tooltip
                   title="Sort"
@@ -270,16 +270,6 @@ class DataTable extends React.Component {
       orderBy: "isin",
       selected: [],
       data: [
-        createData("GBX0001", 23.4678, 9.2536, 10.2456, 1.45, "20/04/2018", 2.345),
-        createData("GBX0002", 23.4678, 9.2536, 10.2456, 1.45, "20/04/2018", -2.345),
-        createData("GBX0003", 23.4678, 9.2536, 10.2456, 1.45, "20/04/2018", 2.345),
-        createData("GBX0004", 23.4678, 9.2536, 10.2456, 1.45, "20/04/2018", -2.345),
-        createData("GBX0005", 23.4678, 9.2536, 10.2456, 1.45, "20/04/2018", -2.345),
-        createData("GBX0006", 23.4678, 9.2536, 10.2456, 1.45, "20/04/2018", 2.345),
-        createData("GBX0007", 23.4678, 9.2536, 10.2456, 1.45, "20/04/2018", 2.345),
-        createData("GBX0008", 23.4678, 9.2536, 10.2456, 1.45, "20/04/2018", 2.345),
-        createData("GBX0009", 23.4678, 9.2536, 10.2456, 1.45, "20/04/2018", 2.345),
-        createData("GBX0010", 23.4678, 9.2536, 10.2456, 1.45, "20/04/2018", 2.345)
       ].sort((a, b) => (a.isin < b.isin ? -1 : 1)),
       page: 0,
       rowsPerPage: 5,
@@ -287,7 +277,14 @@ class DataTable extends React.Component {
     };
   }
 
+  componentWillReceiveProps(){
+    var self=this;
+    self.setState({data: this.props.tableData });
+    //alert(this.state)
+  }
+
   render() {
+    //alert(JSON.stringify(this.props));
     const {
       data,
       order,
@@ -354,7 +351,7 @@ class DataTable extends React.Component {
                         selected={isSelected}
                       >
                         <TableCell className="tran t-center" >{n.isin}</TableCell>
-                       
+
                         <TableCell numeric className="text-primary"><span>£</span>{n.subscriptions}<span>mn</span></TableCell>
                         <TableCell numeric className="text-warning"><span>£</span>{n.redemptions}<span>mn</span></TableCell>
                         <TableCell numeric className="text-primary"><span>£</span>{n.netflow}<span>mn</span></TableCell>

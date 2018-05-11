@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import acdActions from 'actions/Dashboard/acdActions';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import moment from "moment";
 import {boxDataCalculation, convertCurrency} from 'components/Common/function/BoxDataCalculation';
 class NextBox extends React.Component {
 
@@ -15,8 +16,9 @@ class NextBox extends React.Component {
     }
 
     componentWillMount() {
-        this.props.acdActions.getAcd('next', localStorage.getItem('acdId'))
-        //console.log(JSON.stringify(this.props.acdToday));
+        var date = moment().add('days', 1).format("YYYY-MM-DD")
+        this.props.acdActions.getAcd(date, localStorage.getItem('acdId'))
+        console.log('hello'+JSON.stringify(this.props.acdNext));
     }
 
     render() {
@@ -47,7 +49,7 @@ class NextBox extends React.Component {
               <i className="zmdi   zmdi-case px-1" />
               Next Day</span>
 
-              <Link to="/app/table-page">
+              <Link to={{pathname: "/app/table-page",state: { data: moment().add('days', 1).format("YYYY-MM-DD")}}}>
                 <i
                   className={`zmdi zmdi-hc-lg pull-right zmdi-arrow-right`}
                 />

@@ -74,7 +74,7 @@ const columnData = [
   { id: "units", numeric: true, disablePadding: false, className:'tran t-right', label: "Units" },
   { id: "amount", numeric: true, disablePadding: false, className:'tran t-right',   label: "Amount" },
   { id: "status", numeric: false, disablePadding: false, className:' stat tran t-center', label: "Status" },
-  
+
 ];
   // { id: "actions", numeric: true, disablePadding: false, label: "Actions" }
 
@@ -204,7 +204,8 @@ class IsinTransTable extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-
+    alert(JSON.stringify(this.state));
+    alert(JSON.stringify(this.props));
     this.state = {
       order: "asc",
       orderBy: "trade",
@@ -319,7 +320,7 @@ class IsinTransTable extends React.Component {
                       >
 
 
-                     
+
                     <TableCell padding="none" className="tran t-center">{n.trade}</TableCell>
                         <TableCell className="tran t-center">{n.invAcc}</TableCell>
                         <TableCell className="tran t-center">{n.isin}</TableCell>
@@ -329,11 +330,11 @@ class IsinTransTable extends React.Component {
 
                       <TableCell  className="tran t-center">
                         <div className={` badge text-uppercase ${statusStyle}`}>
-                         {n.status}                        
+                         {n.status}
                         </div></TableCell>
 
 
-                     
+
 
 
 
