@@ -13,11 +13,11 @@ const dealingActions = {
                         dealing: data
                     });
                 }).catch(err => {
-                if (err.message == "Token Expired or Token not valid.")
+                    if (err.message == "Token Expired or Token not valid." || err.status==400) 
                     // localStorage.removeItem('token');
                     // localStorage.removeItem('displayName');
                     // localStorage.removeItem('acdId');
-                    dispatch(push('/#/signin'))
+                    dispatch(push('#/signin'))
             });
         };
     },
@@ -33,11 +33,11 @@ const dealingActions = {
                         dealsByDate: data
                     });
                 }).catch(err => {
-                if (err.message == "Token Expired or Token not valid.")
+                    if (err.message == "Token Expired or Token not valid." || err.status==400) 
                     // localStorage.removeItem('token');
                     // localStorage.removeItem('displayName');
                     // localStorage.removeItem('acdId');
-                    dispatch(push('/#/signin'))
+                    dispatch(push('#/signin'))
             });
         };
     }
