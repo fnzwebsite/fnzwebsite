@@ -18,7 +18,7 @@ class TodayBox extends React.Component {
     componentWillMount() {
         var date = moment().format("YYYY-MM-DD");
         this.props.acdActions.getAcd(date, localStorage.getItem('acdId'))
-        console.log(JSON.stringify(this.props.acdToday));
+//        console.log(JSON.stringify(this.props.acdToday));
     }
 
     render() {
@@ -43,18 +43,7 @@ class TodayBox extends React.Component {
         if (this.props.acdToday) {
           return (
             <div>
-            <div className="card-header d-flex justify-content-between bg-primary">
-              <span className="text-white">
-
-              <i className="zmdi   zmdi-case px-1" />
-              Today</span>
-
-              <Link to={{pathname: "/app/table-page",state: { data: moment().format("YYYY-MM-DD")}}}>
-                <i
-                  className={`zmdi zmdi-hc-lg pull-right zmdi-arrow-right`}
-                />
-              </Link>
-            </div>
+     
             <div className="row con col-with-divider py-3 px-2">
               <div className="col-md-4">
                 <div className="stack-order">
@@ -86,7 +75,7 @@ class TodayBox extends React.Component {
         else{
 
           return (
-                <div>
+            <div style={{height: '125px'}}>
 
                     <div class="preloader">
                         <span class="line line-1"></span>

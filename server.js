@@ -51,7 +51,7 @@ server.get('/price', (req, res) => {
 });
 
 server.get('/box/:day/acd/:acdId', (req, res) => {
-    console.log("hi")
+    //console.log("hi")
     // var checkDate;
     // if (req.params.day == 'today') {
     //     checkDate = moment().format("YYYY-MM-DD");
@@ -78,8 +78,14 @@ server.get('/getacd', (req, res) => {
 
 server.get('/dealingbyday/:boxDate',(req,res)=>{
 let auth=req.headers.authorization;
+getDealingByDate(function (data) {
+    if (data.status != 400) {
+        io.sockets.emit('dealingbydate', data);
+    }
+} ,auth,req.params.boxDate);
 getDealsByBoxDate(function (data) {
     if (data.status != 400) {
+        console.log("Data Recieved Box Api: "+ JSON.stringify(data))
         res.send(data);
         //io.sockets.emit('dealingbyday', req.params.boxDate);
     }
@@ -143,12 +149,12 @@ io.sockets.on('connection', function (socket) {
         setDate = momenttz.tz(momenttz.now(), "Europe/London").subtract(2,'hour').format();
     });
 
-    socket.on('dealingbyday', function (msg) {
-        getDealsByBoxDate(function () {
-            io.sockets.emit('dealingbyday', data);
-        }, msg['query'], '2018-05-09');
-        setDate = momenttz.tz(momenttz.now(), "Europe/London").subtract(2,'hour').format();
-    });
+    // socket.on('dealingbyday', function (msg) {
+    //     getDealsByBoxDate(function () {
+    //         io.sockets.emit('dealingbyday', data);
+    //     }, msg['query'], '2018-05-09');
+    //     setDate = momenttz.tz(momenttz.now(), "Europe/London").subtract(2,'hour').format();
+    // });
 
     socket.on('disconnect', function () {
         delete clients[socket.id];
@@ -195,7 +201,7 @@ function getDealingByDate(callback, auth, setDate) {
 
 function getDealsByBoxDate(callback, auth, setDate) {
     //console.log("BoxDate Method...");
-    var post_data = '{"selector": {"boxDate": {"$eq": "2018-05-09"}, "docType": {"$eq": "DEA"}}}';
+    var post_data = '{"selector": {"boxDate": {"$eq": "2018-05-14"}, "docType": {"$eq": "DEA"}}}';
     console.log(post_data);
     var options = {
         method: 'POST',
@@ -214,7 +220,7 @@ function getDealsByBoxDate(callback, auth, setDate) {
             output += chunk;
         });
         res.on('end', function () {
-
+            console.log("box data :"+output)
             if(output!=null)
             {
                 //console.log(output);
@@ -255,8 +261,9 @@ function getDealing(callback, auth) {
         });
 
         res.on('end', function () {
-            console.log(output);
+         
             var obj = JSON.parse(output);
+            console.log("dealing data: " +JSON.stringify(obj));
             if (callback != undefined) {
                 callback(obj);
             }
@@ -727,6 +734,7 @@ function postDeal(callback, auth, body) {
 function getDealingByDay(callback, auth, setDate) {
 
     var post_data = '{"selector": {"boxDate": {"$eq": "'+setDate+'"}}}';
+    console.log("Deal Query Post Data: " + post_data);
     var options = {
         method: 'POST',
         host: hostIP,
@@ -746,7 +754,7 @@ function getDealingByDay(callback, auth, setDate) {
         res.on('end', function () {
             if(output!=null)
             {
-                //console.log(output);
+                console.log(output);
                 var obj = JSON.parse(output);
                 if (callback != undefined) {
                     callback(obj);

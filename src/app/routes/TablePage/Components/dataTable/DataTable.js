@@ -327,10 +327,10 @@ class DataTable extends React.Component {
                 orderBy={orderBy}
                 onSelectAllClick={this.handleSelectAllClick}
                 onRequestSort={this.handleRequestSort}
-                rowCount={data.length}
+                rowCount={(data)?data.length:0}
               />
               <TableBody>
-                {data
+                {(data)?data
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map(n => {
                     const navStyle =
@@ -374,12 +374,12 @@ class DataTable extends React.Component {
                         </TableCell>
                       </TableRow>
                     );
-                  })}
+                  }):' '}
               </TableBody>
               <TableFooter>
                 <TableRow>
                   <TablePagination
-                    count={data.length}
+                    count={data?data.length:0}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={this.handleChangePage}

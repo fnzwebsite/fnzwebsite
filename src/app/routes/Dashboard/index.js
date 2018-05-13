@@ -1,8 +1,11 @@
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
 import React, { Component } from "react";
 import DataTable from "./Components/dataTable/DataTable.js";
 import CardBox from "components/CardBox/index";
 import IntlMessages from "util/IntlMessages";
 import SimpleLineChart from "./Components/simpleLineChart/SimpleLineChart.js";
+import Chart from "./Components/Chart/Chart.js";
 import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
 import SwipeableViews from "react-swipeable-views";
@@ -11,12 +14,14 @@ import AppBar from "material-ui/AppBar";
 import { Card, CardBody, CardFooter, CardSubtitle, CardText } from "reactstrap";
 import { Link } from "react-router-dom";
 import {InsertChart , List} from 'material-ui-icons'
-import acdActions from 'actions/Dashboard/acdActions';
+import dealingActions from 'actions/Dashboard/dealingActions';
 import TodayBox from './TodayBox'
 import PreviousBox from './PreviousBox'
 import NextBox from './NextBox'
 import io from "socket.io-client"
 import {authHeader, getConfig} from 'helpers/index';
+import moment from "moment";
+
 
 function TabContainer(props) {
   return <div style={{ padding: 20 }}>{props.children}</div>;
@@ -33,7 +38,7 @@ class Dashboard extends Component {
       super(props);
       this.state = {
           dealing: null,
-          chart: 'today',
+          chart: 'next',
           selected: 'chart'
       };
       this.changeView = this.changeView.bind(this);
@@ -61,28 +66,93 @@ class Dashboard extends Component {
   handleChangeIndex = index => {
     this.setState({ value: index });
   };
-
+  componentWillMount(prevProps, prevState) {
+//    console.log('selected : ' + this.state.chart);
+    this.props.dealingActions.getDealings();
+  //  this.getPrice();
+}
+componentDidMount()
+{
+  var self = this;
+  //var socket = io('http://localhost:3700', {query: "auth=" + authHeader()['Authorization']});
+  var socket = io(getConfig('socketurl'), {query: "auth=" + authHeader()['Authorization']});
+  socket.on('dealingbydate', function (dealingbydate) {
+      if (Object.keys(dealingbydate).length > 0) {
+          var data = self.state.dealing;
+          if (!self.state.dealing) {
+              data = {};
+              Object.keys(self.props.data.dealing).forEach((itm, i) => {
+                  data[itm] = self.props.data.dealing[itm];
+              });
+          }
+          Object.keys(dealingbydate).forEach((itm, i) => {
+              data[itm] = dealingbydate[itm];
+          });
+          self.setState({
+              dealing: data
+          })
+      }
+  })
+}
 
   render() {
+    //console.log("Data for chart: " + JSON.stringify(this.props));
     const { theme } = this.props;
     const { value } = this.state;
-
+    var dealing = this.state.dealing || this.props.data.dealing;
         return (
           <div className="app-wrapper">
             <div className="animated slideInUpTiny animation-duration-3">
               <div className="row">
                 <div className="col-lg-4 col-sm-12 col-md-4">
                   <div className="card fund-card shadow text-center">
+                  <div className="card-header d-flex justify-content-between bg-primary">
+              <span className="text-white">
+
+              <i className="zmdi   zmdi-case px-1" />
+              Previous Day</span>
+
+              <Link to={{pathname: "/app/table-page",state: { data: moment().add('days', -1).format("YYYY-MM-DD")}}}>
+                <i
+                  className={`zmdi zmdi-hc-lg pull-right zmdi-arrow-right`}
+                />
+              </Link>
+            </div>
+
                     <PreviousBox/>
                   </div>
                 </div>
                 <div className="col-lg-4 col-sm-12 col-md-4">
                   <div className="card fund-card shadow text-center">
+                  <div className="card-header d-flex justify-content-between bg-primary">
+              <span className="text-white">
+
+              <i className="zmdi   zmdi-case px-1" />
+              Today</span>
+
+              <Link to={{pathname: "/app/table-page",state: { data: moment().format("YYYY-MM-DD")}}}>
+                <i
+                  className={`zmdi zmdi-hc-lg pull-right zmdi-arrow-right`}
+                />
+              </Link>
+            </div>
                     <TodayBox/>
                   </div>
                 </div>
                 <div className="col-lg-4 col-sm-12 col-md-4">
                   <div className="card fund-card shadow text-center">
+                  <div className="card-header d-flex justify-content-between bg-primary">
+              <span className="text-white">
+
+              <i className="zmdi   zmdi-case px-1" />
+              Next Day</span>
+
+              <Link to={{pathname: "/app/table-page",state: { data: moment().add('days', 1).format("YYYY-MM-DD")}}}>
+                <i
+                  className={`zmdi zmdi-hc-lg pull-right zmdi-arrow-right`}
+                />
+              </Link>
+            </div>
                     <NextBox/>
                   </div>
                 </div>
@@ -112,8 +182,8 @@ class Dashboard extends Component {
                   >
                     <TabContainer>
                       <div className="row chart-tab">
-                        <CardBox heading="Simple Line Chart" styleName="col-12">
-                          <SimpleLineChart />
+                        <CardBox heading="" styleName="col-12">
+                          <Chart   loadThisDay={this.state.chart}  dealingData={dealing} />
                         </CardBox>
                       </div>
                     </TabContainer>
@@ -155,4 +225,24 @@ class Dashboard extends Component {
   }
 }
 
-export default withStyles(null, { withTheme: true })(Dashboard);
+const
+    mapStateToProps = (state, props) => {
+        return {
+            data: state,
+            user: state.user,
+            price: state.price,
+        }
+    };
+
+const
+    mapDispatchToProps = (dispatch) => ({
+        dealingActions: bindActionCreators(dealingActions, dispatch)
+  //      userActions: bindActionCreators(userActions, dispatch)
+    });
+
+
+export default connect(mapStateToProps,
+    mapDispatchToProps)(Dashboard);
+
+
+//export default withStyles(null, { withTheme: true })(Dashboard);

@@ -3339,3 +3339,84 @@ a > code {
     margin-left: 15px;
   }
 }
+
+
+.preloader {
+  position: absolute;
+  top: 44%;
+  display: block;
+  left: 44%;
+}
+
+.preloader>div {
+  text-align: center;
+}
+
+.preloader .line {
+  width: 2px;
+  height: 12px;
+  background: #1191fe;
+  margin: 0 1px;
+  display: inline-block;
+  animation: opacity-2 1000ms infinite ease-in-out;
+}
+
+.preloader .line-1 {
+  animation-delay: 800ms;
+}
+
+.preloader .line-2 {
+  animation-delay: 600ms;
+}
+
+.preloader .line-3 {
+  animation-delay: 400ms;
+}
+
+.preloader .line-4 {
+  animation-delay: 200ms;
+}
+
+.preloader .line-6 {
+  animation-delay: 200ms;
+}
+
+.preloader .line-7 {
+  animation-delay: 400ms;
+}
+
+.preloader .line-8 {
+  animation-delay: 600ms;
+}
+
+.preloader .line-9 {
+  animation-delay: 800ms;
+}
+
+@keyframes opacity-1 {
+  0% {
+      opacity: 1;
+  }
+  50% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
+@keyframes opacity-2 {
+  0% {
+      opacity: 1;
+      height: 15px;
+  }
+  50% {
+      opacity: 0;
+      height: 12px;
+  }
+  100% {
+      opacity: 1;
+      height: 15px;
+  }
+}
+/*Loader end*/

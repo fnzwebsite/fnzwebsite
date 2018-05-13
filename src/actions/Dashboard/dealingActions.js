@@ -23,11 +23,11 @@ const dealingActions = {
     },
 
     getDealingsByBoxDate: (boxDate) => {
-        
+        console.log('called....')
         return dispatch => {
             httpGet('dealingbyday/'+boxDate)
                 .then((data) => {
-                  // console.log("Data rec:"+ JSON.stringify(data))
+                 //console.log("Data rec:"+ JSON.stringify(data))
                     dispatch({
                         type: allActions.RECEIVE_DEALINGBYBOXDATE,
                         dealsByDate: data

@@ -33,7 +33,7 @@ const acdActions = {
                     // localStorage.removeItem('displayName');
                     // localStorage.removeItem('acdId');
 
-                    dispatch(push('/#/signin'))
+                    dispatch(push('#/signin'))
             });
         };
     },

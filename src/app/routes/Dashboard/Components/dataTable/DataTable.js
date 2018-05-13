@@ -211,7 +211,6 @@ class DataTable extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-
     this.state = {
       order: "asc",
       orderBy: "trade",
@@ -222,13 +221,13 @@ class DataTable extends React.Component {
       rowsPerPage: 5,
       open: false
     };
-
+    //console.log('constructor of datatable')
+    this.props.dealingActions.getDealingsByBoxDate('2018-05-14');
   }
 
 
   componentDidMount(prevProps, prevState) {
-        var self = this;
-        this.props.dealingActions.getDealingsByBoxDate('2018-05-09');
+      
         
         //var socket = io('http://localhost:3700', {query: "auth=" + authHeader()['Authorization']});
         // var socket = io(getConfig('socketurl'), {query: "auth=" + authHeader()['Authorization']});
@@ -274,7 +273,7 @@ class DataTable extends React.Component {
  componentWillReceiveProps()
  {
    var self=this;
-  console.log('dealing data:' + JSON.stringify(this.props));
+  //console.log('dealing data:' + JSON.stringify(this.props.dealsByDate));
   if(this.props.dealsByDate)
   {
     var dealData = [];
@@ -286,7 +285,7 @@ class DataTable extends React.Component {
                       ,this.props.dealsByDate[itm].units
                     ,this.props.dealsByDate[itm].amount
                   ,this.props.dealsByDate[itm].dealingStatus);
-                  console.log(dealDataObj);
+                 // console.log(dealDataObj);
                 dealData.push(dealDataObj);
     });
     self.setState({data: dealData });
@@ -299,7 +298,7 @@ class DataTable extends React.Component {
     //alert('hi'+JSON.stringify(dealing))
 
     const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
-    //alert('render'+JSON.stringify(data));
+  //console.log('render'+JSON.stringify(data));
     return (
       <Paper>
         <div className="flex-auto">

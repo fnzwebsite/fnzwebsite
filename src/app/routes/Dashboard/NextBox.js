@@ -7,7 +7,6 @@ import {Link} from 'react-router-dom';
 import moment from "moment";
 import {boxDataCalculation, convertCurrency} from 'components/Common/function/BoxDataCalculation';
 class NextBox extends React.Component {
-
     constructor(props) {
         super(props)
         this.state = {
@@ -16,9 +15,13 @@ class NextBox extends React.Component {
     }
 
     componentWillMount() {
+       
+    }
+    componentDidMount()
+    {
         var date = moment().add('days', 1).format("YYYY-MM-DD")
         this.props.acdActions.getAcd(date, localStorage.getItem('acdId'))
-        console.log('hello'+JSON.stringify(this.props.acdNext));
+//        console.log('Next Day Data: '+JSON.stringify(this.props.acdNext));
     }
 
     render() {
@@ -26,35 +29,10 @@ class NextBox extends React.Component {
           this.state = {
               boxData: boxDataCalculation(this.props.acdNext)
           }
-            //  console.log(JSON.stringify(this.props.acdTodayData));
-            // subscriptionsToday = parseFloat(subscriptionsToday) + parseFloat(this.props.acdTodayData[0].unitsPurchased) * parseFloat(this.props.acdTodayData[0].roundedPrice);
-            // redemptionsToday = parseFloat(redemptionsToday) + parseFloat(this.props.acdTodayData[0].unitsSold) * parseFloat(this.props.acdTodayData[0].roundedPrice);
-            // broughtForwardToday = parseFloat(broughtForwardToday) + parseFloat(this.props.acdTodayData[0].totalUnitsBroughtForwardBalance);
-            // carryForwardToday = parseFloat(carryForwardToday) + parseFloat(this.props.acdTodayData[0].totalUnitsCarriedForward);
-            // netInflowOutflowToday = parseFloat(subscriptionsToday) - parseFloat(redemptionsToday);
-            // subscriptionsToday = parseFloat(subscriptionsToday).toFixed(4);
-            // redemptionsToday = parseFloat(redemptionsToday).toFixed(4);
-            // netInflowOutflowToday = parseFloat(netInflowOutflowToday).toFixed(4);
-            // broughtForwardToday = parseFloat(broughtForwardToday).toFixed(4);
-            // carryForwardToday = parseFloat(carryForwardToday).toFixed(4);
-            //console.log(broughtForwardToday);
-            //console.log(carryForwardToday);
         }
         if (this.props.acdNext) {
           return (
             <div>
-            <div className="card-header d-flex justify-content-between bg-primary">
-              <span className="text-white">
-
-              <i className="zmdi   zmdi-case px-1" />
-              Next Day</span>
-
-              <Link to={{pathname: "/app/table-page",state: { data: moment().add('days', 1).format("YYYY-MM-DD")}}}>
-                <i
-                  className={`zmdi zmdi-hc-lg pull-right zmdi-arrow-right`}
-                />
-              </Link>
-            </div>
             <div className="row con col-with-divider py-3 px-2">
               <div className="col-md-4">
                 <div className="stack-order">
@@ -86,18 +64,18 @@ class NextBox extends React.Component {
         else{
 
           return (
-                <div>
-
-                    <div class="preloader">
-                        <span class="line line-1"></span>
-                        <span class="line line-2"></span>
-                        <span class="line line-3"></span>
-                        <span class="line line-4"></span>
-                        <span class="line line-5"></span>
-                        <span class="line line-6"></span>
-                        <span class="line line-7"></span>
-                        <span class="line line-8"></span>
-                        <span class="line line-9"></span>
+            <div style={{height: '125px'}}>
+          
+                    <div className="preloader">
+                        <span className="line line-1"></span>
+                        <span className="line line-2"></span>
+                        <span className="line line-3"></span>
+                        <span className="line line-4"></span>
+                        <span className="line line-5"></span>
+                        <span className="line line-6"></span>
+                        <span className="line line-7"></span>
+                        <span className="line line-8"></span>
+                        <span className="line line-9"></span>
                         <div>Loading</div>
                     </div>
                 </div>

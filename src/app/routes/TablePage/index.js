@@ -35,13 +35,9 @@ class ExampleCustomInput extends React.Component {
       this.state = {
           boxData: null
       }
-      //alert(JSON.stringify(this.props));
-      //this.handletextChange=this.handletextChange.bind(this)
   }
 
-  handletextChange(e){
-    alert('text');
-  }
+ 
   render() {
     return (
       <div>
@@ -53,8 +49,6 @@ class ExampleCustomInput extends React.Component {
           className="example-custom-input"
           onClick={this.props.onClick}
           value={this.props.value}
-    onChange={this.handletextChange}
-
         />
 
       </div>
@@ -65,40 +59,77 @@ class ExampleCustomInput extends React.Component {
 class TablePage extends React.Component {
   constructor(props) {
     super(props);
-    var date=this.props.location.state.data;
+    
     this.state = {
-      startDate: moment(date),
+      calendarDate: moment(),
+      settlementDate:moment(),
       isOpen: false,
-      boxValues: []
+      boxValues:boxDataCalculation(this.props.acdPrice)
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleCalendarDateChange = this.handleCalendarDateChange.bind(this);
+    this.handleSettlementDateChange = this.handleSettlementDateChange.bind(this);
+    console.log('table page constructor event...');
+    if(this.props.location && this.props.location.state && this.props.location.state.data)
+    this.props.acdActions.getAcdByDay(this.props.location.state.data, localStorage.getItem('acdId'));
     //alert(JSON.stringify(this.props.location.state.data))
   }
 
-  handleChange(date) {
-    this.setState({
-      startDate: date
-    });
-    var date=moment(this.state.startDate).format("YYYY-MM-DD");
+  handleCalendarDateChange(selectedDate) {
+    const date = selectedDate ? selectedDate.format('YYYY-MM-DD') : undefined;
+    
+    this.setState({ calendarDate:moment(date)});
+    //console.log('calendar event...');  
     this.props.acdActions.getAcdByDay(date, localStorage.getItem('acdId'));
-    //alert(JSON.stringify(this.props.acdPrice));
-    //console.log(JSON.stringify(this.props.acdPrice));
+    this.setState({boxValues: boxDataCalculation(this.props.acdPrice) });
   }
 
-  componentWillMount(prevProps, prevState) {
-    // this.props.acdActions.getAcdByDay('2018-05-09', localStorage.getItem('acdId'));
-    // alert(JSON.stringify(this.props.acdPrice))
+  handleSettlementDateChange(selectedDate)
+  {
+    const date = selectedDate ? selectedDate.format('YYYY-MM-DD') : undefined;
+   // alert(date);
+    this.setState({ settlementDate:moment(selectedDate)});
   }
-  componentDidMount(prevProps, prevState) {
-        var dateValue=this.props.location.state.data
-        this.props.acdActions.getAcdByDay(dateValue, localStorage.getItem('acdId'));
-        var self=this;
-        //var box=boxDataCalculation(this.props.acdPrice)
-        self.setState({boxValues: boxDataCalculation(this.props.acdPrice) });
-        //alert(JSON.stringify(this.state.boxValues))
-      }
 
+  componentWillMount() {
+    console.log('comp will mount....')
+if(this.props.location.state && this.props.location.state.data)
+{
+    var dateValue=this.props.location.state.data
+    this.setState({
+      calendarDate: moment(dateValue),
+      settlementDate:moment(dateValue),
+      isOpen: false,
+      boxValues: boxDataCalculation(this.props.acdPrice)
+    });
+    this.props.acdActions.getAcdByDay(dateValue, localStorage.getItem('acdId'));
+     var self=this;
+     var box=boxDataCalculation(this.props.acdPrice)
+     self.setState({boxValues: boxDataCalculation(this.props.acdPrice) });
+    }
+  }
+  componentDidMount()
+  {
+    console.log('comp did mount....')
+    this.props.acdActions.getAcdByDay(moment(this.state.calendarDate).format('YYYY-MM-DD'), localStorage.getItem('acdId'));
+  this.setState({boxValues: boxDataCalculation(this.props.acdPrice) });
+  }
+componentWillReceiveProps()
+{
+  console.log('receive props event...');
+  console.log("table page after nav : " + JSON.stringify(this.props.acdPrice));
+  
+}
+componentWillUnmount()
+{
+  this.state = {
+    calendarDate: moment(),
+    settlementDate:moment(),
+    isOpen: false,
+    boxValues:[]
+  };
+}
   render() {
+    
     if (this.props.acdPrice && this.state.boxValues && this.state.boxValues.length) {
     return (
       <div className="app-wrapper">
@@ -126,10 +157,10 @@ class TablePage extends React.Component {
                     <DatePicker
                       dateFormat="DD/MM/YYYY"
                       customInput={
-                        <ExampleCustomInput icon="zmdi-arrow-right" />
+                        <ExampleCustomInput icon="zmdi-arrow-right" idValue="txtTransDate" />
                       }
-                      selected={this.state.startDate}
-                      onChange={this.handleChange}
+                      selected={this.state.calendarDate && moment(this.state.calendarDate)}
+                      onChange={this.handleCalendarDateChange}
                     />
                   </div>
 
@@ -142,10 +173,11 @@ class TablePage extends React.Component {
                     <DatePicker
                       dateFormat="DD/MM/YYYY"
                       customInput={
-                        <ExampleCustomInput />
+                        <ExampleCustomInput idValue="txtSetDate" />
                       }
-                      selected={this.state.startDate}
-                      onChange={this.handleChange}
+                      selected={this.state.settlementDate && moment(this.state.settlementDate)}
+                      
+                      onChange={this.handleSettlementDateChange}
                     />
                   </div>
                   <hr />
