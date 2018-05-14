@@ -14,7 +14,7 @@ const Actions = {
         localStorage.setItem('token', JSON.stringify(response.token));
         localStorage.setItem('displayName', response.enrollmentId);
         localStorage.setItem('acdId',response.acd);
-        dispatch(push('/dashboard'));
+        dispatch(push('/'));
       })
       .catch((error) => {
         error.response.json()
@@ -38,7 +38,7 @@ const Actions = {
       })
       .catch(function (error) {
         console.log(error);
-        dispatch(push('/sign_in'));
+        dispatch(push('/signin'));
       });
     };
   },

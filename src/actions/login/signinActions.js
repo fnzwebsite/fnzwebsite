@@ -2,6 +2,7 @@ import { push }                           from 'react-router-redux';
 import Constants                          from 'constants/index';
 import { httpGet, httpPost, httpDelete }  from 'utils/Utils';
 import {getConfig} from 'helpers/index';
+import { history } from 'helpers/History';
 
 const Actions = {
   signIn: (data) => {
@@ -15,7 +16,8 @@ const Actions = {
         localStorage.setItem('token', JSON.stringify(response.token));
         localStorage.setItem('displayName', response.enrollmentId);
         localStorage.setItem('acdId',response.organisations.slice(1, -1));
-        dispatch(push('/#/dashboard'));
+        dispatch(push('/'));
+        // history.push('/#/app/dashboard');
       })
       .catch((error) => {
         error.response.json()

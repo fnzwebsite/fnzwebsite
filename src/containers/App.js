@@ -11,7 +11,7 @@ import AppLocale from '../languageProvider';
 
 import MainApp from 'app/index';
 import SignIn from './SignIn';
-import SignUp from './SignUp';
+// import SignUp from './SignUp';
 
 const RestrictedRoute = ({component: Component, ...rest, authUser}) =>
     <Route
@@ -32,12 +32,12 @@ class App extends Component {
     render() {
         const {match, location, authUser, locale} = this.props;
         if (location.pathname === '/') {
-            if (authUser === null) {
+            // if (authUser === null) {
                 // return ( <Redirect to={'/signin'}/> );
                 return ( <Redirect to={'/app/dashboard'}/> );
-            } else {
-                return ( <Redirect to={'/app/dashboard'}/> );
-            }
+            // } else {
+            //     return ( <Redirect to={'/app/dashboard'}/> );
+            // }
         }
 
         console.log('connecting with ');
@@ -50,9 +50,9 @@ class App extends Component {
                 >
                     <div className="app-main">
                         <RestrictedRoute path={`${match.url}app`}
-                                         authUser={authUser} component={MainApp}/>
+                                         authUser={localStorage.getItem('token')} component={MainApp}/>
                         <Route path='/signin' component={SignIn}/>
-                        <Route path='/signup' component={SignUp}/>
+                        {/*<Route path='/signup' component={SignUp}/>*/}
                     </div>
                 </IntlProvider>
             </MuiThemeProvider>
