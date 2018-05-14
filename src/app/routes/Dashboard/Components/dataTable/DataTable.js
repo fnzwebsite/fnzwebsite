@@ -230,7 +230,6 @@ class DataTable extends React.Component {
     var dealData = [];
     if(self.props.data.dealsByDate)
     {
-      
       Object.keys(self.props.data.dealsByDate).forEach((itm, i) => {
         var dealDataObj= createData(self.props.data.dealsByDate[itm].tradeTime
                         ,self.props.data.dealsByDate[itm].account?this.props.dealsByDate[itm].account:" "
@@ -242,7 +241,6 @@ class DataTable extends React.Component {
                    // console.log(dealDataObj);
                   dealData.push(dealDataObj);
       });
-     
     }
     self.setState({data: dealData });
         //var socket = io('http://localhost:3700', {query: "auth=" + authHeader()['Authorization']});
@@ -293,7 +291,6 @@ class DataTable extends React.Component {
   var dealData = [];
   if(self.props.data.dealsByDate)
   {
-    
     Object.keys(self.props.data.dealsByDate).forEach((itm, i) => {
       var dealDataObj= createData(self.props.data.dealsByDate[itm].tradeTime
                       ,self.props.data.dealsByDate[itm].account?this.props.dealsByDate[itm].account:" "

@@ -8,6 +8,7 @@ import pricePreviousReducer         from './Dashboard/pricePreviousReducer'
 import priceTodayReducer         from './Dashboard/priceTodayReducer'
 import priceNextReducer         from './Dashboard/priceNextReducer';
 import dealsByDateReducer from './Dashboard/dealsByDateReducer';
+import dealsByISINReducer from './Dashboard/dealsByIsin';
 import priceReducer from './dashboard/priceReducer'
 
 
@@ -21,7 +22,8 @@ const reducers = combineReducers({
   acdPrevious:pricePreviousReducer,
   acdNext:priceNextReducer,
   dealsByDate:dealsByDateReducer,
-  acdPrice:priceReducer
+  acdPrice:priceReducer,
+  dealsByIsin:dealsByISINReducer
 });
 
 export default reducers;

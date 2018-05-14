@@ -105,7 +105,7 @@ class Dashboard extends Component {
   componentWillMount(prevProps, prevState) {
 //    console.log('selected : ' + this.state.chart);
     this.props.dealingActions.getDealings();
-    this.props.dealingActions.getDealingsByBoxDate('2018-05-14');
+    this.props.dealingActions.getDealingsByBoxDate(moment().format('YYYY-MM-DD'));
   //  this.getPrice();
 }
 componentDidMount()
