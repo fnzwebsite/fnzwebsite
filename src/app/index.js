@@ -16,6 +16,8 @@ import {
 import asyncComponent from "../util/AsyncFunc";
 import Settings from "./routes/settings/";
 import Dashboard from "./routes/Dashboard";
+import Account from "./routes/Account";
+import Instrument from "./routes/Instrument";
 class App extends React.Component {
   onToggleCollapsedNav = e => {
     const val = !this.props.navCollapsed;
@@ -56,6 +58,8 @@ class App extends React.Component {
                 component={asyncComponent(() => import("./routes/TablePage"))}
               />
               <Route path={`${match.url}/dashboard`} component={Dashboard} />
+              <Route path={`${match.url}/account`} component={Account} />
+              <Route path={`${match.url}/instrument`} component={Instrument} />
               <Route path={`${match.url}/icons`} component={Icons} />
               <Route path={`${match.url}/settings`} component={Settings} />
             

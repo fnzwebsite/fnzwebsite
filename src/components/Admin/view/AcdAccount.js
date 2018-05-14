@@ -20,17 +20,17 @@ var Table = createReactClass({
          this.loadDataTable();
     },
     loadDataTable: function () {
-        window.$('#table').dataTable({
-            "order": [[0, "desc"]],
-            "bDestroy": true
-        });
-        let self = this;
-        window.$('#table tbody').on('click', 'a.handle-edit-modal', function (e) {
-            let key = window.$(this).data("id")
-            let acdAccountEditData = self.props.acdAccountData[key];
-            self.props.loadEditAcdAccountData(acdAccountEditData);
-
-        });
+        // window.$('#table').dataTable({
+        //     "order": [[0, "desc"]],
+        //     "bDestroy": true
+        // });
+        // let self = this;
+        // window.$('#table tbody').on('click', 'a.handle-edit-modal', function (e) {
+        //     let key = window.$(this).data("id")
+        //     let acdAccountEditData = self.props.acdAccountData[key];
+        //     self.props.loadEditAcdAccountData(acdAccountEditData);
+        //
+        // });
     },
 
     render: function () {
@@ -123,8 +123,8 @@ class AcdAccount extends React.Component {
             return (
                 <div className="container-fluid" id="page_content">
                     <div className="uk-modal" id="modal_header_footer">
-                        {this.state.modalType == "add" && <AcdAccountWizard updateAccount={this.updateAccount}/>}
-                        {this.state.modalType == "edit" &&<EditAcdAccountWizard acdAccountEditData={this.state.acdAccountEditData}/>}
+                        {/*{this.state.modalType == "add" && <AcdAccountWizard updateAccount={this.updateAccount}/>}*/}
+                        {/*{this.state.modalType == "edit" &&<EditAcdAccountWizard acdAccountEditData={this.state.acdAccountEditData}/>}*/}
                     </div>
                     <div className="mt-6">
                         <div className="row">

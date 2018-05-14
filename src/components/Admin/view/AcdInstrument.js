@@ -40,16 +40,17 @@ var Table = createReactClass({
         // this.loadDataTable();
     },
     loadDataTable: function () {
-        window.$('#table').dataTable({
-            "order": [[0, "desc"]],
-            "bDestroy": true
-        });
-        let self = this;
-        window.$('#table tbody').on('click', 'a.handle-edit-modal', function (e) {
-            let key = window.$(this).data("id")
-            let acdInstrumentEditData = self.props.acdInstrumentData[key];
-            self.props.loadEditInstrumentAcdData(acdInstrumentEditData);
-        });
+        // window.$('#table').dataTable({
+        //     "order": [[0, "desc"]],
+        //     "bDestroy": true
+        // });
+        // let self = this;
+        // window.$('#table tbody').on('click', 'a.handle-edit-modal', function (e) {
+        //     let key = window.$(this).data("id")
+        //     let acdInstrumentEditData = self.props.acdInstrumentData[key];
+        //     self.props.loadEditInstrumentAcdData(acdInstrumentEditData);
+        // });
+
     },
     render: function () {
         let LoadRows = null;
@@ -146,8 +147,8 @@ class AcdInstrument extends React.Component {
             return (
                 <div className="container-fluid" id="page_content">
                     <div className="uk-modal" id="modal_header_footer">
-                        {this.state.modalType == "add" && <AcdInstrumentWizard updateInstrument={this.updateInstrument}/>}
-                        {this.state.modalType == "edit" &&<EditInstrumentWizard acdInstrumentEditData={this.state.acdInstrumentEditData}/>}
+                        {/*{this.state.modalType == "add" && <AcdInstrumentWizard updateInstrument={this.updateInstrument}/>}*/}
+                        {/*{this.state.modalType == "edit" &&<EditInstrumentWizard acdInstrumentEditData={this.state.acdInstrumentEditData}/>}*/}
                     </div>
                     <div className="mt-6">
                         <div className="row">
