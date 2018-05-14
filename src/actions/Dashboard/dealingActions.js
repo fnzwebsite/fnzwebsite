@@ -13,7 +13,7 @@ const dealingActions = {
                         dealing: data
                     });
                 }).catch(err => {
-                if (err.message == "Token Expired or Token not valid.")
+                    if (err.message == "Token Expired or Token not valid." || err.status==400) 
                     // localStorage.removeItem('token');
                     // localStorage.removeItem('displayName');
                     // localStorage.removeItem('acdId');
@@ -30,10 +30,30 @@ const dealingActions = {
                  //console.log("Data rec:"+ JSON.stringify(data))
                     dispatch({
                         type: allActions.RECEIVE_DEALINGBYBOXDATE,
-                        dealsByDate: data
+                        dealsByIsin: data
                     });
                 }).catch(err => {
-                if (err.message == "Token Expired or Token not valid.")
+                    if (err.message == "Token Expired or Token not valid." || err.status==400) 
+                    // localStorage.removeItem('token');
+                    // localStorage.removeItem('displayName');
+                    // localStorage.removeItem('acdId');
+                    dispatch(push('/#/signin'))
+            });
+        };
+    },
+
+    getDealingsByISIN: (isin,boxDate) => {
+        console.log('called deals by  isin')
+        return dispatch => {
+            httpGet('getDealsByIsin/'+isin+'/'+boxDate)
+                .then((data) => {
+               //  console.log("isin wise data:"+ JSON.stringify(data))
+                    dispatch({
+                        type: allActions.RECEIVE_DEALINGBYISIN,
+                        dealsByIsin: data
+                    });
+                }).catch(err => {
+                    if (err.message == "Token Expired or Token not valid." || err.status==400) 
                     // localStorage.removeItem('token');
                     // localStorage.removeItem('displayName');
                     // localStorage.removeItem('acdId');

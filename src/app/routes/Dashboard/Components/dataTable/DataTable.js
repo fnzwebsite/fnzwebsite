@@ -221,14 +221,28 @@ class DataTable extends React.Component {
       rowsPerPage: 5,
       open: false
     };
-    //console.log('constructor of datatable')
-    this.props.dealingActions.getDealingsByBoxDate('2018-05-14');
+    
   }
 
 
-  componentDidMount(prevProps, prevState) {
-      
-        
+  componentWillMount() {
+      var self=this;
+    var dealData = [];
+    if(self.props.data.dealsByDate)
+    {
+      Object.keys(self.props.data.dealsByDate).forEach((itm, i) => {
+        var dealDataObj= createData(self.props.data.dealsByDate[itm].tradeTime
+                        ,self.props.data.dealsByDate[itm].account?this.props.dealsByDate[itm].account:" "
+                        ,self.props.data.dealsByDate[itm].instrumentPrimaryIdentifier?this.props.dealsByDate[itm].instrumentPrimaryIdentifier:" "
+                        ,self.props.data.dealsByDate[itm].dealType
+                        ,self.props.data.dealsByDate[itm].units
+                      ,self.props.data.dealsByDate[itm].amount
+                    ,self.props.data.dealsByDate[itm].dealingStatus);
+                   // console.log(dealDataObj);
+                  dealData.push(dealDataObj);
+      });
+    }
+    self.setState({data: dealData });
         //var socket = io('http://localhost:3700', {query: "auth=" + authHeader()['Authorization']});
         // var socket = io(getConfig('socketurl'), {query: "auth=" + authHeader()['Authorization']});
         // socket.on('dealingbyday', function (dealingbydate) {
@@ -270,30 +284,31 @@ class DataTable extends React.Component {
     }
 
 
- componentWillReceiveProps()
+ componentWillReceiveProps(nextProps)
  {
    var self=this;
-  //console.log('dealing data:' + JSON.stringify(this.props.dealsByDate));
-  if(this.props.dealsByDate)
+   console.log('dealing data in datatable:' + self.props);
+  var dealData = [];
+  if(self.props.data.dealsByDate)
   {
-    var dealData = [];
-    Object.keys(this.props.dealsByDate).forEach((itm, i) => {
-      var dealDataObj= createData(this.props.dealsByDate[itm].tradeTime
-                      ,this.props.dealsByDate[itm].account?this.props.dealsByDate[itm].account:" "
-                      ,this.props.dealsByDate[itm].instrumentPrimaryIdentifier?this.props.dealsByDate[itm].instrumentPrimaryIdentifier:" "
-                      ,this.props.dealsByDate[itm].dealType
-                      ,this.props.dealsByDate[itm].units
-                    ,this.props.dealsByDate[itm].amount
-                  ,this.props.dealsByDate[itm].dealingStatus);
+    Object.keys(self.props.data.dealsByDate).forEach((itm, i) => {
+      var dealDataObj= createData(self.props.data.dealsByDate[itm].tradeTime
+                      ,self.props.data.dealsByDate[itm].account?this.props.dealsByDate[itm].account:" "
+                      ,self.props.data.dealsByDate[itm].instrumentPrimaryIdentifier?this.props.dealsByDate[itm].instrumentPrimaryIdentifier:" "
+                      ,self.props.data.dealsByDate[itm].dealType
+                      ,self.props.data.dealsByDate[itm].units
+                    ,self.props.data.dealsByDate[itm].amount
+                  ,self.props.data.dealsByDate[itm].dealingStatus);
                  // console.log(dealDataObj);
                 dealData.push(dealDataObj);
     });
-    self.setState({data: dealData });
+   
   }
+  self.setState({data: dealData });
  }
-  componentWillMount(prevProps, prevState) {
+  // componentWillMount(prevProps, prevState) {
     
-  }
+  // }
   render() {
     //alert('hi'+JSON.stringify(dealing))
 
@@ -302,8 +317,6 @@ class DataTable extends React.Component {
     return (
       <Paper>
         <div className="flex-auto">
-
-
           <div className="table-responsive-material">
             <Table className="">
               <DataTableHead
@@ -315,7 +328,6 @@ class DataTable extends React.Component {
                 rowCount={data.length}
               />
               <TableBody>
-
                 {data
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map(n =>{
@@ -348,14 +360,10 @@ class DataTable extends React.Component {
                         <TableCell className="tran t-center">{n.tradeType}</TableCell>
                         <TableCell numeric>{n.units}</TableCell>
                         <TableCell numeric>{n.amount}</TableCell>
-
-
-
                         <TableCell  className="tran t-center">
                         <div className={` badge text-uppercase ${statusStyle}`}>
                          {n.status}
                         </div></TableCell>
-
                       </TableRow>
                     );
                   })}
@@ -385,14 +393,14 @@ const
             data: state,
             user: state.user,
       //      price: state.price,
-            dealsByDate: state.dealsByDate
+          //  dealsByDate: state.dealsByDate
         }
     };
 
 DataTable.propTypes = {
     userActions: PropTypes.object,
     user: PropTypes.array,
-   // dealsByDate:PropTypes.array
+    dealsByDate:PropTypes.array
       //dealing: PropTypes.array
 };
 

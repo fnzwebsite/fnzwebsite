@@ -45,7 +45,6 @@ class LoadLineChart extends React.Component {
         }
         //this.props.dealingActions.getDealings();
         this.getChartData = this.getChartData.bind(this);
-        
     }
 
     getChartData(dealing,loadThisDay) {
@@ -165,6 +164,7 @@ class LoadLineChart extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        console.log("Chart Props: " + JSON.stringify(nextProps.loadThisDay))
         if (nextProps.dealingData) {
             let data = nextProps.dealingData;
             let loadThisDay = nextProps.loadThisDay;
@@ -300,8 +300,7 @@ class LoadLineChart extends React.Component {
 
             const size = {};
 
-            return (
-                <LineChart size={size}
+            return (<LineChart size={size}
                            padding={padding}
                            tooltip={tooltip}
                            data={data}

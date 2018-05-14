@@ -38,26 +38,62 @@ class Dashboard extends Component {
       super(props);
       this.state = {
           dealing: null,
-          chart: 'next',
-          selected: 'chart'
+          chart: 'today',
+          selected: 'chart',
+          transData:null
       };
-      this.changeView = this.changeView.bind(this);
+      //this.changeView = this.changeView.bind(this);
       //this.loadChart = this.loadChart.bind(this);
       //this.getPrice = this.getPrice.bind(this);
   }
 
   changeView(selected) {
-
-      if (this.state.selected != selected) {
-
-          this.setState({
-              selected: selected
-          });
-      }
+    // alert(selected);
+    //   if (this.state.selected != selected) {
+    //       this.setState({
+    //         selected: selected
+    //       });
+         
+    //   }
+    this.loadChart(selected)
   }
-  state = {
-    value: 0
-  };
+  loadChart(selected) {
+    console.log('calling load chart in dashboard....' + selected +':'+this.state.chart);
+    
+        this.props.dealingActions.getDealings();
+      
+        this.setState({
+            chart: selected
+        });
+
+        //console.log(this.props.loadThisDay);
+        let boxDate;//=moment().format("YYYY-MM-DD");
+        if (selected == 'today') {
+          boxDate=moment().format("YYYY-MM-DD");
+          //console.log('datatable today')
+        }
+        else   if (selected == 'next') {
+           boxDate=moment().add('days',1).format("YYYY-MM-DD");
+          //console.log('datatable next')
+        }
+        
+        else   if (selected == 'previous') {
+          boxDate=moment().add('days',-1).format("YYYY-MM-DD");
+          //console.log('datatable prev')
+        }
+      
+        console.log('change view' + boxDate);
+        if(boxDate)
+        this.props.dealingActions.getDealingsByBoxDate(boxDate); 
+        this.setState({
+          transData: this.props.dealsByDate
+      })
+    
+}
+
+  // state = {
+  //   value: 0
+  // };
 
   handleChange = (event, value) => {
     this.setState({ value });
@@ -69,6 +105,7 @@ class Dashboard extends Component {
   componentWillMount(prevProps, prevState) {
 //    console.log('selected : ' + this.state.chart);
     this.props.dealingActions.getDealings();
+    this.props.dealingActions.getDealingsByBoxDate(moment().format('YYYY-MM-DD'));
   //  this.getPrice();
 }
 componentDidMount()
@@ -96,17 +133,19 @@ componentDidMount()
 }
 
   render() {
-    //console.log("Data for chart: " + JSON.stringify(this.props));
+    console.log("Data for chart & dt: " + JSON.stringify(this.props));
     const { theme } = this.props;
     const { value } = this.state;
     var dealing = this.state.dealing || this.props.data.dealing;
+    var dataTableData=this.props.data.dealsByDate;
+    //console.log('datatable data in render: ' + JSON.stringify(dataTableData));
         return (
           <div className="app-wrapper">
             <div className="animated slideInUpTiny animation-duration-3">
               <div className="row">
-                <div className="col-lg-4 col-sm-12 col-md-4">
+                <div className="col-lg-4 col-sm-12 col-md-4" >
                   <div className="card fund-card shadow text-center">
-                  <div className="card-header d-flex justify-content-between bg-primary">
+                  <div className="card-header d-flex justify-content-between bg-primary" onClick={() => this.changeView('previous')}>
               <span className="text-white">
 
               <i className="zmdi   zmdi-case px-1" />
@@ -123,8 +162,8 @@ componentDidMount()
                   </div>
                 </div>
                 <div className="col-lg-4 col-sm-12 col-md-4">
-                  <div className="card fund-card shadow text-center">
-                  <div className="card-header d-flex justify-content-between bg-primary">
+                  <div className="card fund-card shadow text-center" onClick={() => this.changeView('today')}>
+                  <div className="card-header d-flex justify-content-between bg-primary" >
               <span className="text-white">
 
               <i className="zmdi   zmdi-case px-1" />
@@ -139,8 +178,8 @@ componentDidMount()
                     <TodayBox/>
                   </div>
                 </div>
-                <div className="col-lg-4 col-sm-12 col-md-4">
-                  <div className="card fund-card shadow text-center">
+                <div className="col-lg-4 col-sm-12 col-md-4" onClick={() => this.changeView('next')}>
+                  <div className="card fund-card shadow text-center1">
                   <div className="card-header d-flex justify-content-between bg-primary">
               <span className="text-white">
 
@@ -183,7 +222,7 @@ componentDidMount()
                     <TabContainer>
                       <div className="row chart-tab">
                         <CardBox heading="" styleName="col-12">
-                          <Chart   loadThisDay={this.state.chart}  dealingData={dealing} />
+                          <Chart loadThisDay={this.state.chart}  dealingData={dealing} />
                         </CardBox>
                       </div>
                     </TabContainer>
@@ -195,7 +234,7 @@ componentDidMount()
                           // heading={"charan"}
                           // headerOutside
                         >
-                          <DataTable loadThisDay={this.state.chart}/>
+                          <DataTable dealsByDate={dataTableData}/>
                         </CardBox>
                       </div>
                     </TabContainer>

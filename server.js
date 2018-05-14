@@ -85,7 +85,7 @@ getDealingByDate(function (data) {
 } ,auth,req.params.boxDate);
 getDealsByBoxDate(function (data) {
     if (data.status != 400) {
-        console.log("Data Recieved Box Api: "+ JSON.stringify(data))
+       // console.log("Data Recieved Box Api: "+ JSON.stringify(data))
         res.send(data);
         //io.sockets.emit('dealingbyday', req.params.boxDate);
     }
@@ -200,8 +200,8 @@ function getDealingByDate(callback, auth, setDate) {
 }
 
 function getDealsByBoxDate(callback, auth, setDate) {
-    //console.log("BoxDate Method...");
-    var post_data = '{"selector": {"boxDate": {"$eq": "2018-05-14"}, "docType": {"$eq": "DEA"}}}';
+    console.log("BoxDate Method..." + setDate);
+    var post_data = '{"selector": {"boxDate": {"$eq": "'+setDate+'"}, "docType": {"$eq": "DEA"}}}';
     console.log(post_data);
     var options = {
         method: 'POST',
@@ -220,7 +220,7 @@ function getDealsByBoxDate(callback, auth, setDate) {
             output += chunk;
         });
         res.on('end', function () {
-            console.log("box data :"+output)
+//            console.log("box data :"+output)
             if(output!=null)
             {
                 //console.log(output);
@@ -263,7 +263,7 @@ function getDealing(callback, auth) {
         res.on('end', function () {
          
             var obj = JSON.parse(output);
-            console.log("dealing data: " +JSON.stringify(obj));
+  //          console.log("dealing data: " +JSON.stringify(obj));
             if (callback != undefined) {
                 callback(obj);
             }
@@ -290,9 +290,9 @@ function postAccount(callback, auth, body) {
             'Content-Length': postData.length
         }
     };
-    console.log(options);
-    console.log(auth);
-    console.log(body);
+    //console.log(options);
+    //console.log(auth);
+    //console.log(body);
 
     var req = http.request(options, (res) => {
         var output = '';
@@ -306,7 +306,7 @@ function postAccount(callback, auth, body) {
         res.on('end', function () {
             if(output!=null)
             {
-                console.log(output);
+      //          console.log(output);
                 var obj = JSON.parse(output);
                 if (callback != undefined) {
                     callback(obj);
@@ -421,7 +421,7 @@ function getAcd(callback, auth, dateValue,acdId) {
             if(Object.keys(output).length!=2)
             {
                 var obj = JSON.parse(output);
-                console.log(obj);
+        //        console.log(obj);
                 if (callback != undefined) {
                     callback(obj);
                 }
@@ -734,7 +734,57 @@ function postDeal(callback, auth, body) {
 function getDealingByDay(callback, auth, setDate) {
 
     var post_data = '{"selector": {"boxDate": {"$eq": "'+setDate+'"}}}';
-    console.log("Deal Query Post Data: " + post_data);
+    //console.log("Deal Query Post Data: " + post_data);
+    var options = {
+        method: 'POST',
+        host: hostIP,
+        port: 8081,
+        path: '/api/v1/dealquery',
+        headers: {
+            Authorization: auth,
+            'Content-Type': 'application/json'
+        }
+    };
+    var req = http.request(options, function (res) {
+        var output = '';
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            output += chunk;
+        });
+        res.on('end', function () {
+            if(output!=null)
+            {
+                console.log(output);
+                var obj = JSON.parse(output);
+                if (callback != undefined) {
+                    callback(obj);
+                }
+            }
+        });
+    });
+    req.on('error', function (e) {
+        console.log('problem with request: ' + e.message);
+    });
+    req.write(post_data);
+    req.end();
+}
+
+
+server.get('/getDealsByIsin/:isin/:calendarDate', (req, res) => {
+   console.log('isin: '+ req.params.isin)
+   console.log('isin: '+ req.params.calendarDate)
+    var priceData = [];
+    let auth = req.headers.authorization;
+    getDealsByIsin(function (data) {
+        res.send(data);
+    }, auth, req.params.isin, req.params.calendarDate);
+});
+
+function getDealsByIsin(callback, auth, isin,calendarDate) {
+
+    //var post_data = '{"selector": {"boxDate": {"$eq": "'+setDate+'"}}}';
+    var post_data = '{"selector": {"instrumentPrimaryIdentifier": {"$eq": "'+isin+'"}, "boxDate": {"$eq": "'+calendarDate+'"}, "docType": {"$eq": "DEA"}}}';
+    //console.log("Deal Query Post Data: " + post_data);
     var options = {
         method: 'POST',
         host: hostIP,

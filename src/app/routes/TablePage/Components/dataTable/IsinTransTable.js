@@ -204,73 +204,13 @@ class IsinTransTable extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-    alert(JSON.stringify(this.state));
-    alert(JSON.stringify(this.props));
+    //alert(JSON.stringify(this.state));
+    //alert(JSON.stringify(this.props));
     this.state = {
       order: "asc",
       orderBy: "trade",
       selected: [],
       data: [
-        createData(
-          "01/02/2018",
-          "ACC001",
-          "GBX0001",
-          "Buy",
-          1000,
-          136000,
-          "Accepted",
-          "yes"
-        ),
-        createData(
-          "01/02/2017",
-          "ACC001",
-          "GBX0001",
-          "Sell",
-          100,
-          136000,
-          "On Hold",
-          "yes"
-        ),
-        createData(
-          "01/02/2017",
-          "ACC001",
-          "GBX0001",
-          "Buy",
-          1500,
-          136000,
-          "On Hold",
-          "yes"
-        ),
-        createData(
-          "01/02/2016",
-          "ACC001",
-          "GBX0001",
-          "Sell",
-          1000,
-          136000,
-          "Accepted",
-          "yes"
-        ),
-        createData(
-          "01/02/2016",
-          "ACC001",
-          "GBX0001",
-          "Buy",
-          1080,
-          136000,
-          "Rejected",
-          "yes"
-        ),
-        createData(
-          "01/02/2019",
-          "ACC001",
-          "GBX0001",
-          "Sell",
-          1002,
-          136000,
-          "Accepted",
-          "yes"
-        )
       ].sort((a, b) => (a.trade < b.trade ? -1 : 1)),
       page: 0,
       rowsPerPage: 5,
@@ -278,9 +218,49 @@ class IsinTransTable extends React.Component {
     };
   }
 
+  componentWillMount()
+  {
+    // var self=this;
+    // var dealData=[];
+    // if(self.props.dealsByIsin)
+    // {
+    //   Object.keys(self.props.dealsByIsin).forEach((itm, i) => {
+    //     var dealDataObj= createData(self.props.dealsByIsin[itm].tradeTime
+    //                     ,self.props.dealsByIsin[itm].account?self.props.dealsByIsin[itm].account:" "
+    //                     ,self.props.dealsByIsin[itm].instrumentPrimaryIdentifier?self.props.dealsByIsin[itm].instrumentPrimaryIdentifier:" "
+    //                     ,self.props.dealsByIsin[itm].dealType
+    //                     ,self.props.dealsByIsin[itm].units
+    //                   ,self.props.dealsByIsin[itm].amount
+    //                 ,self.props.dealsByIsin[itm].dealingStatus);
+    //                // console.log(dealDataObj);
+    //               dealData.push(dealDataObj);
+    //   });
+    // }
+    // self.setState({data: dealData });
+  }
+  componentWillReceiveProps()
+  {
+    var self=this;
+    var dealData=[];
+    if(self.props.dealsByIsin)
+    {
+      Object.keys(self.props.dealsByIsin).forEach((itm, i) => {
+        var dealDataObj= createData(self.props.dealsByIsin[itm].tradeTime
+                        ,self.props.dealsByIsin[itm].account?self.props.dealsByIsin[itm].account:" "
+                        ,self.props.dealsByIsin[itm].instrumentPrimaryIdentifier?self.props.dealsByIsin[itm].instrumentPrimaryIdentifier:" "
+                        ,self.props.dealsByIsin[itm].dealType
+                        ,self.props.dealsByIsin[itm].units
+                      ,self.props.dealsByIsin[itm].amount
+                    ,self.props.dealsByIsin[itm].dealingStatus);
+                   // console.log(dealDataObj);
+                  dealData.push(dealDataObj);
+      });
+    }
+    self.setState({data: dealData });
+  }
   render() {
     const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
-
+    console.log('deals by isin' + JSON.stringify(this.props.dealsByIsin));
     return (
       <Paper>
         <div className="flex-auto">
@@ -332,12 +312,6 @@ class IsinTransTable extends React.Component {
                         <div className={` badge text-uppercase ${statusStyle}`}>
                          {n.status}
                         </div></TableCell>
-
-
-
-
-
-
                       </TableRow>
                     );
                   })}

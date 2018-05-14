@@ -26,6 +26,10 @@ import Dialog, {
 } from "material-ui/Dialog";
 import Button from "material-ui/Button";
 import IsinTransTable from "./IsinTransTable";
+import dealingActions from 'actions/Dashboard/dealingActions';
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import moment from "moment";
 
 let counter = 0;
 
@@ -275,12 +279,21 @@ class DataTable extends React.Component {
       rowsPerPage: 5,
       open: false
     };
+    this.handleActionClick=this.handleActionClick.bind(this);
   }
 
   componentWillReceiveProps(){
     var self=this;
     self.setState({data: this.props.tableData });
     //alert(this.state)
+  }
+
+  handleActionClick(selectedIsin){
+    console.log('isin in action: '+selectedIsin);
+    console.log('calendar date in action: '+this.props.calendarSelectedDate);
+this.props.dealingActions.getDealingsByISIN(selectedIsin,moment(this.props.calendarSelectedDate).format('YYYY-MM-DD'));
+
+    this.setState({open:true})
   }
 
   render() {
@@ -308,7 +321,7 @@ class DataTable extends React.Component {
                   className={`zmdi zmdi-hc-lg pull-left zmdi-filter-list`}
                 />{"ISIN Data"}</DialogTitle>
             <DialogContent>
-              <IsinTransTable />
+              <IsinTransTable dealsByIsin={this.props.data.dealsByIsin} />
             </DialogContent>
             <DialogActions>
               <Button onClick={this.handleRequestClose} color="primary">
@@ -366,8 +379,8 @@ class DataTable extends React.Component {
                         <TableCell className="tran t-center">
                           <IconButton
                             className="size-20"
-                            // onClick={this.onContactOptionSelect}
-                            onClick={() => this.setState({ open: true })}
+                             onClick={() =>this.handleActionClick(n.isin)}
+                          //  onClick={() => this.setState({ open: true })}
                           >
                             <i className="zmdi zmdi-eye text-primary" />
                           </IconButton>
@@ -395,4 +408,21 @@ class DataTable extends React.Component {
   }
 }
 
-export default DataTable;
+const
+    mapStateToProps = (state, props) => {
+        return {
+            data: state,
+            user: state.user,
+        }
+    };
+
+const
+    mapDispatchToProps = (dispatch) => ({
+        dealingActions: bindActionCreators(dealingActions, dispatch)
+    });
+
+
+export default connect(mapStateToProps,
+    mapDispatchToProps)(DataTable);
+
+//export default DataTable;

@@ -41,7 +41,7 @@ const Actions = {
       })
       .catch(function (error) {
         console.log(error);
-        dispatch(push('/#/signin'));
+        dispatch(push('#/signin'));
       });
     };
   },
@@ -54,14 +54,14 @@ const Actions = {
 
         dispatch({ type: Constants.USER_SIGNED_OUT });
 
-        dispatch(push('/#/signin'));
+        dispatch(push('#/signin'));
       })
       .catch(function (error) {
         localStorage.removeItem('token');
 
         dispatch({ type: Constants.USER_SIGNED_OUT });
 
-        dispatch(push('/#/signin'));
+        dispatch(push('#/signin'));
       });
     };
   },

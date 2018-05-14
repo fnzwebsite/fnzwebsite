@@ -28,7 +28,7 @@ const acdActions = {
                         dispatch({type: allActions.RECEIVE_ACD_PREVIOUS, acdPrevious: data});
                     }
                 }).catch(err => {
-                if (err.message == "Token Expired or Token not valid.")
+                if (err.message == "Token Expired or Token not valid." || err.status==400) 
                     // localStorage.removeItem('token');
                     // localStorage.removeItem('displayName');
                     // localStorage.removeItem('acdId');

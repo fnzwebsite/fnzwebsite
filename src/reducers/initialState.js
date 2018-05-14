@@ -5,5 +5,6 @@ export default {
     acdPrevious:null,
     acdNext:null,
     dealsByDate:null,
-    acdPrice: null
+    acdPrice: null,
+    dealsByIsin:null
 };

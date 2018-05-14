@@ -212,7 +212,7 @@ componentWillUnmount()
                   </div>
                 </div>
                 <div className="col-md-10 col-sm-12 closed">
-                  <DataTable tableData={this.props.acdPrice.positions}/>
+                  <DataTable tableData={this.props.acdPrice.positions} calendarSelectedDate={this.state.calendarDate}/>
                 </div>
               </div>
             </CardBody>
