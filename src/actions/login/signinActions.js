@@ -2,7 +2,6 @@ import { push }                           from 'react-router-redux';
 import Constants                          from 'constants/index';
 import { httpGet, httpPost, httpDelete }  from 'utils/Utils';
 import {getConfig} from 'helpers/index';
-import { history } from 'helpers/History';
 
 const Actions = {
   signIn: (data) => {
@@ -13,11 +12,20 @@ const Actions = {
       };
       httpPost('http://35.178.56.52:8081/login', data1)
       .then((response) => {
+        // localStorage.setItem('token', JSON.stringify(response.token));
+        // localStorage.setItem('displayName', response.enrollmentId);
+        // localStorage.setItem('acdId',response.organisations.slice(1, -1));
+        // dispatch(push('/#/dashboard'));
+        if(response.type!="ERROR")
+        {
         localStorage.setItem('token', JSON.stringify(response.token));
         localStorage.setItem('displayName', response.enrollmentId);
-        localStorage.setItem('acdId',response.organisations.slice(1, -1));
-        dispatch(push('/'));
-        // history.push('/#/app/dashboard');
+        localStorage.setItem('acdId',response.asset_organisations[0]);
+        dispatch(push('/#/app/dashboard'));
+      }
+      else{
+        alert(response.message);
+      }
       })
       .catch((error) => {
         error.response.json()

@@ -58,9 +58,9 @@ class Dashboard extends Component {
     this.loadChart(selected)
   }
   loadChart(selected) {
-    console.log('calling load chart in dashboard....' + selected +':'+this.state.chart);
+   // console.log('calling load chart in dashboard....' + selected +':'+this.state.chart);
     
-        this.props.dealingActions.getDealings();
+       
       
         this.setState({
             chart: selected
@@ -84,7 +84,11 @@ class Dashboard extends Component {
       
         console.log('change view' + boxDate);
         if(boxDate)
-        this.props.dealingActions.getDealingsByBoxDate(boxDate); 
+        {
+          this.props.dealingActions.getDealings(boxDate);
+          this.props.dealingActions.getDealingsByBoxDate(boxDate); 
+        }
+       
         this.setState({
           transData: this.props.dealsByDate
       })
@@ -104,7 +108,7 @@ class Dashboard extends Component {
   };
   componentWillMount(prevProps, prevState) {
 //    console.log('selected : ' + this.state.chart);
-    this.props.dealingActions.getDealings();
+    this.props.dealingActions.getDealings(moment().format('YYYY-MM-DD'));
     this.props.dealingActions.getDealingsByBoxDate(moment().format('YYYY-MM-DD'));
   //  this.getPrice();
 }
@@ -131,21 +135,24 @@ componentDidMount()
       }
   })
 }
-
+componentWillReceiveProps()
+{
+  this.props.dealingActions.getDealingsByBoxDate(moment().format('YYYY-MM-DD'));
+}
   render() {
-    console.log("Data for chart & dt: " + JSON.stringify(this.props));
+   // console.log("Data for chart & dt: " + JSON.stringify(this.props));
     const { theme } = this.props;
     const { value } = this.state;
     var dealing = this.state.dealing || this.props.data.dealing;
     var dataTableData=this.props.data.dealsByDate;
-    //console.log('datatable data in render: ' + JSON.stringify(dataTableData));
+    console.log('datatable data in render: ' + JSON.stringify(dataTableData));
         return (
           <div className="app-wrapper">
             <div className="animated slideInUpTiny animation-duration-3">
               <div className="row">
-                <div className="col-lg-4 col-sm-12 col-md-4" >
+                <div className="col-lg-4 col-sm-12 col-md-4" onClick={() => this.changeView('previous')}>
                   <div className="card fund-card shadow text-center">
-                  <div className="card-header d-flex justify-content-between bg-primary" onClick={() => this.changeView('previous')}>
+                  <div className="card-header d-flex justify-content-between bg-primary">
               <span className="text-white">
 
               <i className="zmdi   zmdi-case px-1" />
@@ -161,8 +168,8 @@ componentDidMount()
                     <PreviousBox/>
                   </div>
                 </div>
-                <div className="col-lg-4 col-sm-12 col-md-4">
-                  <div className="card fund-card shadow text-center" onClick={() => this.changeView('today')}>
+                <div className="col-lg-4 col-sm-12 col-md-4" onClick={() => this.changeView('today')}>
+                  <div className="card fund-card shadow text-center" >
                   <div className="card-header d-flex justify-content-between bg-primary" >
               <span className="text-white">
 

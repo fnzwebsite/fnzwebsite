@@ -76,7 +76,6 @@ class TablePage extends React.Component {
 
   handleCalendarDateChange(selectedDate) {
     const date = selectedDate ? selectedDate.format('YYYY-MM-DD') : undefined;
-    
     this.setState({ calendarDate:moment(date)});
     //console.log('calendar event...');  
     this.props.acdActions.getAcdByDay(date, localStorage.getItem('acdId'));
@@ -117,6 +116,8 @@ componentWillReceiveProps()
 {
   console.log('receive props event...');
   console.log("table page after nav : " + JSON.stringify(this.props.acdPrice));
+  //this.props.acdActions.getAcdByDay(date, localStorage.getItem('acdId'));
+    this.setState({boxValues: boxDataCalculation(this.props.acdPrice) });
   
 }
 componentWillUnmount()
@@ -164,8 +165,8 @@ componentWillUnmount()
                     />
                   </div>
 
-                  <hr />
-                  <div className="row justify-content-center">
+                  {/* <hr /> */}
+                  <div className="row justify-content-center" style={{display:'none'}}>
                     <Typography variant="title" component="h5">
                       Settlement Date
                     </Typography>

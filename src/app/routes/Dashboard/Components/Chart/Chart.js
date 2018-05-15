@@ -51,7 +51,7 @@ class LoadLineChart extends React.Component {
         var today = moment().format("YYYY-MM-DD");
         var tomorrow = moment().add('days', 1).format("YYYY-MM-DD");
         var yesterday = moment().add('days', -1).format("YYYY-MM-DD");
-        if (dealing) {
+        if (dealing && dealing.code!=2) {
             let datetime = [];
             datetime.push('x');
             datetime.push('00:00')
@@ -168,6 +168,7 @@ class LoadLineChart extends React.Component {
         if (nextProps.dealingData) {
             let data = nextProps.dealingData;
             let loadThisDay = nextProps.loadThisDay;
+            console.log("Chart Data: "+ JSON.stringify(data))
             let lineChartData = this.getChartData(data,loadThisDay);
             this.setState({data: lineChartData})
         }
@@ -185,7 +186,7 @@ class LoadLineChart extends React.Component {
         if (this.state.data && this.state.data.length) {
             var options = {
                 legend: {position: 'none'},
-                pointSize: 20,
+                pointSize: 10,
                 series: {
                     0: {color: '#2051ba', lineWidth: 1, pointShape: 'circle'},
                 },
@@ -249,7 +250,7 @@ class LoadLineChart extends React.Component {
             };
             const bar = {
                 width: {
-                    ratio: 0.1// this makes bar width 50% of length between ticks
+                    ratio: 0.02// this makes bar width 50% of length between ticks
                 },
 
                 spacing: 20,
@@ -263,8 +264,8 @@ class LoadLineChart extends React.Component {
 //console.log("chart values: "+ JSON.stringify(this.state.chartValues));
             const axis = {
                 x: {
-                    min: '12:00',
-                    max: '17:00',
+                    min: '00:30',
+                    max: '23:00',
                     type: 'timeseries',
                     width:'100%',
                     tick: {
