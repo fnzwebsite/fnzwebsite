@@ -261,7 +261,7 @@ function getDealing(callback, auth) {
         });
 
         res.on('end', function () {
-         
+
             var obj = JSON.parse(output);
   //          console.log("dealing data: " +JSON.stringify(obj));
             if (callback != undefined) {
@@ -816,5 +816,47 @@ function getDealsByIsin(callback, auth, isin,calendarDate) {
         console.log('problem with request: ' + e.message);
     });
     req.write(post_data);
+    req.end();
+}
+
+server.get('/getcompany', (req, res) => {
+    let auth = req.headers.authorization;
+    getAllAcd(function (data) {
+        res.send(data);
+    }, auth);
+});
+
+function getAllAcd(callback, auth) {
+    var options = {
+        method: 'GET',
+        host: hostIP,
+        port: 8081,
+        path: '/api/v1/company',
+        headers: {
+            Authorization: auth
+        }
+    };
+
+    var req = http.request(options, function (res) {
+        var output = '';
+
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            output += chunk;
+        });
+
+        res.on('end', function () {
+            //console.log(output);
+            var obj = JSON.parse(output);
+            if (callback != undefined) {
+                callback(obj);
+            }
+        });
+    });
+
+    req.on('error', function (e) {
+        console.log('problem with request: ' + e.message);
+    });
+
     req.end();
 }

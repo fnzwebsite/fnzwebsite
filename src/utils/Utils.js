@@ -100,6 +100,32 @@ export function httpNodeServerPost(url, data) {
   .then(parseJSON);
 }
 
+export function httpDirectGet(url) {
+
+    return fetch(getConfig('fnzUrl')+url, {
+        method: 'get',
+        headers: {
+            'Authorization':JSON.parse(localStorage.getItem('token'))
+        }
+    })
+        .then(checkStatus)
+        .then(parseJSON)
+        .then(checkData);
+}
+
+export function httpDirectPost(url, data) {
+    const body = JSON.stringify(data);
+    return fetch(getConfig('fnzUrl')+url, {
+        method: 'POST',
+        headers: {
+            'Authorization':JSON.parse(localStorage.getItem('token')),
+            'Content-Type': 'application/json'
+        },
+        body: body
+    })
+        .then(checkStatus)
+        .then(parseJSON);
+}
 export function httpDelete(url) {
 
   return fetch(url, {

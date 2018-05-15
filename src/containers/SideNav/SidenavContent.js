@@ -190,9 +190,9 @@ class SidenavContent extends Component {
             <li>
               <NavLink
                 className="prepend-icon"
-                 to="/app/sample-page7" onClick={e => e.preventDefault()}
+                 to="/app/Organisation" onClick={e => e.preventDefault()}
               >
-                <span className="nav-text">Company</span>
+                <span className="nav-text">Organisation</span>
               </NavLink>
             </li>
             <li>

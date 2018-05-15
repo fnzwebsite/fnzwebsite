@@ -18,6 +18,7 @@ import Settings from "./routes/settings/";
 import Dashboard from "./routes/Dashboard";
 import Account from "./routes/Account";
 import Instrument from "./routes/Instrument";
+import Organisation from './routes/Organisation';
 class App extends React.Component {
   onToggleCollapsedNav = e => {
     const val = !this.props.navCollapsed;
@@ -26,7 +27,7 @@ class App extends React.Component {
 
   render() {
     const { match, drawerType } = this.props;
-   
+
     const drawerStyle = drawerType.includes(FIXED_DRAWER) ? 'fixed-drawer' : drawerType.includes(COLLAPSED_DRAWER) ? 'collapsible-drawer' : 'mini-drawer';
 
     //set default height and overflow for iOS mobile Safari 10+ support.
@@ -62,7 +63,7 @@ class App extends React.Component {
               <Route path={`${match.url}/instrument`} component={Instrument} />
               <Route path={`${match.url}/icons`} component={Icons} />
               <Route path={`${match.url}/settings`} component={Settings} />
-            
+              <Route path={`${match.url}/organisation`} component={Organisation} />
             </div>
             {/* <Footer /> */}
           </main>

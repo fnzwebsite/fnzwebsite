@@ -5,6 +5,10 @@ import acdToday from './priceTodayReducer';
 import acdPrevious from './pricePreviousReducer';
 import dealsByDate from './dealsByDateReducer';
 import acdPrice from './priceReducer'
+import organisationData from './organisationReducer'
+import instrumentData from './instrumentReducer'
+import postOrganisationData from './postOrganisationReducer'
+import postInstrumentData from './postInstrumentReducer'
 
 export {
     dealing,
@@ -13,5 +17,9 @@ export {
     acdToday,
     acdPrevious,
     dealsByDate,
-    acdPrice
+    acdPrice,
+    organisationData,
+    instrumentData,
+    postOrganisationData,
+    postInstrumentData
 };

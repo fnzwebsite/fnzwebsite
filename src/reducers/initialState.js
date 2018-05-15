@@ -6,5 +6,9 @@ export default {
     acdNext:null,
     dealsByDate:null,
     acdPrice: null,
-    dealsByIsin:null
+    dealsByIsin:null,
+    organisationData:null,
+    instrumentData: null,
+    postOrganisationData:null,
+    postInstrumentData:null
 };
