@@ -1,20 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import App from './App';
-import './index.css';
-import registerServiceWorker from './registerServiceWorker';
 
-import * as reducers from './reducers/allReducers';
-const store = createStore(combineReducers(reducers), applyMiddleware(thunk));
+const rootEl = document.getElementById('app-site');
 
-ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-    document.getElementById('root')
-);
+// Create a reusable render method that we can call more than once
+let render = () => {
+    // Dynamically import our main App component, and render it
+    const MainApp = require('./MainApp').default;
+    ReactDOM.render(
+        <MainApp/>,
+        rootEl
+    );
+};
 
-registerServiceWorker();
+if (module.hot) {
+    module.hot.accept('./MainApp', () => {
+        const NextApp = require('./MainApp').default;
+        render(
+            <NextApp/>,
+            rootEl
+        );
+    });
+}
+
+render();
